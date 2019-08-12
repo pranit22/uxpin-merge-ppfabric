@@ -1,0 +1,33 @@
+{
+  "name": "uxpin-merge-ms-fabric",
+  "version": "1.0.0",
+  "description": "Fabric wrappers for integration with UX Pin Merge",
+  "main": "index.ts",
+  "scripts": {
+    "test": "exit 0",
+    "server": "uxpin-merge server --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
+    "start": "uxpin-merge --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
+    "push": "uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js"
+  },
+  "author": "Stan Carrico <scarrico@paypal.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "office-ui-fabric-react": "^7.22.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.1",
+    "@uxpin/merge-cli": "^2.3.0",
+    "autoprefixer": "^9.6.1",
+    "css-loader": "^3.2.0",
+    "fork-ts-checker-webpack-plugin": "^1.5.0",
+    "fs-extra": "^8.1.0",
+    "postcss-loader": "^3.0.0",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.8.0"
+  }
+}
