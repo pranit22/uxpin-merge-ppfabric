@@ -7,7 +7,8 @@
     "test": "exit 0",
     "server": "uxpin-merge server --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
     "start": "uxpin-merge --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
-    "push": "uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js"
+    "push": "uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 79cf9b135307fddf013aae4af03c4c56781ea1b7",
+    "build": "webpack"
   },
   "author": "Stan Carrico <scarrico@paypal.com>",
   "license": "UNLICENSED",
@@ -17,13 +18,17 @@
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
     "@types/react": "^16.9.1",
     "@uxpin/merge-cli": "^2.3.0",
     "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "fork-ts-checker-webpack-plugin": "^1.5.0",
     "fs-extra": "^8.1.0",
     "postcss-loader": "^3.0.0",
+    "source-map-loader": "^0.2.4",
     "ts-loader": "^6.0.4",
     "typescript": "^3.5.3",
     "webpack": "^4.39.1",
