@@ -1,2 +1,4 @@
 import {ColorPicker} from 'office-ui-fabric-react';
-export default ColorPicker;
+import * as PropTypes from 'prop-types';
+ColorPicker.propTypes = {};
+export { ColorPicker as default };

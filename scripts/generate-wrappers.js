@@ -10,17 +10,70 @@ const sourcePrefix = path.resolve(__dirname, '../', 'src');
 const ts = require('typescript');
 
 // remove the source directory
+// stop doing so we don't lose customizations :)
 fs.emptyDirSync(sourcePrefix);
 
-dirItems.forEach(component => {
-
-  // create a local folder
+function generateComponent(component) {
   const componentDir = `${sourcePrefix}/${component}`;
   const presetDir = `${sourcePrefix}/${component}/presets`;
 
   const componentTemplate = `import {${component}} from '${libraryTarget}';
-export default ${component};
+import * as PropTypes from 'prop-types';
+${component}.propTypes = {};
+export { ${component} as default };
 `;
+
+  const docTemplate = `# ${component}
+  
+\`\`\`jsx
+<${component} />
+\`\`\`
+  
+ `;
+
+  // verify the component directory exists
+  fs.ensureDirSync(componentDir);
+
+  // verify the presets directory exists
+  fs.ensureDirSync(presetDir);
+
+  let exampleType = '';
+  // load the example, looking for Basic, Default etc..
+  const example = [ 'Basic', 'Default' ].reduce((file, exampleName) => {
+    try {
+      file = fs.readFileSync(librarySrcPath + '/components/' + component + `/examples/${component}.${exampleName}.Example.tsx`, 'UTF-8');
+      exampleType = exampleName;
+    } catch (e) {
+      // noop
+    }
+    return file;
+  }, null);
+
+  let jsx = `import * as React from 'react';
+// TODO implement ${component} example
+`;
+  if (example) {
+    jsx = ts.transpile(example, {
+      jsx: 'preserve',
+      "target": "es2015"
+    });
+    jsx += `
+export default ${component}${exampleType}Example;
+`;
+  }
+
+  fs.writeFileSync(`${presetDir}/0-default.jsx`, jsx);
+
+  // write the component wrapper stub
+  fs.writeFileSync(`${componentDir}/${component}.js`, componentTemplate);
+
+  // write component doc stub
+  fs.writeFileSync(`${componentDir}/${component}.md`, docTemplate);
+
+}
+
+dirItems.forEach(component => {
+
 
   const wrapperTemplate = `import * as React from 'react';
 import { loadTheme } from 'office-ui-fabric-react';
@@ -40,56 +93,53 @@ export default function UXPinWrapper({ children }) {
     return tpl;
   }, '');
 
-  const docTemplate = `# ${component}
-  
-\`\`\`jsx
-<${component} />
-\`\`\`
-  
- `;
 
   switch (component) {
+    case 'Check':
+    case 'Color':
+    case 'Fabric':
+    case 'FocusZone':
+    case 'FocusTrapZone':
+    case 'Foundation':
     case 'index':
+    case 'Icons':
+    case 'image':
+    case 'Image':
+    case 'KeytipData':
+    case 'KeytipLayer':
+    case 'Layer':
+    case 'MarqueeSelection':
+    case 'Overlay':
+    case 'PositioningContainer':
+    case 'Stack':
+    case 'Sticky':
+    case 'Styling':
+    case 'tsdoc-metadata':
+    case 'version':
+    case 'Theme':
+    case 'ThemeGenerator':
+    case 'Text':
+    case 'Utilities':
     // we need to generate this one ourselves at the end!
     // noop
+      break;
+    case 'Button':
+      // there are many types of buttons, so do a second loop for them..
+      [ 'ActionButton',
+        'CommandBarButton',
+        'CommandButton',
+        'CompoundButton',
+        'DefaultButton',
+        'IconButton',
+        'MessageBarButton',
+        'PrimaryButton',
+        'SplitButton' ].forEach((buttonComponent) => {
+          generateComponent(buttonComponent)
+      });
+      break;
+
     default:
-      // verify the component directory exists
-      fs.ensureDirSync(componentDir);
-
-      // verify the presets directory exists
-      fs.ensureDirSync(presetDir);
-
-      let exampleType = '';
-      // load the example, looking for Basic, Default etc..
-      const example = [ 'Basic', 'Default' ].reduce((file, exampleName) => {
-        try {
-          file = fs.readFileSync(librarySrcPath + '/components/' + component + `/examples/${component}.${exampleName}.Example.tsx`, 'UTF-8');
-          exampleType = exampleName;
-        }catch(e){
-          // noop
-        }
-        return file;
-      }, null);
-
-      let jsx = `import * as React from 'react';
-// TODO implement ${component} example
-`;
-      if (example) {
-        jsx = ts.transpile(example, {
-          jsx: 'preserve',
-          "target": "es2015"
-        });
-        jsx += `
-export default ${component}${exampleType}Example;
-`;
-      }
-      fs.writeFileSync(`${presetDir}/0-default.jsx`, jsx);
-
-      // write the component wrapper stub
-      fs.writeFileSync(`${componentDir}/${component}.js`, componentTemplate);
-
-      // write component doc stub
-      fs.writeFileSync(`${componentDir}/${component}.md`, docTemplate);
+      generateComponent(component);
   }
 
   // generate the index file

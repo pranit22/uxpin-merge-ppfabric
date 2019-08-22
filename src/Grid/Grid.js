@@ -1,2 +1,4 @@
 import {Grid} from 'office-ui-fabric-react';
-export default Grid;
+import * as PropTypes from 'prop-types';
+Grid.propTypes = {};
+export { Grid as default };

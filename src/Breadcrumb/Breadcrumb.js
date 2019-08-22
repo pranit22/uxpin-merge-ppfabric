@@ -1,2 +1,4 @@
 import {Breadcrumb} from 'office-ui-fabric-react';
-export default Breadcrumb;
+import * as PropTypes from 'prop-types';
+Breadcrumb.propTypes = {};
+export { Breadcrumb as default };

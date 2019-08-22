@@ -1,2 +1,4 @@
 import {DetailsList} from 'office-ui-fabric-react';
-export default DetailsList;
+import * as PropTypes from 'prop-types';
+DetailsList.propTypes = {};
+export { DetailsList as default };

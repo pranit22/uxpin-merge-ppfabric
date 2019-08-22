@@ -1,7 +1,0 @@
-# version
-  
-```jsx
-<version />
-```
-  
- 

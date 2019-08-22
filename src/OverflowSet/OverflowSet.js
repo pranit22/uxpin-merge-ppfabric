@@ -1,2 +1,4 @@
 import {OverflowSet} from 'office-ui-fabric-react';
-export default OverflowSet;
+import * as PropTypes from 'prop-types';
+OverflowSet.propTypes = {};
+export { OverflowSet as default };

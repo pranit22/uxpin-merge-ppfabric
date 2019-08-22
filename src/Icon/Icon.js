@@ -1,2 +1,4 @@
 import {Icon} from 'office-ui-fabric-react';
-export default Icon;
+import * as PropTypes from 'prop-types';
+Icon.propTypes = {};
+export { Icon as default };

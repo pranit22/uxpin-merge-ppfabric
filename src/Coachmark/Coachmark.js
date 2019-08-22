@@ -1,2 +1,4 @@
 import {Coachmark} from 'office-ui-fabric-react';
-export default Coachmark;
+import * as PropTypes from 'prop-types';
+Coachmark.propTypes = {};
+export { Coachmark as default };

@@ -1,7 +1,0 @@
-# Button
-  
-```jsx
-<Button />
-```
-  
- 

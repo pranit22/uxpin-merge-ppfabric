@@ -1,2 +1,4 @@
 import {PersonaPresence} from 'office-ui-fabric-react';
-export default PersonaPresence;
+import * as PropTypes from 'prop-types';
+PersonaPresence.propTypes = {};
+export { PersonaPresence as default };

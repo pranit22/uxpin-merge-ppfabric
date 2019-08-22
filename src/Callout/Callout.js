@@ -1,2 +1,4 @@
 import {Callout} from 'office-ui-fabric-react';
-export default Callout;
+import * as PropTypes from 'prop-types';
+Callout.propTypes = {};
+export { Callout as default };

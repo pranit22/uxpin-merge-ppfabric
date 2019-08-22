@@ -1,0 +1,7 @@
+# CompoundButton
+  
+```jsx
+<CompoundButton />
+```
+  
+ 

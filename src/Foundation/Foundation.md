@@ -1,7 +1,0 @@
-# Foundation
-  
-```jsx
-<Foundation />
-```
-  
- 

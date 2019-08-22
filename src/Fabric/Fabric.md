@@ -1,7 +1,0 @@
-# Fabric
-  
-```jsx
-<Fabric />
-```
-  
- 

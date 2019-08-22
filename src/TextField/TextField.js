@@ -1,2 +1,4 @@
 import {TextField} from 'office-ui-fabric-react';
-export default TextField;
+import * as PropTypes from 'prop-types';
+TextField.propTypes = {};
+export { TextField as default };

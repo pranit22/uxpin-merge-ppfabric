@@ -1,2 +1,4 @@
 import {ProgressIndicator} from 'office-ui-fabric-react';
-export default ProgressIndicator;
+import * as PropTypes from 'prop-types';
+ProgressIndicator.propTypes = {};
+export { ProgressIndicator as default };

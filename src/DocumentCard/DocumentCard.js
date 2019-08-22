@@ -1,2 +1,4 @@
 import {DocumentCard} from 'office-ui-fabric-react';
-export default DocumentCard;
+import * as PropTypes from 'prop-types';
+DocumentCard.propTypes = {};
+export { DocumentCard as default };

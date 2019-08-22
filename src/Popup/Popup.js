@@ -1,2 +1,4 @@
 import {Popup} from 'office-ui-fabric-react';
-export default Popup;
+import * as PropTypes from 'prop-types';
+Popup.propTypes = {};
+export { Popup as default };

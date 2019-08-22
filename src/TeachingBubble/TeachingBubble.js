@@ -1,2 +1,4 @@
 import {TeachingBubble} from 'office-ui-fabric-react';
-export default TeachingBubble;
+import * as PropTypes from 'prop-types';
+TeachingBubble.propTypes = {};
+export { TeachingBubble as default };

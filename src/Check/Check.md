@@ -1,7 +1,0 @@
-# Check
-  
-```jsx
-<Check />
-```
-  
- 

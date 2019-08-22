@@ -1,2 +1,4 @@
 import {ExtendedPicker} from 'office-ui-fabric-react';
-export default ExtendedPicker;
+import * as PropTypes from 'prop-types';
+ExtendedPicker.propTypes = {};
+export { ExtendedPicker as default };

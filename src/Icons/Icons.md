@@ -1,7 +1,0 @@
-# Icons
-  
-```jsx
-<Icons />
-```
-  
- 

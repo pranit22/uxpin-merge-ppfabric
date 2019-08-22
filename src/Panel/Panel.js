@@ -1,2 +1,4 @@
 import {Panel} from 'office-ui-fabric-react';
-export default Panel;
+import * as PropTypes from 'prop-types';
+Panel.propTypes = {};
+export { Panel as default };

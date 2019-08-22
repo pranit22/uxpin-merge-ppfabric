@@ -1,7 +1,0 @@
-# Styling
-  
-```jsx
-<Styling />
-```
-  
- 

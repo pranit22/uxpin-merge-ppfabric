@@ -1,7 +1,0 @@
-# FocusTrapZone
-  
-```jsx
-<FocusTrapZone />
-```
-  
- 

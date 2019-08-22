@@ -1,2 +1,4 @@
 import {ComboBox} from 'office-ui-fabric-react';
-export default ComboBox;
+import * as PropTypes from 'prop-types';
+ComboBox.propTypes = {};
+export { ComboBox as default };

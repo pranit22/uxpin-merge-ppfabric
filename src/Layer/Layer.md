@@ -1,7 +1,0 @@
-# Layer
-  
-```jsx
-<Layer />
-```
-  
- 

@@ -1,2 +1,4 @@
 import {Autofill} from 'office-ui-fabric-react';
-export default Autofill;
+import * as PropTypes from 'prop-types';
+Autofill.propTypes = {};
+export { Autofill as default };

@@ -1,2 +1,4 @@
 import {DatePicker} from 'office-ui-fabric-react';
-export default DatePicker;
+import * as PropTypes from 'prop-types';
+DatePicker.propTypes = {};
+export { DatePicker as default };

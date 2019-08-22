@@ -1,2 +1,4 @@
 import {SwatchColorPicker} from 'office-ui-fabric-react';
-export default SwatchColorPicker;
+import * as PropTypes from 'prop-types';
+SwatchColorPicker.propTypes = {};
+export { SwatchColorPicker as default };

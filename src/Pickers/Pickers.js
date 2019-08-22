@@ -1,2 +1,4 @@
 import {Pickers} from 'office-ui-fabric-react';
-export default Pickers;
+import * as PropTypes from 'prop-types';
+Pickers.propTypes = {};
+export { Pickers as default };

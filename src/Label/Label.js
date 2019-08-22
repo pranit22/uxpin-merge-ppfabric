@@ -1,2 +1,4 @@
 import {Label} from 'office-ui-fabric-react';
-export default Label;
+import * as PropTypes from 'prop-types';
+Label.propTypes = {};
+export { Label as default };

@@ -1,2 +1,4 @@
 import {Separator} from 'office-ui-fabric-react';
-export default Separator;
+import * as PropTypes from 'prop-types';
+Separator.propTypes = {};
+export { Separator as default };

@@ -1,7 +1,0 @@
-# MarqueeSelection
-  
-```jsx
-<MarqueeSelection />
-```
-  
- 

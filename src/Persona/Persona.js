@@ -1,2 +1,4 @@
 import {Persona} from 'office-ui-fabric-react';
-export default Persona;
+import * as PropTypes from 'prop-types';
+Persona.propTypes = {};
+export { Persona as default };

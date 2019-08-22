@@ -1,7 +1,0 @@
-# FocusZone
-  
-```jsx
-<FocusZone />
-```
-  
- 

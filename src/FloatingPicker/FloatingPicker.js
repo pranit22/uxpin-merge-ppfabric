@@ -1,2 +1,4 @@
 import {FloatingPicker} from 'office-ui-fabric-react';
-export default FloatingPicker;
+import * as PropTypes from 'prop-types';
+FloatingPicker.propTypes = {};
+export { FloatingPicker as default };

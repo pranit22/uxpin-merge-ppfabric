@@ -1,2 +1,4 @@
 import {Modal} from 'office-ui-fabric-react';
-export default Modal;
+import * as PropTypes from 'prop-types';
+Modal.propTypes = {};
+export { Modal as default };

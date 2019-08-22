@@ -1,7 +1,0 @@
-# Sticky
-  
-```jsx
-<Sticky />
-```
-  
- 

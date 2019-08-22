@@ -1,7 +1,0 @@
-# KeytipData
-  
-```jsx
-<KeytipData />
-```
-  
- 

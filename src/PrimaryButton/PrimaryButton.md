@@ -1,0 +1,7 @@
+# PrimaryButton
+  
+```jsx
+<PrimaryButton />
+```
+  
+ 

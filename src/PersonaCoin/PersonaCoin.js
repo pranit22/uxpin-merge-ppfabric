@@ -1,2 +1,4 @@
 import {PersonaCoin} from 'office-ui-fabric-react';
-export default PersonaCoin;
+import * as PropTypes from 'prop-types';
+PersonaCoin.propTypes = {};
+export { PersonaCoin as default };

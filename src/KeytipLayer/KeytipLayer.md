@@ -1,7 +1,0 @@
-# KeytipLayer
-  
-```jsx
-<KeytipLayer />
-```
-  
- 

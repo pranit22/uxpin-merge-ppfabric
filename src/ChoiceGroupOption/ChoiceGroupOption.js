@@ -1,2 +1,4 @@
 import {ChoiceGroupOption} from 'office-ui-fabric-react';
-export default ChoiceGroupOption;
+import * as PropTypes from 'prop-types';
+ChoiceGroupOption.propTypes = {};
+export { ChoiceGroupOption as default };

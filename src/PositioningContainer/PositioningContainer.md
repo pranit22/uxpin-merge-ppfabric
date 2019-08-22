@@ -1,7 +1,0 @@
-# PositioningContainer
-  
-```jsx
-<PositioningContainer />
-```
-  
- 

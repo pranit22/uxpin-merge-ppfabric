@@ -1,2 +1,4 @@
 import {Toggle} from 'office-ui-fabric-react';
-export default Toggle;
+import * as PropTypes from 'prop-types';
+Toggle.propTypes = {};
+export { Toggle as default };

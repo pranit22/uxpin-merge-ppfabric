@@ -1,2 +1,4 @@
 import {Slider} from 'office-ui-fabric-react';
-export default Slider;
+import * as PropTypes from 'prop-types';
+Slider.propTypes = {};
+export { Slider as default };

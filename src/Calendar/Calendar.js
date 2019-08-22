@@ -1,2 +1,4 @@
 import {Calendar} from 'office-ui-fabric-react';
-export default Calendar;
+import * as PropTypes from 'prop-types';
+Calendar.propTypes = {};
+export { Calendar as default };

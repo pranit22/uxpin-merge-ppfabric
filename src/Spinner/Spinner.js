@@ -1,2 +1,4 @@
 import {Spinner} from 'office-ui-fabric-react';
-export default Spinner;
+import * as PropTypes from 'prop-types';
+Spinner.propTypes = {};
+export { Spinner as default };

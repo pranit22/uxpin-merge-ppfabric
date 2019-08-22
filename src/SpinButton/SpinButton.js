@@ -1,2 +1,4 @@
 import {SpinButton} from 'office-ui-fabric-react';
-export default SpinButton;
+import * as PropTypes from 'prop-types';
+SpinButton.propTypes = {};
+export { SpinButton as default };

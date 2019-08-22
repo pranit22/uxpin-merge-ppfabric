@@ -1,2 +1,4 @@
 import {Facepile} from 'office-ui-fabric-react';
-export default Facepile;
+import * as PropTypes from 'prop-types';
+Facepile.propTypes = {};
+export { Facepile as default };

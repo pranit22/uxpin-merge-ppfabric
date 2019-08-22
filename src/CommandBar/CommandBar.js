@@ -1,2 +1,4 @@
 import {CommandBar} from 'office-ui-fabric-react';
-export default CommandBar;
+import * as PropTypes from 'prop-types';
+CommandBar.propTypes = {};
+export { CommandBar as default };

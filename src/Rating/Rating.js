@@ -1,2 +1,4 @@
 import {Rating} from 'office-ui-fabric-react';
-export default Rating;
+import * as PropTypes from 'prop-types';
+Rating.propTypes = {};
+export { Rating as default };

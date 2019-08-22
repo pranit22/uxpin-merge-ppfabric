@@ -1,2 +1,4 @@
 import {Tooltip} from 'office-ui-fabric-react';
-export default Tooltip;
+import * as PropTypes from 'prop-types';
+Tooltip.propTypes = {};
+export { Tooltip as default };

@@ -1,2 +1,4 @@
 import {Nav} from 'office-ui-fabric-react';
-export default Nav;
+import * as PropTypes from 'prop-types';
+Nav.propTypes = {};
+export { Nav as default };

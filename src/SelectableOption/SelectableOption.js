@@ -1,2 +1,4 @@
 import {SelectableOption} from 'office-ui-fabric-react';
-export default SelectableOption;
+import * as PropTypes from 'prop-types';
+SelectableOption.propTypes = {};
+export { SelectableOption as default };

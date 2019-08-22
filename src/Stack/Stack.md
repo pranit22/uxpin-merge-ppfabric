@@ -1,7 +1,0 @@
-# Stack
-  
-```jsx
-<Stack />
-```
-  
- 

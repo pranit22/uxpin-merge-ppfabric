@@ -1,2 +1,4 @@
 import {Pivot} from 'office-ui-fabric-react';
-export default Pivot;
+import * as PropTypes from 'prop-types';
+Pivot.propTypes = {};
+export { Pivot as default };

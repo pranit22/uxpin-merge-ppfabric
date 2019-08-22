@@ -1,2 +1,4 @@
 import {Dialog} from 'office-ui-fabric-react';
-export default Dialog;
+import * as PropTypes from 'prop-types';
+Dialog.propTypes = {};
+export { Dialog as default };

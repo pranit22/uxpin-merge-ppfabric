@@ -1,7 +1,0 @@
-# Overlay
-  
-```jsx
-<Overlay />
-```
-  
- 

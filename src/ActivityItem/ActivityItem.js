@@ -1,2 +1,4 @@
 import {ActivityItem} from 'office-ui-fabric-react';
-export default ActivityItem;
+import * as PropTypes from 'prop-types';
+ActivityItem.propTypes = {};
+export { ActivityItem as default };

@@ -1,2 +1,4 @@
 import {ContextualMenu} from 'office-ui-fabric-react';
-export default ContextualMenu;
+import * as PropTypes from 'prop-types';
+ContextualMenu.propTypes = {};
+export { ContextualMenu as default };

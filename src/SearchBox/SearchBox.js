@@ -1,2 +1,4 @@
 import {SearchBox} from 'office-ui-fabric-react';
-export default SearchBox;
+import * as PropTypes from 'prop-types';
+SearchBox.propTypes = {};
+export { SearchBox as default };

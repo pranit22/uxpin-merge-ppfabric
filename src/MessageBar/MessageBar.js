@@ -1,2 +1,4 @@
 import {MessageBar} from 'office-ui-fabric-react';
-export default MessageBar;
+import * as PropTypes from 'prop-types';
+MessageBar.propTypes = {};
+export { MessageBar as default };
