@@ -1,0 +1,7 @@
+# GroupedList
+  
+```jsx
+<GroupedList />
+```
+  
+ 

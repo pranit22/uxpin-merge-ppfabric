@@ -1,0 +1,7 @@
+# Shimmer
+  
+```jsx
+<Shimmer />
+```
+  
+ 

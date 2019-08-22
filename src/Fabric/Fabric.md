@@ -1,0 +1,7 @@
+# Fabric
+  
+```jsx
+<Fabric />
+```
+  
+ 

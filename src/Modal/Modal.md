@@ -1,0 +1,7 @@
+# Modal
+  
+```jsx
+<Modal />
+```
+  
+ 

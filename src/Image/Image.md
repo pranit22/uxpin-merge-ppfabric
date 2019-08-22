@@ -1,0 +1,7 @@
+# Image
+  
+```jsx
+<Image />
+```
+  
+ 

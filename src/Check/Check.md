@@ -1,0 +1,7 @@
+# Check
+  
+```jsx
+<Check />
+```
+  
+ 

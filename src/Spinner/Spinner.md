@@ -1,0 +1,7 @@
+# Spinner
+  
+```jsx
+<Spinner />
+```
+  
+ 

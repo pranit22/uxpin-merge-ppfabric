@@ -1,0 +1,7 @@
+# ColorPicker
+  
+```jsx
+<ColorPicker />
+```
+  
+ 

@@ -1,0 +1,7 @@
+# ActivityItem
+  
+```jsx
+<ActivityItem />
+```
+  
+ 

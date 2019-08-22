@@ -1,0 +1,7 @@
+# ExtendedPicker
+  
+```jsx
+<ExtendedPicker />
+```
+  
+ 

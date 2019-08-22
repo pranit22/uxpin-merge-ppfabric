@@ -1,0 +1,7 @@
+# Slider
+  
+```jsx
+<Slider />
+```
+  
+ 

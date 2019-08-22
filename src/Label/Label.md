@@ -1,0 +1,7 @@
+# Label
+  
+```jsx
+<Label />
+```
+  
+ 

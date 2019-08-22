@@ -1,0 +1,7 @@
+# Sticky
+  
+```jsx
+<Sticky />
+```
+  
+ 

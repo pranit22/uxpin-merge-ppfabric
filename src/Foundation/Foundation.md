@@ -1,0 +1,7 @@
+# Foundation
+  
+```jsx
+<Foundation />
+```
+  
+ 

@@ -1,0 +1,7 @@
+# ResizeGroup
+  
+```jsx
+<ResizeGroup />
+```
+  
+ 

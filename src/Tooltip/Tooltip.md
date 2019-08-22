@@ -1,0 +1,7 @@
+# Tooltip
+  
+```jsx
+<Tooltip />
+```
+  
+ 

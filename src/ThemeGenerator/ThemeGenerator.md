@@ -1,0 +1,7 @@
+# ThemeGenerator
+  
+```jsx
+<ThemeGenerator />
+```
+  
+ 

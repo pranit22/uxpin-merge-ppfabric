@@ -1,0 +1,7 @@
+# SearchBox
+  
+```jsx
+<SearchBox />
+```
+  
+ 

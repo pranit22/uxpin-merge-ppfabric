@@ -1,0 +1,7 @@
+# DetailsList
+  
+```jsx
+<DetailsList />
+```
+  
+ 

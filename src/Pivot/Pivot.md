@@ -1,0 +1,7 @@
+# Pivot
+  
+```jsx
+<Pivot />
+```
+  
+ 

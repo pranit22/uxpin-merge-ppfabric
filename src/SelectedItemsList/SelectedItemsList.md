@@ -1,0 +1,7 @@
+# SelectedItemsList
+  
+```jsx
+<SelectedItemsList />
+```
+  
+ 

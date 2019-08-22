@@ -1,0 +1,7 @@
+# Checkbox
+  
+```jsx
+<Checkbox />
+```
+  
+ 

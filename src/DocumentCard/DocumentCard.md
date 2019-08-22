@@ -1,0 +1,7 @@
+# DocumentCard
+  
+```jsx
+<DocumentCard />
+```
+  
+ 

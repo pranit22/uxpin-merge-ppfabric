@@ -1,0 +1,7 @@
+# ShimmeredDetailsList
+  
+```jsx
+<ShimmeredDetailsList />
+```
+  
+ 

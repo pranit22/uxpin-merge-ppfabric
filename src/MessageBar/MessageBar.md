@@ -1,0 +1,7 @@
+# MessageBar
+  
+```jsx
+<MessageBar />
+```
+  
+ 

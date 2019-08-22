@@ -1,0 +1,7 @@
+# Dialog
+  
+```jsx
+<Dialog />
+```
+  
+ 

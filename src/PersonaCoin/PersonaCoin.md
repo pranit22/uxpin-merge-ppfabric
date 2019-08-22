@@ -1,0 +1,7 @@
+# PersonaCoin
+  
+```jsx
+<PersonaCoin />
+```
+  
+ 
