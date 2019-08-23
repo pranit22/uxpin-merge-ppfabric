@@ -1,11 +1,10 @@
 const fs = require('fs-extra');
 const path = require('path');
+const { difference, uniq } = require('lodash');
 
 const libraryTarget = 'office-ui-fabric-react';
 const targetPath = path.resolve(__dirname, '../', `node_modules/${libraryTarget}/lib`);
 const librarySrcPath = path.resolve(__dirname, '../', `node_modules/${libraryTarget}/src`);
-// read the list of components
-const dirItems = fs.readdirSync(targetPath).filter(file => file.match(/\.js/)).map(file => file.split('.')[ 0 ]);
 const sourcePrefix = path.resolve(__dirname, '../', 'src');
 const ts = require('typescript');
 
@@ -13,13 +12,76 @@ const ts = require('typescript');
 // stop doing so we don't lose customizations :)
 fs.emptyDirSync(sourcePrefix);
 
+const fabricBlacklist = [
+  'Button',
+  'Check',
+  'Color',
+  'Fabric',
+  'FocusZone',
+  'FocusTrapZone',
+  'Foundation',
+  'index',
+  'Icons',
+  'image',
+  'Image',
+  'KeytipData',
+  'KeytipLayer',
+  'Layer',
+  'MarqueeSelection',
+  'Overlay',
+  'PositioningContainer',
+  'Stack',
+  'Sticky',
+  'Styling',
+  'tsdoc-metadata',
+  'version',
+  'Theme',
+  'ThemeGenerator',
+  'Text',
+  'Utilities',
+];
+
+const rawDirList = uniq(fs.readdirSync(targetPath).filter(file => file.match(/\.js/)).map(file => file.split('.')[ 0 ]));
+
+// read the list of components
+const dirItems = difference(rawDirList, fabricBlacklist);
+
+const indexTemplate = dirItems.reduce((tpl, file) => {
+  tpl += `export * from './${file}/${file}'\n`;
+  return tpl;
+}, '');
+
+const wrapperTemplate = `import * as React from 'react';
+import { loadTheme } from 'office-ui-fabric-react';
+import '@paypalcorp/console.pp-fabric/dist/pp-fabric-tokens.css';
+import {light} from '@paypalcorp/console.pp-fabric/dist/theme';
+
+// load the theme from node_modules
+loadTheme(light);
+
+export default function UXPinWrapper({ children }) {
+  return children;
+}
+`;
+
 function generateComponent(component) {
   const componentDir = `${sourcePrefix}/${component}`;
   const presetDir = `${sourcePrefix}/${component}/presets`;
 
-  const componentTemplate = `import {${component}} from '${libraryTarget}';
+  const componentTemplate = `import * as React from 'react';
+import {${component} as F${component}} from '${libraryTarget}';
 import * as PropTypes from 'prop-types';
-${component}.propTypes = {};
+
+function ${component}(props) {
+   return (
+      <F${component} {...props}>{props.children}</F${component}>
+  );
+}
+
+${component}.propTypes = {
+    children: PropTypes.node,
+};
+
 export { ${component} as default };
 `;
 
@@ -50,6 +112,11 @@ export { ${component} as default };
   }, null);
 
   let jsx = `import * as React from 'react';
+import ${component} from '../${component}';
+
+export default (
+  <${component} uxpId="${component.toLowerCase()}1"/>
+);
 // TODO implement ${component} example
 `;
   if (example) {
@@ -65,91 +132,35 @@ export default ${component}${exampleType}Example;
   fs.writeFileSync(`${presetDir}/0-default.jsx`, jsx);
 
   // write the component wrapper stub
-  fs.writeFileSync(`${componentDir}/${component}.js`, componentTemplate);
+  fs.writeFileSync(`${componentDir}/${component}.jsx`, componentTemplate);
 
   // write component doc stub
   fs.writeFileSync(`${componentDir}/${component}.md`, docTemplate);
 
 }
 
-dirItems.forEach(component => {
+dirItems.forEach(generateComponent);
 
-
-  const wrapperTemplate = `import * as React from 'react';
-import { loadTheme } from 'office-ui-fabric-react';
-import '@paypalcorp/console.pp-fabric/dist/pp-fabric-tokens.css';
-import {light} from '@paypalcorp/console.pp-fabric/dist/theme';
-
-// load the theme from node_modules
-loadTheme(light);
-
-export default function UXPinWrapper({ children }) {
-  return children;
-}
-`;
-
-  const indexTemplate = dirItems.reduce((tpl, file) => {
-    tpl += `export * from './${file}/${file}'\n`;
-    return tpl;
-  }, '');
-
-
-  switch (component) {
-    case 'Check':
-    case 'Color':
-    case 'Fabric':
-    case 'FocusZone':
-    case 'FocusTrapZone':
-    case 'Foundation':
-    case 'index':
-    case 'Icons':
-    case 'image':
-    case 'Image':
-    case 'KeytipData':
-    case 'KeytipLayer':
-    case 'Layer':
-    case 'MarqueeSelection':
-    case 'Overlay':
-    case 'PositioningContainer':
-    case 'Stack':
-    case 'Sticky':
-    case 'Styling':
-    case 'tsdoc-metadata':
-    case 'version':
-    case 'Theme':
-    case 'ThemeGenerator':
-    case 'Text':
-    case 'Utilities':
-    // we need to generate this one ourselves at the end!
-    // noop
-      break;
-    case 'Button':
-      // there are many types of buttons, so do a second loop for them..
-      [ 'ActionButton',
-        'CommandBarButton',
-        'CommandButton',
-        'CompoundButton',
-        'DefaultButton',
-        'IconButton',
-        'MessageBarButton',
-        'PrimaryButton',
-        'SplitButton' ].forEach((buttonComponent) => {
-          generateComponent(buttonComponent)
-      });
-      break;
-
-    default:
-      generateComponent(component);
-  }
-
-  // generate the index file
-  const indexPath = `${sourcePrefix}/index.js`;
-  fs.ensureFileSync(indexPath);
-  fs.writeFileSync(indexPath, indexTemplate);
-
-  // write the UXPin wrapper component
-  const wrapperPath = `${sourcePrefix}/UXPinWrapper/UXPinWrapper.js`;
-  fs.ensureFileSync(wrapperPath);
-  fs.writeFileSync(wrapperPath, wrapperTemplate);
-
+// there are many types of buttons, so do a second loop for them..
+[ 'ActionButton',
+  'CommandBarButton',
+  'CommandButton',
+  'CompoundButton',
+  'DefaultButton',
+  'IconButton',
+  'MessageBarButton',
+  'PrimaryButton',
+  'SplitButton' ].forEach((buttonComponent) => {
+  generateComponent(buttonComponent)
 });
+
+
+// generate the index file
+const indexPath = `${sourcePrefix}/index.js`;
+fs.ensureFileSync(indexPath);
+fs.writeFileSync(indexPath, indexTemplate);
+
+// write the UXPin wrapper component
+const wrapperPath = `${sourcePrefix}/UXPinWrapper/UXPinWrapper.js`;
+fs.ensureFileSync(wrapperPath);
+fs.writeFileSync(wrapperPath, wrapperTemplate);

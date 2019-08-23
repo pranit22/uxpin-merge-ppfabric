@@ -1,2 +1,6 @@
 import * as React from 'react';
-// TODO implement PrimaryButton example
+import PrimaryButton from '../PrimaryButton';
+
+export default (
+  <PrimaryButton uxpId="primarybutton1" text="foo"/>
+);

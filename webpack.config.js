@@ -1,9 +1,9 @@
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { join, resolve } = require('path');
 
 const webpackConfig = {
+  mode: 'production',
   context: __dirname, // to automatically find tsconfig.json
-  entry: './src/index.ts',
+  entry: './src/index.js',
   output: {
     path: resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -16,16 +16,26 @@ const webpackConfig = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2
+            }
+          }
+        ]
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         include: join(__dirname, 'src'),
         use: [
           {
-            loader: 'babel-loader',
-            options: {
-              babelrc: false,
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
+            loader: 'babel-loader'
           },
         ],
       },
@@ -36,7 +46,7 @@ const webpackConfig = {
       }
     ]
   },
-  devtool: 'source-map',
+  devtool: 'source-map'
 };
 
 module.exports = webpackConfig;

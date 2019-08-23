@@ -1,7 +1,6 @@
 # ActionButton
   
 ```jsx
-<ActionButton />
+<ActionButton text="foo" iconName="Dictionary"/>
 ```
   
- 

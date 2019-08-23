@@ -4,16 +4,13 @@ module.exports = {
       {
         name: 'Basic Input',
         include: [
-          'src/Button/Button.js',
-          'src/Checkbox/Checkbox.js',
-          'src/Dropdown/Dropdown.js',
+          'src/ActionButton/ActionButton.jsx',
+          'src/PrimaryButton/PrimaryButton.jsx'
         ]
       },
       {
         name: 'Commands, Menus & Navs',
-        include: [
-          'src/Breadcrumb/Breadcrumb.js'
-        ]
+        include: []
       },
     ]
   },
