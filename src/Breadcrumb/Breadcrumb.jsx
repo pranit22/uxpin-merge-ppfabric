@@ -3,29 +3,29 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
 function Breadcrumb(props) {
+  function getItems(){
+    console.log(props.crumbs, props);
+    const items = props.crumbs.split(',');
+    if(items.length){
+      return props.crumbs.split(',').map(text => ({text}))
+    }
+    return [];
+  }
   return (
-    <FBreadcrumb {...props}>{props.children}</FBreadcrumb>
+    <FBreadcrumb items={getItems()} {...props} />
   );
 }
 
 Breadcrumb.propTypes = {
-  items: PropTypes.array,
-  maxDisplayedItems: PropTypes.number
+  crumbs: PropTypes.string.isRequired,
+  maxDisplayedItems: PropTypes.number,
+  overflowIndex: PropTypes.number
 };
 
 Breadcrumb.defaultProps = {
-  items: [
-    {
-      href: '#foo',
-      isCurrentItem: false,
-      text: 'Foo'
-    },
-    {
-      href: '#bar',
-      isCurrentItem: true,
-      text: 'Bar'
-    }
-  ]
+  crumbs: 'foo,bar,baz',
+  maxDisplayedItems: 3,
+  overflowIndex: 0
 };
 
 export { Breadcrumb as default };
