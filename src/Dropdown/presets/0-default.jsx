@@ -13,4 +13,4 @@ const options = [
     { key: 'lettuce', text: 'Lettuce' }
 ];
 
-export default ( <Dropdown uxpId="dropdown1" placeholder="Select an option" label="Basic uncontrolled example" options={options} dropdownWidth="300"/>);
+export default ( <Dropdown uxpId="dropdown1" placeholder="Select an option" label="Label (optional)" options={options} dropdownWidth="300"/>);

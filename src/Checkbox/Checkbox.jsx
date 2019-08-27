@@ -15,4 +15,10 @@ Checkbox.propTypes = {
   label: PropTypes.string
 };
 
+Checkbox.defaults = {
+  boxSide: 'start',
+  disabled: false,
+  checked: false
+};
+
 export { Checkbox as default };

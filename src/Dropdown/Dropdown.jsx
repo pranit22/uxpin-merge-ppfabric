@@ -12,7 +12,14 @@ Dropdown.propTypes = {
   disabled: PropTypes.bool,
   options: PropTypes.array,
   required: PropTypes.bool,
-  multiSelect: PropTypes.bool
+  multiSelect: PropTypes.bool,
+  label: PropTypes.string,
+  dropdownWidth: PropTypes.number
+};
+
+Dropdown.defaults = {
+  dropdownWidth: 300,
+  label: "label (optional)"
 };
 
 export { Dropdown as default };
