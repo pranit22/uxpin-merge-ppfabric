@@ -1,7 +1,6 @@
 # Checkbox
   
 ```jsx
-<Checkbox />
+<Checkbox label="Standard checkbox" />
 ```
   
- 

@@ -9,7 +9,11 @@ function Breadcrumb(props) {
 }
 
 Breadcrumb.propTypes = {
-    children: PropTypes.node,
+    items: PropTypes.shape({
+      href: PropTypes.string,
+      isCurrentItem: PropTypes.bool,
+      text: PropTypes.string
+    })
 };
 
 export { Breadcrumb as default };

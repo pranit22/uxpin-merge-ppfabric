@@ -1,15 +1,18 @@
-import * as React from 'react';
-import {Dropdown as FDropdown} from 'office-ui-fabric-react';
+import { Dropdown as FDropdown } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
+import * as React from 'react';
 
 function Dropdown(props) {
-   return (
-      <FDropdown {...props}>{props.children}</FDropdown>
+  return (
+    <FDropdown {...props}>{props.children}</FDropdown>
   );
 }
 
 Dropdown.propTypes = {
-    children: PropTypes.node,
+  disabled: PropTypes.bool,
+  options: PropTypes.array,
+  required: PropTypes.bool,
+  multiSelect: PropTypes.bool
 };
 
 export { Dropdown as default };

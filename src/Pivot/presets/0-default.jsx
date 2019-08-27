@@ -1,24 +1,24 @@
+import { Label, PivotItem } from 'office-ui-fabric-react';
 import * as React from 'react';
-import { Label } from 'office-ui-fabric-react/lib/Label';
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
+import Pivot from '../Pivot';
+
 const labelStyles = {
-    root: { marginTop: 10 }
-};
-export const PivotBasicExample = () => {
-    return (<Pivot>
-      <PivotItem headerText="My Files" headerButtonProps={{
-        'data-order': 1,
-        'data-title': 'My Files Title'
-    }}>
-        <Label styles={labelStyles}>Pivot #1</Label>
-      </PivotItem>
-      <PivotItem headerText="Recent">
-        <Label styles={labelStyles}>Pivot #2</Label>
-      </PivotItem>
-      <PivotItem headerText="Shared with me">
-        <Label styles={labelStyles}>Pivot #3</Label>
-      </PivotItem>
-    </Pivot>);
+  //root: { marginTop: 10 }
 };
 
-export default PivotBasicExample;
+export default (
+  <Pivot uxpId="pivot1">
+    <PivotItem uxpId="pivot.item.1" headerText="My Files" headerButtonProps={{
+      'data-order': 1,
+      'data-title': 'My Files Title'
+    }}>
+      <Label uxpId="pivot.label.1" styles={labelStyles}>Pivot #1</Label>
+    </PivotItem>
+    <PivotItem uxpId="pivot.item.2" headerText="Recent">
+      <Label uxpId="pivot.label.2"  styles={labelStyles}>Pivot #2</Label>
+    </PivotItem>
+    <PivotItem uxpId="pivot.item.3" headerText="Shared with me">
+      <Label uxpId="pivot.label.3"  styles={labelStyles}>Pivot #3</Label>
+    </PivotItem>
+  </Pivot>
+);

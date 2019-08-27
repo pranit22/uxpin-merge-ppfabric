@@ -8,6 +8,9 @@ const librarySrcPath = path.resolve(__dirname, '../', `node_modules/${libraryTar
 const sourcePrefix = path.resolve(__dirname, '../', 'src');
 const ts = require('typescript');
 
+// DON"T RUN THIS, it will overwrite things. if you want to, remove this
+process.abort();
+
 // remove the source directory
 // stop doing so we don't lose customizations :)
 fs.emptyDirSync(sourcePrefix);

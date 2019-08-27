@@ -36,7 +36,7 @@ const webpackConfig = {
         use: [
           {
             loader: 'babel-loader'
-          },
+          }
         ],
       },
       {

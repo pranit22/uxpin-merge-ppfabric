@@ -1,15 +1,16 @@
-import * as React from 'react';
-import {Pivot as FPivot} from 'office-ui-fabric-react';
+import { Pivot as FPivot} from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
+import * as React from 'react';
 
 function Pivot(props) {
-   return (
-      <FPivot {...props}>{props.children}</FPivot>
+  return (
+    <FPivot {...props}>{props.children}</FPivot>
   );
 }
 
 Pivot.propTypes = {
-    children: PropTypes.node,
+  headersOnly: PropTypes.bool,
+  children: PropTypes.node
 };
 
 export { Pivot as default };
