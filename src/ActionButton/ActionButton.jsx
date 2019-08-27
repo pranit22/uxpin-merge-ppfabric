@@ -13,7 +13,6 @@ ActionButton.propTypes = {
   disabled: PropTypes.bool,
   href: PropTypes.string,
   iconName: PropTypes.string,
-  primary: PropTypes.bool,
   text: PropTypes.string.isRequired
 };
 

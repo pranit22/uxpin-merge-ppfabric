@@ -3,16 +3,8 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
 function Breadcrumb(props) {
-  function getItems(){
-    console.log(props.crumbs, props);
-    const items = props.crumbs.split(',');
-    if(items.length){
-      return props.crumbs.split(',').map(text => ({text}))
-    }
-    return [];
-  }
   return (
-    <FBreadcrumb items={getItems()} {...props} />
+    <FBreadcrumb items={props.crumbs.split(',').map(text => ({text}))} {...props} />
   );
 }
 
