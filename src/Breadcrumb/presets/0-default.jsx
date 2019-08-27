@@ -6,4 +6,4 @@ export default (<Breadcrumb uxpId="breadcrumb1" styles={{
   listItem: {
     fontSize: FontSizes.medium
   }
-}}/>);
+}} crumbs="foo,bar,baz"/>);
