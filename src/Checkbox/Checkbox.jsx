@@ -15,7 +15,7 @@ Checkbox.propTypes = {
   label: PropTypes.string
 };
 
-Checkbox.defaults = {
+Checkbox.defaultProps = {
   boxSide: 'start',
   disabled: false,
   checked: false

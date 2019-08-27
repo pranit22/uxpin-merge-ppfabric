@@ -17,7 +17,7 @@ Dropdown.propTypes = {
   dropdownWidth: PropTypes.number
 };
 
-Dropdown.defaults = {
+Dropdown.defaultProps = {
   dropdownWidth: 300,
   label: "label (optional)"
 };

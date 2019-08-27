@@ -13,7 +13,7 @@ Breadcrumb.propTypes = {
   maxDisplayedItems: PropTypes.number
 };
 
-Breadcrumb.defaults = {
+Breadcrumb.defaultProps = {
   items: [
     {
       href: '#foo',
