@@ -9,6 +9,7 @@
     allowFreeform 
     autoComplete="on" 
     items="Apple,Banana,Orange,Grape"
-    width={300} />
+    width={300}
+    placeholder="Select or type an option" />
 ```
  

@@ -17,7 +17,7 @@ function ComboBox(props) {
                 .split(',')
                 .map(text => ({key: text, text}))}
                 styles={ {root: {width: props.width}} } 
-            dropdownWidth={props.width}>
+            dropdownWidth={props.width} >
             {props.children}
         </FComboBox>
     );
@@ -25,7 +25,7 @@ function ComboBox(props) {
 
 ComboBox.propTypes = {
     label: PropTypes.string,
-    placeholder: "Select or type an option",
+    placeholder: PropTypes.string,
     allowFreeform: PropTypes.bool, 
 
     /**
@@ -45,7 +45,7 @@ ComboBox.propTypes = {
     items: PropTypes.string,
      
     /** Called when Select is opened */
-    onMenuOpen: (event) => {}
+    onMenuOpen: (event) => {console.log(event)}
 };
 
 ComboBox.defaultProps = {
