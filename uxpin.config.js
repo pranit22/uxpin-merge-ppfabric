@@ -8,7 +8,9 @@ module.exports = {
           'src/PrimaryButton/PrimaryButton.jsx',
           'src/Checkbox/Checkbox.jsx',
           'src/ChoiceGroup/ChoiceGroup.jsx',
-          'src/Dropdown/Dropdown.jsx'
+          'src/Dropdown/Dropdown.jsx',
+          'src/TextField/TextField.jsx',
+          'src/Toggle/Toggle.jsx',
         ]
       },
       {

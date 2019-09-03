@@ -2,24 +2,33 @@ import { Dropdown as FDropdown } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
+/**
+ * @uxpinwrappers
+ * NonResizableWrapper
+ */
 function Dropdown(props) {
   return (
-    <FDropdown {...props}>{props.children}</FDropdown>
+    <FDropdown options={props.items.split(',').map(text => ({text}))} {...props} styles={ {root: {width: props.inputWidth}} }/>
   );
 }
 
 Dropdown.propTypes = {
   disabled: PropTypes.bool,
-  options: PropTypes.array,
   required: PropTypes.bool,
   multiSelect: PropTypes.bool,
   label: PropTypes.string,
-  dropdownWidth: PropTypes.number
+  inputWidth: PropTypes.number,
+  advancedOptions: PropTypes.object,
+  /**
+   * @uxpincontroltype textfield(2)
+   * */
+  items: PropTypes.string
 };
 
 Dropdown.defaultProps = {
-  dropdownWidth: 300,
-  label: "label (optional)"
+  label: "label (clear to remove)",
+  inputWidth: 300,
+  items: "Apple,Orange,Cranberry"
 };
 
 export { Dropdown as default };

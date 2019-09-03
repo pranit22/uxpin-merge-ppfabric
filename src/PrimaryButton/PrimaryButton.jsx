@@ -4,15 +4,13 @@ import * as React from 'react';
 
 function PrimaryButton(props) {
   return (
-    <FPrimaryButton {...props} iconProps={{ iconName: props.iconName }}>{props.children}</FPrimaryButton>
+    <FPrimaryButton {...props} iconProps={{ iconName: props.iconName }}/>
   );
 }
 
 PrimaryButton.propTypes = {
-  children: PropTypes.node,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
-  href: PropTypes.string,
   iconName: PropTypes.string,
   text: PropTypes.string.isRequired
 };

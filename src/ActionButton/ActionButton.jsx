@@ -11,7 +11,6 @@ function ActionButton(props) {
 ActionButton.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
-  href: PropTypes.string,
   iconName: PropTypes.string,
   text: PropTypes.string.isRequired
 };

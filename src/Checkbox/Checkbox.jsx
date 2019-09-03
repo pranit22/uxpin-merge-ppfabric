@@ -10,7 +10,7 @@ function Checkbox(props) {
 
 Checkbox.propTypes = {
   boxSide: PropTypes.oneOf(['start', 'end']),
-  checked: PropTypes.bool,
+  defaultChecked: PropTypes.bool,
   disabled: PropTypes.bool,
   label: PropTypes.string
 };
@@ -18,7 +18,8 @@ Checkbox.propTypes = {
 Checkbox.defaultProps = {
   boxSide: 'start',
   disabled: false,
-  checked: false
+  defaultChecked: false,
+  label: 'Checkbox'
 };
 
 export { Checkbox as default };
