@@ -7,11 +7,6 @@ import * as PropTypes from 'prop-types';
  * SkipContainerWrapper, NonResizableWrapper
  */
 
-
-function onMenuOpen (event){
-    console.log(event)
-}
-
 function ComboBox(props) {
     return (
         <FComboBox 
@@ -22,7 +17,10 @@ function ComboBox(props) {
                 .map(text => ({key: text, text}))}
                 styles={ {root: {width: props.width}} } 
             dropdownWidth={props.width} 
-            onMenuOpen={onMenuOpen.bind(this)}>
+            defaultSelectedKey={props.defaultSelectedKey
+                .replace(/\s/g,'')
+                .split(',')}
+            >
             {props.children}
         </FComboBox>
     );
@@ -31,7 +29,6 @@ function ComboBox(props) {
 ComboBox.propTypes = {
     /** Could be empty to remove label */
     label: PropTypes.string,
-
 
     placeholder: PropTypes.string,
     allowFreeform: PropTypes.bool, 
@@ -51,8 +48,18 @@ ComboBox.propTypes = {
      * */
     items: PropTypes.string,
      
-    /** Called when Select is opened */
-    onMenuOpen: PropTypes.func
+     /** Coma separated values to preselect */
+    defaultSelectedKey: PropTypes.string,
+
+    /** Triggered when Select is opened */
+    onMenuOpen: PropTypes.func,
+
+    /** Triggered when Select is focused */
+    onFocus: PropTypes.func,
+
+    /** Triggered when value is selected */
+    onPendingValueChanged: PropTypes.func,
+
 };
 
 ComboBox.defaultProps = {
