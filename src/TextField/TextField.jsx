@@ -20,7 +20,8 @@ TextField.propTypes = {
   multiline: PropTypes.bool,
   prefix: PropTypes.string,
   suffix: PropTypes.string,
-  readOnly: PropTypes.bool
+  readOnly: PropTypes.bool,
+  required: PropTypes.bool
 };
 
 TextField.defaultProps = {
