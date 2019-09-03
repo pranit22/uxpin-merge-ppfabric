@@ -5,10 +5,11 @@ module.exports = {
         name: 'Basic Input',
         include: [
           'src/ActionButton/ActionButton.jsx',
-          'src/PrimaryButton/PrimaryButton.jsx',
+          'src/ComboBox/ComboBox.jsx',
           'src/Checkbox/Checkbox.jsx',
           'src/ChoiceGroup/ChoiceGroup.jsx',
           'src/Dropdown/Dropdown.jsx',
+          'src/PrimaryButton/PrimaryButton.jsx',
           'src/TextField/TextField.jsx',
           'src/Toggle/Toggle.jsx',
         ]
