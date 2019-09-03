@@ -38,10 +38,14 @@ ComboBox.propTypes = {
     width: PropTypes.number,
     errorMessage: PropTypes.string, 
     advancedOptions: PropTypes.object,
+
     /**
      * @uxpincontroltype textfield(3)
      * */
-    items: PropTypes.string
+    items: PropTypes.string,
+     
+    /** Called when Select is opened */
+    onMenuOpen: (event) => {}
 };
 
 ComboBox.defaultProps = {
