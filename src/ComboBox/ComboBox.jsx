@@ -8,6 +8,10 @@ import * as PropTypes from 'prop-types';
  */
 
 
+function onMenuOpen (event){
+    console.log(event)
+}
+
 function ComboBox(props) {
     return (
         <FComboBox 
@@ -17,14 +21,18 @@ function ComboBox(props) {
                 .split(',')
                 .map(text => ({key: text, text}))}
                 styles={ {root: {width: props.width}} } 
-            dropdownWidth={props.width} >
+            dropdownWidth={props.width} 
+            onMenuOpen={onMenuOpen.bind(this)}>
             {props.children}
         </FComboBox>
     );
 }
 
 ComboBox.propTypes = {
+    /** Could be empty to remove label */
     label: PropTypes.string,
+
+
     placeholder: PropTypes.string,
     allowFreeform: PropTypes.bool, 
 
@@ -37,7 +45,6 @@ ComboBox.propTypes = {
     multiSelect: PropTypes.bool,
     width: PropTypes.number,
     errorMessage: PropTypes.string, 
-    advancedOptions: PropTypes.object,
 
     /**
      * @uxpincontroltype textfield(3)
@@ -45,7 +52,7 @@ ComboBox.propTypes = {
     items: PropTypes.string,
      
     /** Called when Select is opened */
-    onMenuOpen: (event) => {console.log(event)}
+    onMenuOpen: PropTypes.func
 };
 
 ComboBox.defaultProps = {

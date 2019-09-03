@@ -7,7 +7,7 @@ export default (
         multiSelect
         uxpId="ComboBox1"
         defaultSelectedKey="C"
-        label="ComboBox label (optional)" 
+        label="ComboBox label" 
         allowFreeform 
         autoComplete="on" 
         items="Apple,Banana,Orange,Grape"
