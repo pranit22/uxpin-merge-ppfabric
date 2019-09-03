@@ -1,7 +1,6 @@
 # Toggle
   
 ```jsx
-<Toggle />
+<Toggle label="label (clear to remove)" />
 ```
   
- 
