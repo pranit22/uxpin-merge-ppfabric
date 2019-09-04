@@ -43,15 +43,15 @@ function DetailsList(props) {
 
 DetailsList.propTypes = {
 
-  /** Separate each item with | , Separate each row with new line or ||.
-   * @uxpincontroltype textfield(20) 
-   * */
-  items: PropTypes.string,
-
   /** Separate each item with | .
   * @uxpincontroltype textfield(4)
   * */
   columns: PropTypes.string,
+
+  /** Separate each item with | , Separate each row with new line or ||.
+   * @uxpincontroltype textfield(20) 
+   * */
+  items: PropTypes.string,
 
   /** Defines if rows might be selected with checkmark on the left hand side  */
   selectable: PropTypes.bool,
