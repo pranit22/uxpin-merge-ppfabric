@@ -5,6 +5,8 @@ import * as PropTypes from 'prop-types';
 
 function DetailsList(props) {
   let columns = props.columns
+    .split('\n')
+    .join('|')
     .split('|')
     .map(col => col.trim())
     .map((col, i) => ({
@@ -43,12 +45,12 @@ function DetailsList(props) {
 
 DetailsList.propTypes = {
 
-  /** Separate each item with | .
+  /** Separate each item with new line or | symbol
   * @uxpincontroltype textfield(4)
   * */
   columns: PropTypes.string,
 
-  /** Separate each item with | , Separate each row with new line or ||.
+  /** Separate each item with | , Separate each row with new line or || symbol
    * @uxpincontroltype textfield(20) 
    * */
   items: PropTypes.string,
