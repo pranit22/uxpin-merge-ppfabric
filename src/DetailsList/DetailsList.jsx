@@ -2,24 +2,6 @@ import * as React from 'react';
 import { DetailsList as FDetailsList, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import * as PropTypes from 'prop-types';
 
-/**
- * @uxpinwrappers
- * SkipContainerWrapper, ResizableWrapper
- */
-
-const columns = [
-  { key: 'column1', name: 'Name', fieldName: 'name', minWidth: 100, maxWidth: 200, isResizable: true },
-  { key: 'column2', name: 'Value', fieldName: 'value', minWidth: 100, maxWidth: 200, isResizable: true }
-];
-
-let items = [];
-for (let i = 0; i < 5; i++) {
-  items.push({
-    key: i,
-    name: 'Item ' + i,
-    value: i
-  });
-}
 
 function DetailsList(props) {
   let columns = props.columns
@@ -57,7 +39,7 @@ function DetailsList(props) {
 DetailsList.propTypes = {
 
   /** Separate each item with | , Separate each row with ||.
-   * @uxpincontroltype textfield(6) 
+   * @uxpincontroltype textfield(10) 
    * */
   items: PropTypes.string,
 
