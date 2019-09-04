@@ -20,7 +20,11 @@ function DetailsList(props) {
     .split('||')
     .map(row => (row.split('|').map(val => val.trim())))
     .map((row, rowInd) => {
-      let r = { key: rowInd }
+      let r = {
+        key: rowInd,
+        data: props.columnDataType,
+        onColumnClick: () => { console.log(column.fieldName + " was clicked") }
+      }
       columns.forEach((column, colInd) => {
         r[column.fieldName] = row[colInd]
       })
@@ -58,7 +62,9 @@ DetailsList.propTypes = {
   minWidth: PropTypes.number,
 
   /** Max width for columns */
-  maxWidth: PropTypes.number
+  maxWidth: PropTypes.number,
+
+  columnDataType: PropTypes.oneOf(['string', 'number']),
 };
 
 DetailsList.defaultProps = {
@@ -67,7 +73,8 @@ DetailsList.defaultProps = {
   selectable: false,
   isResizable: true,
   minWidth: 100,
-  maxWidth: 200
+  maxWidth: 200,
+  columnDataType: 'string'
 };
 
 export { DetailsList as default };
