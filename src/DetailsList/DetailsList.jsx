@@ -14,7 +14,6 @@ function DetailsList(props) {
       isResizable: true,
       minWidth: props.minWidth,
       maxWidth: props.maxWidth,
-      data: props.columnDataType,
       onColumnClick: () => { console.log(col.toLowerCase() + " was clicked") }
     }))
 
@@ -44,8 +43,8 @@ function DetailsList(props) {
 
 DetailsList.propTypes = {
 
-  /** Separate each item with | , Separate each row with ||.
-   * @uxpincontroltype textfield(10) 
+  /** Separate each item with | , Separate each row with new line or ||.
+   * @uxpincontroltype textfield(20) 
    * */
   items: PropTypes.string,
 
@@ -66,17 +65,17 @@ DetailsList.propTypes = {
   /** Max width for columns */
   maxWidth: PropTypes.number,
 
-  columnDataType: PropTypes.oneOf(['string', 'number']),
 };
 
 DetailsList.defaultProps = {
-  columns: "Aa|Bb|Cc",
-  items: "A-1 | B-1 | C-1 || A-2 | B-2 | C-2",
+  columns: "Aa | Bb | Cc",
+  items: `A-1  | B-1  | C-1 
+          A-2 | B-2 | C-2
+          A-3 | B-3 | C-3`,
   selectable: false,
   isResizable: true,
   minWidth: 100,
   maxWidth: 200,
-  columnDataType: 'string'
 };
 
 export { DetailsList as default };
