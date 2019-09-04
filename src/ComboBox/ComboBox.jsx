@@ -2,25 +2,20 @@ import { ComboBox as FComboBox, SelectableOptionMenuItemType } from 'office-ui-f
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-/**
- * @uxpinwrappers
- * SkipContainerWrapper, NonResizableWrapper
- */
-
 function ComboBox(props) {
     return (
-        <FComboBox 
-            {...props} 
+        <FComboBox
+            {...props}
             options={props.items
-                .replace(/\s/g,'')
+                .replace(/\s/g, '')
                 .split(',')
-                .map(text => ({key: text, text}))}
-                styles={ {root: {width: props.width}} } 
-            dropdownWidth={props.width} 
+                .map(text => ({ key: text, text }))}
+            styles={{ root: { width: props.width } }}
+            dropdownWidth={props.width}
             defaultSelectedKey={props.defaultSelectedKey
-                .replace(/\s/g,'')
+                .replace(/\s/g, '')
                 .split(',')}
-            >
+        >
             {props.children}
         </FComboBox>
     );
@@ -31,24 +26,24 @@ ComboBox.propTypes = {
     label: PropTypes.string,
 
     placeholder: PropTypes.string,
-    allowFreeform: PropTypes.bool, 
+    allowFreeform: PropTypes.bool,
 
     /**
      * Use "on" or "off" labels
      * @uxpindescription use "on" or "off" labels
      * */
-    autoComplete: PropTypes.oneOf(['on', 'off']), 
+    autoComplete: PropTypes.oneOf(['on', 'off']),
 
     multiSelect: PropTypes.bool,
     width: PropTypes.number,
-    errorMessage: PropTypes.string, 
+    errorMessage: PropTypes.string,
 
     /**
      * @uxpincontroltype textfield(3)
      * */
     items: PropTypes.string,
-     
-     /** Coma separated values to preselect */
+
+    /** Coma separated values to preselect */
     defaultSelectedKey: PropTypes.string,
 
     /** Triggered when Select is opened */

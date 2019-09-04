@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import DetailsList from '../DetailsList';
 
 export default (
