@@ -8,22 +8,24 @@ function DetailsList(props) {
     .split('|')
     .map(col => col.trim())
     .map((col, i) => ({
-      key: col.toLowerCase() + Math.random().toString().slice(2, 11),
+      key: col.toLowerCase(),
       name: col,
       fieldName: col.toLowerCase(),
       isResizable: true,
       minWidth: props.minWidth,
-      maxWidth: props.maxWidth
+      maxWidth: props.maxWidth,
+      data: props.columnDataType,
+      onColumnClick: () => { console.log(col.toLowerCase() + " was clicked") }
     }))
 
   let items = props.items
+    .split('\n')
+    .join('||')
     .split('||')
     .map(row => (row.split('|').map(val => val.trim())))
     .map((row, rowInd) => {
       let r = {
         key: rowInd,
-        data: props.columnDataType,
-        onColumnClick: () => { console.log(column.fieldName + " was clicked") }
       }
       columns.forEach((column, colInd) => {
         r[column.fieldName] = row[colInd]
