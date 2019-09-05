@@ -1,4 +1,5 @@
 import { CompoundButton, INavLinkGroup, Nav, Text } from 'office-ui-fabric-react';
+import { Card } from '@uifabric/react-cards';
 import React from 'react';
 import { render } from 'react-dom';
 import injectSheet, { Styles, ThemeProvider, WithStyles } from 'react-jss';
@@ -89,7 +90,21 @@ const Page = ({classes}: WithStyles<typeof styles>) => (
       <Switch>
         <Route path="/component/:name" component={InjectComponent}/>
         <Route path="/" exact>
-          <Text variant={'large'}>Select a component from the menu to view it's preset and metadata</Text>
+          <Text variant={'xLarge'}>Useful hints:</Text>
+        <Card styles={{root: {padding: '1em'}}} tokens={{
+                minWidth: '100%',
+              }}>
+          <Card.Item>
+            <Text variant={'large'}>Select a component from the menu to view it's preset and metadata</Text>
+          </Card.Item>
+        </Card>
+        <Card styles={{root: {padding: '1em'}}} tokens={{
+                minWidth: '100%',
+              }}>
+          <Card.Item>
+           <Text variant={'large'}>To index new component and make it available in Kitchensink run `npm run debug`</Text>
+          </Card.Item>
+        </Card>
         </Route>
       </Switch>
     </div>

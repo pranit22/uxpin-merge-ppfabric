@@ -15,6 +15,12 @@ module.exports = {
         ]
       },
       {
+        name: 'Items & Lists',
+        include: [
+          'src/DetailsList/DetailsList.jsx'
+        ]
+      },
+      {
         name: 'Commands, Menus & Navs',
         include: [
           'src/Breadcrumb/Breadcrumb.jsx',

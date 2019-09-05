@@ -4,7 +4,7 @@ import * as React from 'react';
 
 function Toggle(props) {
   return (
-    <FToggle {...props}/>
+    <FToggle {...props} />
   );
 }
 
@@ -16,7 +16,7 @@ Toggle.propTypes = {
 
 Toggle.defaultProps = {
   defaultChecked: false,
-  label: "label (clear to remove",
+  label: "Toggle label (clear to remove)",
   disabled: false
 };
 
