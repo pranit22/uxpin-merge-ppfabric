@@ -3,16 +3,17 @@ import * as PropTypes from 'prop-types';
 import { DetailsList as FDetailsList, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import { mergeStyleSets } from 'office-ui-fabric-react/lib/Styling';
 
-
-// const cssVar = (variable) => (getComputedStyle(document.documentElement)
-//   .getPropertyValue(variable))
-
 const classNames = mergeStyleSets({
+
   headerCell: {
     background: 'var(--color-grey-300)',
   },
-  tableCell: {
-    background: 'white'
+  tableRow: {
+    selectors: {
+      '&:hover': {
+        background: 'red'
+      }
+    }
   }
 });
 
@@ -62,7 +63,12 @@ class DetailsList extends React.Component {
       <FDetailsList {...this.props}
         columns={this.getColumns()}
         items={this.getItems()}
-        selectionMode={this.props.selectable ? SelectionMode.multiple : SelectionMode.none}>
+        selectionMode={this.props.selectable ? SelectionMode.multiple : SelectionMode.none}
+        onRenderRow={(props, defaultRender) => (
+          <>
+            {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
+          </>
+        )}>
       </FDetailsList>
     );
   }
