@@ -85,8 +85,9 @@ class DetailsList extends React.Component {
 
 DetailsList.propTypes = {
 
-  /** Separate each item with new line or | symbol.
-   *  put at the end of the line [color:blue-600] token to set color for whole column.
+  /** 
+   *  Separate each item with new line or | symbol.
+   *  Put at the end of the line [color:blue-600] token to set color for whole column.
    * @uxpincontroltype textfield(4)
    * */
   columns: PropTypes.string,
