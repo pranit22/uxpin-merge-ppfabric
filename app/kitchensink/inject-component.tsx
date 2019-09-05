@@ -119,20 +119,20 @@ export class InjectComponent extends Component<Props> {
         <Suspense fallback={<Text>Loading...</Text>}>
           <Text variant={'xLarge'}>{componentName}</Text>
           <Separator />
-          <Stack disableShrink tokens={{childrenGap: 25}}>
+          <Stack disableShrink tokens={{childrenGap: 25}} >
             <Stack.Item>
               <Card styles={{root: {padding: '1em'}}} tokens={{
-                minWidth: 300
+                minWidth: '100%',
               }}>
-                <Card.Item>
-                  <Injected/>
+                <Card.Item >
+                  <Injected />
                 </Card.Item>
               </Card>
             </Stack.Item>
             <Stack.Item>
               <Text variant='large' block>Props</Text>
               <DetailsList items={tabularProps} columns={columns} compact={true} layoutMode={DetailsListLayoutMode.fixedColumns}
-                           checkboxVisibility={CheckboxVisibility.hidden} selectionMode={SelectionMode.none} styles={{root: {maxWidth: '70%'}}}/>
+                           checkboxVisibility={CheckboxVisibility.hidden} selectionMode={SelectionMode.none} styles={{root: {maxWidth: '100%'}}}/>
             </Stack.Item>
           </Stack>
         </Suspense>

@@ -9,7 +9,7 @@
     "start": "uxpin-merge --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
     "push": "rm -rf .uxpin-merge && uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 258e3f84adad7ff4420400d965b6bb14f683acdc",
     "debug": "uxpin-merge dump --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js > metadata.json",
-    "kitckensink": "webpack-cli serve --config app/kitchensink/webpack.config.js"
+    "kitchensink": "webpack-cli serve --config app/kitchensink/webpack.config.js"
   },
   "author": "Stan Carrico <scarrico@paypal.com>",
   "license": "UNLICENSED",

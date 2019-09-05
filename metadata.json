@@ -481,16 +481,7 @@
               }
             }
           ],
-          "wrappers": [
-            {
-              "name": "SkipContainerWrapper",
-              "type": "builtIn"
-            },
-            {
-              "name": "NonResizableWrapper",
-              "type": "builtIn"
-            }
-          ]
+          "wrappers": []
         },
         {
           "documentation": {
@@ -620,7 +611,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<PrimaryButton text=\"foo\" />"
+                "code": "<PrimaryButton text=\"Primary Button\" />"
               }
             ]
           },
@@ -647,7 +638,7 @@
                 "primarybutton1": {
                   "name": "PrimaryButton",
                   "props": {
-                    "text": "foo"
+                    "text": "Primary Button"
                   }
                 }
               },
@@ -875,7 +866,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<Toggle label=\"label (clear to remove)\" />"
+                "code": "<Toggle label=\"Toggle label (clear to remove)\" />"
               }
             ]
           },
@@ -902,7 +893,7 @@
                 "toggle1": {
                   "name": "Toggle",
                   "props": {
-                    "label": "label (clear to remove)"
+                    "label": "Toggle label (clear to remove)"
                   }
                 }
               },
@@ -925,7 +916,7 @@
             },
             {
               "defaultValue": {
-                "value": "label (clear to remove"
+                "value": "Toggle label (clear to remove)"
               },
               "description": "",
               "isRequired": false,
@@ -952,6 +943,140 @@
         }
       ],
       "name": "Basic Input"
+    },
+    {
+      "components": [
+        {
+          "documentation": {
+            "examples": [
+              {
+                "code": "<DetailsList \n  uxpId=\"DetailsList1\"\n  columns=\"Aa | Bb | Cc\"\n  items={\n`A-1 | B-1 | C-1 \nA-2 | B-2 | C-2\nA-3 | B-3 | C-3`\n  }\n  isResizable />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/DetailsList",
+            "documentation": {
+              "path": "src/DetailsList/DetailsList.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/DetailsList/DetailsList.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/DetailsList/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "DetailsList",
+          "presets": [
+            {
+              "elements": {
+                "DetailsList1": {
+                  "name": "DetailsList",
+                  "props": {
+                    "columns": "Aa | Bb | Cc",
+                    "isResizable": true,
+                    "items": "A-1  | B-1  | C-1 \nA-2 | B-2 | C-2\nA-3 | B-3 | C-3"
+                  }
+                }
+              },
+              "name": "default",
+              "rootId": "DetailsList1"
+            }
+          ],
+          "properties": [
+            {
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 4
+                }
+              },
+              "defaultValue": {
+                "value": "Aa | Bb | Cc"
+              },
+              "description": "Separate each item with new line or | symbol",
+              "isRequired": false,
+              "name": "columns",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 20
+                }
+              },
+              "defaultValue": {
+                "value": "A-1  | B-1  | C-1 \n        A-2 | B-2 | C-2\n        A-3 | B-3 | C-3"
+              },
+              "description": "Separate each item with | , Separate each row with new line or || symbol",
+              "isRequired": false,
+              "name": "items",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": false
+              },
+              "description": "Defines if rows might be selected with checkmark on the left hand side",
+              "isRequired": false,
+              "name": "selectable",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": true
+              },
+              "description": "Is table resizable",
+              "isRequired": false,
+              "name": "isResizable",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 100
+              },
+              "description": "Min width for columns",
+              "isRequired": false,
+              "name": "minWidth",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 200
+              },
+              "description": "Max width for columns",
+              "isRequired": false,
+              "name": "maxWidth",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            }
+          ],
+          "wrappers": []
+        }
+      ],
+      "name": "Items & Lists"
     },
     {
       "components": [
@@ -1108,7 +1233,7 @@
   ],
   "name": "MS Fabric UXPin Merge",
   "vcs": {
-    "branchName": "sc/devapp",
-    "commitHash": "bf6497ed99ea363ef32b0ae338ae1a0d2535290a"
+    "branchName": "master",
+    "commitHash": "7db24f94393595713d527adec992e3afac56a6a9"
   }
 }
