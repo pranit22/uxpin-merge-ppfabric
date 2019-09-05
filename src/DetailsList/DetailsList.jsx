@@ -4,12 +4,12 @@ import { DetailsList as FDetailsList, SelectionMode } from 'office-ui-fabric-rea
 import { mergeStyleSets } from 'office-ui-fabric-react/lib/Styling';
 
 
-const cssVar = (variable) => (getComputedStyle(document.documentElement)
-  .getPropertyValue(variable))
+// const cssVar = (variable) => (getComputedStyle(document.documentElement)
+//   .getPropertyValue(variable))
 
 const classNames = mergeStyleSets({
   headerCell: {
-    background: cssVar('--color-grey-300')
+    background: 'var(--color-grey-300)',
   },
   tableCell: {
     background: 'white'
