@@ -3,7 +3,7 @@
 ```jsx
 <DetailsList 
   uxpId="DetailsList1"
-  columns="Aa | Bb | Cc [l]"
+  columns="Aa | Bb | Cc [color:blue-600]"
   items={
 `A-1 | B-1 | C-1 
 A-2 | B-2 | C-2

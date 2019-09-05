@@ -39,8 +39,12 @@ class DetailsList extends React.Component {
           minWidth: this.props.minWidth,
           maxWidth: this.props.maxWidth,
           onColumnClick: () => { console.log(col.toLowerCase() + " was clicked") },
-          className: token === 'l' ? classNames.links : null,
           headerClassName: classNames.headerCell,
+          className: token && token.indexOf('color' !== -1) ? mergeStyleSets({
+            a: {
+              color: `var(--color-${token.split(':')[1]})`
+            }
+          }).a : null
         }
       })
   }
@@ -82,7 +86,7 @@ class DetailsList extends React.Component {
 DetailsList.propTypes = {
 
   /** Separate each item with new line or | symbol.
-   *  put at the end of the line [l] token to make elements blue/link
+   *  put at the end of the line [color:blue-600] token to set color for whole column.
    * @uxpincontroltype textfield(4)
    * */
   columns: PropTypes.string,
@@ -107,7 +111,7 @@ DetailsList.propTypes = {
 };
 
 DetailsList.defaultProps = {
-  columns: "Aa | Bb | Cc [l]",
+  columns: "Aa | Bb | Cc [color:blue-600]",
   items: `A-1  | B-1  | C-1 
           A-2 | B-2 | C-2
           A-3 | B-3 | C-3`,
