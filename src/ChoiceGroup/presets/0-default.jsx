@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ChoiceGroup from '../ChoiceGroup';
 
-export default (<ChoiceGroup uxpId="choicegroup1" className="defaultChoiceGroup" defaultSelectedKey="B" options={[
+export default ()=>(<ChoiceGroup uxpId="choicegroup1" className="defaultChoiceGroup" defaultSelectedKey="B" options={[
     {
         key: 'A',
         text: 'Option A',

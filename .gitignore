@@ -1,3 +1,4 @@
 .uxpin-merge
 .idea
 node_modules
+/app/kitchensink/dist/
