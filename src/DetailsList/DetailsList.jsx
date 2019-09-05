@@ -1,47 +1,63 @@
 import * as React from 'react';
 import { DetailsList as FDetailsList, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import * as PropTypes from 'prop-types';
+import { render } from 'react-dom';
 
 
-function DetailsList(props) {
-  let columns = props.columns
-    .split('\n')
-    .join('|')
-    .split('|')
-    .map(col => col.trim())
-    .map((col, i) => ({
-      key: col.toLowerCase(),
-      name: col,
-      fieldName: col.toLowerCase(),
-      isResizable: true,
-      minWidth: props.minWidth,
-      maxWidth: props.maxWidth,
-      onColumnClick: () => { console.log(col.toLowerCase() + " was clicked") }
-    }))
 
-  let items = props.items
-    .split('\n')
-    .join('||')
-    .split('||')
-    .map(row => (row.split('|').map(val => val.trim())))
-    .map((row, rowInd) => {
-      let r = {
-        key: rowInd,
-      }
-      columns.forEach((column, colInd) => {
-        r[column.fieldName] = row[colInd]
+class DetailsList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
+
+  getColumns() {
+    return this.props.columns
+      .split('\n')
+      .join('|')
+      .split('|')
+      .map(col => col.trim())
+      .map((col, i) => ({
+        key: col.toLowerCase(),
+        name: col,
+        fieldName: col.toLowerCase(),
+        isResizable: true,
+        minWidth: this.props.minWidth,
+        maxWidth: this.props.maxWidth,
+        onColumnClick: () => { console.log(col.toLowerCase() + " was clicked") }
+      }))
+  }
+
+  getItems() {
+    return this.props.items
+      .split('\n')
+      .join('||')
+      .split('||')
+      .map(row => (row.split('|').map(val => val.trim())))
+      .map((row, rowInd) => {
+        let r = {
+          key: rowInd,
+        }
+        this.getColumns().forEach((column, colInd) => {
+          r[column.fieldName] = row[colInd]
+        })
+        return r
       })
-      return r
-    })
+  }
 
-  return (
-    <FDetailsList {...props}
-      columns={columns}
-      items={items}
-      selectionMode={props.selectable ? SelectionMode.multiple : SelectionMode.none}>
-    </FDetailsList>
-  );
+  render() {
+    return (
+      <FDetailsList {...this.props}
+        columns={this.getColumns()}
+        items={this.getItems()}
+        selectionMode={this.props.selectable ? SelectionMode.multiple : SelectionMode.none}>
+      </FDetailsList>
+    );
+  }
+
 }
+
+
 
 DetailsList.propTypes = {
 
