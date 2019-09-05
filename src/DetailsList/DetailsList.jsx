@@ -4,16 +4,11 @@ import { DetailsList as FDetailsList, SelectionMode } from 'office-ui-fabric-rea
 import { mergeStyleSets } from 'office-ui-fabric-react/lib/Styling';
 
 const classNames = mergeStyleSets({
-
   headerCell: {
     background: 'var(--color-grey-300)',
   },
-  tableRow: {
-    selectors: {
-      '&:hover': {
-        background: 'red'
-      }
-    }
+  links: {
+    color: 'var(--color-blue-600)'
   }
 });
 
@@ -28,17 +23,26 @@ class DetailsList extends React.Component {
       .join('|')
       .split('|')
       .map(col => col.trim())
-      .map((col, i) => ({
-        key: col.toLowerCase(),
-        name: col,
-        fieldName: col.toLowerCase(),
-        isResizable: true,
-        minWidth: this.props.minWidth,
-        maxWidth: this.props.maxWidth,
-        onColumnClick: () => { console.log(col.toLowerCase() + " was clicked") },
-        className: classNames.tableCell,
-        headerClassName: classNames.headerCell,
-      }))
+      .map((col, i) => {
+        const lBracket = col.indexOf('[')
+        const rBracket = col.indexOf(']')
+        let token = null;
+        if (lBracket !== -1) {
+          token = col.substring(lBracket + 1, rBracket)
+          col = col.substring(0, lBracket)
+        }
+        return {
+          key: col.toLowerCase(),
+          name: col,
+          fieldName: col.toLowerCase(),
+          isResizable: true,
+          minWidth: this.props.minWidth,
+          maxWidth: this.props.maxWidth,
+          onColumnClick: () => { console.log(col.toLowerCase() + " was clicked") },
+          className: token === 'l' ? classNames.links : null,
+          headerClassName: classNames.headerCell,
+        }
+      })
   }
 
   getItems() {
@@ -72,16 +76,15 @@ class DetailsList extends React.Component {
       </FDetailsList>
     );
   }
-
 }
-
 
 
 DetailsList.propTypes = {
 
-  /** Separate each item with new line or | symbol
-  * @uxpincontroltype textfield(4)
-  * */
+  /** Separate each item with new line or | symbol.
+   *  put at the end of the line [l] token to make elements blue/link
+   * @uxpincontroltype textfield(4)
+   * */
   columns: PropTypes.string,
 
   /** Separate each item with | , Separate each row with new line or || symbol
@@ -104,7 +107,7 @@ DetailsList.propTypes = {
 };
 
 DetailsList.defaultProps = {
-  columns: "Aa | Bb | Cc",
+  columns: "Aa | Bb | Cc [l]",
   items: `A-1  | B-1  | C-1 
           A-2 | B-2 | C-2
           A-3 | B-3 | C-3`,
