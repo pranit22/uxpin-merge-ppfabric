@@ -2,10 +2,6 @@ import { Dropdown as FDropdown } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
-/**
- * @uxpinwrappers
- * NonResizableWrapper
- */
 function Dropdown(props) {
   return (
     <FDropdown options={props.items.split(',').map(text => ({text}))} {...props} styles={ {root: {width: props.inputWidth}} }/>
