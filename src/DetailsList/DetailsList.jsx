@@ -1,14 +1,24 @@
 import * as React from 'react';
-import { DetailsList as FDetailsList, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import * as PropTypes from 'prop-types';
-import { render } from 'react-dom';
+import { DetailsList as FDetailsList, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
+import { mergeStyleSets } from 'office-ui-fabric-react/lib/Styling';
 
 
+const cssVar = (variable) => (getComputedStyle(document.documentElement)
+  .getPropertyValue(variable))
+
+const classNames = mergeStyleSets({
+  headerCell: {
+    background: cssVar('--color-grey-300')
+  },
+  tableCell: {
+    background: 'white'
+  }
+});
 
 class DetailsList extends React.Component {
   constructor(props) {
     super(props);
-    this.props = props;
   }
 
   getColumns() {
@@ -24,7 +34,9 @@ class DetailsList extends React.Component {
         isResizable: true,
         minWidth: this.props.minWidth,
         maxWidth: this.props.maxWidth,
-        onColumnClick: () => { console.log(col.toLowerCase() + " was clicked") }
+        onColumnClick: () => { console.log(col.toLowerCase() + " was clicked") },
+        className: classNames.tableCell,
+        headerClassName: classNames.headerCell,
       }))
   }
 
