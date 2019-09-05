@@ -2,7 +2,7 @@ import { CompoundButton, INavLinkGroup, Nav, Text } from 'office-ui-fabric-react
 import React from 'react';
 import { render } from 'react-dom';
 import injectSheet, { Styles, ThemeProvider, WithStyles } from 'react-jss';
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 // @ts-ignore
 import UXPinWrapper from './components/UXPinWrapper/UXPinWrapper.js';
 import { InjectComponent } from './inject-component';
@@ -65,7 +65,8 @@ const componentList = categories.map((category: { name: string, include: Array<s
 
 const FabricNav = withRouter(({history}) => (
   <div>
-    <CompoundButton secondaryText="UXPin Fabric Components" styles={{root: {width: '100%', maxWidth: '100%'}}} onClick={() => history.push('/')}>
+    <CompoundButton iconProps={{iconName: 'WebComponents'}} secondaryText="UXPin Fabric Components" styles={{root: {width: '100%', maxWidth: '100%'}}}
+                    onClick={() => history.push('/')}>
       Kitchen Sink
     </CompoundButton>
     <Nav
@@ -85,7 +86,12 @@ const Page = ({classes}: WithStyles<typeof styles>) => (
       <FabricNav/>
     </div>
     <div className={classes.content}>
-      <Route path="/component/:name" component={InjectComponent}/>
+      <Switch>
+        <Route path="/component/:name" component={InjectComponent}/>
+        <Route path="/" exact>
+          <Text variant={'large'}>Select a component from the menu to view it's preset and metadata</Text>
+        </Route>
+      </Switch>
     </div>
   </div>
 );

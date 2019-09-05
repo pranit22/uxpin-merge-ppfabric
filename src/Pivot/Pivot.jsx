@@ -4,7 +4,7 @@ import * as React from 'react';
 
 function Pivot(props) {
   return (
-    <FPivot {...props}>{props.tabs.split(',').map(tab => (<PivotItem headerText={tab} />))}</FPivot>
+    <FPivot {...props}>{props.tabs.split(',').map((tab,idx) => (<PivotItem headerText={tab} key={idx}/>))}</FPivot>
   );
 }
 

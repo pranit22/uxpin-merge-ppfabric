@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import ComboBox from '../ComboBox';
 
-export default ()=>(
+export default (
     <ComboBox
         multiSelect
         uxpId="ComboBox1"

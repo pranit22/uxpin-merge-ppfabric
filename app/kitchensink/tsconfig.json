@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "preserveSymlinks": true,
-    "removeComments": false
+    "removeComments": false,
+    "resolveJsonModule": true
   }
 }

@@ -4,17 +4,24 @@ import * as React from 'react';
 
 function ChoiceGroup(props) {
   return (
-    <FChoiceGroup {...props}>{props.children}</FChoiceGroup>
+    <FChoiceGroup options={props.choices.split(',').map(text => ({text, key:text}))} {...props}/>
   );
 }
 
 ChoiceGroup.propTypes = {
   label: PropTypes.string,
   required: PropTypes.bool,
-  options: PropTypes.shape({
-    checked: PropTypes.bool,
-    text: PropTypes.string
-  })
+  /**
+   * @uxpincontroltype textfield(2)
+   * */
+  choices: PropTypes.string,
+  defaultSelectedKey: PropTypes.string
+};
+
+ChoiceGroup.defaultProps = {
+  label: 'ChoiceGroup (remove to clear label)',
+  choices: 'one,two,three,four',
+  defaultSelectedKey: 'one'
 };
 
 export { ChoiceGroup as default };

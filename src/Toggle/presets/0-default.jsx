@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Toggle from '../Toggle';
 
-export default ()=>(
+export default (
   <Toggle label="label (clear to remove)" uxpId="toggle1"/>
 );
