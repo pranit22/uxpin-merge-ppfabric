@@ -20,19 +20,19 @@ export class InjectComponent extends Component<Props> {
 
   getComponentMetadata(name: string) {
     // @ts-ignore
-    const {components} = metadata.categorizedComponents.find(category => category.components.find(component => component.name === name));
+    const { components } = metadata.categorizedComponents.find(category => category.components.find(component => component.name === name));
     return components.find((component: { name: string }) => component.name === name)
   }
 
   render() {
     const componentName = this.props.match.params.name;
     const Injected = React.lazy(() => import(
-        /*
-        webpackExclude: /(divider|extendedpicker|floatingpicker|pickers|selectableoption|selecteditemslist|ScrollablePane|splitbutton|documentcard|persona|nav|contextualmenu|datepicker|facepile|icon|link|modal)$/i,
-        webpackChunkName: "component-",
-        webpackMode: "eager"
-        */
-        `./components/${componentName}/presets/0-default.jsx`).then(module => {
+      /*
+      webpackExclude: /(divider|extendedpicker|floatingpicker|pickers|selectableoption|selecteditemslist|ScrollablePane|splitbutton|documentcard|persona|nav|contextualmenu|datepicker|facepile|icon|link|modal)$/i,
+      webpackChunkName: "component-",
+      webpackMode: "eager"
+      */
+      `./components/${componentName}/presets/0-default.jsx`).then(module => {
 
         //because webpack modules are singletons, once you do this, its done "forever"
         // if you do it again, it will break things bec of double wrapping the component
@@ -119,9 +119,9 @@ export class InjectComponent extends Component<Props> {
         <Suspense fallback={<Text>Loading...</Text>}>
           <Text variant={'xLarge'}>{componentName}</Text>
           <Separator />
-          <Stack disableShrink tokens={{childrenGap: 25}} >
+          <Stack disableShrink tokens={{ childrenGap: 25 }} >
             <Stack.Item>
-              <Card styles={{root: {padding: '1em'}}} tokens={{
+              <Card styles={{ root: { padding: '1em' } }} tokens={{
                 minWidth: '100%',
               }}>
                 <Card.Item >
@@ -132,7 +132,7 @@ export class InjectComponent extends Component<Props> {
             <Stack.Item>
               <Text variant='large' block>Props</Text>
               <DetailsList items={tabularProps} columns={columns} compact={true} layoutMode={DetailsListLayoutMode.fixedColumns}
-                           checkboxVisibility={CheckboxVisibility.hidden} selectionMode={SelectionMode.none} styles={{root: {maxWidth: '100%'}}}/>
+                checkboxVisibility={CheckboxVisibility.hidden} selectionMode={SelectionMode.none} styles={{ root: { maxWidth: '100%' } }} />
             </Stack.Item>
           </Stack>
         </Suspense>
