@@ -4,7 +4,7 @@
 <ComboBox 
     multiSelect
     uxpId="ComboBox1"
-    defaultSelectedKey="C"
+    defaultSelectedKey="Banana"
     label="ComboBox label" 
     allowFreeform 
     autoComplete="on" 

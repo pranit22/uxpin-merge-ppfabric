@@ -15,8 +15,8 @@ function ComboBox(props) {
             defaultSelectedKey={props.defaultSelectedKey
                 .replace(/\s/g, '')
                 .split(',')}
+            onResolveOptions={(options) => options}
         >
-            {props.children}
         </FComboBox>
     );
 }
