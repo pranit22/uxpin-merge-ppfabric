@@ -1,7 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { DetailsList as FDetailsList, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
-import { mergeStyleSets } from 'office-ui-fabric-react/lib/Styling';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
+
+
+
 
 const classNames = mergeStyleSets({
   headerCell: {
@@ -17,6 +21,40 @@ class DetailsList extends React.Component {
     super(props);
   }
 
+  getToken(str) {
+    const lBracket = str.indexOf('[')
+    const rBracket = str.indexOf(']')
+    let [token, value] = [null, str];
+    if (lBracket !== -1) {
+      token = str.substring(lBracket + 1, rBracket)
+      value = lBracket === 0 ? str.substring(rBracket + 1, str.length) : str.substring(0, lBracket)
+    }
+    return [value.trim(), token];
+  }
+
+  tokenToSymbol(token) {
+    if (!token) return null
+    let tokenType = token.split(':')[0]
+    switch (tokenType) {
+      case 'color':
+        return mergeStyles({
+          color: `var(--color-${token.split(':')[1]})`
+        })
+        break;
+      case 'icon':
+        let shape = token.split(':')[1]
+        let color = token.split(':')[2]
+        return <Icon key="icon" className={mergeStyles({
+          fontSize: 16,
+          marginRight: 7,
+          transform: 'translateY(3px)',
+          color: `var(--color-${color})`
+        })} iconName={shape} />
+      default:
+        console.warn(`Unknown token type:${tokenType} was passed to DetailsList`)
+    }
+  }
+
   getColumns() {
     return this.props.columns
       .split('\n')
@@ -24,27 +62,17 @@ class DetailsList extends React.Component {
       .split('|')
       .map(col => col.trim())
       .map((col, i) => {
-        const lBracket = col.indexOf('[')
-        const rBracket = col.indexOf(']')
-        let token = null;
-        if (lBracket !== -1) {
-          token = col.substring(lBracket + 1, rBracket)
-          col = col.substring(0, lBracket)
-        }
+        let [columnName, token] = this.getToken(col);
         return {
-          key: col.toLowerCase(),
-          name: col,
-          fieldName: col.toLowerCase(),
+          key: columnName.toLowerCase(),
+          name: columnName,
+          fieldName: columnName.toLowerCase(),
           isResizable: true,
           minWidth: this.props.minWidth,
           maxWidth: this.props.maxWidth,
-          onColumnClick: () => { console.log(col.toLowerCase() + " was clicked") },
+          onColumnClick: () => columnName,
           headerClassName: classNames.headerCell,
-          className: token && token.indexOf('color' !== -1) ? mergeStyleSets({
-            a: {
-              color: `var(--color-${token.split(':')[1]})`
-            }
-          }).a : null
+          className: this.tokenToSymbol(token)
         }
       })
   }
@@ -60,7 +88,9 @@ class DetailsList extends React.Component {
           key: rowInd,
         }
         this.getColumns().forEach((column, colInd) => {
-          r[column.fieldName] = row[colInd]
+          let value = row[colInd]
+          let [cellValue, token] = this.getToken(value);
+          r[column.fieldName] = token ? [this.tokenToSymbol(token), cellValue] : value;
         })
         return r
       })
@@ -92,8 +122,12 @@ DetailsList.propTypes = {
    * */
   columns: PropTypes.string,
 
-  /** Separate each item with | , Separate each row with new line or || symbol
-   * @uxpincontroltype textfield(20) 
+  /** 
+   * 
+   * Separate each item with | , Separate each row with new line or || symbol.
+   * Icon token [icon:Snow:blue-600]
+   * Get icons at https://uifabricicons.azurewebsites.net/
+   * @uxpincontroltype textfield(20)
    * */
   items: PropTypes.string,
 
@@ -113,9 +147,9 @@ DetailsList.propTypes = {
 
 DetailsList.defaultProps = {
   columns: "Aa | Bb | Cc [color:blue-600]",
-  items: `A-1  | B-1  | C-1 
-          A-2 | B-2 | C-2
-          A-3 | B-3 | C-3`,
+  items: `A-1  | B-1  | C-1
+                A-2 | B-2 | C-2
+                A-3 | B-3 | C-3`,
   selectable: false,
   isResizable: true,
   minWidth: 100,
