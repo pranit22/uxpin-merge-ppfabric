@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from 'office-ui-fabric-react';
-import { csv2arr, name2key } from '../_helpers/parser.ts'
+import { csv2arr, name2key } from '../_helpers/parser.js'
 
 class Nav extends React.Component {
     constructor(props) {

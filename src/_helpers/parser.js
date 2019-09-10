@@ -1,4 +1,4 @@
-export const csv2arr = (str: string) => {
+export const csv2arr = (str) => {
   return str
     .match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) // splitting by commas that are only outside of quotes
     .map(val => {
@@ -11,7 +11,7 @@ export const csv2arr = (str: string) => {
 }
 
 
-export const name2key = (str: string) => {
+export const name2key = (str) => {
   return str
     .trim()
     .replace(/[^\w]|_/g, '_')

@@ -979,7 +979,7 @@
                   "props": {
                     "columns": "Aa\nBb [color:red-600]\nCc [color:blue-600]",
                     "isResizable": true,
-                    "items": "A-1  | B-1  | [icon:StatusErrorFull:red-600] C-1 \nA-2 | B-2 | C-2 [icon:SkypeCircleCheck:green-600]\nA-3 | B-3 | C-3 [icon:AlertSolid:orange-600]"
+                    "items": "A-1  | B-1  | [icon|StatusErrorFull:red-600]   dfja;klsdfj;a text[red-600,bold] C-1  \nA-2 | B-2 | C-2 [icon:SkypeCircleCheck:green-600]\nA-3 | B-3 | C-3 [icon:AlertSolid:orange-600]"
                   }
                 }
               },
@@ -1163,7 +1163,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<Nav \n                uxpId=\"Nav1\"\n                onLinkClick={_onLinkClick}\n                selectedIndex={1}\n                expandButtonAriaLabel=\"Expand or collapse\"\n                selectedAriaLabel=\"Selected\"\n                styles=\"\"\n                groups=\"\" />"
+                "code": "<Nav \n  uxpId=\"nav1\"\n  items={`Aa, \"B, b\", Cc`} />"
               }
             ]
           },
@@ -1189,7 +1189,9 @@
               "elements": {
                 "nav1": {
                   "name": "Nav",
-                  "props": {}
+                  "props": {
+                    "items": "Aa, \"B, b\", Cc"
+                  }
                 }
               },
               "name": "default",
@@ -1199,7 +1201,7 @@
           "properties": [
             {
               "defaultValue": {
-                "value": 300
+                "value": 270
               },
               "description": "Max width for menu",
               "isRequired": false,
@@ -1218,6 +1220,18 @@
               "name": "selectedIndex",
               "type": {
                 "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Aa, \"B, b\", Cc"
+              },
+              "description": "Coma separated items names",
+              "isRequired": false,
+              "name": "items",
+              "type": {
+                "name": "string",
                 "structure": {}
               }
             }
@@ -1299,6 +1313,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "504545128f70e692950e566d21df5da026d3d3b1"
+    "commitHash": "4ebfe68ec16779af663ab8a33dcba4bca9edc9f9"
   }
 }
