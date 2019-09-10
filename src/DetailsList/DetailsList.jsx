@@ -158,6 +158,7 @@ DetailsList.defaultProps = {
   isResizable: true,
   minWidth: 100,
   maxWidth: 200,
+  isHeaderVisible: "yes"
 };
 
 export { DetailsList as default };
