@@ -1,77 +1,66 @@
 import * as React from 'react';
-import { Nav } from '../index';
-export const NavBasicExample = () => {
-    return (<Nav onLinkClick={_onLinkClick} selectedKey="key3" expandButtonAriaLabel="Expand or collapse" selectedAriaLabel="Selected" styles={{
-        root: {
-            width: 208,
-            height: 350,
-            boxSizing: 'border-box',
-            border: '1px solid #eee',
-            overflowY: 'auto'
+import { Nav as FNav } from 'office-ui-fabric-react';
+
+
+class Nav extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    getStyles() {
+        return {
+            root: {
+                width: this.props.width,
+            },
+            navItem: {
+                backgroundColor: '#fff'
+            }
         }
-    }} groups={[
+    }
+
+    getGroups() {
+        return [{
+            name: 'Extension Overview',
+            url: 'dashboard',
+            icon: 'Home',
+            key: 'overview',
+            // onClick: this.onMenuClick.bind(this)
+        },
         {
-            links: [
-                {
-                    name: 'Home',
-                    url: 'http://example.com',
-                    links: [
-                        {
-                            name: 'Activity',
-                            url: 'http://msn.com',
-                            key: 'key1',
-                            target: '_blank'
-                        },
-                        {
-                            name: 'MSN',
-                            url: 'http://msn.com',
-                            disabled: true,
-                            key: 'key2',
-                            target: '_blank'
-                        }
-                    ],
-                    isExpanded: true
-                },
-                {
-                    name: 'Documents',
-                    url: 'http://example.com',
-                    key: 'key3',
-                    isExpanded: true,
-                    target: '_blank'
-                },
-                {
-                    name: 'Pages',
-                    url: 'http://msn.com',
-                    key: 'key4',
-                    target: '_blank'
-                },
-                {
-                    name: 'Notebook',
-                    url: 'http://msn.com',
-                    key: 'key5',
-                    disabled: true
-                },
-                {
-                    name: 'Communication and Media',
-                    url: 'http://msn.com',
-                    key: 'key6',
-                    target: '_blank'
-                },
-                {
-                    name: 'News',
-                    url: 'http://cnn.com',
-                    icon: 'News',
-                    key: 'key7',
-                    target: '_blank'
-                }
-            ]
-        }
-    ]}/>);
-};
-function _onLinkClick(ev, item) {
-    if (item && item.name === 'News') {
-        alert('News link clicked');
+            name: 'Extension Nav 1',
+            url: 'nav1',
+            icon: 'OpenFolderHorizontal',
+            key: 'nav1',
+            // onClick: this.onMenuClick.bind(this)
+        },]
+    }
+
+    render() {
+        return (
+            <FNav
+                uxpId="Nav1"
+                onLinkClick={_onLinkClick}
+                selectedKey={this.props.selectedIndex}
+                expandButtonAriaLabel="Expand or collapse"
+                selectedAriaLabel="Selected"
+                styles={styles}
+                groups={this.getGroups()} />
+        )
     }
 }
 
-export default NavBasicExample;
+Nav.propTypes = {
+    /** Max width for menu */
+    width: PropTypes.number,
+
+    /** Which element number should be selected from 1 to n */
+    selectedIndex: PropTypes.number,
+};
+
+Nav.defaultProps = {
+    width: 300,
+    selectedIndex: 1
+};
+
+
+export { Nav as default };

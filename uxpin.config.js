@@ -24,7 +24,8 @@ module.exports = {
         name: 'Commands, Menus & Navs',
         include: [
           'src/Breadcrumb/Breadcrumb.jsx',
-          'src/Pivot/Pivot.jsx'
+          'src/Nav/Nav.jsx',
+          'src/Pivot/Pivot.jsx',
         ]
       },
     ]
