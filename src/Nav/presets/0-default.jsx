@@ -4,5 +4,6 @@ import Nav from '../Nav';
 export default (
     <Nav
         uxpId="nav1"
+        items={`Aa, "B, b", Cc`}
     />
 );

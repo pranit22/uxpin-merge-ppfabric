@@ -2,13 +2,8 @@
   
 ```jsx
 <Nav 
-                uxpId="Nav1"
-                onLinkClick={_onLinkClick}
-                selectedIndex={1}
-                expandButtonAriaLabel="Expand or collapse"
-                selectedAriaLabel="Selected"
-                styles=""
-                groups="" />
+  uxpId="nav1"
+  items={`Aa, "B, b", Cc`} />
 ```
   
  

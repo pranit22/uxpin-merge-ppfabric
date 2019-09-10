@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from 'office-ui-fabric-react';
-
+import { csv2arr, name2key } from '../_helpers/parser.ts'
 
 class Nav extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedIndex: this.props.selectedIndex | 1
+            selectedIndex: this.props.selectedIndex || 1
         }
     }
 
@@ -15,40 +15,33 @@ class Nav extends React.Component {
         return {
             root: {
                 width: this.props.width,
-            },
-            navItem: {
-                backgroundColor: '#fff'
             }
         }
     }
 
-    getGroups() {
-        return [{
-            name: 'Extension Overview',
-            icon: 'Home',
-            key: 'overview',
-            onClick: this.onMenuClick.bind(this)
-        },
-        {
-            name: 'Extension Nav 1',
-            icon: 'OpenFolderHorizontal',
-            key: 'nav1',
-            onClick: this.onMenuClick.bind(this)
-        },]
+    getItems() {
+        return csv2arr(this.props.items)
+            .map(val => {
+                return {
+                    name: val,
+                    key: name2key(val),
+                    onClick: this.onMenuClick.bind(this)
+                }
+            })
     }
 
 
     onMenuClick(event, element) {
         event.preventDefault();
         this.setState({
-            selectedIndex: this.getGroups().findIndex(link => link.key === element.key) + 1
+            selectedIndex: this.getItems().findIndex(link => link.key === element.key) + 1
         }, () => {
             return element.name
         })
     }
 
     render() {
-        const links = this.getGroups()
+        const links = this.getItems()
         return (
             <FNav
                 selectedKey={links[this.state.selectedIndex - 1].key}
@@ -67,11 +60,15 @@ Nav.propTypes = {
 
     /** Which element number should be selected from 1 to n */
     selectedIndex: PropTypes.number,
+
+    /** Coma separated items names */
+    items: PropTypes.string
 };
 
 Nav.defaultProps = {
-    width: 300,
-    selectedIndex: 1
+    width: 270,
+    selectedIndex: 1,
+    items: `Aa, "B, b", Cc`
 };
 
 
