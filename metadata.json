@@ -298,7 +298,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<ComboBox \n    multiSelect\n    uxpId=\"ComboBox1\"\n    defaultSelectedKey=\"C\"\n    label=\"ComboBox label\" \n    allowFreeform \n    autoComplete=\"on\" \n    items=\"Apple,Banana,Orange,Grape\"\n    width={300}\n    placeholder=\"Select or type an option\" />"
+                "code": "<ComboBox \n    multiSelect\n    uxpId=\"ComboBox1\"\n    defaultSelectedKey=\"Banana\"\n    label=\"ComboBox label\" \n    allowFreeform \n    autoComplete=\"on\" \n    items=\"Apple,Banana,Orange,Grape\"\n    width={300}\n    placeholder=\"Select or type an option\" />"
               }
             ]
           },
@@ -327,7 +327,7 @@
                   "props": {
                     "allowFreeform": true,
                     "autoComplete": "on",
-                    "defaultSelectedKey": "C",
+                    "defaultSelectedKey": "Banana",
                     "items": "Apple,Banana,Orange,Grape",
                     "label": "ComboBox label",
                     "multiSelect": true,
@@ -950,7 +950,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<DetailsList \n  uxpId=\"DetailsList1\"\n  columns=\"Aa | Bb | Cc\"\n  items={\n`A-1 | B-1 | C-1 \nA-2 | B-2 | C-2\nA-3 | B-3 | C-3`\n  }\n  isResizable />"
+                "code": "<DetailsList \n  uxpId=\"DetailsList1\"\n  columns={\n`Aa\nBb [color:red-600]\nCc [color:blue-600]`    \n  }\n  items={\n    `A-1  | B-1  | [icon:StatusErrorFull:red-600] C-1 \nA-2 | B-2 | C-2 [icon:SkypeCircleCheck:green-600]\nA-3 | B-3 | C-3 [icon:AlertSolid:orange-600]`\n  }\n  isResizable />"
               }
             ]
           },
@@ -977,9 +977,9 @@
                 "DetailsList1": {
                   "name": "DetailsList",
                   "props": {
-                    "columns": "Aa | Bb | Cc",
+                    "columns": "Aa\nBb [color:red-600]\nCc [color:blue-600]",
                     "isResizable": true,
-                    "items": "A-1  | B-1  | C-1 \nA-2 | B-2 | C-2\nA-3 | B-3 | C-3"
+                    "items": "A-1  | B-1  | C-1 [icon:StatusErrorFull:red-600]\nA-2 | B-2 | C-2 [icon:SkypeCircleCheck:green-600]\nA-3 | B-3 | C-3 [icon:AlertSolid:orange-600]"
                   }
                 }
               },
@@ -996,9 +996,9 @@
                 }
               },
               "defaultValue": {
-                "value": "Aa | Bb | Cc"
+                "value": "Aa | Bb | Cc [color:blue-600]"
               },
-              "description": "Separate each item with new line or | symbol",
+              "description": "Separate each item with new line or | symbol.\nPut at the end of the line [color:blue-600] token to set color for whole column.",
               "isRequired": false,
               "name": "columns",
               "type": {
@@ -1014,9 +1014,9 @@
                 }
               },
               "defaultValue": {
-                "value": "A-1  | B-1  | C-1 \n        A-2 | B-2 | C-2\n        A-3 | B-3 | C-3"
+                "value": "A-1  | B-1  | C-1\n              A-2 | B-2 | C-2\n              A-3 | B-3 | C-3"
               },
-              "description": "Separate each item with | , Separate each row with new line or || symbol",
+              "description": "Separate each item with | , Separate each row with new line or || symbol.\nIcon token [icon:Snow:blue-600]\nGet icons at https://uifabricicons.azurewebsites.net/",
               "isRequired": false,
               "name": "items",
               "type": {
@@ -1070,6 +1070,33 @@
               "type": {
                 "name": "number",
                 "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "show"
+              },
+              "description": "Defines to show or hide the header",
+              "isRequired": false,
+              "name": "header",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "show"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "hide"
+                      }
+                    }
+                  ]
+                }
               }
             }
           ],
@@ -1163,6 +1190,91 @@
           "documentation": {
             "examples": [
               {
+                "code": "<Nav \n  uxpId=\"nav1\"\n  items={`\nAa\n\"B, b\"\nCc`} />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/Nav",
+            "documentation": {
+              "path": "src/Nav/Nav.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/Nav/Nav.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/Nav/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "Nav",
+          "presets": [
+            {
+              "elements": {
+                "nav1": {
+                  "name": "Nav",
+                  "props": {
+                    "items": "\nAa\n\"B, b\"\nCc\n"
+                  }
+                }
+              },
+              "name": "default",
+              "rootId": "nav1"
+            }
+          ],
+          "properties": [
+            {
+              "defaultValue": {
+                "value": 270
+              },
+              "description": "Max width for menu",
+              "isRequired": false,
+              "name": "width",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 1
+              },
+              "description": "Which element number should be selected from 1 to n",
+              "isRequired": false,
+              "name": "selectedIndex",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 20
+                }
+              },
+              "defaultValue": {
+                "value": "Aa\n\"B, b\"\nCc"
+              },
+              "description": "CSV of items, could be coma separated, or new line",
+              "isRequired": false,
+              "name": "items",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            }
+          ],
+          "wrappers": []
+        },
+        {
+          "documentation": {
+            "examples": [
+              {
                 "code": "<Pivot tabs=\"one,two,three\"/>"
               }
             ]
@@ -1234,6 +1346,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "482f6b4339f4b7bc3a6bdcb4e9fb00f7fe181bea"
+    "commitHash": "a3aa1cec7d086a96960eb954cd2be93532d14957"
   }
 }

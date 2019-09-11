@@ -28,7 +28,7 @@ export class InjectComponent extends Component<Props> {
     const componentName = this.props.match.params.name;
     const Injected = React.lazy(() => import(
       /*
-      webpackExclude: /(divider|extendedpicker|floatingpicker|pickers|selectableoption|selecteditemslist|ScrollablePane|splitbutton|documentcard|persona|nav|contextualmenu|datepicker|facepile|icon|link|modal)$/i,
+      webpackExclude: /(divider|extendedpicker|floatingpicker|pickers|selectableoption|selecteditemslist|ScrollablePane|splitbutton|documentcard|persona|contextualmenu|datepicker|facepile|icon|link|modal)$/i,
       webpackChunkName: "component-",
       webpackMode: "eager"
       */
