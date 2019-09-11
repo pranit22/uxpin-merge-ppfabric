@@ -1074,11 +1074,11 @@
             },
             {
               "defaultValue": {
-                "value": "yes"
+                "value": "show"
               },
-              "description": "Defines to show or not to show the header",
+              "description": "Defines to show or hide the header",
               "isRequired": false,
-              "name": "isHeaderVisible",
+              "name": "header",
               "type": {
                 "name": "union",
                 "structure": {
@@ -1086,13 +1086,13 @@
                     {
                       "name": "literal",
                       "structure": {
-                        "value": "yes"
+                        "value": "show"
                       }
                     },
                     {
                       "name": "literal",
                       "structure": {
-                        "value": "no"
+                        "value": "hide"
                       }
                     }
                   ]
@@ -1251,10 +1251,16 @@
               }
             },
             {
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 20
+                }
+              },
               "defaultValue": {
                 "value": "Aa\n\"B, b\"\nCc"
               },
-              "description": "Coma separated items names",
+              "description": "CSV of items, could be coma separated, or new line",
               "isRequired": false,
               "name": "items",
               "type": {
@@ -1340,6 +1346,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "ee5aa84f21c5549a9d2c9fc3dfaf9b8f21e30a7b"
+    "commitHash": "a3aa1cec7d086a96960eb954cd2be93532d14957"
   }
 }

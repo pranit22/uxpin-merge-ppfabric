@@ -81,7 +81,6 @@ Nav.propTypes = {
     selectedIndex: PropTypes.number,
 
     /** 
-      * 
       * CSV of items, could be coma separated, or new line
       *  @uxpincontroltype textfield(20)
       * */

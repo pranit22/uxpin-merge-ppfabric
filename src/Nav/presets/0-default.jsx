@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Nav from '../Nav';
 
-const items = `
-Aa
+const items = `Aa
 "B, b"
 Cc
 `
