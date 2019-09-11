@@ -2,9 +2,13 @@ import { ActionButton as FActionButton } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
+/**
+ * @uxpinwrappers
+ * SkipContainerWrapper
+ */
 function ActionButton(props) {
   return (
-    <FActionButton {...props} iconProps={{ iconName: props.iconName }}>{props.children}</FActionButton>
+    <FActionButton {...props} iconProps={{ iconName: props.iconName }} ref={props.uxpinRef}>{props.children}</FActionButton>
   );
 }
 
@@ -12,7 +16,9 @@ ActionButton.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   iconName: PropTypes.string,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 ActionButton.defaultProps = {
