@@ -33,8 +33,8 @@
                 "actionbutton1": {
                   "name": "ActionButton",
                   "props": {
-                    "iconName": "Dictionary",
-                    "text": "Action Button"
+                    "iconName": "GlobalNavButton",
+                    "text": "button"
                   }
                 }
               },
@@ -107,7 +107,12 @@
               }
             }
           ],
-          "wrappers": []
+          "wrappers": [
+            {
+              "name": "SkipContainerWrapper",
+              "type": "builtIn"
+            }
+          ]
         },
         {
           "documentation": {
@@ -878,7 +883,12 @@
               }
             }
           ],
-          "wrappers": []
+          "wrappers": [
+            {
+              "name": "SkipContainerWrapper",
+              "type": "builtIn"
+            }
+          ]
         },
         {
           "documentation": {
@@ -1208,7 +1218,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<Nav \n  uxpId=\"nav1\"\n  items={`\nAa\n\"B, b\"\nCc`} />"
+                "code": "<Nav \n  uxpId=\"nav1\"\n  items={`Aa\n\"B, b\"\nCc`} />"
               }
             ]
           },
@@ -1235,7 +1245,7 @@
                 "nav1": {
                   "name": "Nav",
                   "props": {
-                    "items": "\nAa\n\"B, b\"\nCc\n"
+                    "items": "Aa\n\"B, b\"\nCc\n"
                   }
                 }
               },
@@ -1364,6 +1374,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "a3aa1cec7d086a96960eb954cd2be93532d14957"
+    "commitHash": "33c67429abb11b363b38d2be3a1998022a95d433"
   }
 }
