@@ -106,12 +106,6 @@ Nav.propTypes = {
      * @uxpincontroltype textfield(3)
      * */
     disabled: PropTypes.string,
-
-    /**
-    * @uxpincontroltype codeeditor
-    * */
-    icons: PropTypes.Shape,
-
 };
 
 Nav.defaultProps = {
