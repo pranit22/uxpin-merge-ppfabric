@@ -5,6 +5,17 @@ import { name2key } from '../_helpers/parser.js'
 import parse from 'csv-parse'
 import { callbackify } from 'util';
 
+let defs = {
+    width: 270,
+    selectedIndex: 1,
+    items: `Aa
+"B, b"
+Cc,
+Dd,
+Ee`,
+    disabled: "2, 4",
+    clicked: null
+}
 
 class Nav extends React.Component {
     constructor(props) {
@@ -66,8 +77,7 @@ class Nav extends React.Component {
         this.setState({
             selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
         }, () => {
-            console.log(element);
-            this.props.onMenuClick(element.name)
+            defs.clicked = element.name
         })
     }
 
@@ -108,20 +118,11 @@ Nav.propTypes = {
      * */
     disabled: PropTypes.string,
 
-    /** Triggered when Select is opened */
-    onMenuClick: PropTypes.func,
+    /** clicked element */
+    clicked: PropTypes.string,
 };
 
-Nav.defaultProps = {
-    width: 270,
-    selectedIndex: 1,
-    items: `Aa
-"B, b"
-Cc,
-Dd,
-Ee`,
-    disabled: "2, 4"
-};
+Nav.defaultProps = defs;
 
 
 export { Nav as default };
