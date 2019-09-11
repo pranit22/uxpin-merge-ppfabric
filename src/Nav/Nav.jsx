@@ -66,8 +66,11 @@ class Nav extends React.Component {
         this.setState({
             selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
         }, () => {
+            console.log(element.name);
+            this.props.onLinkClick(element.name)
+            return element.name
             // this.props.onClick(element.name)
-            this.defaultProps.clicked = element.name
+            // this.defaultProps.clicked = element.name
         })
     }
 
@@ -81,7 +84,8 @@ class Nav extends React.Component {
                         selectedAriaLabel="Selected"
                         styles={this.getStyles()}
                         groups={[{ links: this.state.links }]}
-                        width={300} />
+                        width={300}
+                        onLinkClick={this.onMenuClick.bind(this)} />
 
                     : <div>Incorrect format: {this.props.items} </div>}
             </>
@@ -109,10 +113,7 @@ Nav.propTypes = {
     disabled: PropTypes.string,
 
     /** clicked element */
-    clicked: PropTypes.string,
-
-    /** clicked element */
-    onClick: PropTypes.func
+    onLinkClick: PropTypes.func
 };
 
 Nav.defaultProps = {
