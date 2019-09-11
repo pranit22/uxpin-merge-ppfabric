@@ -2,9 +2,13 @@ import { TextField as FTextField } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
+/**
+ * @uxpinwrappers
+ * SkipContainerWrapper
+ */
 function TextField(props) {
   return (
-    <FTextField {...props} styles={ {root: {width: props.inputWidth}} } iconProps={{ iconName: props.icon }}/>
+    <FTextField {...props} styles={ {root: {width: props.inputWidth}} } iconProps={{ iconName: props.icon }} ref={props.uxpinRef}/>
   );
 }
 
