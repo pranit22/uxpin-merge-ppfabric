@@ -107,7 +107,7 @@ class DetailsList extends React.Component {
             {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
           </>
         )}
-        isHeaderVisible={this.props.isHeaderVisible === "yes"}>
+        isHeaderVisible={this.props.header === "show"}>
       </FDetailsList>
     );
   }
@@ -144,8 +144,8 @@ DetailsList.propTypes = {
   /** Max width for columns */
   maxWidth: PropTypes.number,
 
-  /** Defines to show or not to show the header */
-  isHeaderVisible: PropTypes.oneOf(['yes', 'no']),
+  /** Defines to show or hide the header */
+  header: PropTypes.oneOf(['show', 'hide']),
 
 };
 
@@ -158,7 +158,7 @@ DetailsList.defaultProps = {
   isResizable: true,
   minWidth: 100,
   maxWidth: 200,
-  isHeaderVisible: "yes"
+  header: "show"
 };
 
 export { DetailsList as default };

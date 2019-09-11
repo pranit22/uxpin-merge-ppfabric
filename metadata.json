@@ -1073,6 +1073,9 @@
               }
             },
             {
+              "defaultValue": {
+                "value": "yes"
+              },
               "description": "Defines to show or not to show the header",
               "isRequired": false,
               "name": "isHeaderVisible",
@@ -1187,7 +1190,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<Nav \n  uxpId=\"nav1\"\n  items={`Aa, \"B, b\", Cc`} />"
+                "code": "<Nav \n  uxpId=\"nav1\"\n  items={`\nAa\n\"B, b\"\nCc`} />"
               }
             ]
           },
@@ -1214,7 +1217,7 @@
                 "nav1": {
                   "name": "Nav",
                   "props": {
-                    "items": "Aa, \"B, b\", Cc"
+                    "items": "\nAa\n\"B, b\"\nCc\n"
                   }
                 }
               },
@@ -1249,7 +1252,7 @@
             },
             {
               "defaultValue": {
-                "value": "Aa, \"B, b\", Cc"
+                "value": "Aa\n\"B, b\"\nCc"
               },
               "description": "Coma separated items names",
               "isRequired": false,
@@ -1337,6 +1340,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "75e74e99be21cec1e3dc8fc9ef346db4a6b914a1"
+    "commitHash": "ee5aa84f21c5549a9d2c9fc3dfaf9b8f21e30a7b"
   }
 }

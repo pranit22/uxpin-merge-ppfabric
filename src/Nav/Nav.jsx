@@ -80,8 +80,12 @@ Nav.propTypes = {
     /** Which element number should be selected from 1 to n */
     selectedIndex: PropTypes.number,
 
-    /** Coma separated items names */
-    items: PropTypes.string
+    /** 
+      * 
+      * CSV of items, could be coma separated, or new line
+      *  @uxpincontroltype textfield(20)
+      * */
+    items: PropTypes.string,
 };
 
 Nav.defaultProps = {
