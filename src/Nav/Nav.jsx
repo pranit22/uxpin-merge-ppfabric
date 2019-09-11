@@ -3,19 +3,8 @@ import * as PropTypes from 'prop-types';
 import { Nav as FNav } from 'office-ui-fabric-react';
 import { name2key } from '../_helpers/parser.js'
 import parse from 'csv-parse'
-import { callbackify } from 'util';
 
-let defs = {
-    width: 270,
-    selectedIndex: 1,
-    items: `Aa
-"B, b"
-Cc,
-Dd,
-Ee`,
-    disabled: "2, 4",
-    clicked: null
-}
+
 
 class Nav extends React.Component {
     constructor(props) {
@@ -77,7 +66,8 @@ class Nav extends React.Component {
         this.setState({
             selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
         }, () => {
-            defs.clicked = element.name
+            // this.props.onClick(element.name)
+            this.defaultProps.clicked = element.name
         })
     }
 
@@ -120,9 +110,22 @@ Nav.propTypes = {
 
     /** clicked element */
     clicked: PropTypes.string,
+
+    /** clicked element */
+    onClick: PropTypes.func
 };
 
-Nav.defaultProps = defs;
+Nav.defaultProps = {
+    width: 270,
+    selectedIndex: 1,
+    items: `Aa
+"B, b"
+Cc,
+Dd,
+Ee`,
+    disabled: "2, 4",
+    clicked: null
+};
 
 
 export { Nav as default };

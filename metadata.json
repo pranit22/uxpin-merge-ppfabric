@@ -1314,6 +1314,27 @@
                 "name": "string",
                 "structure": {}
               }
+            },
+            {
+              "defaultValue": {
+                "value": null
+              },
+              "description": "clicked element",
+              "isRequired": false,
+              "name": "clicked",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "description": "clicked element",
+              "isRequired": false,
+              "name": "onClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
             }
           ],
           "wrappers": []
@@ -1393,6 +1414,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "43c24a86505e2fc105a53616bd615ed3beaa2987"
+    "commitHash": "67569739f8ed3c6eae10f5341c8c6098d8d82960"
   }
 }
