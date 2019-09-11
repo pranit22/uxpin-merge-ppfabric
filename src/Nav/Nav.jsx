@@ -31,8 +31,6 @@ class Nav extends React.Component {
             skip_empty_lines: true
         },
             (err, data) => {
-                console.log(data);
-
                 this.setState({
                     links: data
                         .flat()
@@ -43,7 +41,6 @@ class Nav extends React.Component {
                                 onClick: this.onMenuClick.bind(this)
                             }
                         })
-                }, () => {
                 })
             })
     }
@@ -90,7 +87,9 @@ Nav.propTypes = {
 Nav.defaultProps = {
     width: 270,
     selectedIndex: 1,
-    items: `Aa, "B, b", Cc`
+    items: `Aa
+"B, b"
+Cc`
 };
 
 
