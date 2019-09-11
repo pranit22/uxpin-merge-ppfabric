@@ -66,7 +66,8 @@ class Nav extends React.Component {
         this.setState({
             selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
         }, () => {
-            return element.name
+            console.log(element);
+            this.props.onMenuClick(element.name)
         })
     }
 
@@ -106,6 +107,9 @@ Nav.propTypes = {
      * @uxpincontroltype textfield(3)
      * */
     disabled: PropTypes.string,
+
+    /** Triggered when Select is opened */
+    onMenuClick: PropTypes.func,
 };
 
 Nav.defaultProps = {
