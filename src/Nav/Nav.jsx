@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Nav as FNav } from 'office-ui-fabric-react';
 import { name2key } from '../_helpers/parser.js'
 import parse from 'csv-parse'
+import { callbackify } from 'util';
 
 
 class Nav extends React.Component {
@@ -11,11 +12,12 @@ class Nav extends React.Component {
         this.state = {
             links: [],
             selectedIndex: this.props.selectedIndex || 1,
+            disabledIndexes: []
         }
     }
 
     componentDidMount() {
-        this.getItems();
+        this.setDisabledIndexes(this.setItems)
     }
 
     getStyles() {
@@ -26,7 +28,7 @@ class Nav extends React.Component {
         }
     }
 
-    getItems() {
+    setItems(callback) {
         parse(this.props.items, {
             skip_empty_lines: true
         },
@@ -34,14 +36,28 @@ class Nav extends React.Component {
                 this.setState({
                     links: data
                         .flat()
-                        .map(val => {
-                            return {
+                        .map((val, i) => {
+                            let out = {
                                 name: val,
                                 key: name2key(val),
                                 onClick: this.onMenuClick.bind(this)
                             }
+
+                            if (this.state.disabledIndexes.includes(i - 1)) out.disabled = true
+                            return out
                         })
-                })
+                }, callback)
+            })
+    }
+
+    setDisabledIndexes(callback) {
+        parse(this.props.disabled, {
+            skip_empty_lines: true
+        },
+            (err, data) => {
+                this.setState({
+                    disabledIndexes: data.flat().map(i => parseInt(i.trim()))
+                }, callback)
             })
     }
 
@@ -49,7 +65,7 @@ class Nav extends React.Component {
     onMenuClick(event, element) {
         event.preventDefault();
         this.setState({
-            selectedIndex: this.getItems().findIndex(link => link.key === element.key) + 1
+            selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
         }, () => {
             return element.name
         })
@@ -85,6 +101,12 @@ Nav.propTypes = {
       *  @uxpincontroltype textfield(20)
       * */
     items: PropTypes.string,
+
+    /** 
+     * CSV list of disabled items Indexes
+     * @uxpincontroltype textfield(3)
+     * */
+    disabled: PropTypes.string,
 };
 
 Nav.defaultProps = {
@@ -92,7 +114,10 @@ Nav.defaultProps = {
     selectedIndex: 1,
     items: `Aa
 "B, b"
-Cc`
+Cc,
+Dd,
+Ee`,
+    disabled: "2, 4"
 };
 
 
