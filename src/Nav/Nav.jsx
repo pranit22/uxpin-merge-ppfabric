@@ -43,7 +43,7 @@ class Nav extends React.Component {
                                 onClick: this.onMenuClick.bind(this)
                             }
 
-                            if (this.state.disabledIndexes.includes(i - 1)) out.disabled = true
+                            if (this.state.disabledIndexes.includes(i + 1)) out.disabled = true
                             return out
                         })
                 }, callback)
@@ -55,9 +55,8 @@ class Nav extends React.Component {
             skip_empty_lines: true
         },
             (err, data) => {
-                this.setState({
-                    disabledIndexes: data.flat().map(i => parseInt(i.trim()))
-                }, callback)
+                let disabledIndexes = data.flat().map(i => parseInt(i.trim()))
+                this.setState({ disabledIndexes }, callback)
             })
     }
 

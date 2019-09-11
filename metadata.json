@@ -1190,7 +1190,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<Nav \n  uxpId=\"nav1\"\n  items={`\nAa\n\"B, b\"\nCc`} />"
+                "code": "<Nav \n  uxpId=\"nav1\"\n  items={`Aa\n\"B, b\"\nCc`} />"
               }
             ]
           },
@@ -1217,7 +1217,8 @@
                 "nav1": {
                   "name": "Nav",
                   "props": {
-                    "items": "\nAa\n\"B, b\"\nCc\n"
+                    "disabled": "2, 4",
+                    "items": "Aa\n\"B, b\"\nCc\nDd\nEe"
                   }
                 }
               },
@@ -1258,11 +1259,29 @@
                 }
               },
               "defaultValue": {
-                "value": "Aa\n\"B, b\"\nCc"
+                "value": "Aa\n\"B, b\"\nCc,\nDd,\nEe"
               },
               "description": "CSV of items, could be coma separated, or new line",
               "isRequired": false,
               "name": "items",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 3
+                }
+              },
+              "defaultValue": {
+                "value": "2, 4"
+              },
+              "description": "CSV list of disabled items Indexes",
+              "isRequired": false,
+              "name": "disabled",
               "type": {
                 "name": "string",
                 "structure": {}
@@ -1346,6 +1365,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "a3aa1cec7d086a96960eb954cd2be93532d14957"
+    "commitHash": "5bb4307d596298c8ba34f2f660dc3d08a47a4699"
   }
 }
