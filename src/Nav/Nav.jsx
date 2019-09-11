@@ -124,8 +124,7 @@ Nav.defaultProps = {
 Cc,
 Dd,
 Ee`,
-    disabled: "2, 4",
-    clicked: null
+    disabled: "2, 4"
 };
 
 
