@@ -84,8 +84,7 @@ class Nav extends React.Component {
                         selectedAriaLabel="Selected"
                         styles={this.getStyles()}
                         groups={[{ links: this.state.links }]}
-                        width={300}
-                        onLinkClick={this.onMenuClick.bind(this)} />
+                        width={300} />
 
                     : <div>Incorrect format: {this.props.items} </div>}
             </>
