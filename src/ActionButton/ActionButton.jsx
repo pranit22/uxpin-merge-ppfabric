@@ -4,7 +4,11 @@ import * as React from 'react';
 
 function ActionButton(props) {
   return (
-    <FActionButton {...props} iconProps={{ iconName: props.iconName }} ref={props.uxpinRef}/>
+    <FActionButton {...props} iconProps={{ iconName: props.iconName }} ref={props.uxpinRef} styles={{
+      label: {
+        whiteSpace: 'nowrap'
+      }
+    }}/>
   );
 }
 
