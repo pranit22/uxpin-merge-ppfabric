@@ -8,7 +8,7 @@ import * as React from 'react';
  */
 function ActionButton(props) {
   return (
-    <FActionButton {...props} iconProps={{ iconName: props.iconName }} ref={props.uxpinRef}>{props.children}</FActionButton>
+    <FActionButton {...props} iconProps={{ iconName: props.iconName }} ref={props.uxpinRef}/>
   );
 }
 
@@ -24,7 +24,8 @@ ActionButton.propTypes = {
 ActionButton.defaultProps = {
   checked: false,
   disabled: false,
-  text: ''
+  text: 'Action Button',
+  iconName: 'GlobalNavButton'
 };
 
 export { ActionButton as default };
