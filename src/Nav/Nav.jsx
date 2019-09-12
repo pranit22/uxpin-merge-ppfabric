@@ -61,9 +61,10 @@ class Nav extends React.Component {
     }
 
 
-    onLinkClick(event, item) {
+    onMenuClick(event, element) {
+        event.preventDefault();
         this.setState({
-            selectedIndex: this.state.links.findIndex(link => link.key === item.key) + 1
+            selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
         })
     }
 
