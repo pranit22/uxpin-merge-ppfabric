@@ -2,10 +2,6 @@ import { ActionButton as FActionButton } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
-/**
- * @uxpinwrappers
- * SkipContainerWrapper
- */
 function ActionButton(props) {
   return (
     <FActionButton {...props} iconProps={{ iconName: props.iconName }} ref={props.uxpinRef}/>
