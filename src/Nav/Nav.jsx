@@ -61,16 +61,9 @@ class Nav extends React.Component {
     }
 
 
-    onMenuClick(event, element) {
-        event.preventDefault();
+    onLinkClick(event, item) {
         this.setState({
-            selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
-        }, () => {
-            console.log(element);
-            // this.props.onLinkClick(element.name)
-            return element.name
-            // this.props.onClick(element.name)
-            // this.defaultProps.clicked = element.name
+            selectedIndex: this.state.links.findIndex(link => link.key === item.key) + 1
         })
     }
 
@@ -100,13 +93,13 @@ Nav.propTypes = {
     /** Which element number should be selected from 1 to n */
     selectedIndex: PropTypes.number,
 
-    /** 
+    /**
       * CSV of items, could be coma separated, or new line
       *  @uxpincontroltype textfield(20)
       * */
     items: PropTypes.string,
 
-    /** 
+    /**
      * CSV list of disabled items Indexes
      * @uxpincontroltype textfield(3)
      * */
