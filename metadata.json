@@ -1245,7 +1245,8 @@
                 "nav1": {
                   "name": "Nav",
                   "props": {
-                    "items": "Aa\n\"B, b\"\nCc\n"
+                    "disabled": "2, 4",
+                    "items": "Aa\n\"B, b\"\nCc\nDd\nEe"
                   }
                 }
               },
@@ -1286,13 +1287,52 @@
                 }
               },
               "defaultValue": {
-                "value": "Aa\n\"B, b\"\nCc"
+                "value": "Aa\n\"B, b\"\nCc,\nDd,\nEe"
               },
               "description": "CSV of items, could be coma separated, or new line",
               "isRequired": false,
               "name": "items",
               "type": {
                 "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 3
+                }
+              },
+              "defaultValue": {
+                "value": "2, 4"
+              },
+              "description": "CSV list of disabled items Indexes",
+              "isRequired": false,
+              "name": "disabled",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": null
+              },
+              "description": "clicked element",
+              "isRequired": false,
+              "name": "clicked",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "description": "clicked element",
+              "isRequired": false,
+              "name": "onClick",
+              "type": {
+                "name": "func",
                 "structure": {}
               }
             }
@@ -1374,6 +1414,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "33c67429abb11b363b38d2be3a1998022a95d433"
+    "commitHash": "67569739f8ed3c6eae10f5341c8c6098d8d82960"
   }
 }

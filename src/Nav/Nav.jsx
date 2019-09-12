@@ -5,17 +5,19 @@ import { name2key } from '../_helpers/parser.js'
 import parse from 'csv-parse'
 
 
+
 class Nav extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             links: [],
             selectedIndex: this.props.selectedIndex || 1,
+            disabledIndexes: []
         }
     }
 
     componentDidMount() {
-        this.getItems();
+        this.setDisabledIndexes(this.setItems)
     }
 
     getStyles() {
@@ -26,7 +28,7 @@ class Nav extends React.Component {
         }
     }
 
-    getItems() {
+    setItems(callback) {
         parse(this.props.items, {
             skip_empty_lines: true
         },
@@ -34,14 +36,27 @@ class Nav extends React.Component {
                 this.setState({
                     links: data
                         .flat()
-                        .map(val => {
-                            return {
+                        .map((val, i) => {
+                            let out = {
                                 name: val,
                                 key: name2key(val),
                                 onClick: this.onMenuClick.bind(this)
                             }
+
+                            if (this.state.disabledIndexes.includes(i + 1)) out.disabled = true
+                            return out
                         })
-                })
+                }, callback)
+            })
+    }
+
+    setDisabledIndexes(callback) {
+        parse(this.props.disabled, {
+            skip_empty_lines: true
+        },
+            (err, data) => {
+                let disabledIndexes = data.flat().map(i => parseInt(i.trim()))
+                this.setState({ disabledIndexes }, callback)
             })
     }
 
@@ -49,9 +64,13 @@ class Nav extends React.Component {
     onMenuClick(event, element) {
         event.preventDefault();
         this.setState({
-            selectedIndex: this.getItems().findIndex(link => link.key === element.key) + 1
+            selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
         }, () => {
+            console.log(element);
+            // this.props.onLinkClick(element.name)
             return element.name
+            // this.props.onClick(element.name)
+            // this.defaultProps.clicked = element.name
         })
     }
 
@@ -65,7 +84,8 @@ class Nav extends React.Component {
                         selectedAriaLabel="Selected"
                         styles={this.getStyles()}
                         groups={[{ links: this.state.links }]}
-                        width={300} />
+                        width={300}
+                        onLinkClick={this.onMenuClick.bind(this)} />
 
                     : <div>Incorrect format: {this.props.items} </div>}
             </>
@@ -85,6 +105,15 @@ Nav.propTypes = {
       *  @uxpincontroltype textfield(20)
       * */
     items: PropTypes.string,
+
+    /** 
+     * CSV list of disabled items Indexes
+     * @uxpincontroltype textfield(3)
+     * */
+    disabled: PropTypes.string,
+
+    /** clicked element */
+    onLinkClick: PropTypes.func
 };
 
 Nav.defaultProps = {
@@ -92,7 +121,10 @@ Nav.defaultProps = {
     selectedIndex: 1,
     items: `Aa
 "B, b"
-Cc`
+Cc,
+Dd,
+Ee`,
+    disabled: "2, 4"
 };
 
 
