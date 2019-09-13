@@ -5,7 +5,7 @@ const items = `Aa
 "B, b"
 Cc
 Dd
-Ee`
+Ee`;
 
 export default (
     <Nav

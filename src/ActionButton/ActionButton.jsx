@@ -2,13 +2,13 @@ import { ActionButton as FActionButton } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
-/**
- * @uxpinwrappers
- * SkipContainerWrapper
- */
 function ActionButton(props) {
   return (
-    <FActionButton {...props} iconProps={{ iconName: props.iconName }} ref={props.uxpinRef}>{props.children}</FActionButton>
+    <FActionButton {...props} iconProps={{ iconName: props.iconName }} ref={props.uxpinRef} styles={{
+      label: {
+        whiteSpace: 'nowrap'
+      }
+    }}/>
   );
 }
 
@@ -24,7 +24,8 @@ ActionButton.propTypes = {
 ActionButton.defaultProps = {
   checked: false,
   disabled: false,
-  text: ''
+  text: 'Action Button',
+  iconName: 'GlobalNavButton'
 };
 
 export { ActionButton as default };

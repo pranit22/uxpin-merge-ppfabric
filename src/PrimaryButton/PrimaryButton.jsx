@@ -4,7 +4,11 @@ import * as React from 'react';
 
 function PrimaryButton(props) {
   return (
-    <FPrimaryButton {...props} iconProps={{ iconName: props.iconName }}/>
+    <FPrimaryButton {...props} iconProps={{ iconName: props.iconName }} ref={props.uxpinRef} styles={{
+      label: {
+        whiteSpace: 'nowrap'
+      }
+    }}/>
   );
 }
 

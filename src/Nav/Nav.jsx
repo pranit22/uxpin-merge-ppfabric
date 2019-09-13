@@ -10,8 +10,9 @@ class Nav extends React.Component {
         super(props);
         this.state = {
             links: [],
-            selectedIndex: this.props.selectedIndex || 1,
-            disabledIndexes: []
+            selectedIndex: props.selectedIndex || 1,
+            disabledIndexes: [],
+            width: props.width
         }
     }
 
@@ -35,16 +36,11 @@ class Nav extends React.Component {
                 this.setState({
                     links: data
                         .flat()
-                        .map((val, i) => {
-                            let out = {
-                                name: val,
-                                key: name2key(val),
-                                onClick: this.onMenuClick.bind(this)
-                            }
-
-                            if (this.state.disabledIndexes.includes(i + 1)) out.disabled = true
-                            return out
-                        })
+                        .map((val, i) => ({
+                            name: val,
+                            key: name2key(val),
+                            disabled: this.state.disabledIndexes.includes(i + 1)
+                        }))
                 }, callback)
             })
     }
@@ -71,6 +67,7 @@ class Nav extends React.Component {
             // return element.name
             // this.props.onClick(element.name)
             // this.defaultProps.clicked = element.name
+
         })
     }
 
@@ -84,7 +81,7 @@ class Nav extends React.Component {
                         selectedAriaLabel="Selected"
                         styles={this.getStyles()}
                         groups={[{ links: this.state.links }]}
-                        width={300}
+                        width={this.state.width}
                         onLinkClick={this.onMenuClick.bind(this)} />
 
                     : <div>Incorrect format: {this.props.items} </div>}
@@ -100,13 +97,13 @@ Nav.propTypes = {
     /** Which element number should be selected from 1 to n */
     selectedIndex: PropTypes.number,
 
-    /** 
+    /**
       * CSV of items, could be coma separated, or new line
-      *  @uxpincontroltype textfield(20)
+      *  @uxpincontroltype textfield(10)
       * */
     items: PropTypes.string,
 
-    /** 
+    /**
      * CSV list of disabled items Indexes
      * @uxpincontroltype textfield(3)
      * */
