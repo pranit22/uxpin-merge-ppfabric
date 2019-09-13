@@ -5,7 +5,6 @@ import { name2key } from '../_helpers/parser.js'
 import parse from 'csv-parse'
 
 
-
 class Nav extends React.Component {
     constructor(props) {
         super(props);
@@ -68,7 +67,8 @@ class Nav extends React.Component {
         }, () => {
             console.log(element);
             // this.props.onLinkClick(element.name)
-            return element.name
+            Nav.defaultProps.clicked = element.name
+            // return element.name
             // this.props.onClick(element.name)
             // this.defaultProps.clicked = element.name
         })
@@ -113,7 +113,9 @@ Nav.propTypes = {
     disabled: PropTypes.string,
 
     /** clicked element */
-    onLinkClick: PropTypes.func
+    onLinkClick: PropTypes.func,
+
+    clicked: PropTypes.string
 };
 
 Nav.defaultProps = {
