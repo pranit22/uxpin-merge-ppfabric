@@ -3,6 +3,8 @@ import * as PropTypes from 'prop-types';
 import { Nav as FNav } from 'office-ui-fabric-react';
 import { name2key } from '../_helpers/parser.js'
 import parse from 'csv-parse'
+import ReactDOM from "react-dom";
+
 
 
 class Nav extends React.Component {
@@ -12,13 +14,20 @@ class Nav extends React.Component {
             links: [],
             selectedIndex: props.selectedIndex || 1,
             disabledIndexes: [],
-            width: props.width
+            width: props.width,
+            clicked: null
         }
     }
 
     componentDidMount() {
         this.setDisabledIndexes(this.setItems)
     }
+
+    componentDidUpdate() {
+        const node = ReactDOM.findDOMNode(this);
+        console.log(node);
+    }
+
 
     getStyles() {
         return {
@@ -61,13 +70,16 @@ class Nav extends React.Component {
         this.setState({
             selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
         }, () => {
-            console.log(element);
+            // console.log(element);
             // this.props.onLinkClick(element.name)
-            Nav.defaultProps.clicked = element.name
+            // Nav.defaultProps.clicked = element.name
             // return element.name
             // this.props.onClick(element.name)
             // this.defaultProps.clicked = element.name
-
+            this.setState({ clicked: element.name }, () => {
+                this.props.onLinkClick()
+                console.log(element);
+            })
         })
     }
 
@@ -82,7 +94,8 @@ class Nav extends React.Component {
                         styles={this.getStyles()}
                         groups={[{ links: this.state.links }]}
                         width={this.state.width}
-                        onLinkClick={this.onMenuClick.bind(this)} />
+                        onLinkClick={this.onMenuClick.bind(this)}
+                        clicked={this.state.clicked} />
 
                     : <div>Incorrect format: {this.props.items} </div>}
             </>
