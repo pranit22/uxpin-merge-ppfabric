@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { Nav as FNav } from 'office-ui-fabric-react';
 import { name2key } from '../_helpers/parser.js'
 import parse from 'csv-parse'
-import ReactDOM from "react-dom";
 
 
 
@@ -22,12 +21,6 @@ class Nav extends React.Component {
     componentDidMount() {
         this.setDisabledIndexes(this.setItems)
     }
-
-    componentDidUpdate() {
-        const node = ReactDOM.findDOMNode(this);
-        console.log(node);
-    }
-
 
     getStyles() {
         return {
@@ -71,7 +64,7 @@ class Nav extends React.Component {
         this.setState({
             selectedIndex: index
         }, () => {
-            this.props.onLinkClick1()
+            eval(`this.props.onLinkClick${index}()`)
         })
     }
 
@@ -86,8 +79,7 @@ class Nav extends React.Component {
                         styles={this.getStyles()}
                         groups={[{ links: this.state.links }]}
                         width={this.state.width}
-                        onLinkClick={this.onMenuClick.bind(this)}
-                        onLinkClick1={() => { }} />
+                        onLinkClick={this.onMenuClick.bind(this)} />
 
                     : <div>Incorrect format: {this.props.items} </div>}
             </>
@@ -115,7 +107,7 @@ Nav.propTypes = {
     disabled: PropTypes.string,
 
     /** clicked element */
-    onLinkClick: PropTypes.func,
+    // onLinkClick: PropTypes.func,
 
     onLinkClick1: PropTypes.func,
 
