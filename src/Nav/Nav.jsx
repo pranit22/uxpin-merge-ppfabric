@@ -65,21 +65,13 @@ class Nav extends React.Component {
     }
 
 
-    onMenuClick(event, element) {
+    onMenuClick(event, element, val) {
         event.preventDefault();
+        const index = this.state.links.findIndex(link => link.key === element.key) + 1
         this.setState({
-            selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
+            selectedIndex: index
         }, () => {
-            // console.log(element);
-            // this.props.onLinkClick(element.name)
-            // Nav.defaultProps.clicked = element.name
-            // return element.name
-            // this.props.onClick(element.name)
-            // this.defaultProps.clicked = element.name
-            this.setState({ clicked: element.name }, () => {
-                this.props.onLinkClick()
-                console.log(element);
-            })
+            this.props.onLinkClick1()
         })
     }
 
@@ -95,7 +87,7 @@ class Nav extends React.Component {
                         groups={[{ links: this.state.links }]}
                         width={this.state.width}
                         onLinkClick={this.onMenuClick.bind(this)}
-                        clicked={this.state.clicked} />
+                        onLinkClick1={() => { }} />
 
                     : <div>Incorrect format: {this.props.items} </div>}
             </>
@@ -125,7 +117,11 @@ Nav.propTypes = {
     /** clicked element */
     onLinkClick: PropTypes.func,
 
-    clicked: PropTypes.string
+    onLinkClick1: PropTypes.func,
+
+    onLinkClick2: PropTypes.func,
+
+    onLinkClick3: PropTypes.func,
 };
 
 Nav.defaultProps = {
