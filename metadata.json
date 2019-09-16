@@ -34,7 +34,7 @@
                   "name": "ActionButton",
                   "props": {
                     "iconName": "GlobalNavButton",
-                    "text": "button"
+                    "text": "Action Button"
                   }
                 }
               },
@@ -68,6 +68,9 @@
               }
             },
             {
+              "defaultValue": {
+                "value": "GlobalNavButton"
+              },
               "description": "",
               "isRequired": false,
               "name": "iconName",
@@ -78,7 +81,7 @@
             },
             {
               "defaultValue": {
-                "value": ""
+                "value": "Action Button"
               },
               "description": "",
               "isRequired": false,
@@ -107,12 +110,7 @@
               }
             }
           ],
-          "wrappers": [
-            {
-              "name": "SkipContainerWrapper",
-              "type": "builtIn"
-            }
-          ]
+          "wrappers": []
         },
         {
           "documentation": {
@@ -883,12 +881,7 @@
               }
             }
           ],
-          "wrappers": [
-            {
-              "name": "SkipContainerWrapper",
-              "type": "builtIn"
-            }
-          ]
+          "wrappers": []
         },
         {
           "documentation": {
@@ -1129,6 +1122,46 @@
             }
           ],
           "wrappers": []
+        },
+        {
+          "documentation": {
+            "examples": [
+              {
+                "code": "<Persona />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/Persona",
+            "documentation": {
+              "path": "src/Persona/Persona.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/Persona/Persona.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/Persona/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "Persona",
+          "presets": [
+            {
+              "elements": {
+                "persona1": {
+                  "name": "Persona",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "persona1"
+            }
+          ],
+          "properties": [],
+          "wrappers": []
         }
       ],
       "name": "Items & Lists"
@@ -1246,7 +1279,7 @@
                   "name": "Nav",
                   "props": {
                     "disabled": "2, 4",
-                    "items": "Aa\n\"B, b\"\nCc\nDd\nEe"
+                    "items": "icon(ViewAll) Aa \n\"icon(Edit) B, b\"\nicon(Emoji2) Cc\nDd\nEe"
                   }
                 }
               },
@@ -1281,13 +1314,11 @@
             },
             {
               "customType": {
-                "name": "textfield",
-                "structure": {
-                  "rows": 20
-                }
+                "name": "codeeditor",
+                "structure": {}
               },
               "defaultValue": {
-                "value": "Aa\n\"B, b\"\nCc,\nDd,\nEe"
+                "value": "icon(ViewAll) Aa \n\"icon(Edit) B, b\"\nicon(Emoji2) Cc\nDd\nEe"
               },
               "description": "CSV of items, could be coma separated, or new line",
               "isRequired": false,
@@ -1316,21 +1347,150 @@
               }
             },
             {
-              "defaultValue": {
-                "value": null
-              },
-              "description": "clicked element",
+              "customName": "Link 1 click",
+              "description": "",
               "isRequired": false,
-              "name": "clicked",
+              "name": "onLink1Click",
               "type": {
-                "name": "string",
+                "name": "func",
                 "structure": {}
               }
             },
             {
-              "description": "clicked element",
+              "customName": "Link 2 click",
+              "description": "",
               "isRequired": false,
-              "name": "onClick",
+              "name": "onLink2Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 3 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink3Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 4 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink4Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 5 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink5Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 6 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink6Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 7 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink7Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 8 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink8Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 9 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink9Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 10 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink10Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 11 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink11Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 12 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink12Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 13 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink13Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 14 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink14Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 15 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink15Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -1413,7 +1573,7 @@
   ],
   "name": "MS Fabric UXPin Merge",
   "vcs": {
-    "branchName": "master",
-    "commitHash": "67569739f8ed3c6eae10f5341c8c6098d8d82960"
+    "branchName": "persona",
+    "commitHash": "9b4c96fe2ddb6c8aee029a87162321187486156c"
   }
 }
