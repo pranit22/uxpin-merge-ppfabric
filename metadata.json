@@ -1160,7 +1160,168 @@
               "rootId": "persona1"
             }
           ],
-          "properties": [],
+          "properties": [
+            {
+              "customName": "url",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 2
+                }
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "imageUrl",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "size100"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "size",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size8"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size24"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size32"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size40"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size56"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size72"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size100"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size120"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "presence",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "offline"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "online"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "away"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "busy"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "initials",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "name",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "role",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "status",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "optional",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            }
+          ],
           "wrappers": []
         }
       ],
@@ -1574,6 +1735,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "persona",
-    "commitHash": "9b4c96fe2ddb6c8aee029a87162321187486156c"
+    "commitHash": "c8c6da1c1e01ee70a5837b3d8456ac1e9d642811"
   }
 }
