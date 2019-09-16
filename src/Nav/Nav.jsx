@@ -105,7 +105,7 @@ Nav.propTypes = {
 
     /**
       * CSV of items, could be coma separated, or new line
-      *  @uxpincontroltype textfield(10)
+      *  @uxpincontroltype codeeditor
       * */
     items: PropTypes.string,
 
