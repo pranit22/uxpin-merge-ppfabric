@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Nav from '../Nav';
 
-const items = `icon(ViewAll|blue-500) Aa 
+const items = `icon(ViewAll) Aa 
 "icon(Edit) B, b"
 icon(Emoji2) Cc
 Dd

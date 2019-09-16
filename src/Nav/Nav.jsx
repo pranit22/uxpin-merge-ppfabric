@@ -115,31 +115,59 @@ Nav.propTypes = {
      * */
     disabled: PropTypes.string,
 
-    /** clicked element */
+    /** @uxpinpropname Link 1 click */
     onLink1Click: PropTypes.func,
+
+    /** @uxpinpropname Link 2 click */
     onLink2Click: PropTypes.func,
+
+    /** @uxpinpropname Link 3 click */
     onLink3Click: PropTypes.func,
+
+    /** @uxpinpropname Link 4 click */
     onLink4Click: PropTypes.func,
+
+    /** @uxpinpropname Link 5 click */
     onLink5Click: PropTypes.func,
+
+    /** @uxpinpropname Link 6 click */
     onLink6Click: PropTypes.func,
+
+    /** @uxpinpropname Link 7 click */
     onLink7Click: PropTypes.func,
+
+    /** @uxpinpropname Link 8 click */
     onLink8Click: PropTypes.func,
+
+    /** @uxpinpropname Link 9 click */
     onLink9Click: PropTypes.func,
+
+    /** @uxpinpropname Link 10 click */
     onLink10Click: PropTypes.func,
+
+    /** @uxpinpropname Link 11 click */
     onLink11Click: PropTypes.func,
+
+    /** @uxpinpropname Link 12 click */
     onLink12Click: PropTypes.func,
+
+    /** @uxpinpropname Link 13 click */
     onLink13Click: PropTypes.func,
+
+    /** @uxpinpropname Link 14 click */
     onLink14Click: PropTypes.func,
+
+    /** @uxpinpropname Link 15 click */
     onLink15Click: PropTypes.func,
 };
 
 Nav.defaultProps = {
     width: 270,
     selectedIndex: 1,
-    items: `Aa
-"B, b"
-Cc,
-Dd,
+    items: `icon(ViewAll) Aa 
+"icon(Edit) B, b"
+icon(Emoji2) Cc
+Dd
 Ee`,
     disabled: "2, 4"
 };
