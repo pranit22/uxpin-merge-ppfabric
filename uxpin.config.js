@@ -17,7 +17,8 @@ module.exports = {
       {
         name: 'Items & Lists',
         include: [
-          'src/DetailsList/DetailsList.jsx'
+          'src/DetailsList/DetailsList.jsx',
+          'src/Persona/Persona.jsx',
         ]
       },
       {

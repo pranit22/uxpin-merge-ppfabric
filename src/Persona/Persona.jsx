@@ -1,15 +1,24 @@
 import * as React from 'react';
-import {Persona as FPersona} from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
+import parse from 'csv-parse'
+import { name2key, getTokens } from '../_helpers/parser.js'
 
-function Persona(props) {
-   return (
-      <FPersona {...props}>{props.children}</FPersona>
-  );
+import { Persona as FPersona } from 'office-ui-fabric-react';
+
+
+class Persona extends React.Component {
+    render() {
+        return (
+            <div></div>
+        )
+    }
 }
 
 Persona.propTypes = {
-    children: PropTypes.node,
+};
+
+Persona.defaultProps = {
+
 };
 
 export { Persona as default };
