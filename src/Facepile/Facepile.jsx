@@ -8,8 +8,6 @@ import { facepilePersonas } from '@uifabric/example-data';
 
 class Facepile extends React.Component {
     render() {
-        debugger
-
         let params = {
             personaSize: PersonaSize[this.props.size],
             personas: facepilePersonas.slice(0, this.props.number),
