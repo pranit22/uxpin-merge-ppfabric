@@ -1529,7 +1529,98 @@
               "rootId": "facepile1"
             }
           ],
-          "properties": [],
+          "properties": [
+            {
+              "defaultValue": {
+                "value": "size32"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "size",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size16"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size24"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size28"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size32"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size40"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 5
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "number",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": 1
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": 2
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": 3
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": 4
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": 5
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ],
           "wrappers": []
         }
       ],
@@ -1938,11 +2029,56 @@
         }
       ],
       "name": "Commands, Menus & Navs"
+    },
+    {
+      "components": [
+        {
+          "documentation": {
+            "examples": [
+              {
+                "code": "<Card />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/Card",
+            "documentation": {
+              "path": "src/Card/Card.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/Card/Card.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/Card/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "Card",
+          "presets": [
+            {
+              "elements": {
+                "card1": {
+                  "name": "Card",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "card1"
+            }
+          ],
+          "properties": [],
+          "wrappers": []
+        }
+      ],
+      "name": "Experimental"
     }
   ],
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "299251c1c097ea92fe4e151c7210d9848ae5a6e5"
+    "commitHash": "196fabf48a369dabfc92836eda2a8f4f24fbc316"
   }
 }

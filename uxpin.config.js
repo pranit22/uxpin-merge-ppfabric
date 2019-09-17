@@ -30,6 +30,12 @@ module.exports = {
           'src/Pivot/Pivot.jsx',
         ]
       },
+      {
+        name: 'Experimental',
+        include: [
+          'src/Card/Card.jsx',
+        ]
+      },
     ]
   },
   name: 'MS Fabric UXPin Merge'
