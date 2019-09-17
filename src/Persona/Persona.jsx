@@ -14,7 +14,7 @@ class Persona extends React.Component {
 
     render() {
         let persona = {
-            imageUrl: this.props.imageUrl || personaFemaleUrl,
+            imageUrl: this.props.imageUrl || '',
             imageInitials: this.props.initials || 'AL',
             text: this.props.name || 'Annie Lindqvist',
             secondaryText: this.props.role || 'Software Engineer',
@@ -40,7 +40,7 @@ Persona.propTypes = {
     * */
     imageUrl: PropTypes.string,
 
-    size: PropTypes.oneOf(['size8', 'size24', 'size32', 'size40', 'size56', 'size72', 'size100', 'size120']),
+    size: PropTypes.oneOf(['size8', 'size24', 'size32', 'size40', 'size56', 'size72', 'size100']),
 
     presence: PropTypes.oneOf(['none', 'online', 'offline', 'away', 'busy', 'dnd', 'blocked']),
 
