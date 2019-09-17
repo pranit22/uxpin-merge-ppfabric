@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Nav from '../Nav';
 
-const items = `Aa
-"B, b"
-Cc
+const items = `icon(ViewAll) Aa 
+"icon(Edit) B, b"
+icon(Emoji2) Cc
 Dd
 Ee`;
 

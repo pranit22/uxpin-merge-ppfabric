@@ -34,7 +34,7 @@
                   "name": "ActionButton",
                   "props": {
                     "iconName": "GlobalNavButton",
-                    "text": "button"
+                    "text": "Action Button"
                   }
                 }
               },
@@ -68,6 +68,9 @@
               }
             },
             {
+              "defaultValue": {
+                "value": "GlobalNavButton"
+              },
               "description": "",
               "isRequired": false,
               "name": "iconName",
@@ -78,7 +81,7 @@
             },
             {
               "defaultValue": {
-                "value": ""
+                "value": "Action Button"
               },
               "description": "",
               "isRequired": false,
@@ -107,12 +110,7 @@
               }
             }
           ],
-          "wrappers": [
-            {
-              "name": "SkipContainerWrapper",
-              "type": "builtIn"
-            }
-          ]
+          "wrappers": []
         },
         {
           "documentation": {
@@ -883,12 +881,7 @@
               }
             }
           ],
-          "wrappers": [
-            {
-              "name": "SkipContainerWrapper",
-              "type": "builtIn"
-            }
-          ]
+          "wrappers": []
         },
         {
           "documentation": {
@@ -1129,6 +1122,506 @@
             }
           ],
           "wrappers": []
+        },
+        {
+          "documentation": {
+            "examples": [
+              {
+                "code": "<Persona uxpId=\"persona1\"/>"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/Persona",
+            "documentation": {
+              "path": "src/Persona/Persona.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/Persona/Persona.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/Persona/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "Persona",
+          "presets": [
+            {
+              "elements": {
+                "persona1": {
+                  "name": "Persona",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "persona1"
+            }
+          ],
+          "properties": [
+            {
+              "customName": "url",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 2
+                }
+              },
+              "defaultValue": {
+                "value": "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-female.png"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "imageUrl",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "size100"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "size",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size8"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size24"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size32"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size40"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size56"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size72"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size100"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size120"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "online"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "presence",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "none"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "online"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "offline"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "away"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "busy"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "dnd"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "blocked"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "green"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "initialsColor",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "green"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "darkGreen"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "teal"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "lightBlue"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "blue"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "darkBlue"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "violet"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "purple"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "magenta"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "lightPink"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "pink"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "burgundy"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "lightRed"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "darkRed"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "orange"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "rust"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "gold"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "warmGray"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "coolGray"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "AL"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "initials",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Annie Lindqvist"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "name",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Software Engineer"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "role",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "In a meeting"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "status",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Available at 4:00pm"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "optional",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            }
+          ],
+          "wrappers": []
+        },
+        {
+          "documentation": {
+            "examples": [
+              {
+                "code": "<Facepile />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/Facepile",
+            "documentation": {
+              "path": "src/Facepile/Facepile.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/Facepile/Facepile.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/Facepile/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "Facepile",
+          "presets": [
+            {
+              "elements": {
+                "facepile1": {
+                  "name": "Facepile",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "facepile1"
+            }
+          ],
+          "properties": [
+            {
+              "defaultValue": {
+                "value": "size32"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "size",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size16"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size24"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size28"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size32"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "size40"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 5
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "number",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": 1
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": 2
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": 3
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": 4
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": 5
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "wrappers": []
         }
       ],
       "name": "Items & Lists"
@@ -1246,7 +1739,7 @@
                   "name": "Nav",
                   "props": {
                     "disabled": "2, 4",
-                    "items": "Aa\n\"B, b\"\nCc\nDd\nEe"
+                    "items": "icon(ViewAll) Aa \n\"icon(Edit) B, b\"\nicon(Emoji2) Cc\nDd\nEe"
                   }
                 }
               },
@@ -1281,13 +1774,11 @@
             },
             {
               "customType": {
-                "name": "textfield",
-                "structure": {
-                  "rows": 20
-                }
+                "name": "codeeditor",
+                "structure": {}
               },
               "defaultValue": {
-                "value": "Aa\n\"B, b\"\nCc,\nDd,\nEe"
+                "value": "icon(ViewAll) Aa \n\"icon(Edit) B, b\"\nicon(Emoji2) Cc\nDd\nEe"
               },
               "description": "CSV of items, could be coma separated, or new line",
               "isRequired": false,
@@ -1316,21 +1807,150 @@
               }
             },
             {
-              "defaultValue": {
-                "value": null
-              },
-              "description": "clicked element",
+              "customName": "Link 1 click",
+              "description": "",
               "isRequired": false,
-              "name": "clicked",
+              "name": "onLink1Click",
               "type": {
-                "name": "string",
+                "name": "func",
                 "structure": {}
               }
             },
             {
-              "description": "clicked element",
+              "customName": "Link 2 click",
+              "description": "",
               "isRequired": false,
-              "name": "onClick",
+              "name": "onLink2Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 3 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink3Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 4 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink4Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 5 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink5Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 6 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink6Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 7 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink7Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 8 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink8Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 9 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink9Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 10 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink10Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 11 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink11Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 12 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink12Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 13 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink13Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 14 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink14Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 15 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLink15Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -1409,11 +2029,56 @@
         }
       ],
       "name": "Commands, Menus & Navs"
+    },
+    {
+      "components": [
+        {
+          "documentation": {
+            "examples": [
+              {
+                "code": "<Card />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/Card",
+            "documentation": {
+              "path": "src/Card/Card.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/Card/Card.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/Card/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "Card",
+          "presets": [
+            {
+              "elements": {
+                "card1": {
+                  "name": "Card",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "card1"
+            }
+          ],
+          "properties": [],
+          "wrappers": []
+        }
+      ],
+      "name": "Experimental"
     }
   ],
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "67569739f8ed3c6eae10f5341c8c6098d8d82960"
+    "commitHash": "196fabf48a369dabfc92836eda2a8f4f24fbc316"
   }
 }

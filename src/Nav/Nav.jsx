@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from 'office-ui-fabric-react';
-import { name2key } from '../_helpers/parser.js'
+import { name2key, getTokens } from '../_helpers/parser.js'
 import parse from 'csv-parse'
 
 
@@ -13,7 +13,8 @@ class Nav extends React.Component {
             links: [],
             selectedIndex: props.selectedIndex || 1,
             disabledIndexes: [],
-            width: props.width
+            width: props.width,
+            clicked: null
         }
     }
 
@@ -29,19 +30,28 @@ class Nav extends React.Component {
         }
     }
 
+    getLeftIcon(str) {
+        if (!getTokens(str).tokens) return null
+        if (!getTokens(str).tokens.find(t => t.type === 'icon')) return null
+        if (getTokens(str).tokens.find(t => t.type === 'icon').position.label !== 'start') return null
+        return getTokens(str).tokens.find(t => t.type === 'icon').target
+    }
+
     setItems(callback) {
         parse(this.props.items, {
             skip_empty_lines: true
         },
             (err, data) => {
+
                 this.setState({
                     links: data
                         .flat()
                         .map((val, i) => ({
-                                name: val,
-                                key: name2key(val),
-                                disabled: this.state.disabledIndexes.includes(i + 1)
-                            }))
+                            name: getTokens(val).text,
+                            key: name2key(val),
+                            disabled: this.state.disabledIndexes.includes(i + 1),
+                            icon: this.getLeftIcon(val)
+                        }))
                 }, callback)
             })
     }
@@ -57,10 +67,13 @@ class Nav extends React.Component {
     }
 
 
-    onMenuClick(event, element) {
+    onMenuClick(event, element, val) {
         event.preventDefault();
+        const index = this.state.links.findIndex(link => link.key === element.key) + 1
         this.setState({
-            selectedIndex: this.state.links.findIndex(link => link.key === element.key) + 1
+            selectedIndex: index
+        }, () => {
+            if (eval(`this.props.onLink${index}Click`)) eval(`this.props.onLink${index}Click()`)
         })
     }
 
@@ -92,7 +105,7 @@ Nav.propTypes = {
 
     /**
       * CSV of items, could be coma separated, or new line
-      *  @uxpincontroltype textfield(10)
+      *  @uxpincontroltype codeeditor
       * */
     items: PropTypes.string,
 
@@ -102,17 +115,59 @@ Nav.propTypes = {
      * */
     disabled: PropTypes.string,
 
-    /** clicked element */
-    onLinkClick: PropTypes.func
+    /** @uxpinpropname Link 1 click */
+    onLink1Click: PropTypes.func,
+
+    /** @uxpinpropname Link 2 click */
+    onLink2Click: PropTypes.func,
+
+    /** @uxpinpropname Link 3 click */
+    onLink3Click: PropTypes.func,
+
+    /** @uxpinpropname Link 4 click */
+    onLink4Click: PropTypes.func,
+
+    /** @uxpinpropname Link 5 click */
+    onLink5Click: PropTypes.func,
+
+    /** @uxpinpropname Link 6 click */
+    onLink6Click: PropTypes.func,
+
+    /** @uxpinpropname Link 7 click */
+    onLink7Click: PropTypes.func,
+
+    /** @uxpinpropname Link 8 click */
+    onLink8Click: PropTypes.func,
+
+    /** @uxpinpropname Link 9 click */
+    onLink9Click: PropTypes.func,
+
+    /** @uxpinpropname Link 10 click */
+    onLink10Click: PropTypes.func,
+
+    /** @uxpinpropname Link 11 click */
+    onLink11Click: PropTypes.func,
+
+    /** @uxpinpropname Link 12 click */
+    onLink12Click: PropTypes.func,
+
+    /** @uxpinpropname Link 13 click */
+    onLink13Click: PropTypes.func,
+
+    /** @uxpinpropname Link 14 click */
+    onLink14Click: PropTypes.func,
+
+    /** @uxpinpropname Link 15 click */
+    onLink15Click: PropTypes.func,
 };
 
 Nav.defaultProps = {
     width: 270,
     selectedIndex: 1,
-    items: `Aa
-"B, b"
-Cc,
-Dd,
+    items: `icon(ViewAll) Aa 
+"icon(Edit) B, b"
+icon(Emoji2) Cc
+Dd
 Ee`,
     disabled: "2, 4"
 };

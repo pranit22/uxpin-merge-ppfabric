@@ -17,7 +17,9 @@ module.exports = {
       {
         name: 'Items & Lists',
         include: [
-          'src/DetailsList/DetailsList.jsx'
+          'src/DetailsList/DetailsList.jsx',
+          'src/Persona/Persona.jsx',
+          'src/Facepile/Facepile.jsx',
         ]
       },
       {
@@ -26,6 +28,12 @@ module.exports = {
           'src/Breadcrumb/Breadcrumb.jsx',
           'src/Nav/Nav.jsx',
           'src/Pivot/Pivot.jsx',
+        ]
+      },
+      {
+        name: 'Experimental',
+        include: [
+          'src/Card/Card.jsx',
         ]
       },
     ]
