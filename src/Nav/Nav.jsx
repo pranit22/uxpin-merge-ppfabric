@@ -73,7 +73,7 @@ class Nav extends React.Component {
         this.setState({
             selectedIndex: index
         }, () => {
-            if (eval(`this.props.onLink${index}Click`)) eval(`this.props.onLink${index}Click()`)
+            if (this.props[`onLink${index}Click`]) this.props[`onLink${index}Click`]()
         })
     }
 
