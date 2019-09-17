@@ -1,7 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import parse from 'csv-parse'
-import { name2key, getTokens } from '../_helpers/parser.js'
 
 import {
     Persona as FPersona,

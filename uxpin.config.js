@@ -19,6 +19,7 @@ module.exports = {
         include: [
           'src/DetailsList/DetailsList.jsx',
           'src/Persona/Persona.jsx',
+          'src/Facepile/Facepile.jsx',
         ]
       },
       {
