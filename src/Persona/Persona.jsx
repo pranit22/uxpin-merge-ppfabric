@@ -2,12 +2,12 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import parse from 'csv-parse'
 import { name2key, getTokens } from '../_helpers/parser.js'
-// import { TestImages } from '@uifabric/example-data';
 
 import {
     Persona as FPersona,
     PersonaSize,
-    PersonaPresence
+    PersonaPresence,
+    PersonaInitialsColor
 } from 'office-ui-fabric-react';
 
 let personaFemaleUrl = "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-female.png"
@@ -26,7 +26,10 @@ class Persona extends React.Component {
 
         return (
             <FPersona {...persona}
-                size={PersonaSize[this.props.size]} />
+                size={PersonaSize[this.props.size]}
+                presence={PersonaPresence[this.props.presence || null]}
+                initialsColor={PersonaInitialsColor[this.props.initialsColor || null]}
+            />
         )
     }
 }
@@ -41,7 +44,12 @@ Persona.propTypes = {
 
     size: PropTypes.oneOf(['size8', 'size24', 'size32', 'size40', 'size56', 'size72', 'size100', 'size120']),
 
-    presence: PropTypes.oneOf(['offline', 'online', 'away', 'busy']),
+    presence: PropTypes.oneOf(['none', 'online', 'offline', 'away', 'busy', 'dnd', 'blocked']),
+
+    initialsColor: PropTypes.oneOf([
+        'green', 'darkGreen', 'teal', 'lightBlue', 'blue', 'darkBlue', 'violet',
+        'purple', 'magenta', 'lightPink', 'pink', 'burgundy', 'lightRed', 'darkRed',
+        'orange', 'rust', 'gold', 'warmGray', 'coolGray']),
 
     initials: PropTypes.string,
     name: PropTypes.string,
@@ -51,7 +59,15 @@ Persona.propTypes = {
 };
 
 Persona.defaultProps = {
-    size: "size100"
+    imageUrl: personaFemaleUrl,
+    size: "size100",
+    presence: 'online',
+    initials: 'AL',
+    name: 'Annie Lindqvist',
+    role: 'Software Engineer',
+    status: 'In a meeting',
+    optional: 'Available at 4:00pm',
+    initialsColor: 'green'
 };
 
 export { Persona as default };

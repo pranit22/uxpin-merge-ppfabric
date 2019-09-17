@@ -1,7 +1,7 @@
 # Persona
   
 ```jsx
-<Persona />
+<Persona uxpId="persona1"/>
 ```
   
  
