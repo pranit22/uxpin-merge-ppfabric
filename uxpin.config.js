@@ -17,6 +17,7 @@ module.exports = {
       {
         name: 'Items & Lists',
         include: [
+          'src/ActivityItem/ActivityItem.jsx',
           'src/DetailsList/DetailsList.jsx',
           'src/Persona/Persona.jsx',
           'src/Facepile/Facepile.jsx',

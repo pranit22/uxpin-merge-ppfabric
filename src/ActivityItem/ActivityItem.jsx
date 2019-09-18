@@ -1,15 +1,28 @@
 import * as React from 'react';
-import {ActivityItem as FActivityItem} from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
+import { ActivityItem as FActivityItem } from 'office-ui-fabric-react';
+// import parse from 'csv-parse'
+// import { name2key, getTokens } from '../_helpers/parser.js'
 
-function ActivityItem(props) {
-   return (
-      <FActivityItem {...props}>{props.children}</FActivityItem>
-  );
+
+class ActivityItem extends React.Component {
+    render() {
+        let params = {
+            personaSize: PersonaSize[this.props.size],
+            personas: ActivityItemPersonas.slice(0, this.props.number),
+        }
+        return (
+            <FActivityItem {...params}></FActivityItem >
+        )
+    }
 }
 
 ActivityItem.propTypes = {
-    children: PropTypes.node,
+    click: PropTypes.func
 };
+
+ActivityItem.defaultProps = {
+
+}
 
 export { ActivityItem as default };
