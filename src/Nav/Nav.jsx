@@ -31,8 +31,9 @@ class Nav extends React.Component {
     }
 
     getLeftIcon(str) {
-        let tokens = getTokens(str).tokens
-        return tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start').target
+        const tokens = getTokens(str).tokens
+        const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start')
+        return leftIcon ? leftIcon.target : null
     }
 
     setItems(callback) {
@@ -164,7 +165,7 @@ Nav.defaultProps = {
     items: `icon(ViewAll) Aa 
 "icon(Edit) B, b"
 icon(Emoji2) Cc
-Dd
+Dd icon(Emoji2)
 Ee`,
     disabled: "2, 4"
 };

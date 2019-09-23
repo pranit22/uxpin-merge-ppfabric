@@ -4,7 +4,7 @@ import Nav from '../Nav';
 const items = `icon(ViewAll) Aa 
 "icon(Edit) B, b"
 icon(Emoji2) Cc
-Dd
+Dd icon(Emoji2)
 Ee`;
 
 export default (
