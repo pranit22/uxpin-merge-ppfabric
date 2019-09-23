@@ -165,7 +165,7 @@ Nav.defaultProps = {
     items: `icon(ViewAll) Aa 
 "icon(Edit) B, b"
 icon(Emoji2) Cc
-Dd icon(Emoji2)
+Dd
 Ee`,
     disabled: "2, 4"
 };

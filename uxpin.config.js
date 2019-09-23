@@ -2,6 +2,12 @@ module.exports = {
   components: {
     categories: [
       {
+        name: 'PayPal',
+        include: [
+          'src/PPHeader/PPHeader.jsx',
+        ]
+      },
+      {
         name: 'Basic Input',
         include: [
           'src/ActionButton/ActionButton.jsx',
