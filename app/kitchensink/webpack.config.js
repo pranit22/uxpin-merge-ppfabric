@@ -15,6 +15,26 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader'
+          },
+        ],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
+      },
+      {
         test: /\.css$/,
         use: [
           {
@@ -46,7 +66,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.jsx', '.js', '.json' ],
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
     symlinks: false
   },
   entry: './index.tsx',

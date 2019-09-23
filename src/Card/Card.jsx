@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Card as FCard } from '@uifabric/react-cards';
 import { Text } from 'office-ui-fabric-react';
 // import parse from 'csv-parse'
-// import { name2key, getTokens } from '../_helpers/parser.js'
+// import { name2key, getTokens } from '../_helpers/parser.ts'
 
 
 class Card extends React.Component {

@@ -1,0 +1,26 @@
+.ContextBarComponent {
+  position: absolute;
+  bottom: -28px;
+  display: block;
+  width: 100%;
+  height: 28px;
+  display: grid;
+  align-content: center;
+  grid-template-columns: 1fr 110px;
+  box-shadow: inset 0 3px 3px rgba(0, 0, 0, 0.4);
+
+  .context {
+    span {
+      &:first-child {
+        margin-left: 20px;
+      }
+      padding: 0 10px;
+      &.bold {
+        font-weight: bold;
+      }
+    }
+    i[data-icon-name="ChevronRight"] {
+      font-size: 10px;
+    }
+  }
+}
