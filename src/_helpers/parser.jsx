@@ -8,13 +8,14 @@ export const name2key = (str) => {
     .toLowerCase()
 }
 
-/*
-type(target|mutation1, mutation2)
-cases:
-"icon(lock)  fasdfa sdf link(Snow|blue)  dfsdfadf dsaf icon(foo|bar, red-600)"
-"icon(box) dfsdf"
-"dfsfsdf link(target)"
-*/
+/**
+ * Function to parse input string and return object
+ *
+ * @param {string} inputStr - Input string with tokens <type>(<target>|<mutation1>,<mutation2>)
+ * @example "icon(Dictionary) abc link(John Snow|blue) def icon(CompassNW|bar,red-600)"
+ * @example "icon(box) dfsdf"
+ * @example "dfsfsdf link(target)"
+ */
 export const getTokens = inputStr => {
   let str = inputStr.trim()
 

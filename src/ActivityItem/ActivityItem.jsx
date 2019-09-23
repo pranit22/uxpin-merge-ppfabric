@@ -8,6 +8,8 @@ import { getTokens } from '../_helpers/parser.jsx'
 class ActivityItem extends React.Component {
 
     render() {
+        console.log(getTokens("icon(Dictionary) abc link(John Snow|blue) def icon(CompassNW|bar,red-600)"));
+
         let params = {
             onClick: this.props.click,
             activityDescription: getTokens(this.props.description).mixed
@@ -23,6 +25,7 @@ class ActivityItem extends React.Component {
         )
     }
 }
+
 
 ActivityItem.propTypes = {
     click: PropTypes.func,
