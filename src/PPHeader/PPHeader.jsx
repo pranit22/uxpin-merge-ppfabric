@@ -7,7 +7,7 @@ import { ActionButton /*, css, classNamesFunction, IButtonProps, IStyle */ } fro
 import './index.scss';
 
 import logoSvg from './images/logo.svg';
-import Drawer from './Drawer/index.tsx'
+import Drawer from './Drawer/index.jsx'
 
 class PPHeader extends React.Component {
     constructor(props) {

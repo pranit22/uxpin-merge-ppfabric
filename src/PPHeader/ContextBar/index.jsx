@@ -6,7 +6,7 @@ import { Breadcrumb, IBreadcrumbItem, IDividerAsProps } from 'office-ui-fabric-r
 
 const theme = getTheme();
 
-class ContextBar extends Component<any> {
+class ContextBar extends Component {
   render() {
     return (
       <div className="ContextBarComponent"

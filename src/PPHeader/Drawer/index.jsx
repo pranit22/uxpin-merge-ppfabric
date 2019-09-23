@@ -9,12 +9,12 @@ import AnimateHeight from 'react-animate-height';
 import ContextBar from '../ContextBar/index'
 
 
-export default class Drawer extends Component<{
-  open: any,
-  onCloseClick: any
-}> {
-  state = {
-    grouped: false,
+export default class Drawer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      grouped: false,
+    }
   }
 
   onGroupedSwitch() {
@@ -65,7 +65,7 @@ export default class Drawer extends Component<{
           <div className="alphabetical">
             <section>
               {mockProducts
-                .reduce((col, elm) => col.concat(elm.list), [] as string[])
+                .reduce((col, elm) => col.concat(elm.list), [])
                 .sort()
                 .map(product => {
                   return (<Text className="product" key={product} variant={'small'} block>{product}</Text>)
@@ -99,7 +99,7 @@ export default class Drawer extends Component<{
     )
   }
 
-  onProductSwitchClick(type: string) {
+  onProductSwitchClick() {
     this.setState({ productsView: type })
   }
 
