@@ -1,11 +1,11 @@
 
 import React, { Component } from 'react'
-import mockProducts from '../mock/products'
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { Text } from 'office-ui-fabric-react/lib/Text';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import AnimateHeight from 'react-animate-height';
 
+import mockProducts from '../data/products'
 import ContextBar from '../ContextBar/index'
 
 
