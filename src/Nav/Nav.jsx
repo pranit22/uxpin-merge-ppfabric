@@ -32,10 +32,7 @@ class Nav extends React.Component {
 
     getLeftIcon(str) {
         let tokens = getTokens(str).tokens
-        if (!tokens) return null
-        if (!tokens.find(t => t.type === 'icon')) return null
-        if (tokens.find(t => t.type === 'icon').position.placement !== 'start') return null
-        return tokens.find(t => t.type === 'icon').target
+        return tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start').target
     }
 
     setItems(callback) {
