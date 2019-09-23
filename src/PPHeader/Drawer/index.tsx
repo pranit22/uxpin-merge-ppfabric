@@ -115,7 +115,9 @@ export default class Drawer extends Component<{
             {this.props.open === 'Products' ? this.renderProducts() : null}
             {this.props.open === 'Favorites' ? this.renderFavorites() : null}
           </AnimateHeight>
-          <ContextBar />
+          <ContextBar
+            productName={this.props.productName}
+            breadcrumbs={this.props.breadcrumbs} />
         </div >
       </div >
     )

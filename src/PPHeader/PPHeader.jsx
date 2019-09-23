@@ -7,7 +7,7 @@ import { ActionButton /*, css, classNamesFunction, IButtonProps, IStyle */ } fro
 import './index.scss';
 
 import logoSvg from './images/logo.svg';
-import Drawer from './Drawer/index'
+import Drawer from './Drawer/index.tsx'
 
 class PPHeader extends React.Component {
     constructor(props) {
@@ -18,9 +18,7 @@ class PPHeader extends React.Component {
     }
     onMenuClick(elm) {
         let text = elm.props.headerText
-        this.setState({ open: text === 'Dashboard' ? null : text }, () => {
-            if (text === 'Dashboard') this.props.history.push('/')
-        })
+        this.setState({ open: text === 'Dashboard' ? null : text })
     }
 
     onCloseClick() {
@@ -31,7 +29,10 @@ class PPHeader extends React.Component {
             <div className="PPHeaderComponent">
                 <Drawer
                     open={this.state.open}
-                    onCloseClick={this.onCloseClick.bind(this)} />
+                    onCloseClick={this.onCloseClick.bind(this)}
+                    productName={this.props.productName}
+                    breadcrumbs={this.props.breadcrumbs}
+                />
 
                 <div className="logo">
                     <img alt="Console logo" src={logoSvg}></img>

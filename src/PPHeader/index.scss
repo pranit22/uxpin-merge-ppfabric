@@ -1,11 +1,12 @@
 .PPHeaderComponent {
-  // z-index: 1;
-  // position: absolute;
+  z-index: 1;
+  position: relative;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   display: grid;
   grid-template-columns: 150px 1fr min-content 175px;
   height: 44px;
   width: 100%;
+  margin-bottom: 30px;
 
   .logo {
     margin: 10px 28px;
