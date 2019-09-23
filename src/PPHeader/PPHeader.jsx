@@ -7,14 +7,14 @@ import * as PropTypes from 'prop-types';
 class PPHeader extends React.Component {
     render() {
         return (
-            <div className="PPHeaderComponent"></div >
+            <div className="PPHeader"></div >
         )
     }
 }
 
 PPHeader.propTypes = {
     productName: PropTypes.string,
-    number: PropTypes.string,
+    breadcrumbs: PropTypes.string,
 };
 
 PPHeader.defaultProps = {

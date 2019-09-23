@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Facepile from '../PPHeader';
+import PPHeader from '../PPHeader';
 
 
 export default (
