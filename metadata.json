@@ -1013,6 +1013,60 @@
                 "name": "func",
                 "structure": {}
               }
+            },
+            {
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 7
+                }
+              },
+              "defaultValue": {
+                "value": "link(Tahlia) edited this file"
+              },
+              "description": "CSV list of disabled items Indexes",
+              "isRequired": false,
+              "name": "description",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Mail"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "icon",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Hello! I am making a comment and mentioning."
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "comments",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Just now"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "timeStamp",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
             }
           ],
           "wrappers": []
@@ -2136,6 +2190,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "4e4dfd8f0eafe250ba8e03cf56f6628488a2cf39"
+    "commitHash": "bb05fa482724ceebf6a2cc9a38726552b3230b53"
   }
 }

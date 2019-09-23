@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from 'office-ui-fabric-react';
-import { name2key, getTokens } from '../_helpers/parser.js'
+import { name2key, getTokens } from '../_helpers/parser.jsx'
 import parse from 'csv-parse'
 
 
@@ -31,10 +31,11 @@ class Nav extends React.Component {
     }
 
     getLeftIcon(str) {
-        if (!getTokens(str).tokens) return null
-        if (!getTokens(str).tokens.find(t => t.type === 'icon')) return null
-        if (getTokens(str).tokens.find(t => t.type === 'icon').position.label !== 'start') return null
-        return getTokens(str).tokens.find(t => t.type === 'icon').target
+        let tokens = getTokens(str).tokens
+        if (!tokens) return null
+        if (!tokens.find(t => t.type === 'icon')) return null
+        if (tokens.find(t => t.type === 'icon').position.placement !== 'start') return null
+        return tokens.find(t => t.type === 'icon').target
     }
 
     setItems(callback) {
@@ -42,7 +43,6 @@ class Nav extends React.Component {
             skip_empty_lines: true
         },
             (err, data) => {
-
                 this.setState({
                     links: data
                         .flat()
@@ -50,7 +50,7 @@ class Nav extends React.Component {
                             name: getTokens(val).text,
                             key: name2key(val),
                             disabled: this.state.disabledIndexes.includes(i + 1),
-                            icon: this.getLeftIcon(val)
+                            icon: null//  this.getLeftIcon(val)
                         }))
                 }, callback)
             })
