@@ -50,7 +50,7 @@ class Nav extends React.Component {
                             name: getTokens(val).text,
                             key: name2key(val),
                             disabled: this.state.disabledIndexes.includes(i + 1),
-                            icon: null//  this.getLeftIcon(val)
+                            icon: this.getLeftIcon(val)
                         }))
                 }, callback)
             })

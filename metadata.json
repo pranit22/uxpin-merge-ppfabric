@@ -1022,7 +1022,7 @@
                 }
               },
               "defaultValue": {
-                "value": "link(Tahlia) edited this file"
+                "value": "link(Tahlia) edited this file and link(John Snow)"
               },
               "description": "CSV list of disabled items Indexes",
               "isRequired": false,
@@ -2190,6 +2190,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "bb05fa482724ceebf6a2cc9a38726552b3230b53"
+    "commitHash": "9026b22e2f9a726d7125f3f386862cd7343f74aa"
   }
 }
