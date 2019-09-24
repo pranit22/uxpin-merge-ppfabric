@@ -47,6 +47,11 @@
       background-color: var(--color-grey-300);
     }
   }
+  .ms-Persona {
+    width: 20px;
+    display: inline-block;
+    margin: 10px 0;
+  }
 }
 
 @import "./Drawer/index.scss";

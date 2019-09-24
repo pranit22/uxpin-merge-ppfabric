@@ -23,7 +23,7 @@ class Persona extends React.Component {
         }
 
         return (
-            <FPersona {...persona}
+            <FPersona {...persona} {...this.props}
                 size={PersonaSize[this.props.size]}
                 presence={PersonaPresence[this.props.presence || null]}
                 initialsColor={PersonaInitialsColor[this.props.initialsColor || null]}

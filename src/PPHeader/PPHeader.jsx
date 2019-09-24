@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Pivot, PivotItem, TextField, Text, TooltipHost, ActionButton } from 'office-ui-fabric-react';
 // import { ActionButton /*, css, classNamesFunction, IButtonProps, IStyle */ } from 'office-ui-fabric-react';
 import './index.scss';
+import Persona from '../Persona/Persona'
 
 // import logoSvg from './images/logo.svg';
 import Drawer from './Drawer/index.jsx'
@@ -71,7 +72,7 @@ class PPHeader extends React.Component {
                         </ActionButton>
                     </TooltipHost>
                     <TooltipHost content="This is coming in the future">
-                        <div className="imagePlaceholder" />
+                        <Persona size="size24" presence="none" hidePersonaDetails />
                     </TooltipHost>
                 </div>
 
