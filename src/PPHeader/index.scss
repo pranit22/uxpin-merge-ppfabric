@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: 150px 1fr min-content 175px;
   height: 44px;
-  width: 100%;
+  min-width: 1200px;
   margin-bottom: 30px;
 
   .logo {
