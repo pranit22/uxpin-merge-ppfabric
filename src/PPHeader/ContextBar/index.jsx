@@ -25,9 +25,3 @@ class ContextBar extends Component {
 
 
 export default ContextBar;
-
-
-
-// <Text variant={'small'} style={{ color: theme.palette.themePrimary }}>Home</Text>
-//   <Icon iconName="ChevronRight" />
-//   <Text variant={'small'} >Current Page</Text>
