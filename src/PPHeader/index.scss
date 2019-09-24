@@ -10,7 +10,9 @@
 
   .logo {
     margin: 10px 28px;
-
+    .logoTitle {
+      color: var(--color-grey-700);
+    }
     .logoImg {
       display: inline-block;
       background: url(http://lofrev.net/wp-content/photos/2017/05/paypal_logo_2.png);
