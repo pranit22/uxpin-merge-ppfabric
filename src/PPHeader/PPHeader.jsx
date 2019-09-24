@@ -1,20 +1,28 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Pivot, PivotItem, TextField, Text, TooltipHost, ActionButton } from 'office-ui-fabric-react';
-// import { ActionButton /*, css, classNamesFunction, IButtonProps, IStyle */ } from 'office-ui-fabric-react';
+import parse from 'csv-parse'
+
 import './index.scss';
 import Persona from '../Persona/Persona'
-
-// import logoSvg from './images/logo.svg';
 import Drawer from './Drawer/index.jsx'
 
 class PPHeader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: null,  // null, 'Products', 'Favorites'
+            open: null,
+            breadcrumbs: []
         }
     }
+
+    componentDidMount() {
+        parse(this.props.breadcrumbs, { skip_empty_lines: true },
+            (err, data) => {
+                this.setState({ breadcrumbs: data.flat().map(v => v.trim()) })
+            })
+    }
+
     onMenuClick(elm) {
         let text = elm.props.headerText
         this.setState({ open: text === 'Dashboard' ? null : text })
@@ -30,7 +38,7 @@ class PPHeader extends React.Component {
                     open={this.state.open}
                     onCloseClick={this.onCloseClick.bind(this)}
                     productName={this.props.productName}
-                    breadcrumbs={this.props.breadcrumbs}
+                    breadcrumbs={this.state.breadcrumbs}
                 />
 
                 <div className="logo">
@@ -88,7 +96,7 @@ PPHeader.propTypes = {
 
 PPHeader.defaultProps = {
     productName: 'Kafka',
-    breadcrumbs: 'Kafka, Topics, Create Topic',
+    breadcrumbs: 'Topics, Create Topic',
 }
 
 export { PPHeader as default };
