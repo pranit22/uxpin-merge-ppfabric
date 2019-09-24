@@ -1,12 +1,10 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import { TextField } from 'office-ui-fabric-react/lib/TextField';
-import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
-import { ActionButton /*, css, classNamesFunction, IButtonProps, IStyle */ } from 'office-ui-fabric-react';
+import { Pivot, PivotItem, TextField, Text, TooltipHost, ActionButton } from 'office-ui-fabric-react';
+// import { ActionButton /*, css, classNamesFunction, IButtonProps, IStyle */ } from 'office-ui-fabric-react';
 import './index.scss';
 
-import logoSvg from './images/logo.svg';
+// import logoSvg from './images/logo.svg';
 import Drawer from './Drawer/index.jsx'
 
 class PPHeader extends React.Component {
@@ -35,7 +33,8 @@ class PPHeader extends React.Component {
                 />
 
                 <div className="logo">
-                    <img alt="Console logo" src={logoSvg}></img>
+                    <div className="logoImg"></div>
+                    <Text key="logo" variant='mediumPlus'>Console</Text>
                 </div>
 
                 <div className="menu ">
