@@ -35,7 +35,7 @@ class PPHeader extends React.Component {
 
                 <div className="logo">
                     <div className="logoImg"></div>
-                    <Text key="logo" variant='mediumPlus'>Console</Text>
+                    <Text key="logo" variant='large'>Console</Text>
                 </div>
 
                 <div className="menu ">

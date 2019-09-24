@@ -14,7 +14,7 @@
     .logoImg {
       display: inline-block;
       background: url(http://lofrev.net/wp-content/photos/2017/05/paypal_logo_2.png);
-      background-position: -15px;
+      background-position: -17px -9px;
       background-size: 55px auto;
       height: 25px;
       width: 30px;
@@ -22,7 +22,7 @@
 
     & > span {
       display: inline-block;
-      transform: translate(0, -5px);
+      transform: translate(0, -6px);
     }
   }
 
