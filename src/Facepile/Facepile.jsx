@@ -2,8 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Facepile as FFacepile, PersonaSize } from 'office-ui-fabric-react';
 import { facepilePersonas } from '@uifabric/example-data';
-// import parse from 'csv-parse'
-// import { name2key, getTokens } from '../_helpers/parser.js'
+
 
 
 class Facepile extends React.Component {

@@ -6,6 +6,76 @@
           "documentation": {
             "examples": [
               {
+                "code": "<PPHeader />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/PPHeader",
+            "documentation": {
+              "path": "src/PPHeader/PPHeader.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/PPHeader/PPHeader.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/PPHeader/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "PPHeader",
+          "presets": [
+            {
+              "elements": {
+                "ppheader1": {
+                  "name": "PPHeader",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "ppheader1"
+            }
+          ],
+          "properties": [
+            {
+              "defaultValue": {
+                "value": "Kafka"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "productName",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Kafka, Topics, Create Topic"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "breadcrumbs",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            }
+          ],
+          "wrappers": []
+        }
+      ],
+      "name": "PayPal"
+    },
+    {
+      "components": [
+        {
+          "documentation": {
+            "examples": [
+              {
                 "code": "<ActionButton text=\"foo\" iconName=\"Dictionary\"/>"
               }
             ]
@@ -971,6 +1041,110 @@
           "documentation": {
             "examples": [
               {
+                "code": "<ActivityItem />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/ActivityItem",
+            "documentation": {
+              "path": "src/ActivityItem/ActivityItem.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/ActivityItem/ActivityItem.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/ActivityItem/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "ActivityItem",
+          "presets": [
+            {
+              "elements": {
+                "activityitem1": {
+                  "name": "ActivityItem",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "activityitem1"
+            }
+          ],
+          "properties": [
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 7
+                }
+              },
+              "defaultValue": {
+                "value": "link(Tahlia) edited this file and link(John Snow)"
+              },
+              "description": "CSV list of disabled items Indexes",
+              "isRequired": false,
+              "name": "description",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Mail"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "icon",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Hello! I am making a comment and mentioning."
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "comments",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Just now"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "timeStamp",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            }
+          ],
+          "wrappers": []
+        },
+        {
+          "documentation": {
+            "examples": [
+              {
                 "code": "<DetailsList \n  uxpId=\"DetailsList1\"\n  columns={\n`Aa\nBb [color:red-600]\nCc [color:blue-600]`    \n  }\n  items={\n    `A-1  | B-1  | [icon:StatusErrorFull:red-600] C-1 \nA-2 | B-2 | C-2 [icon:SkypeCircleCheck:green-600]\nA-3 | B-3 | C-3 [icon:AlertSolid:orange-600]`\n  }\n  isResizable />"
               }
             ]
@@ -1231,12 +1405,6 @@
                       "name": "literal",
                       "structure": {
                         "value": "size100"
-                      }
-                    },
-                    {
-                      "name": "literal",
-                      "structure": {
-                        "value": "size120"
                       }
                     }
                   ]
@@ -2069,7 +2237,20 @@
               "rootId": "card1"
             }
           ],
-          "properties": [],
+          "properties": [
+            {
+              "defaultValue": {
+                "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis sed dolor et dapibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec vehicula eros tortor, sed sagittis dolor congue eu. Nunc suscipit porta sapien. In venenatis diam sed dolor mollis sodales. "
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "text",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            }
+          ],
           "wrappers": []
         }
       ],
@@ -2079,6 +2260,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "196fabf48a369dabfc92836eda2a8f4f24fbc316"
+    "commitHash": "8c69740dc0206a90276001a3169235f89520bb14"
   }
 }
