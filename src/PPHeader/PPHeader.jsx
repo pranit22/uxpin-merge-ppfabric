@@ -24,14 +24,21 @@ class PPHeader extends React.Component {
     }
 
     onMenuClick(elm) {
+        let index = parseInt(elm.key.replace('.', '')) + 1;
         let text = elm.props.headerText
-        this.setState({ open: text === 'Dashboard' ? null : text })
+        this.setState({ open: text === 'Dashboard' ? null : text }, () => {
+            if (this.props[`onMenu${index}Click`]) this.props[`onMenu${index}Click`]()
+        })
     }
 
     onCloseClick() {
         this.setState({ open: null })
     }
     render() {
+        let menuItems = ['Code Projects', 'Products', 'Favorites']
+        let selectedKey = null
+        if (menuItems[this.props.selectedIndex - 1] && this.props.selectedIndex !== '') selectedKey = menuItems[this.props.selectedIndex - 1]
+        if (this.state.open) selectedKey = this.state.open
         return (
             <div className="PPHeaderComponent">
                 <Drawer
@@ -47,10 +54,8 @@ class PPHeader extends React.Component {
                 </div>
 
                 <div className="menu ">
-                    <Pivot onLinkClick={this.onMenuClick.bind(this)} selectedKey={this.state.open}>
-                        <PivotItem headerText="Dashboard" itemKey='Dashboard'></PivotItem>
-                        <PivotItem headerText="Products" itemKey='Products'></PivotItem>
-                        <PivotItem headerText="Favorites" itemKey='Favorites'></PivotItem>
+                    <Pivot onLinkClick={this.onMenuClick.bind(this)} selectedKey={selectedKey}>
+                        {menuItems.map(item => <PivotItem headerText={item} itemKey={item}></PivotItem>)}
                     </Pivot>
                 </div>
 
@@ -92,11 +97,24 @@ class PPHeader extends React.Component {
 PPHeader.propTypes = {
     productName: PropTypes.string,
     breadcrumbs: PropTypes.string,
+
+    /** Which element number should be selected from 1 to n */
+    selectedIndex: PropTypes.number,
+
+    /** @uxpinpropname Menu 1 click */
+    onMenu1Click: PropTypes.func,
+
+    /** @uxpinpropname Menu 2 click */
+    onMenu2Click: PropTypes.func,
+
+    /** @uxpinpropname Menu 3 click */
+    onMenu3Click: PropTypes.func,
 };
 
 PPHeader.defaultProps = {
     productName: 'Kafka',
     breadcrumbs: 'Topics, Create Topic',
+    selectedIndex: 1
 }
 
 export { PPHeader as default };
