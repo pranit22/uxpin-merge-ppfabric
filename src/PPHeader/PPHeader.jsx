@@ -1,11 +1,16 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Pivot, PivotItem, TextField, Text, TooltipHost, ActionButton } from 'office-ui-fabric-react';
+import { mergeStyles } from '@uifabric/merge-styles';
 import parse from 'csv-parse'
 
+
 import './index.scss';
+import { UtilitiesBarStyles } from './styles.ts'
 import Persona from '../Persona/Persona'
 import Drawer from './Drawer/index.jsx'
+
+
 
 class PPHeader extends React.Component {
     constructor(props) {
@@ -55,7 +60,7 @@ class PPHeader extends React.Component {
 
                 <div className="menu ">
                     <Pivot onLinkClick={this.onMenuClick.bind(this)} selectedKey={selectedKey}>
-                        {menuItems.map(item => <PivotItem headerText={item} itemKey={item}></PivotItem>)}
+                        {menuItems.map(item => <PivotItem headerText={item} key={item} itemKey={item}></PivotItem>)}
                     </Pivot>
                 </div>
 
@@ -65,15 +70,18 @@ class PPHeader extends React.Component {
                     </TooltipHost>
                 </div>
 
-                <div className="bar">
-                    <ActionButton onClick={() => { this.props.onTool1Click() }}
+                <div className="bar" style={UtilitiesBarStyles}>
+                    <ActionButton
+                        onClick={() => { this.props.onTool1Click() }}
                         iconProps={{ iconName: 'Ringer' }} >
                     </ActionButton>
-                    <ActionButton onClick={() => { this.props.onTool2Click() }}
+                    <ActionButton
+                        onClick={() => { this.props.onTool2Click() }}
                         iconProps={{ iconName: 'EmojiNeutral' }}>
                     </ActionButton>
-                    <ActionButton onClick={() => { this.props.onTool3Click() }}
-                        iconProps={{ iconName: 'Help' }} >
+                    <ActionButton
+                        onClick={() => { this.props.onTool3Click() }}
+                        iconProps={{ iconName: 'Unknown' }} >
                     </ActionButton>
                     <Persona onClick={() => { this.props.onPersonaClick() }}
                         size="size24" presence="none" hidePersonaDetails />
