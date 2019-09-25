@@ -65,9 +65,7 @@ class PPHeader extends React.Component {
                 </div>
 
                 <div className="search">
-                    <TooltipHost content="This is coming in the future">
-                        <TextField placeholder="Do it all..." disabled />
-                    </TooltipHost>
+                    <TextField placeholder="Do it all..." iconProps={{ iconName: 'Search' }} />
                 </div>
 
                 <div className="bar" style={UtilitiesBarStyles}>
