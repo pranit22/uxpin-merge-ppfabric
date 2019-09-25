@@ -13,11 +13,14 @@
   .context {
     display: grid;
     grid-template-columns: min-content 1fr min-content;
+    width: calc(100% + 110px);
 
     .product {
       margin: 17px 28px;
       color: white;
+      font-weight: 600;
     }
+
     .ms-Breadcrumb {
       width: min-content;
       .ms-Breadcrumb-listItem {
@@ -33,6 +36,9 @@
     }
     .documentation {
       justify-self: right;
+      display: grid;
+      grid-template-columns: 1fr min-content;
+      align-items: center;
     }
   }
 }
