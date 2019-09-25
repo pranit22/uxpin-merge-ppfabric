@@ -65,28 +65,18 @@ class PPHeader extends React.Component {
                     </TooltipHost>
                 </div>
 
-                <div className="bar disabled">
-                    <TooltipHost content="This is coming in the future">
-                        <ActionButton
-                            iconProps={{ iconName: 'Ringer' }}
-                            disabled={true} >
-                        </ActionButton>
-                    </TooltipHost>
-                    <TooltipHost content="This is coming in the future">
-                        <ActionButton
-                            iconProps={{ iconName: 'EmojiNeutral' }}
-                            disabled={true} >
-                        </ActionButton>
-                    </TooltipHost>
-                    <TooltipHost content="This is coming in the future">
-                        <ActionButton
-                            iconProps={{ iconName: 'Help' }}
-                            disabled={true} >
-                        </ActionButton>
-                    </TooltipHost>
-                    <TooltipHost content="This is coming in the future">
-                        <Persona size="size24" presence="none" hidePersonaDetails />
-                    </TooltipHost>
+                <div className="bar">
+                    <ActionButton onClick={() => { this.props.onTool1Click() }}
+                        iconProps={{ iconName: 'Ringer' }} >
+                    </ActionButton>
+                    <ActionButton onClick={() => { this.props.onTool2Click() }}
+                        iconProps={{ iconName: 'EmojiNeutral' }}>
+                    </ActionButton>
+                    <ActionButton onClick={() => { this.props.onTool3Click() }}
+                        iconProps={{ iconName: 'Help' }} >
+                    </ActionButton>
+                    <Persona onClick={() => { this.props.onPersonaClick() }}
+                        size="size24" presence="none" hidePersonaDetails />
                 </div>
 
             </div >
@@ -109,6 +99,18 @@ PPHeader.propTypes = {
 
     /** @uxpinpropname Menu 3 click */
     onMenu3Click: PropTypes.func,
+
+    /** @uxpinpropname Tool 1 click */
+    onTool1Click: PropTypes.func,
+
+    /** @uxpinpropname Tool 2 click */
+    onTool2Click: PropTypes.func,
+
+    /** @uxpinpropname Tool 3 click */
+    onTool3Click: PropTypes.func,
+
+    /** @uxpinpropname Persona click */
+    onPersonaClick: PropTypes.func,
 };
 
 PPHeader.defaultProps = {
