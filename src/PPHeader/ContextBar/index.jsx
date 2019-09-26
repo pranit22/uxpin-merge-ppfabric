@@ -11,7 +11,7 @@ class ContextBar extends Component {
     return (
       <div className="ContextBarComponent">
         <div className="context">
-          <Text className="product" variant={'medium'} >{this.props.productName}</Text>
+          <Text className="product" variant={'medium'} nowrap>{this.props.productName}</Text>
           <Breadcrumb className="breadCrumb" items={items} />
           <div className="documentation">
             <Icon style={{
@@ -21,7 +21,9 @@ class ContextBar extends Component {
             <Text style={{
               color: 'white',
               marginRight: 20
-            }} variant="smallPlus">Documentation</Text>
+            }} variant="smallPlus" onClick={() => {
+              this.props.onDocumentationClick()
+            }}>Documentation</Text>
           </div>
         </div>
       </div>
