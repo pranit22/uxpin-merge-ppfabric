@@ -1,6 +1,6 @@
-# PrimaryButton
+# Button
   
 ```jsx
-<PrimaryButton text="Primary Button" />
+<Button text="Primary Button" />
 ```
   

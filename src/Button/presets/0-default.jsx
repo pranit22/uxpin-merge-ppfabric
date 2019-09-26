@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PrimaryButton from '../PrimaryButton';
+import Button from '../Button';
 
 export default (
-  <PrimaryButton uxpId="button1" text="Primary Button" />
+  <Button uxpId="button1" text="Button Name" />
 );

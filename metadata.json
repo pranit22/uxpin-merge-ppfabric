@@ -42,7 +42,7 @@
           "properties": [
             {
               "defaultValue": {
-                "value": "Kafka"
+                "value": "Product name"
               },
               "description": "",
               "isRequired": false,
@@ -54,13 +54,105 @@
             },
             {
               "defaultValue": {
-                "value": "Kafka, Topics, Create Topic"
+                "value": "Topics, Create Topic"
               },
               "description": "",
               "isRequired": false,
               "name": "breadcrumbs",
               "type": {
                 "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 1
+              },
+              "description": "Which element number should be selected from 1 to n",
+              "isRequired": false,
+              "name": "selectedIndex",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Menu 1 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onMenu1Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Menu 2 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onMenu2Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Menu 3 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onMenu3Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Tool 1 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onTool1Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Tool 2 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onTool2Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Tool 3 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onTool3Click",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Persona click",
+              "description": "",
+              "isRequired": false,
+              "name": "onPersonaClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Documentation click",
+              "description": "",
+              "isRequired": false,
+              "name": "onDocumentationClick",
+              "type": {
+                "name": "func",
                 "structure": {}
               }
             }
@@ -707,37 +799,49 @@
             ]
           },
           "info": {
-            "dirPath": "src/PrimaryButton",
+            "dirPath": "src/Button",
             "documentation": {
-              "path": "src/PrimaryButton/PrimaryButton.md"
+              "path": "src/Button/Button.md"
             },
             "implementation": {
               "framework": "reactjs",
               "lang": "javascript",
-              "path": "src/PrimaryButton/PrimaryButton.jsx"
+              "path": "src/Button/Button.jsx"
             },
             "presets": [
               {
-                "path": "src/PrimaryButton/presets/0-default.jsx"
+                "path": "src/Button/presets/0-default.jsx"
               }
             ]
           },
-          "name": "PrimaryButton",
+          "name": "Button",
           "presets": [
             {
               "elements": {
-                "primarybutton1": {
-                  "name": "PrimaryButton",
+                "button1": {
+                  "name": "Button",
                   "props": {
-                    "text": "Primary Button"
+                    "text": "Button"
                   }
                 }
               },
               "name": "default",
-              "rootId": "primarybutton1"
+              "rootId": "button1"
             }
           ],
           "properties": [
+            {
+              "defaultValue": {
+                "value": true
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "primary",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
             {
               "defaultValue": {
                 "value": false
@@ -773,7 +877,7 @@
             },
             {
               "defaultValue": {
-                "value": ""
+                "value": "Button Name"
               },
               "description": "",
               "isRequired": false,
@@ -2260,6 +2364,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "8c69740dc0206a90276001a3169235f89520bb14"
+    "commitHash": "913663de252ff527220be33be01345971d72ae39"
   }
 }
