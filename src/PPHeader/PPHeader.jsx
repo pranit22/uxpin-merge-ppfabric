@@ -6,7 +6,6 @@ import parse from 'csv-parse'
 
 
 import './index.scss';
-import { UtilitiesBarStyles } from './styles.ts'
 import Persona from '../Persona/Persona'
 import Drawer from './Drawer/index.jsx'
 
@@ -69,7 +68,7 @@ class PPHeader extends React.Component {
                     <TextField placeholder="Do it all..." iconProps={{ iconName: 'Search' }} />
                 </div>
 
-                <div className="bar" style={UtilitiesBarStyles}>
+                <div className="bar">
                     <ActionButton
                         onClick={() => { this.props.onTool1Click() }}
                         iconProps={{ iconName: 'Ringer' }} >

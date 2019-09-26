@@ -34,25 +34,20 @@
   }
 
   .bar {
+    display: grid;
+    grid-template-columns: repeat(4, min-content);
+    align-items: center;
+    margin-top: -3px;
+
     i {
       font-size: 18px;
       padding: 5px;
-      margin: 10px 3px;
     }
-
-    .imagePlaceholder {
+    .ms-Persona {
+      width: 20px;
       display: inline-block;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      margin-top: 12px;
-      background-color: var(--color-grey-300);
+      // margin: 8px 0;
     }
-  }
-  .ms-Persona {
-    width: 20px;
-    display: inline-block;
-    margin: 8px 0;
   }
 }
 
