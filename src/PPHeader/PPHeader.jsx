@@ -53,7 +53,7 @@ class PPHeader extends React.Component {
                     onDocumentationClick={this.props.onDocumentationClick}
                 />
 
-                <div className="logo">
+                <div className="logo" onClick={this.props.onLogoClick}>
                     <div className="logoImg"></div>
                     <Text key="logo" className="logoTitle" variant='large'>Console</Text>
                 </div>
@@ -96,6 +96,9 @@ PPHeader.propTypes = {
 
     /** Which element number should be selected from 1 to n */
     selectedIndex: PropTypes.number,
+
+    /** @uxpinpropname Logo click */
+    onLogoClick: PropTypes.func,
 
     /** @uxpinpropname Menu 1 click */
     onMenu1Click: PropTypes.func,
