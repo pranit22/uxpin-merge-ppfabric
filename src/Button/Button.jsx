@@ -1,7 +1,6 @@
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { mergeStyles, mergeStyleSets } from '@uifabric/merge-styles';
-import './index.scss'
 import { PrimaryButton as FPrimaryButton, DefaultButton as FDefaultButton, IButtonStyles } from 'office-ui-fabric-react';
 
 
@@ -15,19 +14,23 @@ class Button extends React.Component {
 
   render() {
     let iconProps = { iconName: this.props.iconName }
-    let buttonClass = 'button' + (this.props.rounded ? ' rounded' : '')
+    let styles = {
+      root: {
+        borderRadius: this.props.rounded ? 100 : 0
+      }
+    }
     return (
       <>
         {this.props.primary ?
           <FPrimaryButton  {...this.props}
             onClick={this.props.onClick}
             iconProps={iconProps}
-            className={buttonClass} />
+            styles={styles} />
           :
           <FDefaultButton {...this.props}
             onClick={this.props.onClick}
             iconProps={iconProps}
-            className={buttonClass} />
+            styles={styles} />
         }
       </>
 

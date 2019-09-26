@@ -38,6 +38,12 @@ module.exports = {
         ]
       },
       {
+        name: 'Notification & Engagement',
+        include: [
+          'src/Coachmark/Coachmark.jsx',
+        ]
+      },
+      {
         name: 'Experimental',
         include: [
           'src/Card/Card.jsx',

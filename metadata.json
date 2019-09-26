@@ -77,6 +77,16 @@
               }
             },
             {
+              "customName": "Logo click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLogoClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
               "customName": "Menu 1 click",
               "description": "",
               "isRequired": false,
@@ -794,7 +804,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<PrimaryButton text=\"Primary Button\" />"
+                "code": "<Button text=\"Primary Button\" />"
               }
             ]
           },
@@ -821,7 +831,7 @@
                 "button1": {
                   "name": "Button",
                   "props": {
-                    "text": "Button"
+                    "text": "Button Name"
                   }
                 }
               },
@@ -830,6 +840,18 @@
             }
           ],
           "properties": [
+            {
+              "defaultValue": {
+                "value": "Button Name"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "text",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
             {
               "defaultValue": {
                 "value": true
@@ -877,13 +899,22 @@
             },
             {
               "defaultValue": {
-                "value": "Button Name"
+                "value": false
               },
               "description": "",
               "isRequired": false,
-              "name": "text",
+              "name": "rounded",
               "type": {
-                "name": "string",
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "onClick",
+              "type": {
+                "name": "func",
                 "structure": {}
               }
             }
@@ -2308,6 +2339,61 @@
           "documentation": {
             "examples": [
               {
+                "code": "<Coachmark />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/Coachmark",
+            "documentation": {
+              "path": "src/Coachmark/Coachmark.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/Coachmark/Coachmark.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/Coachmark/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "Coachmark",
+          "presets": [
+            {
+              "elements": {
+                "Coachmark1": {
+                  "name": "Coachmark",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "Coachmark1"
+            }
+          ],
+          "properties": [
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "children",
+              "type": {
+                "name": "node",
+                "structure": {}
+              }
+            }
+          ],
+          "wrappers": []
+        }
+      ],
+      "name": "Notification & Engagement"
+    },
+    {
+      "components": [
+        {
+          "documentation": {
+            "examples": [
+              {
                 "code": "<Card />"
               }
             ]
@@ -2364,6 +2450,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "913663de252ff527220be33be01345971d72ae39"
+    "commitHash": "f5a6b387155ec8935bbb778dc55973817e61093c"
   }
 }
