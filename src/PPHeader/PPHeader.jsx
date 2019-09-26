@@ -124,7 +124,7 @@ PPHeader.propTypes = {
 };
 
 PPHeader.defaultProps = {
-    productName: 'Kafka fdfs',
+    productName: 'Product name',
     breadcrumbs: 'Topics, Create Topic',
     selectedIndex: 1
 }
