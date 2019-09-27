@@ -36,7 +36,6 @@ class Coachmark extends React.Component {
                     <FCoachmark
                         target={this._targetElm.current}
                         positioningContainerProps={{
-
                             doNotLayer: false
                         }}>
                         <TeachingBubbleContent
@@ -47,12 +46,14 @@ class Coachmark extends React.Component {
                                 children: this.props.primaryButtonLabel,
                                 onClick: () => {
                                     if (this.props.primaryButtonClick) this.props.primaryButtonClick()
+                                    this.setState({ open: false })
                                 }
                             }}
                             secondaryButtonProps={{
                                 children: this.props.secondaryButtonLabel,
                                 onClick: () => {
                                     if (this.props.secondaryButtonClick) this.props.secondaryButtonClick()
+                                    this.setState({ open: false })
                                 }
                             }}
                             onDismiss={() => {
