@@ -39,7 +39,7 @@ class Coachmark extends React.Component {
                             doNotLayer: false
                         }}>
                         <TeachingBubbleContent
-                            headline="Example Title"
+                            headline={this.props.title}
                             hasCloseIcon={true}
                             closeButtonAriaLabel="Close"
                             primaryButtonProps={{
@@ -74,6 +74,7 @@ class Coachmark extends React.Component {
 Coachmark.propTypes = {
     open: PropTypes.bool,
     text: PropTypes.string,
+    title: PropTypes.string,
     primaryButtonLabel: PropTypes.string,
     secondaryButtonLabel: PropTypes.string,
 
@@ -86,6 +87,7 @@ Coachmark.propTypes = {
 
 Coachmark.defaultProps = {
     open: true,
+    title: "Example Title",
     text: 'Welcome to the land of Coachmarks!',
     primaryButtonLabel: 'Try it',
     secondaryButtonLabel: 'Try it again'
