@@ -1,58 +1,94 @@
 import * as React from 'react';
 import { Coachmark as FCoachmark, TeachingBubbleContent, DirectionalHint } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
-import './index.scss';
+
+
 
 class Coachmark extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: this.props.open || false
+            open: false
         }
         this._targetElm = React.createRef();
     }
+
+    componentDidMount() {
+        if (this.props.open) this.setState({ open: true })
+    }
+
     render() {
-        let option = { key: 'A', text: 'Top Left Edge', data: DirectionalHint.topRightEdge }
         return (
-            <div className="CoachmarkComponent" >
+            <>
                 <div
                     className="trigger"
                     onClick={() => { this.setState({ open: !this.state.open }) }}
-                    ref={this._targetElm} />
-                <FCoachmark
-                    target={this._targetElm.current}
-                    positioningContainerProps={{
-                        directionalHint: {
-                            coachmarkPosition: option.data,
-                            dropdownSelectedOptionKey: option.key
-                        },
-                        // doNotLayer: false
-                    }}>
-                    <TeachingBubbleContent
-                        headline="Example Title"
-                        hasCloseIcon={true}
-                        closeButtonAriaLabel="Close"
-                        primaryButtonProps={{ text: 'Try it' }}
-                        secondaryButtonProps={{ text: 'Try it again' }}
-                        onDismiss={this.props.dismiss}
-                        ariaDescribedBy={'example-description1'}
-                        ariaLabelledBy={'example-label1'} >
-                        Welcome to the land of Coachmarks!
-                    </TeachingBubbleContent>
-                </FCoachmark>
-            </div >
+                    ref={this._targetElm}
+                    style={{
+                        width: 10,
+                        height: 10,
+                        background: 'var(--color-blue-100)',
+                        borderRadius: 10,
+                        cursor: 'pointer'
+                    }} />
+
+                {this.state.open && (
+                    <FCoachmark
+                        target={this._targetElm.current}
+                        positioningContainerProps={{
+
+                            doNotLayer: false
+                        }}>
+                        <TeachingBubbleContent
+                            headline="Example Title"
+                            hasCloseIcon={true}
+                            closeButtonAriaLabel="Close"
+                            primaryButtonProps={{
+                                children: this.props.primaryButtonLabel,
+                                onClick: () => {
+                                    if (this.props.primaryButtonClick) this.props.primaryButtonClick()
+                                }
+                            }}
+                            secondaryButtonProps={{
+                                children: this.props.secondaryButtonLabel,
+                                onClick: () => {
+                                    if (this.props.secondaryButtonClick) this.props.secondaryButtonClick()
+                                }
+                            }}
+                            onDismiss={() => {
+                                this.setState({ open: false })
+                                if (this.props.dismiss) this.props.dismiss()
+                            }}
+                            ariaDescribedBy={'example-description1'}
+                            ariaLabelledBy={'example-label1'} >
+                            {this.props.text}
+                        </TeachingBubbleContent>
+                    </FCoachmark>
+                )}
+            </>
         );
     }
 }
 
 Coachmark.propTypes = {
     open: PropTypes.bool,
+    text: PropTypes.string,
+    primaryButtonLabel: PropTypes.string,
+    secondaryButtonLabel: PropTypes.string,
+
     dismiss: PropTypes.func,
+    primaryButtonClick: PropTypes.func,
+    secondaryButtonClick: PropTypes.func,
+
 
 };
 
 Coachmark.defaultProps = {
-    open: true
+    open: true,
+    text: 'Welcome to the land of Coachmarks!',
+    primaryButtonLabel: 'Try it',
+    secondaryButtonLabel: 'Try it again'
+
 }
 
 export { Coachmark as default };
