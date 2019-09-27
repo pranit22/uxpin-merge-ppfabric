@@ -15,7 +15,7 @@ module.exports = {
           'src/ChoiceGroup/ChoiceGroup.jsx',
           'src/ComboBox/ComboBox.jsx',
           'src/Dropdown/Dropdown.jsx',
-          'src/PrimaryButton/PrimaryButton.jsx',
+          'src/Button/Button.jsx',
           'src/TextField/TextField.jsx',
           'src/Toggle/Toggle.jsx',
         ]
@@ -35,6 +35,12 @@ module.exports = {
           'src/Breadcrumb/Breadcrumb.jsx',
           'src/Nav/Nav.jsx',
           'src/Pivot/Pivot.jsx',
+        ]
+      },
+      {
+        name: 'Notification & Engagement',
+        include: [
+          'src/Coachmark/Coachmark.jsx',
         ]
       },
       {
