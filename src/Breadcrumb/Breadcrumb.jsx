@@ -1,6 +1,7 @@
 import { Breadcrumb as FBreadcrumb, FontSizes } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
+import "./index.scss";
 
 function Breadcrumb(props) {
   return (
