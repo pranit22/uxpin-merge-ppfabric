@@ -4,7 +4,7 @@ import * as React from 'react';
 
 function Breadcrumb(props) {
   return (
-    <FBreadcrumb items={props.crumbs.split(',').map(text => ({text}))} styles={{
+    <FBreadcrumb className="BreadcrumbComponent" items={props.crumbs.split(',').map(text => ({text}))} styles={{
       itemLink : {
         fontSize: FontSizes.medium
       },
