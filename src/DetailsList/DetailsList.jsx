@@ -24,12 +24,13 @@ class DetailsList extends React.Component {
 
     this.state = {
       columns: [],
-      items: []
+      rows: []
     }
   }
 
   componentDidMount() {
-    this.setColumns()
+    this.setColumns(this.setRows)
+
   }
 
   setColumns(callback) {
@@ -41,7 +42,7 @@ class DetailsList extends React.Component {
           columns: data
             .flat()
             .map((columnName, i) => {
-              console.log(columnName);
+              columnName = columnName.trim()
               return {
                 key: columnName,
                 name: columnName,
@@ -55,6 +56,27 @@ class DetailsList extends React.Component {
               }
             })
         }, callback)
+      })
+  }
+
+  setRows(callback) {
+    parse(this.props.items, {
+      skip_empty_lines: true
+    },
+      (err, data) => {
+        let rows = []
+
+        data.forEach((row, rowIndex) => {
+          let r = {
+            key: rowIndex,
+          }
+          this.state.columns.forEach((column, colInd) => {
+            r[column.fieldName] = row[colInd].trim()
+          })
+          rows.push(r)
+        })
+
+        this.setState({ rows }, callback)
       })
   }
 
@@ -137,7 +159,7 @@ class DetailsList extends React.Component {
     return (
       <FDetailsList {...this.props}
         columns={this.state.columns}
-        items={this.state.items}
+        items={this.state.rows}
         selectionMode={this.props.selectable ? SelectionMode.multiple : SelectionMode.none}
         onRenderRow={(props, defaultRender) => (
           <>
