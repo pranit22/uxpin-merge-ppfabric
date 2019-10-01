@@ -4,31 +4,34 @@ import * as React from 'react';
 import { mergeStyles } from '@uifabric/merge-styles';
 
 
-
-function Breadcrumb(props) {
-  let breadcrumbClasses = mergeStyles({
-    marginTop: -5,
-    marginBottom: -10,
-    display: 'inline - block',
-    width: 'min-content',
-    height: 'min-content',
-    selectors: {
-      '& .ms-Breadcrumb-item': {
-        fontSize: FontSizes[props.fontSize],
-      },
-      '& .ms-Breadcrumb-list': {
-        height: 31,
-        padding: '15px 0px 20px 0px',
-        verticalAlign: 'middle'
+class Breadcrumb extends React.Component {
+  getBreadcrumbClasses() {
+    return mergeStyles({
+      marginTop: -5,
+      marginBottom: -10,
+      display: 'inline - block',
+      width: 'min-content',
+      height: 'min-content',
+      selectors: {
+        '& .ms-Breadcrumb-item': {
+          fontSize: FontSizes[this.props.fontSize],
+        },
+        '& .ms-Breadcrumb-list': {
+          height: 31,
+          padding: '15px 0px 20px 0px',
+          verticalAlign: 'middle'
+        }
       }
-    }
-  })
+    })
+  }
 
-  return (
-    <FBreadcrumb className="BreadcrumbComponent"
-      items={props.crumbs.split(',').map(text => ({ text }))}
-      className={breadcrumbClasses} {...props} />
-  );
+  render() {
+    return (
+      <FBreadcrumb className="BreadcrumbComponent"
+        items={this.props.crumbs.split(',').map(text => ({ text }))}
+        className={this.getBreadcrumbClasses()} {...this.props} />
+    );
+  }
 }
 
 Breadcrumb.propTypes = {
