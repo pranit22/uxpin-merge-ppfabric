@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, ActionButton } from 'office-ui-fabric-react';
+import { Link, ActionButton, merge } from 'office-ui-fabric-react';
 import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 
 export const name2key = (str) => {
@@ -46,6 +46,11 @@ export const getTokens = inputStr => {
   }
 
   const getSuggestions = token => {
+    let mutatorsArray = getMutators(token.tokenString)
+    let colorMutator = null
+    if (mutatorsArray && mutatorsArray.filter(m => m.indexOf('color') !== -1)) {
+      colorMutator = mutatorsArray.filter(m => m.indexOf('color') !== -1)[0]
+    }
     let suggestions = []
     if (token.type === 'link') suggestions.push(() => <Link key={Math.random()}>{token.target}</Link>)
     if (token.type === 'icon') suggestions.push(() => <ActionButton key={Math.random()} style={{
@@ -53,7 +58,15 @@ export const getTokens = inputStr => {
       width: 26,
       padding: 0,
       margin: 0,
-    }} iconProps={{ iconName: token.target }} />)
+    }}
+      className={mergeStyles({
+        selectors: {
+          '& i': {
+            color: colorMutator ? `var(--${colorMutator})` : 'var(--color-grey-600)'
+          }
+        }
+      })}
+      iconProps={{ iconName: token.target }} />)
 
     // if (token.type === 'icon') suggestions.push(() => <FontIcon key={Math.random()} iconName={token.target} />)
     return suggestions
