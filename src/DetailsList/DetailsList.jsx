@@ -9,19 +9,10 @@ import { name2key, getTokens } from '../_helpers/parser.jsx'
 
 
 
-const classNames = mergeStyleSets({
-  headerCell: {
-    background: 'var(--color-grey-300)',
-    selectors: {
-      '& .ms-Button': {
-        transform: 'translateY(14px)',
-      }
-    }
-  },
-  links: {
-    color: 'var(--color-blue-600)'
-  }
-});
+const linkClasses = mergeStyles({
+  color: 'var(--color-blue-600)'
+})
+
 
 
 class DetailsList extends React.Component {
@@ -30,13 +21,31 @@ class DetailsList extends React.Component {
 
     this.state = {
       columns: [],
-      rows: []
+      rows: [],
+      alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
+      alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : []
     }
   }
 
   componentDidMount() {
     this.setColumns(this.setRows)
 
+  }
+
+  getColumnClasses(colIndex) {
+    let alignHeaderLabels = {}
+    if (this.state.alignCenter.includes(colIndex + 1)) alignHeaderLabels = { margin: '0 auto' }
+    if (this.state.alignRight.includes(colIndex + 1)) alignHeaderLabels = { margin: '0 0 0 auto' }
+
+    return mergeStyles({
+      background: 'var(--color-grey-300)',
+      selectors: {
+        '& .ms-Button': {
+          transform: 'translateY(14px)',
+        },
+        '& .ms-DetailsHeader-cellName': alignHeaderLabels
+      }
+    })
   }
 
   setColumns(callback) {
@@ -47,7 +56,7 @@ class DetailsList extends React.Component {
         this.setState({
           columns: data
             .flat()
-            .map((columnName, i) => {
+            .map((columnName, colIndex) => {
               columnName = columnName.trim()
 
               let name = getTokens(columnName).mixed ? getTokens(columnName).mixed
@@ -57,8 +66,7 @@ class DetailsList extends React.Component {
                 :
                 getTokens(columnName).text
 
-
-              return {
+              const columnParams = {
                 key: columnName,
                 name,
                 fieldName: columnName,
@@ -66,9 +74,22 @@ class DetailsList extends React.Component {
                 minWidth: this.props.minWidth,
                 maxWidth: this.props.maxWidth,
                 onColumnClick: () => columnName,
-                headerClassName: classNames.headerCell,
-                // className: this.tokenToSymbol(token)
+                headerClassName: this.getColumnClasses(colIndex)
               }
+
+              if (this.state.alignRight.includes(colIndex + 1)) {
+                columnParams.className = mergeStyles({
+                  textAlign: 'right',
+                })
+              }
+
+              if (this.state.alignCenter.includes(colIndex + 1)) {
+                columnParams.className = mergeStyles({
+                  textAlign: 'center',
+                })
+              }
+
+              return columnParams
             })
         }, callback)
       })
@@ -103,10 +124,11 @@ class DetailsList extends React.Component {
       })
   }
 
+
+
   render() {
     return (
       <FDetailsList {...this.props}
-
         columns={this.state.columns}
         items={this.state.rows}
         selectionMode={this.props.selectable ? SelectionMode.multiple : SelectionMode.none}
@@ -115,8 +137,7 @@ class DetailsList extends React.Component {
             {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
           </>
         )}
-        isHeaderVisible={this.props.header === "show"}>
-      </FDetailsList>
+        isHeaderVisible={this.props.header === "show"} />
     );
   }
 }
@@ -139,6 +160,12 @@ DetailsList.propTypes = {
    * @uxpincontroltype codeeditor
    * */
   items: PropTypes.string,
+
+  /** Align Right Columns indexes, <2,3>  */
+  alignRihtIndexes: PropTypes.string,
+
+  /** Align Center Columns indexes, <2,3>  */
+  alignCenterIndexes: PropTypes.string,
 
   /** Defines if rows might be selected with checkmark on the left hand side  */
   selectable: PropTypes.bool,
@@ -166,7 +193,10 @@ DetailsList.defaultProps = {
   isResizable: true,
   minWidth: 100,
   maxWidth: 200,
-  header: "show"
+  header: "show",
+  alignRight: "1,2",
+  alignCenter: "3"
+
 };
 
 export { DetailsList as default };
