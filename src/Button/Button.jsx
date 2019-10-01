@@ -12,12 +12,16 @@ class Button extends React.Component {
     }
   }
 
+
   render() {
     let iconProps = { iconName: this.props.iconName }
     let styles = {
       root: {
         borderRadius: this.props.rounded ? 100 : 0
-      }
+      },
+    }
+    if (this.props.iconPosition === "end") styles.flexContainer = {
+      flexDirection: 'row-reverse'
     }
     return (
       <>
@@ -30,7 +34,8 @@ class Button extends React.Component {
           <FDefaultButton {...this.props}
             onClick={this.props.onClick}
             iconProps={iconProps}
-            styles={styles} />
+            styles={styles}
+          />
         }
       </>
 
@@ -45,6 +50,7 @@ Button.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   iconName: PropTypes.string,
+  iconPosition: PropTypes.oneOf(['start', 'end']),
   rounded: PropTypes.bool,
   onClick: PropTypes.func,
 };
@@ -54,7 +60,9 @@ Button.defaultProps = {
   primary: true,
   checked: false,
   disabled: false,
-  rounded: false
+  rounded: false,
+  // iconName: 'Dictionary',
+  // iconPosition: 'end'
 };
 
 export { Button as default };
