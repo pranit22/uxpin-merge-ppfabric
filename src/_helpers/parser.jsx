@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Link, FontIcon } from 'office-ui-fabric-react';
+import { Link, ActionButton } from 'office-ui-fabric-react';
+import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 
 export const name2key = (str) => {
   return str
@@ -47,7 +48,14 @@ export const getTokens = inputStr => {
   const getSuggestions = token => {
     let suggestions = []
     if (token.type === 'link') suggestions.push(() => <Link key={Math.random()}>{token.target}</Link>)
-    if (token.type === 'icon') suggestions.push(() => <FontIcon key={Math.random()} iconName={token.target} />)
+    if (token.type === 'icon') suggestions.push(() => <ActionButton key={Math.random()} style={{
+      height: 16,
+      width: 26,
+      padding: 0,
+      margin: 0,
+    }} iconProps={{ iconName: token.target }} />)
+
+    // if (token.type === 'icon') suggestions.push(() => <FontIcon key={Math.random()} iconName={token.target} />)
     return suggestions
   }
 
