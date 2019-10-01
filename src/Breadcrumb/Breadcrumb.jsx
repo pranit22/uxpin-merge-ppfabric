@@ -38,7 +38,7 @@ Breadcrumb.propTypes = {
   crumbs: PropTypes.string.isRequired,
   maxDisplayedItems: PropTypes.number,
   overflowIndex: PropTypes.number,
-  fontSize: PropTypes.oneOf(Object.keys(FontSizes)),
+  fontSize: PropTypes.oneOf(['small', 'smallPlus', 'medium', 'mediumPlus']),
 };
 
 Breadcrumb.defaultProps = {
