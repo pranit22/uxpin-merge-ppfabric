@@ -127,7 +127,7 @@ DetailsList.propTypes = {
   /** 
    *  Separate each item with new line or | symbol.
    *  Put at the end of the line [color:blue-600] token to set color for whole column.
-   * @uxpincontroltype textfield(4)
+   * @uxpincontroltype codeeditor
    * */
   columns: PropTypes.string,
 
@@ -136,7 +136,7 @@ DetailsList.propTypes = {
    * Separate each item with | , Separate each row with new line or || symbol.
    * Icon token [icon:Snow:blue-600]
    * Get icons at https://uifabricicons.azurewebsites.net/
-   * @uxpincontroltype textfield(20)
+   * @uxpincontroltype codeeditor
    * */
   items: PropTypes.string,
 

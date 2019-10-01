@@ -1280,7 +1280,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<DetailsList \n  uxpId=\"DetailsList1\"\n  columns={\n`Aa\nBb [color:red-600]\nCc [color:blue-600]`    \n  }\n  items={\n    `A-1  | B-1  | [icon:StatusErrorFull:red-600] C-1 \nA-2 | B-2 | C-2 [icon:SkypeCircleCheck:green-600]\nA-3 | B-3 | C-3 [icon:AlertSolid:orange-600]`\n  }\n  isResizable />"
+                "code": "<DetailsList \n  uxpId=\"DetailsList1\"\n    columns={`Aa icon(StockUp|color-blue-500),  Bb, Cc link(link)`}\n    items={\n      `A-1, B-1, C-1 icon(SkypeCircleCheck|color-green-700)\n A-2, B-2,  icon(SkypeCircleMinus|color-red-700) C-2 icon(SkypeCircleSlash|color-blue-700)  icon(SkypeCircleArrow|color-orange-700)\n A-3, B-3, C-3`\n    }\n  isResizable />"
               }
             ]
           },
@@ -1307,9 +1307,9 @@
                 "DetailsList1": {
                   "name": "DetailsList",
                   "props": {
-                    "columns": "Aa\nBb [color:red-600]\nCc [color:blue-600]",
+                    "columns": "Aa icon(StockUp|color-blue-500),  Bb, Cc link(link)",
                     "isResizable": true,
-                    "items": "A-1  | B-1  | C-1 [icon:StatusErrorFull:red-600]\nA-2 | B-2 | C-2 [icon:SkypeCircleCheck:green-600]\nA-3 | B-3 | C-3 [icon:AlertSolid:orange-600]"
+                    "items": "A-1, B-1, C-1 icon(SkypeCircleCheck|color-green-700)\n A-2, B-2,  icon(SkypeCircleMinus|color-red-700) C-2 icon(SkypeCircleSlash|color-blue-700)  icon(SkypeCircleArrow|color-orange-700)\n A-3, B-3, C-3"
                   }
                 }
               },
@@ -1326,7 +1326,7 @@
                 }
               },
               "defaultValue": {
-                "value": "Aa | Bb | Cc [color:blue-600]"
+                "value": "Aa, Bb, link(C)"
               },
               "description": "Separate each item with new line or | symbol.\nPut at the end of the line [color:blue-600] token to set color for whole column.",
               "isRequired": false,
@@ -1344,7 +1344,7 @@
                 }
               },
               "defaultValue": {
-                "value": "A-1  | B-1  | C-1\n              A-2 | B-2 | C-2\n              A-3 | B-3 | C-3"
+                "value": "A-1, B-1, C-1\nA-2, B-2, C-2\nA-3, B-3, C-3"
               },
               "description": "Separate each item with | , Separate each row with new line or || symbol.\nIcon token [icon:Snow:blue-600]\nGet icons at https://uifabricicons.azurewebsites.net/",
               "isRequired": false,
@@ -2374,11 +2374,89 @@
           ],
           "properties": [
             {
+              "defaultValue": {
+                "value": true
+              },
               "description": "",
               "isRequired": false,
-              "name": "children",
+              "name": "open",
               "type": {
-                "name": "node",
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Welcome to the land of Coachmarks!"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "text",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Example Title"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "title",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Try it"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "primaryButtonLabel",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Try it again"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "secondaryButtonLabel",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "dismiss",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "primaryButtonClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "secondaryButtonClick",
+              "type": {
+                "name": "func",
                 "structure": {}
               }
             }
@@ -2450,6 +2528,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "f5a6b387155ec8935bbb778dc55973817e61093c"
+    "commitHash": "af0fae132bee3e09010e81c6e16d6698f8f694bd"
   }
 }
