@@ -162,10 +162,10 @@ DetailsList.propTypes = {
   items: PropTypes.string,
 
   /** Align Right Columns indexes, <2,3>  */
-  alignRihtIndexes: PropTypes.string,
+  alignRight: PropTypes.string,
 
   /** Align Center Columns indexes, <2,3>  */
-  alignCenterIndexes: PropTypes.string,
+  alignCenter: PropTypes.string,
 
   /** Defines if rows might be selected with checkmark on the left hand side  */
   selectable: PropTypes.bool,
