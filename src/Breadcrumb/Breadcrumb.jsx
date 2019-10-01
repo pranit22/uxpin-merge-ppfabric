@@ -1,10 +1,11 @@
 import { Breadcrumb as FBreadcrumb, FontSizes } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
+import "./index.scss";
 
 function Breadcrumb(props) {
   return (
-    <FBreadcrumb items={props.crumbs.split(',').map(text => ({text}))} styles={{
+    <FBreadcrumb className="BreadcrumbComponent" items={props.crumbs.split(',').map(text => ({text}))} styles={{
       itemLink : {
         fontSize: FontSizes.medium
       },
