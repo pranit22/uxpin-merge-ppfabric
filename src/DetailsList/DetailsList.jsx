@@ -162,7 +162,7 @@ DetailsList.propTypes = {
   items: PropTypes.string,
 
   /** Align Right Columns indexes, <2,3>  */
-  alignRiht: PropTypes.string,
+  alignRight: PropTypes.string,
 
   /** Align Center Columns indexes, <2,3>  */
   alignCenter: PropTypes.string,
