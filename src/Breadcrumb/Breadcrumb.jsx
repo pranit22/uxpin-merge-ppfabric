@@ -17,7 +17,7 @@ class Breadcrumb extends React.Component {
           fontSize: FontSizes[this.props.fontSize],
         },
         '& .ms-Breadcrumb-list': {
-          // height: 31,
+          height: 31,
           paddingTop: 15,
           verticalAlign: 'middle'
         }
