@@ -7,8 +7,8 @@ import { mergeStyles } from '@uifabric/merge-styles';
 class Breadcrumb extends React.Component {
   getBreadcrumbClasses() {
     return mergeStyles({
-      marginTop: -5,
-      marginBottom: -10,
+      // marginTop: -5,
+      // marginBottom: -10,
       display: 'inline - block',
       width: 'min-content',
       height: 'min-content',
@@ -17,8 +17,8 @@ class Breadcrumb extends React.Component {
           fontSize: FontSizes[this.props.fontSize],
         },
         '& .ms-Breadcrumb-list': {
-          height: 31,
-          paddingTop: 15,
+          height: 'min-content',
+          // paddingTop: 15,
           verticalAlign: 'middle'
         }
       }
