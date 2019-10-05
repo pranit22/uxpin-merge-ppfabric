@@ -48,6 +48,33 @@ class DetailsList extends React.Component {
     })
   }
 
+  sortColumns(rows, columnKey, isSortedDescending) {
+    const key = columnKey;
+    return rows.slice(0).sort((a, b) => ((isSortedDescending ? a[key] < b[key] : a[key] > b[key]) ? 1 : -1));
+  }
+
+  onCloumnClick(columnKey) {
+  
+    const { columns, rows } = this.state;
+    const newColumns= columns.slice();
+    const currColumn = newColumns.filter(currCol => columnKey === currCol.key)[0];
+    
+    newColumns.forEach( newCol => {
+      if (newCol == currColumn){
+        currColumn.isSortedDescending = !currColumn.isSortedDescending;
+        currColumn.isSorted = true;
+      } else {
+        newCol.isSorted = false;
+        newCol.isSortedDescending = true;
+      }
+    })
+    const newRows = this.sortColumns(rows, currColumn.fieldName, currColumn.isSortedDescending);
+    this.setState({
+      columns: newColumns,
+      rows: newRows
+    })
+  }
+
   setColumns(callback) {
     parse(this.props.columns, {
       skip_empty_lines: true
@@ -73,7 +100,9 @@ class DetailsList extends React.Component {
                 isResizable: true,
                 minWidth: this.props.minWidth,
                 maxWidth: this.props.maxWidth,
-                onColumnClick: () => columnName,
+                isSorted: false,
+                isSortedDescending: false,
+                onColumnClick: () => this.onCloumnClick(columnName),
                 headerClassName: this.getColumnClasses(colIndex)
               }
 
