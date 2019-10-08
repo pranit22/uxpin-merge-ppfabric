@@ -1,5 +1,7 @@
 # UXPin Integration
 
+[![Build Status](https://ciapi-pilot.us-central1.gcp.dev.paypalinc.com/console-uxpin-merge-7306/buildStatus/icon?job=uxpin-merge-ms-fabric%2Fmaster)](https://ciapi-pilot.us-central1.gcp.dev.paypalinc.com/console-uxpin-merge-7306/job/uxpin-merge-ms-fabric/job/master/)
+
 This project contains components that provide an interface for UXPin <--> MS Fabric utilizing [UXPin Merge](https://www.uxpin.com/docs/merge/what-is-uxpin-merge) tools.
 
 ## Adding new components
