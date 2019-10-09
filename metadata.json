@@ -898,6 +898,30 @@
               }
             },
             {
+              "description": "",
+              "isRequired": false,
+              "name": "iconPosition",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "start"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "end"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
               "defaultValue": {
                 "value": false
               },
@@ -1166,6 +1190,125 @@
             }
           ],
           "wrappers": []
+        },
+        {
+          "documentation": {
+            "examples": [
+              {
+                "code": "<Slider />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/Slider",
+            "documentation": {
+              "path": "src/Slider/Slider.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/Slider/Slider.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/Slider/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "Slider",
+          "presets": [
+            {
+              "elements": {
+                "slider1": {
+                  "name": "Slider",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "slider1"
+            }
+          ],
+          "properties": [
+            {
+              "defaultValue": {
+                "value": "Basic Slider"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "label",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 2
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "min",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 20
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "max",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 2
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "step",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "disabled",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": false
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "vertical",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "onChange",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            }
+          ],
+          "wrappers": []
         }
       ],
       "name": "Basic Input"
@@ -1307,6 +1450,8 @@
                 "DetailsList1": {
                   "name": "DetailsList",
                   "props": {
+                    "alignCenter": "3",
+                    "alignRight": "1,2",
                     "columns": "Aa icon(StockUp|color-blue-500),  Bb, Cc link(link)",
                     "isResizable": true,
                     "items": "A-1, B-1, C-1 icon(SkypeCircleCheck|color-green-700)\n A-2, B-2,  icon(SkypeCircleMinus|color-red-700) C-2 icon(SkypeCircleSlash|color-blue-700)  icon(SkypeCircleArrow|color-orange-700)\n A-3, B-3, C-3"
@@ -1320,10 +1465,8 @@
           "properties": [
             {
               "customType": {
-                "name": "textfield",
-                "structure": {
-                  "rows": 4
-                }
+                "name": "codeeditor",
+                "structure": {}
               },
               "defaultValue": {
                 "value": "Aa, Bb, link(C)"
@@ -1338,10 +1481,8 @@
             },
             {
               "customType": {
-                "name": "textfield",
-                "structure": {
-                  "rows": 20
-                }
+                "name": "codeeditor",
+                "structure": {}
               },
               "defaultValue": {
                 "value": "A-1, B-1, C-1\nA-2, B-2, C-2\nA-3, B-3, C-3"
@@ -1349,6 +1490,30 @@
               "description": "Separate each item with | , Separate each row with new line or || symbol.\nIcon token [icon:Snow:blue-600]\nGet icons at https://uifabricicons.azurewebsites.net/",
               "isRequired": false,
               "name": "items",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "1,2"
+              },
+              "description": "Align Right Columns indexes, <2,3>",
+              "isRequired": false,
+              "name": "alignRight",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "3"
+              },
+              "description": "Align Center Columns indexes, <2,3>",
+              "isRequired": false,
+              "name": "alignCenter",
               "type": {
                 "name": "string",
                 "structure": {}
@@ -1935,7 +2100,7 @@
           "documentation": {
             "examples": [
               {
-                "code": "<div>\n      <h5>With no maxDisplayedItems</h5>\n      <Breadcrumb crumbs=\"file1,file2,file3\" ariaLabel=\"Breadcrumb with no maxDisplayedItems\" overflowAriaLabel=\"More links\"/>\n\n      <h5>With maxDisplayedItems set to three</h5>\n      <Breadcrumb crumbs=\"one,two,three,four\"\n         maxDisplayedItems={3} ariaLabel=\"Breadcrumb with maxDisplayedItems set to three\" overflowAriaLabel=\"More links\"/>\n\n      <h5>With maxDisplayedItems set to two and overflowIndex set to 1 (second element)</h5>\n      <Breadcrumb crumbs=\"one,two,three,four\" maxDisplayedItems={2} overflowIndex={1} ariaLabel=\"Breadcrumb with maxDisplayedItems set to 2 and overflowIndex set to 1\" overflowAriaLabel=\"More links\"/>\n    </div>"
+                "code": "<Breadcrumb uxpId=\"breadcrumb1\" crumbs=\"foo,bar,baz\" />"
               }
             ]
           },
@@ -2005,6 +2170,87 @@
               "type": {
                 "name": "number",
                 "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "small"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "fontSize",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "mini"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "xSmall"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "small"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "smallPlus"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "medium"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "mediumPlus"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "icon"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "large"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "xLarge"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "xLargePlus"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "xxLarge"
+                      }
+                    }
+                  ]
+                }
               }
             }
           ],
@@ -2326,6 +2572,106 @@
                 "name": "number",
                 "structure": {}
               }
+            },
+            {
+              "customName": "Link 1 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLinkOneClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 2 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLinkTwoClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 3 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLinkThreeClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 4 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLinkFourClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 5 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLinkFiveClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 6 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLinkSixClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 7 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLinkSevenClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 8 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLinkEightClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 9 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLinkNineClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "Link 10 click",
+              "description": "",
+              "isRequired": false,
+              "name": "onLinkTenClick",
+              "type": {
+                "name": "func",
+                "structure": {}
+              }
             }
           ],
           "wrappers": []
@@ -2528,6 +2874,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "af0fae132bee3e09010e81c6e16d6698f8f694bd"
+    "commitHash": "9f19d8154ffbde434f7921ee8528977d06b72e9c"
   }
 }

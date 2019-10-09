@@ -18,6 +18,7 @@ module.exports = {
           'src/Button/Button.jsx',
           'src/TextField/TextField.jsx',
           'src/Toggle/Toggle.jsx',
+          'src/Slider/Slider.jsx'
         ]
       },
       {
