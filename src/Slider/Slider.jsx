@@ -27,8 +27,10 @@ class Slider extends React.Component {
             min={this.props.min}
             max={this.props.max}
             step={this.props.step}
+            defaultValue={this.props.defaultValue}
             onChange={(value) => console.log(value)}
             className={this.getSliderClasses()}
+            showValue
             vertical
             {...this.props}
           />
@@ -38,6 +40,7 @@ class Slider extends React.Component {
             min={this.props.min}
             max={this.props.max}
             step={this.props.step}
+            defaultValue={this.props.defaultValue}
             onChange={(value) => console.log(value)}
             className={this.getSliderClasses()}
             {...this.props}
@@ -54,6 +57,7 @@ Slider.propTypes = {
   max: PropTypes.number,
   step: PropTypes.number,
   vertical: PropTypes.bool,
+  defaultValue: PropTypes.number,
   onChange: PropTypes.func
 };
 
@@ -62,6 +66,7 @@ Slider.defaultProps = {
   min: 0,
   max: 10,
   step: 1,
+  defaultValue: 2,
   vertical: false
 };
 
