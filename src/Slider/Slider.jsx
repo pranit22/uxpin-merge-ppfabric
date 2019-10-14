@@ -14,7 +14,8 @@ class Slider extends React.Component {
   getSliderClasses() {
     
     return mergeStyles({
-        
+        height: 300,
+        marginBottom: 8
     });
   }
 
@@ -42,7 +43,8 @@ class Slider extends React.Component {
             step={this.props.step}
             defaultValue={this.props.defaultValue}
             onChange={(value) => console.log(value)}
-            className={this.getSliderClasses()}
+            //className={this.getSliderClasses()}
+            showValue
             {...this.props}
           />
         )}
