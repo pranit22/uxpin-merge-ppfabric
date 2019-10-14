@@ -1243,7 +1243,7 @@
             },
             {
               "defaultValue": {
-                "value": 2
+                "value": 0
               },
               "description": "",
               "isRequired": false,
@@ -1255,7 +1255,7 @@
             },
             {
               "defaultValue": {
-                "value": 20
+                "value": 10
               },
               "description": "",
               "isRequired": false,
@@ -1267,7 +1267,7 @@
             },
             {
               "defaultValue": {
-                "value": 2
+                "value": 1
               },
               "description": "",
               "isRequired": false,
@@ -1278,9 +1278,12 @@
               }
             },
             {
+              "defaultValue": {
+                "value": true
+              },
               "description": "",
               "isRequired": false,
-              "name": "disabled",
+              "name": "vertical",
               "type": {
                 "name": "boolean",
                 "structure": {}
@@ -1288,13 +1291,13 @@
             },
             {
               "defaultValue": {
-                "value": false
+                "value": 2
               },
               "description": "",
               "isRequired": false,
-              "name": "vertical",
+              "name": "defaultValue",
               "type": {
-                "name": "boolean",
+                "name": "number",
                 "structure": {}
               }
             },
@@ -2874,6 +2877,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "9f19d8154ffbde434f7921ee8528977d06b72e9c"
+    "commitHash": "deac11097af8757d49f5ad55f105cb75cdfaa314"
   }
 }

@@ -31,7 +31,7 @@ class Slider extends React.Component {
             defaultValue={this.props.defaultValue}
             onChange={(value) => console.log(value)}
             className={this.getSliderClasses()}
-            showValue
+            showValue={true}
             vertical
             {...this.props}
           />
@@ -43,8 +43,7 @@ class Slider extends React.Component {
             step={this.props.step}
             defaultValue={this.props.defaultValue}
             onChange={(value) => console.log(value)}
-            //className={this.getSliderClasses()}
-            showValue
+            showValue={true}
             {...this.props}
           />
         )}
