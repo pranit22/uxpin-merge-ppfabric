@@ -45,6 +45,12 @@ module.exports = {
         ]
       },
       {
+        name: 'Progress',
+        include: [
+          'src/ProgressIndicator/ProgressIndicator.jsx',
+        ]
+      },
+      {
         name: 'Experimental',
         include: [
           'src/Card/Card.jsx',

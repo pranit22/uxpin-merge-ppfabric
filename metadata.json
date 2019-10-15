@@ -1279,7 +1279,7 @@
             },
             {
               "defaultValue": {
-                "value": true
+                "value": false
               },
               "description": "",
               "isRequired": false,
@@ -2821,6 +2821,112 @@
           "documentation": {
             "examples": [
               {
+                "code": "<ProgressIndicator />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/ProgressIndicator",
+            "documentation": {
+              "path": "src/ProgressIndicator/ProgressIndicator.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/ProgressIndicator/ProgressIndicator.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/ProgressIndicator/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "ProgressIndicator",
+          "presets": [
+            {
+              "elements": {
+                "progressIndicator1": {
+                  "name": "ProgressIndicator",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "progressIndicator1"
+            }
+          ],
+          "properties": [
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "status",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "None"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "Green"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "Yellow"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "Red"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Enter text here"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "description",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 0.5
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "percentComplete",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            }
+          ],
+          "wrappers": []
+        }
+      ],
+      "name": "Progress"
+    },
+    {
+      "components": [
+        {
+          "documentation": {
+            "examples": [
+              {
                 "code": "<Card />"
               }
             ]
@@ -2877,6 +2983,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "deac11097af8757d49f5ad55f105cb75cdfaa314"
+    "commitHash": "a23a92a57b2478dbfad8f5f51f2bbcb494158b4d"
   }
 }
