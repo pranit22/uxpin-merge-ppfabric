@@ -8,12 +8,13 @@ class ProgressIndicator extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-         status: this.props.status
+         status: this.props.status,
+         description: this.props.description
       }
     }
 
     getProgressIndicatorClasses() {
-
+        
         return mergeStyles({
             selectors: { 
               '& .ms-ProgressIndicator-progressTrack' : {
@@ -22,9 +23,11 @@ class ProgressIndicator extends React.Component {
               '& .ms-ProgressIndicator-progressBar': {
                     height: 6,
                     width: 50,
-                    backgroundColor: 'red',
-                    borderBottomLeftRadius: 100,
-                    borderTopLeftRadius: 100
+                    backgroundColor: this.props.status === 'None' ? '#ADD8E6' 
+                                   : this.props.status === 'Green' ? '#008000' 
+                                   : this.props.status === 'Yellow' ? '#FFC800' 
+                                   : '#CD0000',
+                    borderRadius: 100
               }
             }      
         })
@@ -33,9 +36,11 @@ class ProgressIndicator extends React.Component {
     render() {
         return (
           
-          <FProgressIndicator borderRadius={100} 
+          <FProgressIndicator borderRadius={100} percentComplete={0.5}
+
           barHeight={6}
-          className={this.getProgressIndicatorClasses()} {...this.props} />
+          className={this.getProgressIndicatorClasses()}
+          {...this.props} />
           
         );
       }
@@ -43,14 +48,12 @@ class ProgressIndicator extends React.Component {
 
 ProgressIndicator.propTypes = {
     status: PropTypes.oneOf(['None','Green','Yellow','Red']),
-    description: PropTypes.string,
-    percentComplete: PropTypes.number
+    description: PropTypes.string
 };
 
 ProgressIndicator.defaultProps = {
     status: 'None',
     description: 'Enter text here',
-    percentComplete: 0.5
 }
 
 export { ProgressIndicator as default };
