@@ -23,7 +23,7 @@ class ProgressIndicator extends React.Component {
               '& .ms-ProgressIndicator-progressBar': {
                     height: 6,
                     width: 50,
-                    backgroundColor: this.props.status === 'None' ? '#ADD8E6' 
+                    backgroundColor: this.props.status === 'None' ? '#0464AE' 
                                    : this.props.status === 'Green' ? '#008000' 
                                    : this.props.status === 'Yellow' ? '#FFC800' 
                                    : '#CD0000',
@@ -36,8 +36,7 @@ class ProgressIndicator extends React.Component {
     render() {
         return (
           
-          <FProgressIndicator borderRadius={100} percentComplete={0.5}
-
+          <FProgressIndicator percentComplete={0.5}
           barHeight={6}
           className={this.getProgressIndicatorClasses()}
           {...this.props} />
