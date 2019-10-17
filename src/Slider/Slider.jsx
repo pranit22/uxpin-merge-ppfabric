@@ -14,15 +14,13 @@ class Slider extends React.Component {
   getSliderClasses() {
     
     return mergeStyles({
-        height: 300,
+        height: this.props.vertical ? 300 : 50,
         marginBottom: 8
     });
   }
 
   render() {
     return (
-      <>
-        {this.props.vertical ? (
           <FSlider
             label={this.props.label}
             min={this.props.min}
@@ -32,22 +30,9 @@ class Slider extends React.Component {
             onChange={(value) => console.log(value)}
             className={this.getSliderClasses()}
             showValue={true}
-            vertical
+            vertical={this.props.vertical}
             {...this.props}
           />
-        ) : (
-          <FSlider
-            label={this.props.label}
-            min={this.props.min}
-            max={this.props.max}
-            step={this.props.step}
-            defaultValue={this.props.defaultValue}
-            onChange={(value) => console.log(value)}
-            showValue={true}
-            {...this.props}
-          />
-        )}
-      </>
     );
   }
 }
