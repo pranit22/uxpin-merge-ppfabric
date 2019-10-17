@@ -186,7 +186,7 @@ class DetailsList extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         {this.props.isSearchEnabled && <TextField iconProps={{ iconName: 'Filter' }} onChange={this.searchTable} className={searchFilterStyle} styles={{ fieldGroup: { width: 200 } }} />}
       <FDetailsList {...this.props}
         columns={this.state.columns}
@@ -198,7 +198,7 @@ class DetailsList extends React.Component {
           </>
         )}
         isHeaderVisible={this.props.header === "show"} />
-        </div>
+        </>
     );
   }
 }
