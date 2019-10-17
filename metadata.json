@@ -1312,6 +1312,128 @@
             }
           ],
           "wrappers": []
+        },
+        {
+          "documentation": {
+            "examples": [
+              {
+                "code": "<SpinButton />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/SpinButton",
+            "documentation": {
+              "path": "src/SpinButton/SpinButton.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/SpinButton/SpinButton.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/SpinButton/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "SpinButton",
+          "presets": [
+            {
+              "elements": {
+                "spinButton1": {
+                  "name": "SpinButton",
+                  "props": {}
+                }
+              },
+              "name": "default",
+              "rootId": "spinButton1"
+            }
+          ],
+          "properties": [
+            {
+              "defaultValue": {
+                "value": "1"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "defaultValue",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Basic SpinButton"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "label",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "labelPosition",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 0
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "min",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 10
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "max",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": 0.5
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "step",
+              "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "SpinButton"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "title",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            }
+          ],
+          "wrappers": []
         }
       ],
       "name": "Basic Input"
@@ -2856,6 +2978,9 @@
           ],
           "properties": [
             {
+              "defaultValue": {
+                "value": "Red"
+              },
               "description": "",
               "isRequired": false,
               "name": "status",
@@ -2892,26 +3017,11 @@
               }
             },
             {
-              "defaultValue": {
-                "value": "Enter text here"
-              },
               "description": "",
               "isRequired": false,
               "name": "description",
               "type": {
                 "name": "string",
-                "structure": {}
-              }
-            },
-            {
-              "defaultValue": {
-                "value": 0.5
-              },
-              "description": "",
-              "isRequired": false,
-              "name": "percentComplete",
-              "type": {
-                "name": "number",
                 "structure": {}
               }
             }
@@ -2983,6 +3093,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "a23a92a57b2478dbfad8f5f51f2bbcb494158b4d"
+    "commitHash": "2e4c4faa32f89edf6936523aff4de89e33728236"
   }
 }
