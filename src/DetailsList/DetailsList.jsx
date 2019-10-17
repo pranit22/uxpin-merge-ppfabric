@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { FontIcon } from 'office-ui-fabric-react/lib/Icon';
 
-import { DetailsList as FDetailsList, SelectionMode } from 'office-ui-fabric-react';
+import { DetailsList as FDetailsList, SelectionMode, TextField } from 'office-ui-fabric-react';
 import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import parse from 'csv-parse'
 import { name2key, getTokens } from '../_helpers/parser.jsx'
@@ -13,15 +13,26 @@ const linkClasses = mergeStyles({
   color: 'var(--color-blue-600)'
 })
 
+const searchFilterStyle = {
+  margin: '0.2em',
+  selectors: {
+    '& div': {
+      marginLeft: 'auto',
+      marginRight: '0',
+    },
+  },
+}
 
 
 class DetailsList extends React.Component {
   constructor(props) {
     super(props);
 
+    this.searchTable = this.searchTable.bind(this);
     this.state = {
       columns: [],
       rows: [],
+      allItems: [],
       alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
       alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : []
     }
@@ -51,6 +62,23 @@ class DetailsList extends React.Component {
   sortColumns(rows, columnKey, isSortedDescending) {
     const key = columnKey;
     return rows.slice(0).sort((a, b) => ((isSortedDescending ? a[key] < b[key] : a[key] > b[key]) ? 1 : -1));
+  }
+
+  includesText(i, text){
+    return Object.values(i).some(txt => txt.toString().toLowerCase().indexOf(text.toLowerCase()) > -1);
+  }
+  
+  searchText(text) {
+    return this.state.allItems.filter(i => this.includesText(i, text)) || this.state.allItems;
+  }
+
+  searchTable(event){
+
+    let inputValue = event.target.value;
+    let filteredRows = this.searchText(inputValue);
+    this.setState({
+      rows : filteredRows
+    });
   }
 
   onCloumnClick(columnKey) {
@@ -150,6 +178,7 @@ class DetailsList extends React.Component {
         })
 
         this.setState({ rows }, callback)
+        this.setState({ allItems: rows});
       })
   }
 
@@ -157,6 +186,8 @@ class DetailsList extends React.Component {
 
   render() {
     return (
+      <>
+        {this.props.isSearchEnabled && <TextField iconProps={{ iconName: 'Filter' }} onChange={this.searchTable} className={searchFilterStyle} styles={{ fieldGroup: { width: 200 } }} />}
       <FDetailsList {...this.props}
         columns={this.state.columns}
         items={this.state.rows}
@@ -167,6 +198,7 @@ class DetailsList extends React.Component {
           </>
         )}
         isHeaderVisible={this.props.header === "show"} />
+        </>
     );
   }
 }
@@ -208,6 +240,9 @@ DetailsList.propTypes = {
   /** Max width for columns */
   maxWidth: PropTypes.number,
 
+  /** Enable search text field to filter details list */
+  isSearchEnabled: PropTypes.bool,
+
   /** Defines to show or hide the header */
   header: PropTypes.oneOf(['show', 'hide']),
 
@@ -224,7 +259,8 @@ DetailsList.defaultProps = {
   maxWidth: 200,
   header: "show",
   alignRight: "1,2",
-  alignCenter: "3"
+  alignCenter: "3",
+  isSearchEnabled: false,
 
 };
 
