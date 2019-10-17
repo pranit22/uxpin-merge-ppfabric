@@ -18,6 +18,8 @@ module.exports = {
           'src/Button/Button.jsx',
           'src/TextField/TextField.jsx',
           'src/Toggle/Toggle.jsx',
+          'src/Slider/Slider.jsx',
+          'src/SpinButton/SpinButton.jsx'
         ]
       },
       {
@@ -41,6 +43,12 @@ module.exports = {
         name: 'Notification & Engagement',
         include: [
           'src/Coachmark/Coachmark.jsx',
+        ]
+      },
+      {
+        name: 'Progress',
+        include: [
+          'src/ProgressIndicator/ProgressIndicator.jsx',
         ]
       },
       {
