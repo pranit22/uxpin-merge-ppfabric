@@ -4,7 +4,8 @@
   "description": "Fabric wrappers for integration with UX Pin Merge",
   "main": "index.ts",
   "scripts": {
-    "test": "uxpin-merge summary --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
+    "test": "uxpin-merge summary --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js && npm run jest",
+    "jest": "jest --coverage",
     "server": "uxpin-merge server --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
     "start": "uxpin-merge --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
     "push-anton": "rm -rf .uxpin-merge && uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token d1359dbcd781da08b8c011c4694548cea0bc22f9",
@@ -15,6 +16,9 @@
   },
   "author": "Stan Carrico <scarrico@paypal.com>",
   "license": "UNLICENSED",
+  "jest": {
+    "verbose": true
+  },
   "dependencies": {
     "office-ui-fabric-react": "^7.22.2",
     "prop-types": "15.7.2",

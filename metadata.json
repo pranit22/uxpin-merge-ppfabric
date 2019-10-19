@@ -1419,18 +1419,6 @@
                 "name": "number",
                 "structure": {}
               }
-            },
-            {
-              "defaultValue": {
-                "value": "SpinButton"
-              },
-              "description": "",
-              "isRequired": false,
-              "name": "title",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
             }
           ],
           "wrappers": []
@@ -1689,6 +1677,18 @@
               "name": "maxWidth",
               "type": {
                 "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": false
+              },
+              "description": "Enable search text field to filter details list",
+              "isRequired": false,
+              "name": "isSearchEnabled",
+              "type": {
+                "name": "boolean",
                 "structure": {}
               }
             },
@@ -2979,7 +2979,7 @@
           "properties": [
             {
               "defaultValue": {
-                "value": "Red"
+                "value": "None"
               },
               "description": "",
               "isRequired": false,
@@ -3017,6 +3017,9 @@
               }
             },
             {
+              "defaultValue": {
+                "value": "Enter text here"
+              },
               "description": "",
               "isRequired": false,
               "name": "description",
@@ -3030,6 +3033,141 @@
         }
       ],
       "name": "Progress"
+    },
+    {
+      "components": [
+        {
+          "documentation": {
+            "examples": [
+              {
+                "code": "<Text />"
+              }
+            ]
+          },
+          "info": {
+            "dirPath": "src/Text",
+            "documentation": {
+              "path": "src/Text/Text.md"
+            },
+            "implementation": {
+              "framework": "reactjs",
+              "lang": "javascript",
+              "path": "src/Text/Text.jsx"
+            },
+            "presets": [
+              {
+                "path": "src/Text/presets/0-default.jsx"
+              }
+            ]
+          },
+          "name": "Text",
+          "presets": [
+            {
+              "elements": {
+                "text": {
+                  "name": "Text",
+                  "props": {
+                    "label": "Toggle label (clear to remove)"
+                  }
+                }
+              },
+              "name": "default",
+              "rootId": "text"
+            }
+          ],
+          "properties": [
+            {
+              "defaultValue": {
+                "value": "The quick brown fox jumped over the lazy dog."
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "value",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "medium"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "size",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "tiny"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "xSmall"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "small"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "smallPlus"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "medium"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "mediumPlus"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "large"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "xLarge"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "xxLarge"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "mega"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "wrappers": []
+        }
+      ],
+      "name": "Utilities"
     },
     {
       "components": [
@@ -3093,6 +3231,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "2e4c4faa32f89edf6936523aff4de89e33728236"
+    "commitHash": "8416487fadb90bc137553856f53a3a79f2277473"
   }
 }

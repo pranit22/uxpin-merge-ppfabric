@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link, ActionButton, merge } from 'office-ui-fabric-react';
-import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
+import { mergeStyles } from 'office-ui-fabric-react';
 
 export const name2key = (str) => {
   return str
@@ -68,7 +68,6 @@ export const getTokens = inputStr => {
       })}
       iconProps={{ iconName: token.target }} />)
 
-    // if (token.type === 'icon') suggestions.push(() => <FontIcon key={Math.random()} iconName={token.target} />)
     return suggestions
   }
 
@@ -99,15 +98,3 @@ export const getTokens = inputStr => {
     incoming: inputStr
   }
 }
-
-// TESTING - getTokens
-// let [a, b, c] = [
-//   "icon(lock) 0123 link(Snow|blue) 4567 icon(foo|bar, red-600) ",
-//   "icon(box) dfsdf",
-//   "dfsfsdf link(target)"
-// ]
-// let res = getTokens(a)
-// console.log(res.tokens[0].position);
-// console.log(res.tokens[1].position);
-// console.log(res.tokens[2].position);
-// console.log(res.text);

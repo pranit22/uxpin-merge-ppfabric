@@ -17,7 +17,7 @@ class PPHeader extends React.Component {
         this.state = {
             open: null,
             breadcrumbs: [],
-            menuItems: ['Code Projects', 'Products', 'Favorites']
+            menuItems: ['Projects', 'Products', 'Favorites']
         }
     }
 

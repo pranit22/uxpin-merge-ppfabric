@@ -52,6 +52,12 @@ module.exports = {
         ]
       },
       {
+        name: 'Utilities',
+        include: [
+          'src/Text/Text.jsx',
+        ]
+      },
+      {
         name: 'Experimental',
         include: [
           'src/Card/Card.jsx',

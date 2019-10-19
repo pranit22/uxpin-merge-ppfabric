@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { loadTheme } from 'office-ui-fabric-react';
 import '@paypalcorp/console.pp-fabric/dist/pp-fabric-tokens.css';
-import {light} from '@paypalcorp/console.pp-fabric/dist/theme';
+import { light } from '@paypalcorp/console.pp-fabric/dist/theme';
 import { initializeIcons } from '@uifabric/icons';
 
 initializeIcons();
