@@ -1407,7 +1407,7 @@
               "isRequired": false,
               "name": "step",
               "type": {
-                "name": "number",
+                "name": "string",
                 "structure": {}
               }
             }
@@ -3013,7 +3013,7 @@
               },
               "description": "",
               "isRequired": false,
-              "name": "description",
+              "name": "descriptionText",
               "type": {
                 "name": "string",
                 "structure": {}
@@ -3021,13 +3021,13 @@
             },
             {
               "defaultValue": {
-                "value": 0.5
+                "value": "0.5"
               },
               "description": "",
               "isRequired": false,
-              "name": "percentComplete",
+              "name": "percent",
               "type": {
-                "name": "number",
+                "name": "string",
                 "structure": {}
               }
             }
@@ -3080,10 +3080,14 @@
           ],
           "properties": [
             {
+              "customType": {
+                "name": "codeeditor",
+                "structure": {}
+              },
               "defaultValue": {
                 "value": "The quick brown fox jumped over the lazy dog."
               },
-              "description": "",
+              "description": "Text value",
               "isRequired": false,
               "name": "value",
               "type": {
@@ -3165,6 +3169,42 @@
                   ]
                 }
               }
+            },
+            {
+              "defaultValue": {
+                "value": false
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "nowrap",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": true
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "block",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "var(--color-grey-700)"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "color",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
             }
           ],
           "wrappers": []
@@ -3234,6 +3274,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "fe2300378af08c0e3d426318461eae4d2d94f9a2"
+    "commitHash": "6034e1a8dfe071b2cb527a7c2aad60e910af8a55"
   }
 }

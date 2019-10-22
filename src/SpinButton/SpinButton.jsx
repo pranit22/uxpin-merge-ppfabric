@@ -12,7 +12,7 @@ class SpinButton extends React.Component {
     }
     render() {
         return (
-         <FSpinButton 
+         <FSpinButton step={parseFloat(this.props.step)}
          {...this.props} />       
         ); 
     }
@@ -21,10 +21,9 @@ class SpinButton extends React.Component {
 SpinButton.propTypes = {
     defaultValue: PropTypes.string.isRequired,
     label: PropTypes.string,
-    labelPosition: PropTypes.string,
     min: PropTypes.number,
     max: PropTypes.number,
-    step: PropTypes.number,
+    step: PropTypes.string,
 };
 SpinButton.defaultProps = {
     label: 'Basic SpinButton',
