@@ -38,21 +38,19 @@ class ProgressIndicator extends React.Component {
 
      getDescription(status, desc) {
         
-        let updated_text = status === 'Green' ? checkIcon
+        let icon = status === 'Green' ? checkIcon
                : status === 'Yellow' ? cautionIcon
                : status === 'Red' ?  errorIcon 
                : '' 
-        let text = updated_text + ' ' + desc;  
-        let name = getTokens(text).mixed ? getTokens(text).mixed
+        let descriptionText = icon + ' ' + desc;  
+        let description = getTokens(descriptionText).mixed ? getTokens(descriptionText).mixed
                 .map((el, i) => typeof el === 'string' ?
                   <span key={i}> {el} </span> :
                   el.suggestions[0]())
                 :
-                getTokens(text).text
-        return name ;
-    }
-
-    
+                getTokens(descriptionText).text
+       return description ;
+    } 
 
     render() {
         return ( 
