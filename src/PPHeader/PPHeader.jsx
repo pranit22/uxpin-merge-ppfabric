@@ -39,28 +39,35 @@ class PPHeader extends React.Component {
     onCloseClick() {
         this.setState({ open: null })
     }
+
+    onDocumentationClick() {
+        if (this.props[`onDocumentationClick`]) this.props[`onDocumentationClick`]()
+    }
+
     render() {
         let selectedKey = null
-        if (this.state.menuItems[this.props.selectedIndex - 1] && this.props.selectedIndex !== '') selectedKey = this.state.menuItems[this.props.selectedIndex - 1]
-        if (this.state.open) selectedKey = this.state.open
+        let p = this.props
+        let s = this.state
+        if (s.menuItems[this.props.selectedIndex - 1] && p.selectedIndex !== '') selectedKey = s.menuItems[p.selectedIndex - 1]
+        if (s.open) selectedKey = s.open
         return (
             <div className="PPHeaderComponent" style={{ backgroundColor: 'white' }}>
                 <Drawer
-                    open={this.state.open}
+                    open={s.open}
                     onCloseClick={this.onCloseClick.bind(this)}
-                    productName={this.props.productName}
-                    breadcrumbs={this.state.breadcrumbs}
-                    onDocumentationClick={this.props.onDocumentationClick}
+                    productName={p.productName}
+                    breadcrumbs={s.breadcrumbs}
+                    onDocumentationClick={this.onDocumentationClick.bind(this)}
                 />
 
-                <div className="logo" onClick={this.props.onLogoClick}>
+                <div className="logo" onClick={p.onLogoClick}>
                     <div className="logoImg"></div>
                     <Text key="logo" className="logoTitle" variant='large'>Console</Text>
                 </div>
 
                 <div className="menu ">
                     <Pivot onLinkClick={this.onMenuClick.bind(this)} selectedKey={selectedKey}>
-                        {this.state.menuItems.map(item => <PivotItem headerText={item} key={item} itemKey={item}></PivotItem>)}
+                        {s.menuItems.map(item => <PivotItem headerText={item} key={item} itemKey={item}></PivotItem>)}
                     </Pivot>
                 </div>
 
@@ -70,18 +77,18 @@ class PPHeader extends React.Component {
 
                 <div className="bar">
                     <ActionButton
-                        onClick={() => { this.props.onTool1Click() }}
+                        onClick={() => { p.onTool1Click() }}
                         iconProps={{ iconName: 'Ringer' }} >
                     </ActionButton>
                     <ActionButton
-                        onClick={() => { this.props.onTool2Click() }}
+                        onClick={() => { p.onTool2Click() }}
                         iconProps={{ iconName: 'EmojiNeutral' }}>
                     </ActionButton>
                     <ActionButton
-                        onClick={() => { this.props.onTool3Click() }}
+                        onClick={() => { p.onTool3Click() }}
                         iconProps={{ iconName: 'Unknown' }} >
                     </ActionButton>
-                    <Persona onClick={() => { this.props.onPersonaClick() }}
+                    <Persona onClick={() => { p.onPersonaClick() }}
                         size="size24" presence="none" hidePersonaDetails />
                 </div>
 

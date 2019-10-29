@@ -104,7 +104,8 @@ export default class Drawer extends React.Component {
   }
 
   render() {
-    let height = this.props.open ? 'auto' : 0
+    let p = this.props
+    let height = p.open ? 'auto' : 0
     return (
       <div className="DrawerComponent" id="DrawerComponent">
         <div className={"drawerWrapper"}>
@@ -112,12 +113,13 @@ export default class Drawer extends React.Component {
             duration={300}
             animateOpacity
             height={height} >
-            {this.props.open === 'Products' ? this.renderProducts() : null}
-            {this.props.open === 'Favorites' ? this.renderFavorites() : null}
+            {p.open === 'Products' ? this.renderProducts() : null}
+            {p.open === 'Favorites' ? this.renderFavorites() : null}
           </AnimateHeight>
           <ContextBar
-            productName={this.props.productName}
-            breadcrumbs={this.props.breadcrumbs} />
+            productName={p.productName}
+            breadcrumbs={p.breadcrumbs}
+            onDocumentationClick={p.onDocumentationClick} />
         </div >
       </div >
     )
