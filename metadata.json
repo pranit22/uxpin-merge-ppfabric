@@ -1154,19 +1154,31 @@
           "properties": [
             {
               "defaultValue": {
-                "value": false
+                "value": "On"
               },
               "description": "",
               "isRequired": false,
-              "name": "defaultChecked",
+              "name": "onText",
               "type": {
-                "name": "boolean",
+                "name": "string",
                 "structure": {}
               }
             },
             {
               "defaultValue": {
-                "value": "Toggle label (clear to remove)"
+                "value": "Off"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "offText",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": "Toggle label"
               },
               "description": "",
               "isRequired": false,
@@ -1185,6 +1197,15 @@
               "name": "disabled",
               "type": {
                 "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "description": "",
+              "isRequired": false,
+              "name": "onChange",
+              "type": {
+                "name": "func",
                 "structure": {}
               }
             }
@@ -2679,11 +2700,11 @@
             },
             {
               "defaultValue": {
-                "value": 0
+                "value": 1
               },
               "description": "",
               "isRequired": false,
-              "name": "defaultSelectedIndex",
+              "name": "selectedIndex",
               "type": {
                 "name": "number",
                 "structure": {}
@@ -2693,7 +2714,7 @@
               "customName": "Link 1 click",
               "description": "",
               "isRequired": false,
-              "name": "onLinkOneClick",
+              "name": "onLink1Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -2703,7 +2724,7 @@
               "customName": "Link 2 click",
               "description": "",
               "isRequired": false,
-              "name": "onLinkTwoClick",
+              "name": "onLink2Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -2713,7 +2734,7 @@
               "customName": "Link 3 click",
               "description": "",
               "isRequired": false,
-              "name": "onLinkThreeClick",
+              "name": "onLink3Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -2723,7 +2744,7 @@
               "customName": "Link 4 click",
               "description": "",
               "isRequired": false,
-              "name": "onLinkFourClick",
+              "name": "onLink4Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -2733,7 +2754,7 @@
               "customName": "Link 5 click",
               "description": "",
               "isRequired": false,
-              "name": "onLinkFiveClick",
+              "name": "onLink5Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -2743,7 +2764,7 @@
               "customName": "Link 6 click",
               "description": "",
               "isRequired": false,
-              "name": "onLinkSixClick",
+              "name": "onLink6Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -2753,7 +2774,7 @@
               "customName": "Link 7 click",
               "description": "",
               "isRequired": false,
-              "name": "onLinkSevenClick",
+              "name": "onLink7Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -2763,7 +2784,7 @@
               "customName": "Link 8 click",
               "description": "",
               "isRequired": false,
-              "name": "onLinkEightClick",
+              "name": "onLink8Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -2773,17 +2794,7 @@
               "customName": "Link 9 click",
               "description": "",
               "isRequired": false,
-              "name": "onLinkNineClick",
-              "type": {
-                "name": "func",
-                "structure": {}
-              }
-            },
-            {
-              "customName": "Link 10 click",
-              "description": "",
-              "isRequired": false,
-              "name": "onLinkTenClick",
+              "name": "onLink9Click",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -3274,6 +3285,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "6034e1a8dfe071b2cb527a7c2aad60e910af8a55"
+    "commitHash": "fa244f28fc496b56f6b16cbb7a4c7d2d9892288e"
   }
 }

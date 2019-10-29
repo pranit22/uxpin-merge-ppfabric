@@ -2,21 +2,35 @@ import { Toggle as FToggle } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
-function Toggle(props) {
-  return (
-    <FToggle {...props} />
-  );
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        
+    }
+  }
+
+  render() {
+    return (
+          <FToggle  {...this.props} />
+    );
+  }
 }
 
 Toggle.propTypes = {
+  onText: PropTypes.string.isRequired,
+  offText: PropTypes.string.isRequired,
   defaultChecked: PropTypes.bool,
   label: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func
 };
 
 Toggle.defaultProps = {
-  defaultChecked: false,
-  label: "Toggle label (clear to remove)",
+  onText: "On",
+  offText: "Off",
+  defaultChecked: true,
+  label: "Toggle label",
   disabled: false
 };
 
