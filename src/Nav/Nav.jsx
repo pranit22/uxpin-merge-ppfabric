@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from 'office-ui-fabric-react';
-import { name2key, getTokens } from '../_helpers/parser.jsx'
-import parse from 'csv-parse'
+import { name2key, getTokens, csv2arr } from '../_helpers/parser.jsx'
 
 
 
@@ -37,31 +36,22 @@ class Nav extends React.Component {
     }
 
     setItems(callback) {
-        parse(this.props.items, {
-            skip_empty_lines: true
-        },
-            (err, data) => {
-                this.setState({
-                    links: data
-                        .flat()
-                        .map((val, i) => ({
-                            name: getTokens(val).text,
-                            key: name2key(val),
-                            disabled: this.state.disabledIndexes.includes(i + 1),
-                            icon: this.getLeftIcon(val)
-                        }))
-                }, callback)
-            })
+        this.setState({
+            links: csv2arr(this.props.items)
+                .flat()
+                .map((val, i) => ({
+                    name: getTokens(val).text,
+                    key: name2key(val),
+                    disabled: this.state.disabledIndexes.includes(i + 1),
+                    icon: this.getLeftIcon(val)
+                }))
+        }, callback)
     }
 
     setDisabledIndexes(callback) {
-        parse(this.props.disabled, {
-            skip_empty_lines: true
-        },
-            (err, data) => {
-                let disabledIndexes = data.flat().map(i => parseInt(i.trim()))
-                this.setState({ disabledIndexes }, callback)
-            })
+        let disabledIndexes = csv2arr(this.props.disabled).flat().map(i => parseInt(i.trim()))
+        this.setState({ disabledIndexes }, callback)
+
     }
 
 

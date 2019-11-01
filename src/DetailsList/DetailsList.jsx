@@ -4,8 +4,7 @@ import { FontIcon } from 'office-ui-fabric-react/lib/Icon';
 
 import { DetailsList as FDetailsList, SelectionMode, TextField } from 'office-ui-fabric-react';
 import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
-import parse from 'csv-parse'
-import { name2key, getTokens } from '../_helpers/parser.jsx'
+import { name2key, getTokens, csv2arr } from '../_helpers/parser.jsx'
 
 
 
@@ -64,31 +63,31 @@ class DetailsList extends React.Component {
     return rows.slice(0).sort((a, b) => ((isSortedDescending ? a[key] < b[key] : a[key] > b[key]) ? 1 : -1));
   }
 
-  includesText(i, text){
+  includesText(i, text) {
     return Object.values(i).some(txt => txt.toString().toLowerCase().indexOf(text.toLowerCase()) > -1);
   }
-  
+
   searchText(text) {
     return this.state.allItems.filter(i => this.includesText(i, text)) || this.state.allItems;
   }
 
-  searchTable(event){
+  searchTable(event) {
 
     let inputValue = event.target.value;
     let filteredRows = this.searchText(inputValue);
     this.setState({
-      rows : filteredRows
+      rows: filteredRows
     });
   }
 
   onCloumnClick(columnKey) {
-  
+
     const { columns, rows } = this.state;
-    const newColumns= columns.slice();
+    const newColumns = columns.slice();
     const currColumn = newColumns.filter(currCol => columnKey === currCol.key)[0];
-    
-    newColumns.forEach( newCol => {
-      if (newCol == currColumn){
+
+    newColumns.forEach(newCol => {
+      if (newCol == currColumn) {
         currColumn.isSortedDescending = !currColumn.isSortedDescending;
         currColumn.isSorted = true;
       } else {
@@ -104,82 +103,73 @@ class DetailsList extends React.Component {
   }
 
   setColumns(callback) {
-    parse(this.props.columns, {
-      skip_empty_lines: true
-    },
-      (err, data) => {
-        this.setState({
-          columns: data
-            .flat()
-            .map((columnName, colIndex) => {
-              columnName = columnName.trim()
 
-              let name = getTokens(columnName).mixed ? getTokens(columnName).mixed
-                .map((el, i) => typeof el === 'string' ?
-                  <span key={i}> {el} </span> :
-                  el.suggestions[0]())
-                :
-                getTokens(columnName).text
+    this.setState({
+      columns: csv2arr(this.props.columns)
+        .flat()
+        .map((columnName, colIndex) => {
+          columnName = columnName.trim()
 
-              const columnParams = {
-                key: columnName,
-                name,
-                fieldName: columnName,
-                isResizable: true,
-                minWidth: this.props.minWidth,
-                maxWidth: this.props.maxWidth,
-                isSorted: false,
-                isSortedDescending: false,
-                onColumnClick: () => this.onCloumnClick(columnName),
-                headerClassName: this.getColumnClasses(colIndex)
-              }
+          let name = getTokens(columnName).mixed ? getTokens(columnName).mixed
+            .map((el, i) => typeof el === 'string' ?
+              <span key={i}> {el} </span> :
+              el.suggestions[0]())
+            :
+            getTokens(columnName).text
 
-              if (this.state.alignRight.includes(colIndex + 1)) {
-                columnParams.className = mergeStyles({
-                  textAlign: 'right',
-                })
-              }
+          const columnParams = {
+            key: columnName,
+            name,
+            fieldName: columnName,
+            isResizable: true,
+            minWidth: this.props.minWidth,
+            maxWidth: this.props.maxWidth,
+            isSorted: false,
+            isSortedDescending: false,
+            onColumnClick: () => this.onCloumnClick(columnName),
+            headerClassName: this.getColumnClasses(colIndex)
+          }
 
-              if (this.state.alignCenter.includes(colIndex + 1)) {
-                columnParams.className = mergeStyles({
-                  textAlign: 'center',
-                })
-              }
-
-              return columnParams
+          if (this.state.alignRight.includes(colIndex + 1)) {
+            columnParams.className = mergeStyles({
+              textAlign: 'right',
             })
-        }, callback)
-      })
+          }
+
+          if (this.state.alignCenter.includes(colIndex + 1)) {
+            columnParams.className = mergeStyles({
+              textAlign: 'center',
+            })
+          }
+
+          return columnParams
+        })
+    }, callback)
   }
 
   setRows(callback) {
-    parse(this.props.items, {
-      skip_empty_lines: true
-    },
-      (err, data) => {
-        let rows = []
+    let rows = []
 
-        data.forEach((row, rowIndex) => {
-          let r = {
-            key: rowIndex,
-          }
-          this.state.columns.forEach((column, colInd) => {
-            const value = row[colInd].trim()
-            let name = getTokens(value).mixed ? getTokens(value).mixed
-              .map((el, i) => typeof el === 'string' ?
-                <span key={i}> {el} </span> :
-                el.suggestions[0]())
-              :
-              getTokens(value).text
+    csv2arr(this.props.items).forEach((row, rowIndex) => {
+      let r = {
+        key: rowIndex,
+      }
+      this.state.columns.forEach((column, colInd) => {
+        const value = row[colInd].trim()
+        let name = getTokens(value).mixed ? getTokens(value).mixed
+          .map((el, i) => typeof el === 'string' ?
+            <span key={i}> {el} </span> :
+            el.suggestions[0]())
+          :
+          getTokens(value).text
 
-            r[column.fieldName] = name
-          })
-          rows.push(r)
-        })
-
-        this.setState({ rows }, callback)
-        this.setState({ allItems: rows});
+        r[column.fieldName] = name
       })
+      rows.push(r)
+    })
+
+    this.setState({ rows }, callback)
+    this.setState({ allItems: rows });
   }
 
 
@@ -188,17 +178,17 @@ class DetailsList extends React.Component {
     return (
       <>
         {this.props.isSearchEnabled && <TextField iconProps={{ iconName: 'Filter' }} onChange={this.searchTable} className={searchFilterStyle} styles={{ fieldGroup: { width: 200 } }} />}
-      <FDetailsList {...this.props}
-        columns={this.state.columns}
-        items={this.state.rows}
-        selectionMode={this.props.selectable ? SelectionMode.multiple : SelectionMode.none}
-        onRenderRow={(props, defaultRender) => (
-          <>
-            {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
-          </>
-        )}
-        isHeaderVisible={this.props.header === "show"} />
-        </>
+        <FDetailsList {...this.props}
+          columns={this.state.columns}
+          items={this.state.rows}
+          selectionMode={this.props.selectable ? SelectionMode.multiple : SelectionMode.none}
+          onRenderRow={(props, defaultRender) => (
+            <>
+              {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
+            </>
+          )}
+          isHeaderVisible={this.props.header === "show"} />
+      </>
     );
   }
 }

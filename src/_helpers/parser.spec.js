@@ -1,4 +1,4 @@
-import { name2key, getTokens } from './parser'
+import { name2key, getTokens, csv2arr } from './parser'
 
 
 it('name2key method', () => {
@@ -66,4 +66,34 @@ it('getTokens - ex2: should only have trimmed text', () => {
   expect(ex2.tokens).toBeUndefined()
   expect(ex2.mixed).toBeUndefined()
   expect(ex2.text).toEqual(string2.trim())
+})
+
+const string3 = 'One,Two,Three'
+const ex3 = getTokens(string3)
+it('getTokens - ex3: should only have trimmed text', () => {
+  expect(ex3.tokens).toBeUndefined()
+  expect(ex3.mixed).toBeUndefined()
+  expect(ex3.text).toEqual(string3.trim())
+})
+
+const csv2arr_string1 = '"one","two with escaped """" double quotes""","three, with, commas",four with no quotes,"five with CRLF\r\n"\r\n"2nd line one","two with escaped """" double quotes""","three, with, commas",four with no quotes,"five with CRLF\r\n"';
+const ex4 = csv2arr(csv2arr_string1)
+
+it('csv2arr - ex1: conversion of the CVS string to array of arrays', () => {
+  expect(ex4).toEqual([
+    [
+      "one",
+      "two with escaped \"\" double quotes\"",
+      "three, with, commas",
+      "four with no quotes",
+      "five with CRLF\r\n"
+    ],
+    [
+      "2nd line one",
+      "two with escaped \"\" double quotes\"",
+      "three, with, commas",
+      "four with no quotes",
+      "five with CRLF\r\n"
+    ]
+  ])
 })

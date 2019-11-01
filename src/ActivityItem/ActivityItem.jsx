@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ActivityItem as FActivityItem, Icon, Link } from 'office-ui-fabric-react';
-// import parse from 'csv-parse'
 import { getTokens } from '../_helpers/parser.jsx'
 
 

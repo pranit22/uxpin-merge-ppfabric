@@ -1,7 +1,7 @@
 import { Pivot as FPivot, PivotItem, colGroupProperties } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import parse from 'csv-parse'
+import { csv2arr } from '../_helpers/parser'
 
 class Pivot extends React.Component {
   constructor(props) {
@@ -13,19 +13,7 @@ class Pivot extends React.Component {
   }
 
   componentDidMount() {
-    this.setTabs()
-  }
-
-  setTabs(callback) {
-    parse(this.props.tabs, {
-      skip_empty_lines: true
-    },
-      (err, data) => {
-        const tabs = data
-          .flat()
-          .map((val, i) => val)
-        this.setState({ tabs }, callback)
-      })
+    this.setState({ tabs: csv2arr(this.props.tabs)[0] })
   }
 
   onLinkClick(element) {

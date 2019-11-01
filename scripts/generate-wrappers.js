@@ -44,7 +44,7 @@ const fabricBlacklist = [
   'Utilities',
 ];
 
-const rawDirList = uniq(fs.readdirSync(targetPath).filter(file => file.match(/\.js/)).map(file => file.split('.')[ 0 ]));
+const rawDirList = uniq(fs.readdirSync(targetPath).filter(file => file.match(/\.js/)).map(file => file.split('.')[0]));
 
 // read the list of components
 const dirItems = difference(rawDirList, fabricBlacklist);
@@ -56,7 +56,7 @@ const indexTemplate = dirItems.reduce((tpl, file) => {
 
 const wrapperTemplate = `import * as React from 'react';
 import { loadTheme } from 'office-ui-fabric-react';
-import '@paypalcorp/console.pp-fabric/dist/pp-fabric-tokens.css';
+import '@paypalcorp/console.pp-fabric/dist/styles/pp-fabric-normalize-tokens.css';
 import {light} from '@paypalcorp/console.pp-fabric/dist/theme';
 
 // load the theme from node_modules
@@ -104,7 +104,7 @@ export { ${component} as default };
 
   let exampleType = '';
   // load the example, looking for Basic, Default etc..
-  const example = [ 'Basic', 'Default' ].reduce((file, exampleName) => {
+  const example = ['Basic', 'Default'].reduce((file, exampleName) => {
     try {
       file = fs.readFileSync(librarySrcPath + '/components/' + component + `/examples/${component}.${exampleName}.Example.tsx`, 'UTF-8');
       exampleType = exampleName;
@@ -145,7 +145,7 @@ export default ${component}${exampleType}Example;
 dirItems.forEach(generateComponent);
 
 // there are many types of buttons, so do a second loop for them..
-[ 'ActionButton',
+['ActionButton',
   'CommandBarButton',
   'CommandButton',
   'CompoundButton',
@@ -153,9 +153,9 @@ dirItems.forEach(generateComponent);
   'IconButton',
   'MessageBarButton',
   'PrimaryButton',
-  'SplitButton' ].forEach((buttonComponent) => {
-  generateComponent(buttonComponent)
-});
+  'SplitButton'].forEach((buttonComponent) => {
+    generateComponent(buttonComponent)
+  });
 
 
 // generate the index file

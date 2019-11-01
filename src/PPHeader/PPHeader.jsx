@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Pivot, PivotItem, TextField, Text, TooltipHost, ActionButton } from 'office-ui-fabric-react';
 import { mergeStyles } from '@uifabric/merge-styles';
-import parse from 'csv-parse'
+import { csv2arr } from '../_helpers/parser.jsx'
 
 
 import './index.scss';
@@ -22,10 +22,7 @@ class PPHeader extends React.Component {
     }
 
     componentDidMount() {
-        parse(this.props.breadcrumbs, { skip_empty_lines: true },
-            (err, data) => {
-                this.setState({ breadcrumbs: data.flat().map(v => v.trim()) })
-            })
+        this.setState({ breadcrumbs: csv2arr(this.props.breadcrumbs).flat().map(v => v.trim()) })
     }
 
     onMenuClick(elm) {
