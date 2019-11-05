@@ -2,19 +2,22 @@ import * as React from 'react';
 import {ProgressIndicator as FProgressIndicator} from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import { mergeStyles } from '@uifabric/merge-styles';
+import { getTokens } from '../_helpers/parser.jsx'
 
+const cautionIcon = 'icon(Warning|color-yellow-700)';
+const errorIcon = 'icon(Error|color-red-700)';
+const checkIcon = 'icon(Completed|color-green-700)';
 class ProgressIndicator extends React.Component {
   
     constructor(props) {
       super(props);
       this.state = {
-         status: this.props.status,
-         description: this.props.description
+          percent: this.props.percent
       }
     }
 
     getProgressIndicatorClasses() {
-        
+       
         return mergeStyles({
             selectors: { 
               '& .ms-ProgressIndicator-progressTrack' : {
@@ -33,26 +36,44 @@ class ProgressIndicator extends React.Component {
         })
     }
 
+     getDescription(status, desc) {
+        
+        let icon = status === 'Green' ? checkIcon
+               : status === 'Yellow' ? cautionIcon
+               : status === 'Red' ?  errorIcon 
+               : '' 
+        let descriptionText = icon + ' ' + desc;  
+        let description = getTokens(descriptionText).mixed ? getTokens(descriptionText).mixed
+                .map((el, i) => typeof el === 'string' ?
+                  <span key={i}> {el} </span> :
+                  el.suggestions[0]())
+                :
+                getTokens(descriptionText).text
+       return description ;
+    } 
+
     render() {
-        return (
-          
-          <FProgressIndicator percentComplete={0.5}
+        return ( 
+          <FProgressIndicator 
+          percentComplete={parseFloat(this.state.percent)}
           barHeight={6}
           className={this.getProgressIndicatorClasses()}
-          {...this.props} />
-          
+          description={this.getDescription(this.props.status, this.props.descriptionText)}
+          {...this.props} />        
         );
       }
 }    
 
 ProgressIndicator.propTypes = {
     status: PropTypes.oneOf(['None','Green','Yellow','Red']),
-    description: PropTypes.string
+    descriptionText: PropTypes.string,
+    percent: PropTypes.string
 };
 
 ProgressIndicator.defaultProps = {
     status: 'None',
-    description: 'Enter text here',
+    percent: "0.5",
+    descriptionText: 'Enter text here'
 }
 
 export { ProgressIndicator as default };
