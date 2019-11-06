@@ -53,7 +53,7 @@ class DetailsList extends React.Component {
         '& .ms-Button': {
           transform: 'translateY(14px)',
         },
-        '& .ms-DetailsHeader-cellName': alignHeaderLabels
+        '& .ms-DetailsHeader-cellName': alignHeaderLabels,
       }
     })
   }
@@ -176,7 +176,15 @@ class DetailsList extends React.Component {
 
   render() {
     return (
-      <>
+      <div style={{ display: 'block' }} className={
+        mergeStyles({
+          selectors: {
+            '& .ms-DetailsHeader': {
+              paddingTop: 0,
+            },
+          }
+        })
+      }>
         {this.props.isSearchEnabled && <TextField iconProps={{ iconName: 'Filter' }} onChange={this.searchTable} className={searchFilterStyle} styles={{ fieldGroup: { width: 200 } }} />}
         <FDetailsList {...this.props}
           columns={this.state.columns}
@@ -188,7 +196,7 @@ class DetailsList extends React.Component {
             </>
           )}
           isHeaderVisible={this.props.header === "show"} />
-      </>
+      </div>
     );
   }
 }
