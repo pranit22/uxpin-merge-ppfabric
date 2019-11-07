@@ -44,7 +44,7 @@
     "@types/react-router-dom": "^4.3.5",
     "@uifabric/icons": "latest",
     "@uifabric/react-cards": "^0.108.1",
-    "@uxpin/merge-cli": "^2.3.0",
+    "@uxpin/merge-cli": "^2.4.1",
     "@webpack-cli/serve": "^0.1.8",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
