@@ -1142,9 +1142,7 @@
               "elements": {
                 "toggle1": {
                   "name": "Toggle",
-                  "props": {
-                    "label": "Toggle label (clear to remove)"
-                  }
+                  "props": {}
                 }
               },
               "name": "default",
@@ -1173,6 +1171,18 @@
               "name": "offText",
               "type": {
                 "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "defaultValue": {
+                "value": true
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "defaultChecked",
+              "type": {
+                "name": "boolean",
                 "structure": {}
               }
             },
@@ -3285,6 +3295,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "fa244f28fc496b56f6b16cbb7a4c7d2d9892288e"
+    "commitHash": "e1c6059d4f50fbc2619921f48000667a2ca9352f"
   }
 }

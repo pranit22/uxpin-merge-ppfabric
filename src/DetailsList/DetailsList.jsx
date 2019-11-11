@@ -155,15 +155,18 @@ class DetailsList extends React.Component {
         key: rowIndex,
       }
       this.state.columns.forEach((column, colInd) => {
-        const value = row[colInd].trim()
-        let name = getTokens(value).mixed ? getTokens(value).mixed
-          .map((el, i) => typeof el === 'string' ?
-            <span key={i}> {el} </span> :
-            el.suggestions[0]())
-          :
-          getTokens(value).text
+        if (row[colInd]) {
+          const value = row[colInd].trim()
+          let name = getTokens(value).mixed ? getTokens(value).mixed
+            .map((el, i) => typeof el === 'string' ?
+              <span key={i}> {el} </span> :
+              el.suggestions[0]())
+            :
+            getTokens(value).text
 
-        r[column.fieldName] = name
+          r[column.fieldName] = name
+        }
+
       })
       rows.push(r)
     })
