@@ -4,7 +4,11 @@ import * as React from 'react';
 
 function TextField(props) {
   return (
-    <FTextField {...props} styles={ {root: {width: props.inputWidth}} } iconProps={{ iconName: props.icon }} ref={props.uxpinRef}/>
+    <FTextField {...props}
+      styles={{ root: { width: props.inputWidth } }}
+      iconProps={{ iconName: props.icon }}
+      ref={props.uxpinRef}
+    />
   );
 }
 

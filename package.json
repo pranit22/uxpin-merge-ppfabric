@@ -7,9 +7,7 @@
     "test": "uxpin-merge summary --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js && npm run jest",
     "jest": "jest --coverage",
     "server": "uxpin-merge server --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
-    "start": "uxpin-merge --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
-    "push-anton": "rm -rf .uxpin-merge && uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token f81f7218256cbc8a0a37e62e3b13ed9ba6cc18bf",
-    "push-froila": "rm -rf .uxpin-merge && uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 5d25334f0f1f849cd9841404dde33eaf870f1ef2",
+    "start": "uxpin-merge --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --disable-tunneling",
     "push": "uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 258e3f84adad7ff4420400d965b6bb14f683acdc",
     "debug": "uxpin-merge dump --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js > metadata.json",
     "kitchensink": "webpack-cli serve --config app/kitchensink/webpack.config.js"
@@ -21,7 +19,8 @@
     "cache": false
   },
   "dependencies": {
-    "office-ui-fabric-react": "^7.62.0",
+    "@uifabric/example-data": "^7.0.1",
+    "office-ui-fabric-react": "^7.64.2",
     "prop-types": "15.7.2",
     "react": "^16.12.0",
     "react-animate-height": "^2.0.17",
@@ -43,7 +42,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^4.3.5",
     "@uifabric/icons": "latest",
-    "@uifabric/react-cards": "^0.108.1",
+    "@uifabric/react-cards": "^0.109.1",
     "@uxpin/merge-cli": "^2.4.1",
     "@webpack-cli/serve": "^0.1.8",
     "autoprefixer": "^9.6.1",
