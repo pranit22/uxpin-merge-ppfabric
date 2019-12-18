@@ -1,138 +1,121 @@
-import * as React from 'react';
+import { PPHeader as FPPHeader } from "@paypalcorp/console.pp-fabric";
 import * as PropTypes from 'prop-types';
-import { Pivot, PivotItem, TextField, Text, TooltipHost, ActionButton } from 'office-ui-fabric-react';
-import { mergeStyles } from '@uifabric/merge-styles';
-import { csv2arr } from '../_helpers/parser.jsx'
+import * as React from 'react';
 
-
-import './index.scss';
-import Persona from '../Persona/Persona'
-import Drawer from './Drawer/index.jsx'
-
-
-
-class PPHeader extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: null,
-            breadcrumbs: [],
-            menuItems: ['Projects', 'Products', 'Favorites']
-        }
-    }
-
-    componentDidMount() {
-        this.setState({ breadcrumbs: csv2arr(this.props.breadcrumbs).flat().map(v => v.trim()) })
-    }
-
-    onMenuClick(elm) {
-        let index = this.state.menuItems.indexOf(elm.props.itemKey) + 1;
-        let text = elm.props.headerText
-        this.setState({ open: text === 'Dashboard' ? null : text }, () => {
-            if (this.props[`onMenu${index}Click`]) this.props[`onMenu${index}Click`]()
-        })
-    }
-
-    onCloseClick() {
-        this.setState({ open: null })
-    }
-
-    onDocumentationClick() {
-        if (this.props[`onDocumentationClick`]) this.props[`onDocumentationClick`]()
-    }
-
-    render() {
-        let selectedKey = null
-        let p = this.props
-        let s = this.state
-        if (s.menuItems[this.props.selectedIndex - 1] && p.selectedIndex !== '') selectedKey = s.menuItems[p.selectedIndex - 1]
-        if (s.open) selectedKey = s.open
-        return (
-            <div className="PPHeaderComponent" style={{ backgroundColor: 'white' }}>
-                <Drawer
-                    open={s.open}
-                    onCloseClick={this.onCloseClick.bind(this)}
-                    productName={p.productName}
-                    breadcrumbs={s.breadcrumbs}
-                    onDocumentationClick={this.onDocumentationClick.bind(this)}
-                />
-
-                <div className="logo" onClick={p.onLogoClick}>
-                    <div className="logoImg"></div>
-                    <Text key="logo" className="logoTitle" variant='large'>Console</Text>
-                </div>
-
-                <div className="menu ">
-                    <Pivot onLinkClick={this.onMenuClick.bind(this)} selectedKey={selectedKey}>
-                        {s.menuItems.map(item => <PivotItem headerText={item} key={item} itemKey={item}></PivotItem>)}
-                    </Pivot>
-                </div>
-
-                <div className="search">
-                    <TextField placeholder="Do it all..." iconProps={{ iconName: 'Search' }} />
-                </div>
-
-                <div className="bar">
-                    <ActionButton
-                        onClick={() => { p.onTool1Click() }}
-                        iconProps={{ iconName: 'Ringer' }} >
-                    </ActionButton>
-                    <ActionButton
-                        onClick={() => { p.onTool2Click() }}
-                        iconProps={{ iconName: 'EmojiNeutral' }}>
-                    </ActionButton>
-                    <ActionButton
-                        onClick={() => { p.onTool3Click() }}
-                        iconProps={{ iconName: 'Unknown' }} >
-                    </ActionButton>
-                    <Persona onClick={() => { p.onPersonaClick() }}
-                        size="size24" presence="none" hidePersonaDetails />
-                </div>
-
-            </div >
-        )
-    }
-}
+const PPHeader = (props) => {
+  return (
+    <div style={{minWidth: '640px', width: props.width}}>
+      <FPPHeader {...props} />
+    </div>
+  )
+};
 
 PPHeader.propTypes = {
-    productName: PropTypes.string,
-    breadcrumbs: PropTypes.string,
+  width: PropTypes.number,
 
-    /** Which element number should be selected from 1 to n */
-    selectedIndex: PropTypes.number,
+  title: PropTypes.string.isRequired,
+  /** @uxpinpropname TitleMenu */
+  hasExtensionMenu: PropTypes.bool,
+  /** @uxpinpropname TitleClick */
+  titleCallback: PropTypes.func,
 
-    /** @uxpinpropname Logo click */
-    onLogoClick: PropTypes.func,
+  /**
+   *  @uxpindescription userInfo detail object
+   *  @uxpinpropname UserInfo */
+  userInfo: PropTypes.shape({
+    'sub': PropTypes.string.isRequired,
+    'Department': PropTypes.default.string.isRequired,
+    'Email': PropTypes.string.isRequired,
+    'DisplayName': PropTypes.string.isRequired,
+    'Country': PropTypes.string.isRequired,
+    'Desk': PropTypes.string.isRequired,
+    'GivenName': PropTypes.string.isRequired,
+    'Title': PropTypes.string.isRequired,
+    'Location': PropTypes.string.isRequired
+  }).isRequired,
 
-    /** @uxpinpropname Menu 1 click */
-    onMenu1Click: PropTypes.func,
+  // Search
 
-    /** @uxpinpropname Menu 2 click */
-    onMenu2Click: PropTypes.func,
+  /** @uxpinpropname Search */
+  hasSearch: PropTypes.bool,
+  /** @uxpinpropname SearchClick */
+  searchCallback: PropTypes.func,
 
-    /** @uxpinpropname Menu 3 click */
-    onMenu3Click: PropTypes.func,
+  // Notifications
 
-    /** @uxpinpropname Tool 1 click */
-    onTool1Click: PropTypes.func,
+  /** @uxpinpropname NotifButton */
+  hasNotificationButton: PropTypes.bool,
+  /** @uxpinpropname NotifBadge */
+  hasNotification: PropTypes.bool,
+  /** @uxpinpropname NotificationClick */
+  notificationCallback: PropTypes.func,
 
-    /** @uxpinpropname Tool 2 click */
-    onTool2Click: PropTypes.func,
+  // Info
 
-    /** @uxpinpropname Tool 3 click */
-    onTool3Click: PropTypes.func,
+  /** @uxpinpropname Info */
+  hasHelpButton: PropTypes.bool,
+  /** @uxpinpropname InfoClick */
+  helpCallback: PropTypes.func,
 
-    /** @uxpinpropname Persona click */
-    onPersonaClick: PropTypes.func,
+  // Feedback
 
-    /** @uxpinpropname Documentation click */
-    onDocumentationClick: PropTypes.func,
+  /** @uxpinpropname Feedback */
+  hasFeedbackButton: PropTypes.bool,
+  /** @uxpinpropname FeedbackClick */
+  feedbackCallback: PropTypes.func,
+
+  // Persona
+
+  /** @uxpinpropname Persona */
+  hasPersonaButton: PropTypes.bool,
+  /** @uxpinpropname PersonaClick */
+  personaCallback: PropTypes.func,
+
+  // Context Bar
+
+  /** @uxpinpropname ContextBar */
+  hasContextBar: PropTypes.bool,
+  /** @uxpinpropname Context
+   *  @uxpindescription type:id collection for context breadcrumb
+   * */
+  extensionContext: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
+  })),
+  /** @uxpinpropname ContextName */
+  extensionName: PropTypes.string,
+  /** @uxpinpropname ContextHomeClick */
+  homeCallback: PropTypes.func,
+  /** @uxpinpropname ContextHelpClick */
+  extensionDocCallback: PropTypes.func,
+
 };
 
 PPHeader.defaultProps = {
-    productName: 'Product name',
-    breadcrumbs: 'Topics, Create Topic',
-    selectedIndex: 1
-}
+  title: 'Console',
+
+  userInfo: {
+    sub: 'guest',
+    Department: 'foo',
+    Email: 'guest@paypal.com',
+    DisplayName: 'User, Guest',
+    Country: 'US',
+    Desk: '10.2.350',
+    GivenName: 'Guest',
+    Title: 'Grand Poobah',
+    Location: 'San Jose - North'
+  },
+  hasContextBar: true,
+  hasHelpButton: true,
+  hasNotification: false,
+  hasNotificationButton: true,
+  hasFeedbackButton: true,
+  hasPersonaButton: true,
+  hasExtensionMenu: true,
+  hasSearch: true,
+  extensionName: 'Foo',
+  extensionContext: [],
+  width: 1440
+};
 
 export { PPHeader as default };
