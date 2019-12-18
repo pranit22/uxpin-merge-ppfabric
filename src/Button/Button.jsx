@@ -60,7 +60,7 @@ Button.defaultProps = {
   primary: true,
   checked: false,
   disabled: false,
-  rounded: false,
+  rounded: true,
   // iconName: 'Dictionary',
   // iconPosition: 'end'
 };
