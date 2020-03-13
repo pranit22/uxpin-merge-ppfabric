@@ -9,6 +9,7 @@
     "server": "uxpin-merge server --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
     "start": "uxpin-merge --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --disable-tunneling",
     "push": "uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 258e3f84adad7ff4420400d965b6bb14f683acdc",
+    "push:experimental": "uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token bc0472edaf6eb932c4c8d487ee2c6bc81d4bb749",
     "debug": "uxpin-merge dump --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js > metadata.json",
     "kitchensink": "webpack-cli serve --config app/kitchensink/webpack.config.js"
   },
