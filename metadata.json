@@ -42,125 +42,309 @@
           "properties": [
             {
               "defaultValue": {
-                "value": "Product name"
+                "value": 1440
               },
               "description": "",
               "isRequired": false,
-              "name": "productName",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
-            },
-            {
-              "defaultValue": {
-                "value": "Topics, Create Topic"
-              },
-              "description": "",
-              "isRequired": false,
-              "name": "breadcrumbs",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
-            },
-            {
-              "defaultValue": {
-                "value": 1
-              },
-              "description": "Which element number should be selected from 1 to n",
-              "isRequired": false,
-              "name": "selectedIndex",
+              "name": "width",
               "type": {
                 "name": "number",
                 "structure": {}
               }
             },
             {
-              "customName": "Logo click",
+              "defaultValue": {
+                "value": "Console"
+              },
               "description": "",
               "isRequired": false,
-              "name": "onLogoClick",
+              "name": "title",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "TitleMenu",
+              "defaultValue": {
+                "value": true
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "hasExtensionMenu",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "TitleClick",
+              "description": "",
+              "isRequired": false,
+              "name": "titleCallback",
               "type": {
                 "name": "func",
                 "structure": {}
               }
             },
             {
-              "customName": "Menu 1 click",
+              "customDescription": "userInfo detail object",
+              "customName": "UserInfo",
+              "defaultValue": {
+                "value": {
+                  "Country": "US",
+                  "Department": "foo",
+                  "Desk": "10.2.350",
+                  "DisplayName": "User, Guest",
+                  "Email": "guest@paypal.com",
+                  "GivenName": "Guest",
+                  "Location": "San Jose - North",
+                  "Title": "Grand Poobah",
+                  "sub": "guest"
+                }
+              },
               "description": "",
               "isRequired": false,
-              "name": "onMenu1Click",
+              "name": "userInfo",
+              "type": {
+                "name": "shape",
+                "structure": {
+                  "Country": {
+                    "name": "string",
+                    "structure": {}
+                  },
+                  "Department": {
+                    "name": "string",
+                    "structure": {}
+                  },
+                  "Desk": {
+                    "name": "string",
+                    "structure": {}
+                  },
+                  "DisplayName": {
+                    "name": "string",
+                    "structure": {}
+                  },
+                  "Email": {
+                    "name": "string",
+                    "structure": {}
+                  },
+                  "GivenName": {
+                    "name": "string",
+                    "structure": {}
+                  },
+                  "Location": {
+                    "name": "string",
+                    "structure": {}
+                  },
+                  "Title": {
+                    "name": "string",
+                    "structure": {}
+                  },
+                  "sub": {
+                    "name": "string",
+                    "structure": {}
+                  }
+                }
+              }
+            },
+            {
+              "customName": "Search",
+              "defaultValue": {
+                "value": true
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "hasSearch",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "SearchClick",
+              "description": "",
+              "isRequired": false,
+              "name": "searchCallback",
               "type": {
                 "name": "func",
                 "structure": {}
               }
             },
             {
-              "customName": "Menu 2 click",
+              "customName": "NotifButton",
+              "defaultValue": {
+                "value": true
+              },
               "description": "",
               "isRequired": false,
-              "name": "onMenu2Click",
+              "name": "hasNotificationButton",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "NotifBadge",
+              "defaultValue": {
+                "value": false
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "hasNotification",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "NotificationClick",
+              "description": "",
+              "isRequired": false,
+              "name": "notificationCallback",
               "type": {
                 "name": "func",
                 "structure": {}
               }
             },
             {
-              "customName": "Menu 3 click",
+              "customName": "Info",
+              "defaultValue": {
+                "value": true
+              },
               "description": "",
               "isRequired": false,
-              "name": "onMenu3Click",
+              "name": "hasHelpButton",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "InfoClick",
+              "description": "",
+              "isRequired": false,
+              "name": "helpCallback",
               "type": {
                 "name": "func",
                 "structure": {}
               }
             },
             {
-              "customName": "Tool 1 click",
+              "customName": "Feedback",
+              "defaultValue": {
+                "value": true
+              },
               "description": "",
               "isRequired": false,
-              "name": "onTool1Click",
+              "name": "hasFeedbackButton",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "FeedbackClick",
+              "description": "",
+              "isRequired": false,
+              "name": "feedbackCallback",
               "type": {
                 "name": "func",
                 "structure": {}
               }
             },
             {
-              "customName": "Tool 2 click",
+              "customName": "Persona",
+              "defaultValue": {
+                "value": true
+              },
               "description": "",
               "isRequired": false,
-              "name": "onTool2Click",
+              "name": "hasPersonaButton",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "PersonaClick",
+              "description": "",
+              "isRequired": false,
+              "name": "personaCallback",
               "type": {
                 "name": "func",
                 "structure": {}
               }
             },
             {
-              "customName": "Tool 3 click",
+              "customName": "ContextBar",
+              "defaultValue": {
+                "value": true
+              },
               "description": "",
               "isRequired": false,
-              "name": "onTool3Click",
+              "name": "hasContextBar",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "type:id collection for context breadcrumb",
+              "customName": "Context",
+              "defaultValue": {
+                "value": []
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "extensionContext",
+              "type": {
+                "name": "typedArray",
+                "structure": {
+                  "memberType": {
+                    "name": "shape",
+                    "structure": {
+                      "id": {
+                        "name": "string",
+                        "structure": {}
+                      },
+                      "type": {
+                        "name": "string",
+                        "structure": {}
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "customName": "ContextName",
+              "defaultValue": {
+                "value": "Foo"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "extensionName",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customName": "ContextHomeClick",
+              "description": "",
+              "isRequired": false,
+              "name": "homeCallback",
               "type": {
                 "name": "func",
                 "structure": {}
               }
             },
             {
-              "customName": "Persona click",
+              "customName": "ContextHelpClick",
               "description": "",
               "isRequired": false,
-              "name": "onPersonaClick",
-              "type": {
-                "name": "func",
-                "structure": {}
-              }
-            },
-            {
-              "customName": "Documentation click",
-              "description": "",
-              "isRequired": false,
-              "name": "onDocumentationClick",
+              "name": "extensionDocCallback",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -204,10 +388,7 @@
               "elements": {
                 "actionbutton1": {
                   "name": "ActionButton",
-                  "props": {
-                    "iconName": "GlobalNavButton",
-                    "text": "Action Button"
-                  }
+                  "props": {}
                 }
               },
               "name": "default",
@@ -216,18 +397,62 @@
           ],
           "properties": [
             {
+              "customDescription": "The displayed text on the button (Optional)",
+              "customName": "Text",
               "defaultValue": {
-                "value": false
+                "value": "Basic Action Button"
               },
               "description": "",
               "isRequired": false,
-              "name": "checked",
+              "name": "text",
               "type": {
-                "name": "boolean",
+                "name": "string",
                 "structure": {}
               }
             },
             {
+              "customDescription": "The exact name from the PayPal icon library (Optional)",
+              "customName": "Icon Name",
+              "defaultValue": {
+                "value": "Launch"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "iconName",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "The location to display an icon, if one is set",
+              "customName": "Icon Position",
+              "description": "",
+              "isRequired": false,
+              "name": "iconPosition",
+              "type": {
+                "name": "union",
+                "structure": {
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "start"
+                      }
+                    },
+                    {
+                      "name": "literal",
+                      "structure": {
+                        "value": "end"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "customDescription": "To disable the control",
+              "customName": "Disabled",
               "defaultValue": {
                 "value": false
               },
@@ -240,42 +465,11 @@
               }
             },
             {
-              "defaultValue": {
-                "value": "GlobalNavButton"
-              },
-              "description": "",
-              "isRequired": false,
-              "name": "iconName",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
-            },
-            {
-              "defaultValue": {
-                "value": "Action Button"
-              },
-              "description": "",
-              "isRequired": false,
-              "name": "text",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
-            },
-            {
+              "customDescription": "Fires when the button is clicked on",
+              "customName": "Click",
               "description": "",
               "isRequired": false,
               "name": "onClick",
-              "type": {
-                "name": "func",
-                "structure": {}
-              }
-            },
-            {
-              "description": "",
-              "isRequired": false,
-              "name": "onChange",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -314,9 +508,7 @@
               "elements": {
                 "checkbox1": {
                   "name": "Checkbox",
-                  "props": {
-                    "label": "Checkbox"
-                  }
+                  "props": {}
                 }
               },
               "name": "default",
@@ -325,6 +517,8 @@
           ],
           "properties": [
             {
+              "customDescription": "To display the box before the start or after end of the text.",
+              "customName": "Box Side",
               "defaultValue": {
                 "value": "start"
               },
@@ -352,18 +546,22 @@
               }
             },
             {
+              "customDescription": "The checked state of the control.",
+              "customName": "Checked",
               "defaultValue": {
                 "value": false
               },
               "description": "",
               "isRequired": false,
-              "name": "defaultChecked",
+              "name": "isChecked",
               "type": {
                 "name": "boolean",
                 "structure": {}
               }
             },
             {
+              "customDescription": "To disable the control",
+              "customName": "Disabled",
               "defaultValue": {
                 "value": false
               },
@@ -376,14 +574,33 @@
               }
             },
             {
+              "customDescription": "The displayed text for the checkbox",
+              "customName": "Text",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 3
+                }
+              },
               "defaultValue": {
-                "value": "Checkbox"
+                "value": "Basic Checkbox"
               },
               "description": "",
               "isRequired": false,
               "name": "label",
               "type": {
                 "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "Fires when the checked state changes.",
+              "customName": "Value Change",
+              "description": "",
+              "isRequired": false,
+              "name": "onChange",
+              "type": {
+                "name": "func",
                 "structure": {}
               }
             }
@@ -420,12 +637,7 @@
               "elements": {
                 "choicegroup1": {
                   "name": "ChoiceGroup",
-                  "props": {
-                    "choices": "one,two,three,four",
-                    "defaultSelectedKey": "one",
-                    "label": "ChoiceGroup (remove to clear label)",
-                    "required": false
-                  }
+                  "props": {}
                 }
               },
               "name": "default",
@@ -434,8 +646,16 @@
           ],
           "properties": [
             {
+              "customDescription": "The label for the options",
+              "customName": "Label",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 2
+                }
+              },
               "defaultValue": {
-                "value": "ChoiceGroup (remove to clear label)"
+                "value": "Basic ChoiceGroup"
               },
               "description": "",
               "isRequired": false,
@@ -446,6 +666,11 @@
               }
             },
             {
+              "customDescription": "To display the 'required' flag on the label",
+              "customName": "Required",
+              "defaultValue": {
+                "value": false
+              },
               "description": "",
               "isRequired": false,
               "name": "required",
@@ -455,14 +680,16 @@
               }
             },
             {
+              "customDescription": "The list of options. Separate each option with a comma.",
+              "customName": "Options",
               "customType": {
                 "name": "textfield",
                 "structure": {
-                  "rows": 2
+                  "rows": 6
                 }
               },
               "defaultValue": {
-                "value": "one,two,three,four"
+                "value": "Apples, Bananas, Grapes, Oranges"
               },
               "description": "",
               "isRequired": false,
@@ -473,14 +700,27 @@
               }
             },
             {
+              "customDescription": "The 1-based index value of the default item to be shown as selected (Optional)",
+              "customName": "Selected Index",
               "defaultValue": {
-                "value": "one"
+                "value": 1
               },
               "description": "",
               "isRequired": false,
-              "name": "defaultSelectedKey",
+              "name": "selectedIndex",
               "type": {
-                "name": "string",
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "Fires when the checked state changes.",
+              "customName": "Value Change",
+              "description": "",
+              "isRequired": false,
+              "name": "onChange",
+              "type": {
+                "name": "func",
                 "structure": {}
               }
             }
@@ -517,16 +757,7 @@
               "elements": {
                 "ComboBox1": {
                   "name": "ComboBox",
-                  "props": {
-                    "allowFreeform": true,
-                    "autoComplete": "on",
-                    "defaultSelectedKey": "Banana",
-                    "items": "Apple,Banana,Orange,Grape",
-                    "label": "ComboBox label",
-                    "multiSelect": true,
-                    "placeholder": "Select or type an option",
-                    "width": 300
-                  }
+                  "props": {}
                 }
               },
               "name": "default",
@@ -535,10 +766,18 @@
           ],
           "properties": [
             {
-              "defaultValue": {
-                "value": "ComboBox label (clear to remove)"
+              "customDescription": "The label for the control",
+              "customName": "Label",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 2
+                }
               },
-              "description": "Could be empty to remove label",
+              "defaultValue": {
+                "value": "Basic ComboBox"
+              },
+              "description": "",
               "isRequired": false,
               "name": "label",
               "type": {
@@ -547,6 +786,11 @@
               }
             },
             {
+              "customDescription": "Placeholder text to show until an item(s) is selected",
+              "customName": "Placeholder",
+              "defaultValue": {
+                "value": " - Select -"
+              },
               "description": "",
               "isRequired": false,
               "name": "placeholder",
@@ -556,40 +800,25 @@
               }
             },
             {
-              "description": "",
+              "customDescription": "Whether the ComboBox auto completes. As the user is inputing text, it will be suggested potential matches from the list of options.",
+              "customName": "Auto-Complete",
+              "defaultValue": {
+                "value": "off"
+              },
+              "description": "Microsoft uses the values: \"on\", \"off\"",
               "isRequired": false,
-              "name": "allowFreeform",
+              "name": "autoComplete",
               "type": {
                 "name": "boolean",
                 "structure": {}
               }
             },
             {
-              "customDescription": "use \"on\" or \"off\" labels",
-              "description": "Use \"on\" or \"off\" labels",
-              "isRequired": false,
-              "name": "autoComplete",
-              "type": {
-                "name": "union",
-                "structure": {
-                  "elements": [
-                    {
-                      "name": "literal",
-                      "structure": {
-                        "value": "on"
-                      }
-                    },
-                    {
-                      "name": "literal",
-                      "structure": {
-                        "value": "off"
-                      }
-                    }
-                  ]
-                }
-              }
-            },
-            {
+              "customDescription": "To allow multiple selections",
+              "customName": "Multi-select",
+              "defaultValue": {
+                "value": false
+              },
               "description": "",
               "isRequired": false,
               "name": "multiSelect",
@@ -599,18 +828,22 @@
               }
             },
             {
+              "customDescription": "To disable the control",
+              "customName": "Disabled",
               "defaultValue": {
-                "value": 300
+                "value": false
               },
               "description": "",
               "isRequired": false,
-              "name": "width",
+              "name": "disabled",
               "type": {
-                "name": "number",
+                "name": "boolean",
                 "structure": {}
               }
             },
             {
+              "customDescription": "An error message to display below the control. Setting this value also displays the control in an error state.",
+              "customName": "Error Message",
               "description": "",
               "isRequired": false,
               "name": "errorMessage",
@@ -620,14 +853,15 @@
               }
             },
             {
+              "customDescription": "The list of available options. Separate items with a comma.",
               "customType": {
                 "name": "textfield",
                 "structure": {
-                  "rows": 3
+                  "rows": 4
                 }
               },
               "defaultValue": {
-                "value": "Apple,Banana,Orange,Grape"
+                "value": "Apples, Bananas, Grapes, Pears"
               },
               "description": "",
               "isRequired": false,
@@ -638,36 +872,11 @@
               }
             },
             {
-              "description": "Coma separated values to preselect",
+              "customDescription": "Fires when the selected item(s) changes.",
+              "customName": "Value Change",
+              "description": "",
               "isRequired": false,
-              "name": "defaultSelectedKey",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
-            },
-            {
-              "description": "Triggered when Select is opened",
-              "isRequired": false,
-              "name": "onMenuOpen",
-              "type": {
-                "name": "func",
-                "structure": {}
-              }
-            },
-            {
-              "description": "Triggered when Select is focused",
-              "isRequired": false,
-              "name": "onFocus",
-              "type": {
-                "name": "func",
-                "structure": {}
-              }
-            },
-            {
-              "description": "Triggered when value is selected",
-              "isRequired": false,
-              "name": "onPendingValueChanged",
+              "name": "onChange",
               "type": {
                 "name": "func",
                 "structure": {}
@@ -706,12 +915,7 @@
               "elements": {
                 "dropdown1": {
                   "name": "Dropdown",
-                  "props": {
-                    "inputWidth": 300,
-                    "items": "Apple,Banana,Orange,Grape",
-                    "label": "Label (optional)",
-                    "placeholder": "Select an option"
-                  }
+                  "props": {}
                 }
               },
               "name": "default",
@@ -720,35 +924,16 @@
           ],
           "properties": [
             {
-              "description": "",
-              "isRequired": false,
-              "name": "disabled",
-              "type": {
-                "name": "boolean",
-                "structure": {}
-              }
-            },
-            {
-              "description": "",
-              "isRequired": false,
-              "name": "required",
-              "type": {
-                "name": "boolean",
-                "structure": {}
-              }
-            },
-            {
-              "description": "",
-              "isRequired": false,
-              "name": "multiSelect",
-              "type": {
-                "name": "boolean",
-                "structure": {}
-              }
-            },
-            {
+              "customDescription": "The label for the control",
+              "customName": "Label",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 2
+                }
+              },
               "defaultValue": {
-                "value": "label (clear to remove)"
+                "value": "Basic Dropdown"
               },
               "description": "",
               "isRequired": false,
@@ -759,41 +944,96 @@
               }
             },
             {
+              "customDescription": "Placeholder text to show until an item(s) is selected",
+              "customName": "Placeholder",
               "defaultValue": {
-                "value": 300
+                "value": " - Select -"
               },
               "description": "",
               "isRequired": false,
-              "name": "inputWidth",
+              "name": "placeholder",
               "type": {
-                "name": "number",
+                "name": "string",
                 "structure": {}
               }
             },
             {
+              "customDescription": "To disable the control",
+              "customName": "Disabled",
+              "defaultValue": {
+                "value": false
+              },
               "description": "",
               "isRequired": false,
-              "name": "advancedOptions",
+              "name": "disabled",
               "type": {
-                "name": "object",
+                "name": "boolean",
                 "structure": {}
               }
             },
             {
+              "customDescription": "To allow multiple selections",
+              "customName": "Multi-select",
+              "description": "",
+              "isRequired": false,
+              "name": "multiSelect",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "An error message to display below the control. Setting this value also displays the control in an error state.",
+              "customName": "Error Message",
+              "description": "",
+              "isRequired": false,
+              "name": "errorMessage",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "To display the 'required' flag on the label",
+              "customName": "Required",
+              "defaultValue": {
+                "value": false
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "required",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "The list of available options. Separate items with a comma.",
               "customType": {
                 "name": "textfield",
                 "structure": {
-                  "rows": 2
+                  "rows": 4
                 }
               },
               "defaultValue": {
-                "value": "Apple,Orange,Cranberry"
+                "value": "Apples, Bananas, Grapes, Pears"
               },
               "description": "",
               "isRequired": false,
               "name": "items",
               "type": {
                 "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "Fires when the selected item(s) changes.",
+              "customName": "Value Change",
+              "description": "",
+              "isRequired": false,
+              "name": "onChange",
+              "type": {
+                "name": "func",
                 "structure": {}
               }
             }
@@ -831,7 +1071,9 @@
                 "button1": {
                   "name": "Button",
                   "props": {
-                    "text": "Button Name"
+                    "style": {
+                      "width": "100%"
+                    }
                   }
                 }
               },
@@ -841,8 +1083,10 @@
           ],
           "properties": [
             {
+              "customDescription": "The displayed text on the button",
+              "customName": "Text",
               "defaultValue": {
-                "value": "Button Name"
+                "value": "Basic Button"
               },
               "description": "",
               "isRequired": false,
@@ -853,6 +1097,8 @@
               }
             },
             {
+              "customDescription": "To display the button in the filled style. Otherwise, displays in the outline style",
+              "customName": "Primary Style",
               "defaultValue": {
                 "value": true
               },
@@ -865,18 +1111,19 @@
               }
             },
             {
-              "defaultValue": {
-                "value": false
-              },
+              "customDescription": "The exact name from the PayPal icon library (Optional)",
+              "customName": "Icon Name",
               "description": "",
               "isRequired": false,
-              "name": "checked",
+              "name": "iconName",
               "type": {
-                "name": "boolean",
+                "name": "string",
                 "structure": {}
               }
             },
             {
+              "customDescription": "To disable the control",
+              "customName": "Disabled",
               "defaultValue": {
                 "value": false
               },
@@ -889,15 +1136,8 @@
               }
             },
             {
-              "description": "",
-              "isRequired": false,
-              "name": "iconName",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
-            },
-            {
+              "customDescription": "The location to display an icon, if one is set",
+              "customName": "Icon Position",
               "description": "",
               "isRequired": false,
               "name": "iconPosition",
@@ -922,8 +1162,10 @@
               }
             },
             {
+              "customDescription": "Sets whether to display the button in the rounded PayPal UI style.",
+              "customName": "Rounded",
               "defaultValue": {
-                "value": false
+                "value": true
               },
               "description": "",
               "isRequired": false,
@@ -934,6 +1176,8 @@
               }
             },
             {
+              "customDescription": "Fires when the button is clicked on.",
+              "customName": "Click",
               "description": "",
               "isRequired": false,
               "name": "onClick",
@@ -975,10 +1219,7 @@
               "elements": {
                 "textfield1": {
                   "name": "TextField",
-                  "props": {
-                    "inputWidth": 300,
-                    "label": "Textfield Label (clear to remove)"
-                  }
+                  "props": {}
                 }
               },
               "name": "default",
@@ -987,74 +1228,16 @@
           ],
           "properties": [
             {
-              "description": "",
-              "isRequired": false,
-              "name": "autoAdjustHeight",
-              "type": {
-                "name": "boolean",
-                "structure": {}
-              }
-            },
-            {
-              "description": "",
-              "isRequired": false,
-              "name": "description",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
-            },
-            {
-              "description": "",
-              "isRequired": false,
-              "name": "defaultValue",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
-            },
-            {
-              "description": "",
-              "isRequired": false,
-              "name": "disabled",
-              "type": {
-                "name": "boolean",
-                "structure": {}
-              }
-            },
-            {
-              "description": "",
-              "isRequired": false,
-              "name": "errorMessage",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
-            },
-            {
-              "description": "",
-              "isRequired": false,
-              "name": "icon",
-              "type": {
-                "name": "string",
-                "structure": {}
-              }
-            },
-            {
-              "defaultValue": {
-                "value": 300
+              "customDescription": "The label for the switch",
+              "customName": "Label",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 2
+                }
               },
-              "description": "",
-              "isRequired": false,
-              "name": "inputWidth",
-              "type": {
-                "name": "number",
-                "structure": {}
-              }
-            },
-            {
               "defaultValue": {
-                "value": "Label (clear to remove)"
+                "value": "Basic Text Field"
               },
               "description": "",
               "isRequired": false,
@@ -1065,6 +1248,106 @@
               }
             },
             {
+              "customDescription": "For multiline text fields, whether or not to auto adjust text field height",
+              "customName": "Auto Adjust Height",
+              "defaultValue": {
+                "value": false
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "autoAdjustHeight",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "Description displayed below the text field to provide additional details about what text to enter",
+              "customName": "Description",
+              "description": "",
+              "isRequired": false,
+              "name": "description",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "Current value of the text field",
+              "customName": "Value",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 3
+                }
+              },
+              "defaultValue": {
+                "value": ""
+              },
+              "description": "We give this property a unique name to avoid collisions. We map its value to the control's 'value' prop.",
+              "isRequired": false,
+              "name": "textValue",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "Placeholder text to show in the text field when it's empty",
+              "customName": "Placeholder",
+              "defaultValue": {
+                "value": "Enter some text"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "placeholder",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "To disable the control",
+              "customName": "Disabled",
+              "defaultValue": {
+                "value": false
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "disabled",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "An error message to display below the control. Setting this value also displays the control in an error state.",
+              "customName": "Error Message",
+              "description": "",
+              "isRequired": false,
+              "name": "errorMessage",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "The exact name from the PayPal icon library. Displays on the right side. (Optional)",
+              "customName": "Icon Name",
+              "description": "",
+              "isRequired": false,
+              "name": "icon",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "Whether or not the text field is a multiline text field",
+              "customName": "Multiline",
+              "defaultValue": {
+                "value": false
+              },
               "description": "",
               "isRequired": false,
               "name": "multiline",
@@ -1074,6 +1357,8 @@
               }
             },
             {
+              "customDescription": "Text to display within the front section of the text field",
+              "customName": "Prefix",
               "description": "",
               "isRequired": false,
               "name": "prefix",
@@ -1083,6 +1368,8 @@
               }
             },
             {
+              "customDescription": "Text to display within the end section of the text field",
+              "customName": "Suffix",
               "description": "",
               "isRequired": false,
               "name": "suffix",
@@ -1092,6 +1379,11 @@
               }
             },
             {
+              "customDescription": "To set the control to read-only mode",
+              "customName": "Read Only",
+              "defaultValue": {
+                "value": false
+              },
               "description": "",
               "isRequired": false,
               "name": "readOnly",
@@ -1101,11 +1393,24 @@
               }
             },
             {
+              "customDescription": "To display the 'required' flag on the label",
+              "customName": "Required",
               "description": "",
               "isRequired": false,
               "name": "required",
               "type": {
                 "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "Fires when the text value changes.",
+              "customName": "Value Change",
+              "description": "We give this property a unique name to avoid collisions. We map its value to the control's 'onChange' prop.",
+              "isRequired": false,
+              "name": "onValueChange",
+              "type": {
+                "name": "func",
                 "structure": {}
               }
             }
@@ -1151,6 +1456,28 @@
           ],
           "properties": [
             {
+              "customDescription": "The label for the switch",
+              "customName": "Label",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 2
+                }
+              },
+              "defaultValue": {
+                "value": "Basic Toggle"
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "label",
+              "type": {
+                "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "The text to show when the value is on (Required)",
+              "customName": "On Text",
               "defaultValue": {
                 "value": "On"
               },
@@ -1163,6 +1490,8 @@
               }
             },
             {
+              "customDescription": "The text to show when the value is off (Required)",
+              "customName": "Off Text",
               "defaultValue": {
                 "value": "Off"
               },
@@ -1175,30 +1504,36 @@
               }
             },
             {
+              "customDescription": "The checked state of the control",
+              "customName": "Checked",
               "defaultValue": {
                 "value": true
               },
               "description": "",
               "isRequired": false,
-              "name": "defaultChecked",
+              "name": "isChecked",
               "type": {
                 "name": "boolean",
                 "structure": {}
               }
             },
             {
+              "customDescription": "To position on the same line as the control (true), or above the control (false)",
+              "customName": "Inline Label",
               "defaultValue": {
-                "value": "Toggle label"
+                "value": true
               },
               "description": "",
               "isRequired": false,
-              "name": "label",
+              "name": "inlineLabel",
               "type": {
-                "name": "string",
+                "name": "boolean",
                 "structure": {}
               }
             },
             {
+              "customDescription": "To disable the control",
+              "customName": "Disabled",
               "defaultValue": {
                 "value": false
               },
@@ -1211,6 +1546,8 @@
               }
             },
             {
+              "customDescription": "Fires when the toggle state changes.",
+              "customName": "Value Change",
               "description": "",
               "isRequired": false,
               "name": "onChange",
@@ -1252,7 +1589,12 @@
               "elements": {
                 "slider1": {
                   "name": "Slider",
-                  "props": {}
+                  "props": {
+                    "style": {
+                      "height": "100%",
+                      "width": "100%"
+                    }
+                  }
                 }
               },
               "name": "default",
@@ -1261,6 +1603,14 @@
           ],
           "properties": [
             {
+              "customDescription": "Description label of the Slider",
+              "customName": "Label",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 2
+                }
+              },
               "defaultValue": {
                 "value": "Basic Slider"
               },
@@ -1273,6 +1623,8 @@
               }
             },
             {
+              "customDescription": "The minimum value of the Slider",
+              "customName": "Min",
               "defaultValue": {
                 "value": 0
               },
@@ -1285,6 +1637,8 @@
               }
             },
             {
+              "customDescription": "The max value of the Slider",
+              "customName": "Max",
               "defaultValue": {
                 "value": 10
               },
@@ -1297,6 +1651,8 @@
               }
             },
             {
+              "customDescription": "The difference between the two adjacent values of the Slider",
+              "customName": "Step",
               "defaultValue": {
                 "value": 1
               },
@@ -1309,6 +1665,8 @@
               }
             },
             {
+              "customDescription": "Optional flag to render the slider vertically. Defaults to rendering horizontal",
+              "customName": "Vertical",
               "defaultValue": {
                 "value": false
               },
@@ -1321,18 +1679,36 @@
               }
             },
             {
+              "customDescription": "The value of the Slider",
+              "customName": "Value",
               "defaultValue": {
                 "value": 2
               },
               "description": "",
               "isRequired": false,
-              "name": "defaultValue",
+              "name": "value",
               "type": {
                 "name": "number",
                 "structure": {}
               }
             },
             {
+              "customDescription": "Optional flag whether to display the current Slider value",
+              "customName": "Show Value",
+              "defaultValue": {
+                "value": true
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "showValue",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "Fires when the Slider value changes.",
+              "customName": "Value Change",
               "description": "",
               "isRequired": false,
               "name": "onChange",
@@ -1383,18 +1759,28 @@
           ],
           "properties": [
             {
+              "customDescription": "The numeric value of the SpinButton (Required)",
+              "customName": "Value",
               "defaultValue": {
                 "value": "1"
               },
               "description": "",
               "isRequired": false,
-              "name": "defaultValue",
+              "name": "value",
               "type": {
                 "name": "string",
                 "structure": {}
               }
             },
             {
+              "customDescription": "Description label of the SpinButton",
+              "customName": "Label",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 2
+                }
+              },
               "defaultValue": {
                 "value": "Basic SpinButton"
               },
@@ -1407,6 +1793,8 @@
               }
             },
             {
+              "customDescription": "The minimum value of the SpinButton",
+              "customName": "Min",
               "defaultValue": {
                 "value": 0
               },
@@ -1419,6 +1807,8 @@
               }
             },
             {
+              "customDescription": "The maximum value of the SpinButton",
+              "customName": "Max",
               "defaultValue": {
                 "value": 10
               },
@@ -1431,6 +1821,8 @@
               }
             },
             {
+              "customDescription": "The amount to raise or lower the value when clicking on the up or down buttons",
+              "customName": "Step",
               "defaultValue": {
                 "value": 0.5
               },
@@ -1438,7 +1830,52 @@
               "isRequired": false,
               "name": "step",
               "type": {
+                "name": "number",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "A little tooltip that will display on hover",
+              "customName": "Tooltip",
+              "customType": {
+                "name": "textfield",
+                "structure": {
+                  "rows": 2
+                }
+              },
+              "defaultValue": {
+                "value": ""
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "title",
+              "type": {
                 "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "To disable the control",
+              "customName": "Disabled",
+              "defaultValue": {
+                "value": false
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "disabled",
+              "type": {
+                "name": "boolean",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "Fires when the value has changed",
+              "customName": "Value Changed",
+              "description": "",
+              "isRequired": false,
+              "name": "onChange",
+              "type": {
+                "name": "func",
                 "structure": {}
               }
             }
@@ -2285,7 +2722,7 @@
           "properties": [
             {
               "defaultValue": {
-                "value": "foo,bar,baz"
+                "value": "Home, Category Page, Details Page"
               },
               "description": "",
               "isRequired": false,
@@ -2990,8 +3427,10 @@
           ],
           "properties": [
             {
+              "customDescription": "Reflect the control's role in the UI with its visual style",
+              "customName": "Role",
               "defaultValue": {
-                "value": "None"
+                "value": "Default"
               },
               "description": "",
               "isRequired": false,
@@ -3003,25 +3442,25 @@
                     {
                       "name": "literal",
                       "structure": {
-                        "value": "None"
+                        "value": "Default"
                       }
                     },
                     {
                       "name": "literal",
                       "structure": {
-                        "value": "Green"
+                        "value": "Success"
                       }
                     },
                     {
                       "name": "literal",
                       "structure": {
-                        "value": "Yellow"
+                        "value": "Warning"
                       }
                     },
                     {
                       "name": "literal",
                       "structure": {
-                        "value": "Red"
+                        "value": "Error"
                       }
                     }
                   ]
@@ -3029,8 +3468,10 @@
               }
             },
             {
+              "customDescription": "The description text to reflect the percent complete.",
+              "customName": "Description",
               "defaultValue": {
-                "value": "Enter text here"
+                "value": "Progress info"
               },
               "description": "",
               "isRequired": false,
@@ -3041,6 +3482,8 @@
               }
             },
             {
+              "customDescription": "Use a value between 0 - 1.0",
+              "customName": "Percent",
               "defaultValue": {
                 "value": "0.5"
               },
@@ -3049,6 +3492,20 @@
               "name": "percent",
               "type": {
                 "name": "string",
+                "structure": {}
+              }
+            },
+            {
+              "customDescription": "To display in indeterminate mode rather than show a percent",
+              "customName": "Indeterminate",
+              "defaultValue": {
+                "value": false
+              },
+              "description": "",
+              "isRequired": false,
+              "name": "indeterminate",
+              "type": {
+                "name": "boolean",
                 "structure": {}
               }
             }
@@ -3295,6 +3752,6 @@
   "name": "MS Fabric UXPin Merge",
   "vcs": {
     "branchName": "master",
-    "commitHash": "2197cdf3d53d8f2f2521cfc24a827f5a0c9eb9d8"
+    "commitHash": "6193bb2c6a94ec258b8faada1b3a257735aa2dc6"
   }
 }

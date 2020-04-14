@@ -84,10 +84,8 @@ export const getTokens = inputStr => {
         }
       })}
       iconProps={{ iconName: token.target }} />)
-
     return suggestions
   }
-
   const makeToken = t => {
     let token = {
       tokenString: t,
@@ -99,15 +97,11 @@ export const getTokens = inputStr => {
     token.suggestions = getSuggestions(token)
     return token
   }
-
   let tokens = ts.map(t => makeToken(t))
-
   let mixed = str.split(/\s(?![^\(]*\))/g).map(el => {
     let token = el.match(reg)
     return token ? makeToken(el) : el
   })
-
-
   return {
     text: mixed.filter(el => typeof el === 'string').join(' '),
     tokens,

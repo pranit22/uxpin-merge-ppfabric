@@ -1,79 +1,223 @@
-import { Pivot as FPivot, PivotItem, colGroupProperties } from 'office-ui-fabric-react';
+import { Pivot as FPivot, 
+    PivotItem, 
+    PivotLinkSize,
+    StyleConstants
+  } from 'office-ui-fabric-react/lib/Pivot';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import { csv2arr } from '../_helpers/parser'
+import { getTokens, csv2arr } from '../_helpers/parser';
+
+
+
+  /**
+   * UPDATED April 3, 2020 by Anthony Hand
+   * - Added support for showing tabs with icons.
+   * - Added support for the user to put commas in tab text. Text a comma must be enclosed in quotes.
+   */
+
+  /**
+   * UPDATED Mar 25, 2020 by Anthony Hand
+   * - Added support for specifying whether the pivot text is normal or large. 
+   * - Refactored how props are set in the Render function.
+   * - Added descriptions and prop names for each property with some updates. Changed some prop names.
+   * 
+   * TODOs
+   * - Waiting for guidance from UXPin on how to expose a return value on at runtime within UXPin.
+   * - Must support escaped commas and being able to add icons.
+   * 
+   * For additional outstanding issues, please see: 
+   *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/102
+   * */
+
+
+//Default pivot tab items to populate the control with.
+//Leave these left aligned as they show up in UXPin exactly as-is. 
+const defaultTabs = `Tab One
+Tab Two
+Tab Three
+Tab Four`; 
+
 
 class Pivot extends React.Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       tabs: [],
       selectedIndex: this.props.selectedIndex
     }
   }
 
+
   componentDidMount() {
-    this.setState({ tabs: csv2arr(this.props.tabs)[0] })
+    this.setItems();
   }
 
-  onLinkClick(element) {
-    const selectedIndex = parseInt(element.key.replace(/\D+/g, '')) + 1;
-    this.setState({ selectedIndex })
-    if (this.props[`onLink${selectedIndex}Click`])
-      this.props[`onLink${selectedIndex}Click`]()
+  //Get the user-entered left icon name, if there is one
+  getLeftIcon(str) {
+    const tokens = getTokens(str).tokens
+    const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start')
+    return leftIcon ? leftIcon.target : null
+}
+
+  //Parse the choice items
+  setItems() {
+    let items = csv2arr(this.props.tabs)
+        .flat()
+        .map((val, index) => ({
+            text: getTokens(val).text,
+            key: index + 1,
+            icon: this.getLeftIcon(val)
+        }));
+
+    this.setState({
+      tabs: items
+    });
   }
+
+
+  _onLinkClick(selectedItem) {
+
+    //The index comes in 1-based. 
+    const selectedIndex = selectedItem.props.itemKey;
+
+    this.setState(
+      { selectedIndex: selectedIndex }
+    )
+
+    //If the prop for an individual tab's click event exists, let's push it. 
+    //Raise this event to UXPin. We'll send them info about which item was clicked on in case they can catch it.
+    if (this.props[`onLink${selectedIndex}Click`]) {
+      this.props[`onLink${selectedIndex}Click`](selectedIndex);
+    }
+  }
+
+
   render() {
-    let s = this.state
+
+    //Set up the tabs
+    //Microsoft makes us instantiate tabs individually. For some reason, we can't set the tabs through props.
+    let tabs = this.state.tabs;
+    var i;
+    var tabList = [];
+    for (i = 0; i < tabs.length; i++) {
+      let t = tabs[i];
+      //The key is already 1 based
+      let tab = (
+        <PivotItem 
+            headerText={t.text} 
+            itemKey={t.key} 
+            key={t.key} 
+            itemIcon={t.icon}
+        />
+      );
+      tabList.push(tab);
+    }
+
+    //The prop is 1-based. The tab keys are also 1-based.
+    let key = this.state.selectedIndex;
+
     return (
-      <div style={{ display: 'block' }}>
-        {this.state.tabs.length > 0 ?
-          <FPivot {...this.props}
-            selectedKey={s.tabs[s.selectedIndex - 1]}
-            onLinkClick={(e) => { this.onLinkClick(e); }} >
-            {s.tabs.map((tab, idx) => (
-              <PivotItem headerText={tab} itemKey={tab} key={idx} />
-            ))}
+
+          <FPivot 
+              {...this.props} //List this one first!! THen our overrides. 
+              selectedKey = { key }
+              linkSize = { PivotLinkSize[this.props.linkSize] }
+              onLinkClick={(pi) => { this._onLinkClick(pi); }} >
+                { tabList }
           </FPivot>
-          : null}
-      </div>
     )
   }
 }
 
+
+/** 
+ * Set up the properties to be available in the UXPin property inspector. 
+ */
 Pivot.propTypes = {
+
+  /**
+  * @uxpindescription The list of tabs. Separate each option with a comma. Icons and commas within tab text are not currently supported.
+  * @uxpinpropname Tabs
+  * @uxpincontroltype codeeditor
+  */
   tabs: PropTypes.string.isRequired,
+
+  /**
+  * @uxpindescription The 1-based index value of the tab to be shown as selected by default
+  * @uxpinpropname Selected Index
+  */
   selectedIndex: PropTypes.number,
 
-  /** @uxpinpropname Link 1 click */
+  /**
+  * @uxpindescription Size option 
+  * @uxpinpropname Tab Size
+  */    
+  linkSize: PropTypes.oneOf(['normal', 'large']),
+
+  /**
+  * @uxpindescription Fires when Tab 1 is clicked
+  * @uxpinpropname Tab 1 Click
+  */
   onLink1Click: PropTypes.func,
 
-  /** @uxpinpropname Link 2 click */
+  /**
+  * @uxpindescription Fires when Tab 2 is clicked
+  * @uxpinpropname Tab 2 Click
+  */
   onLink2Click: PropTypes.func,
 
-  /** @uxpinpropname Link 3 click */
+  /**
+  * @uxpindescription Fires when Tab 3 is clicked
+  * @uxpinpropname Tab 3 Click
+  */
   onLink3Click: PropTypes.func,
 
-  /** @uxpinpropname Link 4 click */
+  /**
+  * @uxpindescription Fires when Tab 4 is clicked
+  * @uxpinpropname Tab 4 Click
+  */
   onLink4Click: PropTypes.func,
 
-  /** @uxpinpropname Link 5 click */
+  /**
+  * @uxpindescription Fires when Tab 5 is clicked
+  * @uxpinpropname Tab 5 Click
+  */
   onLink5Click: PropTypes.func,
 
-  /** @uxpinpropname Link 6 click */
+  /**
+  * @uxpindescription Fires when Tab 6 is clicked
+  * @uxpinpropname Tab 6 Click
+  */
   onLink6Click: PropTypes.func,
 
-  /** @uxpinpropname Link 7 click */
+  /**
+  * @uxpindescription Fires when Tab 7 is clicked
+  * @uxpinpropname Tab 7 Click
+  */
   onLink7Click: PropTypes.func,
 
-  /** @uxpinpropname Link 8 click */
+  /**
+  * @uxpindescription Fires when Tab 8 is clicked
+  * @uxpinpropname Tab 8 Click
+  */
   onLink8Click: PropTypes.func,
 
-  /** @uxpinpropname Link 9 click */
+  /**
+  * @uxpindescription Fires when Tab 9 is clicked
+  * @uxpinpropname Tab 9 Click
+  */
   onLink9Click: PropTypes.func
 };
 
+
+/**
+ * Set the default values for this control in the UXPin Editor.
+ */
 Pivot.defaultProps = {
-  tabs: 'One,Two,Three',
+  tabs: defaultTabs,
+  linkSize: 'normal',
   selectedIndex: 1
 };
 

@@ -1,26 +1,56 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { FontIcon } from 'office-ui-fabric-react/lib/Icon';
+import { 
+  DetailsList as FDetailsList, 
+  SelectionMode,
+  ConstrainMode,
+  SearchBox,
+  Stack,
+  StackItem } from 'office-ui-fabric-react';
+import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
+import { getTokens, csv2arr } from '../_helpers/parser.jsx'
 
-import { DetailsList as FDetailsList, SelectionMode, TextField } from 'office-ui-fabric-react';
-import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
-import { name2key, getTokens, csv2arr } from '../_helpers/parser.jsx'
+
+
+  /**
+   * UPDATED Mar 31, 2020 by Anthony Hand
+   * - Replaced the TextField with a SearchBox control for the filter feature. 
+   * - Added props to let the user specify an icon and a placeholder string for the SearchBox. 
+   * - Implemented a Stack control to control the layouts for the SearchBox and DetailsList.  
+   * */
+
+  /**
+   * UPDATED Mar 26, 2020 by Anthony Hand
+   * - Updated the filter text field's icon and set its width to more closely match 3 columns. 
+   * - Added support for multi-line text in table cells.
+   * - Fixed the 'jumping table' bug. Setting the search filter box's margin to 0 from 0.2em appears to have fixed it. 
+   * - Set the margin between the filter textbox and the table to 24 px. It had been too close before. 
+   * - Set the background color of the column headers to a lighter grey 100 until the theme can be formally updated.
+   * - Updated the default column and row values to more closely illustrate common use cases. 
+   * - Added descriptions and prop names for each property with some updates. Changed some prop names.
+   * 
+   * TODOs
+   * - There are lots of asks in the Github issue ticket. 
+   * 
+   * For additional outstanding issues, please see: 
+   *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/89
+   * */
 
 
 
-const linkClasses = mergeStyles({
-  color: 'var(--color-blue-600)'
-})
+const searchFieldWidth = 330;
+const searchFieldIconName = "Funnel";
+const searchFieldPlaceholder = "Filter"
+const searchFieldMarginBottom = '24px';
 
-const searchFilterStyle = {
-  margin: '0.2em',
-  selectors: {
-    '& div': {
-      marginLeft: 'auto',
-      marginRight: '0',
-    },
-  },
-}
+
+//Use this in the default props below.
+const defaultColumnValues = "Column A,  Column B, Column C, Column D, Actions";
+const defaultRowValues = 
+      `link(Component_Name_A), icon(CircleCheckSolid|color-green-600) Ready, C-1, D-1, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)
+      link(Component_Name_B), icon(CircleWarningSolid|color-orange-500) Restarting..., C-2, D-2, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)
+      link(Component_Name_C), icon(CircleClearSolid|color-red-500) Unavailable, C-3, D-3, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)`;
+
 
 
 class DetailsList extends React.Component {
@@ -28,6 +58,8 @@ class DetailsList extends React.Component {
     super(props);
 
     this.searchTable = this.searchTable.bind(this);
+    this.onSearchClear = this.onSearchClear.bind(this);
+
     this.state = {
       columns: [],
       rows: [],
@@ -39,20 +71,17 @@ class DetailsList extends React.Component {
 
   componentDidMount() {
     this.setColumns(this.setRows)
-
   }
 
+  
   getColumnClasses(colIndex) {
     let alignHeaderLabels = {}
     if (this.state.alignCenter.includes(colIndex + 1)) alignHeaderLabels = { margin: '0 auto' }
     if (this.state.alignRight.includes(colIndex + 1)) alignHeaderLabels = { margin: '0 0 0 auto' }
 
     return mergeStyles({
-      background: 'var(--color-grey-300)',
+      background: 'var(--color-grey-100)',
       selectors: {
-        '& .ms-Button': {
-          transform: 'translateY(14px)',
-        },
         '& .ms-DetailsHeader-cellName': alignHeaderLabels,
       }
     })
@@ -80,7 +109,7 @@ class DetailsList extends React.Component {
     });
   }
 
-  onCloumnClick(columnKey) {
+  onColumnClick(columnKey) {
 
     const { columns, rows } = this.state;
     const newColumns = columns.slice();
@@ -126,9 +155,12 @@ class DetailsList extends React.Component {
             maxWidth: this.props.maxWidth,
             isSorted: false,
             isSortedDescending: false,
-            onColumnClick: () => this.onCloumnClick(columnName),
+            onColumnClick: () => this.onColumnClick(columnName),
             headerClassName: this.getColumnClasses(colIndex)
           }
+
+          //This param allows each cell to support multi-line text. 
+          columnParams.isMultiline = true;
 
           if (this.state.alignRight.includes(colIndex + 1)) {
             columnParams.className = mergeStyles({
@@ -164,7 +196,7 @@ class DetailsList extends React.Component {
             :
             getTokens(value).text
 
-          r[column.fieldName] = name
+          r[column.fieldName] = name 
         }
 
       })
@@ -176,40 +208,79 @@ class DetailsList extends React.Component {
   }
 
 
+  onSearchClear(event) {
+    //This means that the user has hit the clear button, so we need to clear the text out. 
+    
+    event.target.value = "";
+
+    //Propagate the change to the SearchTable event
+    this.searchTable(event);
+  }
+
 
   render() {
+
     return (
-      <div style={{ display: 'block' }} className={
-        mergeStyles({
-          selectors: {
-            '& .ms-DetailsHeader': {
-              paddingTop: 0,
-            },
-          }
-        })
-      }>
-        {this.props.isSearchEnabled && <TextField iconProps={{ iconName: 'Filter' }} onChange={this.searchTable} className={searchFilterStyle} styles={{ fieldGroup: { width: 200 } }} />}
-        <FDetailsList {...this.props}
-          columns={this.state.columns}
-          items={this.state.rows}
-          selectionMode={this.props.selectable ? SelectionMode.multiple : SelectionMode.none}
-          onRenderRow={(props, defaultRender) => (
-            <>
-              {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
-            </>
-          )}
-          isHeaderVisible={this.props.header === "show"} />
-      </div>
+          
+          <Stack>
+
+            {this.props.isSearchEnabled && 
+                <StackItem
+                    align = "end"
+                    styles = {{ root: { marginBottom: searchFieldMarginBottom } }} 
+                >
+                    <SearchBox 
+                        iconProps = {{ iconName: this.props.icon }} 
+                        placeholder = { this.props.placeholder }
+                        onChange = { this.searchTable } 
+                        onClear = { this.onSearchClear }
+                        styles = {{ root: { width: searchFieldWidth }}} 
+                    />
+                </StackItem>
+            }
+            <StackItem>
+              
+              <div style={{ display: 'block' }} className={
+                mergeStyles({
+                  selectors: {
+                    '& .ms-DetailsHeader': {
+                      paddingTop: 0,
+                    },
+                  }
+                })
+              }>
+                  <FDetailsList 
+                      {...this.props}
+                      columns = { this.state.columns }
+                      items = { this.state.rows }
+                      selectionMode = { SelectionMode.none } //Hard coding this to off for the time being. 
+                      constrainMode = { ConstrainMode[ConstrainMode.horizontalConstrained]} //Hard coding this. 
+                      onRenderRow = {(props, defaultRender) => (
+                          <>
+                            {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
+                          </>
+                      )}
+                      isHeaderVisible = { this.props.header } 
+                  />
+                </div>
+            </StackItem>
+
+          </Stack>
+
     );
   }
 }
 
 
+/** 
+ * Set up the properties to be available in the UXPin property inspector. 
+ */
 DetailsList.propTypes = {
 
   /** 
    *  Separate each item with new line or | symbol.
    *  Put at the end of the line [color:blue-600] token to set color for whole column.
+   * @uxpindescription Enter one column per row. Supports these features: link(Link Text) and icon(Name|color-blue-600). Also supports CSV formatting.
    * @uxpincontroltype codeeditor
    * */
   columns: PropTypes.string,
@@ -219,50 +290,80 @@ DetailsList.propTypes = {
    * Separate each item with | , Separate each row with new line or || symbol.
    * Icon token [icon:Snow:blue-600]
    * Get icons at https://uifabricicons.azurewebsites.net/
+   * @uxpindescription Enter one row per line. Supports these features: link(Link Text) and icon(Name|color-blue-600). Also supports CSV formatting. 
+   * @uxpinpropname Rows
    * @uxpincontroltype codeeditor
    * */
   items: PropTypes.string,
 
-  /** Align Right Columns indexes, <2,3>  */
+  /**
+  * Example: 2, 3
+  * @uxpindescription Enter a comma-separated list of column numbers for right aligning their contents (Optional)
+  * @uxpinpropname Alight Right
+  */
   alignRight: PropTypes.string,
 
-  /** Align Center Columns indexes, <2,3>  */
+  /**
+  * Example: 2, 3
+  * @uxpindescription Enter a comma-separated list of column numbers for center aligning their contents (Optional)
+  * @uxpinpropname Align Center
+  */
   alignCenter: PropTypes.string,
 
-  /** Defines if rows might be selected with checkmark on the left hand side  */
-  selectable: PropTypes.bool,
-
-  /** Is table resizable */
-  isResizable: PropTypes.bool,
-
-  /** Min width for columns */
+  /**
+  * @uxpindescription Minimum column width width 
+  * @uxpinpropname Min Width
+  */ 
   minWidth: PropTypes.number,
 
-  /** Max width for columns */
+  /**
+  * @uxpindescription Maximum column width width 
+  * @uxpinpropname Max Width
+  */ 
   maxWidth: PropTypes.number,
 
-  /** Enable search text field to filter details list */
+  /**
+  * @uxpindescription Whether to show the filter SearchBox 
+  * @uxpinpropname Show Filter
+  */ 
   isSearchEnabled: PropTypes.bool,
 
-  /** Defines to show or hide the header */
-  header: PropTypes.oneOf(['show', 'hide']),
+  /**
+  * @uxpindescription Whether to display the table headers 
+  * @uxpinpropname Show Headers
+  */ 
+  header: PropTypes.bool,
+
+  /**
+   * @uxpindescription The exact name from the PayPal icon library. Displays on the right side. 
+   * @uxpinpropname Search Icon
+   * */
+  icon: PropTypes.string,
+
+  /**
+   * @uxpindescription Placeholder text to show in the text field when it's empty
+   * @uxpinpropname Search Placeholder
+   * */  
+  placeholder: PropTypes.string,  
 
 };
 
+
+/**
+ * Set the default values for this control in the UXPin Editor.
+ */
 DetailsList.defaultProps = {
-  columns: "Aa, Bb, link(C)",
-  items: `A-1, B-1, C-1
- A-2, B-2, C-2
- A-3, B-3, C-3`,
-  selectable: false,
-  isResizable: true,
-  minWidth: 100,
-  maxWidth: 200,
-  header: "show",
-  alignRight: "1,2",
-  alignCenter: "3",
-  isSearchEnabled: false,
-
+  columns: defaultColumnValues,
+  items: defaultRowValues ,
+  minWidth: 125,
+  maxWidth: 350,
+  header: true,
+  alignRight: "5",
+  alignCenter: "3, 4",
+  isSearchEnabled: true,
+  icon: searchFieldIconName,
+  placeholder: searchFieldPlaceholder
 };
+
 
 export { DetailsList as default };

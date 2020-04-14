@@ -2,6 +2,6 @@ import * as React from 'react';
 import CompoundButton from '../CompoundButton';
 
 export default (
-  <CompoundButton uxpId="compoundbutton1"/>
+  <CompoundButton uxpId="compoundbutton1" style={{width: '100%'}}/>
 );
-// TODO implement CompoundButton example
+

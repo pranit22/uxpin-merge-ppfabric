@@ -1,21 +1,6 @@
 import * as React from 'react';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
-import { getId } from 'office-ui-fabric-react/lib/Utilities';
-export class TooltipBasicExample extends React.Component {
-    constructor() {
-        super(...arguments);
-        // Use getId() to ensure that the ID is unique on the page.
-        // (It's also okay to use a plain string without getId() and manually ensure uniqueness.)
-        this._hostId = getId('tooltipHost');
-    }
-    render() {
-        return (<div>
-        <TooltipHost content="This is the tooltip" id={this._hostId} calloutProps={{ gapSpace: 0 }}>
-          <DefaultButton aria-labelledby={this._hostId}>Hover Over Me</DefaultButton>
-        </TooltipHost>
-      </div>);
-    }
-}
+import Tooltip from '../Tooltip';
 
-export default TooltipBasicExample;
+export default (
+  <Tooltip uxpId="tooltip1" />
+);

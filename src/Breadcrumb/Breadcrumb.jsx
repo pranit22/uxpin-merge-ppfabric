@@ -64,7 +64,7 @@ Breadcrumb.propTypes = {
 }
 
 Breadcrumb.defaultProps = {
-  crumbs: 'foo,bar,baz',
+  crumbs: 'Home, Category Page, Details Page',
   maxDisplayedItems: 3,
   overflowIndex: 0,
   fontSize: 'small'
