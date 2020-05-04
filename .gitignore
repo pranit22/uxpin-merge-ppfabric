@@ -3,3 +3,4 @@
 node_modules
 /app/kitchensink/dist/
 coverage
+package-lock.json

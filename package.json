@@ -9,6 +9,7 @@
     "server": "uxpin-merge server --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
     "start": "uxpin-merge --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --disable-tunneling",
     "push": "uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token f06631f716d0ab697fd84ed258fabac10ad2c3fc",
+    "push:experimental": "NODE_TLS_REJECT_UNAUTHORIZED=0 uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token f06631f716d0ab697fd84ed258fabac10ad2c3fc",
     "debug": "uxpin-merge dump --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js > metadata.json",
     "kitchensink": "webpack-cli serve --config app/kitchensink/webpack.config.js"
   },
@@ -19,11 +20,11 @@
     "cache": false
   },
   "dependencies": {
-    "@uifabric/example-data": "^7.0.9",
+    "@uifabric/example-data": "^7.0.12",
     "npm": "^6.14.4",
     "prop-types": "15.7.2",
     "react": "^16.13.1",
-    "react-animate-height": "^2.0.20",
+    "react-animate-height": "^2.0.21",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
@@ -37,16 +38,16 @@
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
     "@paypalcorp/console.pp-fabric": "1.18.0",
-    "@types/lodash": "^4.14.149",
+    "@types/lodash": "^4.14.150",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
     "@types/react-router-dom": "^4.3.5",
     "@uifabric/icons": "latest",
-    "@uifabric/react-cards": "^0.109.53",
+    "@uifabric/react-cards": "^0.109.60",
     "@uxpin/merge-cli": "^2.5.3",
     "@webpack-cli/serve": "^0.1.8",
     "autoprefixer": "^9.7.6",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.1.0",
     "babel-plugin-typescript-to-proptypes": "^0.17.1",
     "css-loader": "^3.5.2",
     "file-loader": "^4.3.0",
@@ -63,11 +64,11 @@
     "react-router-dom": "^5.1.2",
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
-    "style-loader": "^1.1.3",
+    "style-loader": "^1.1.4",
     "terser-webpack-plugin": "^1.4.1",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",
-    "webpack": "^4.40.2",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   }

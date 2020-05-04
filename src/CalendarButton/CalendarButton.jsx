@@ -10,7 +10,7 @@ import {Callout,
     DayOfWeek,
     } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
-import { TpxUxDateTimeUtils } from '../_helpers/tpxuxhelpers.jsx';
+import { TpxUxDateTimeUtils } from '../_helpers/tpxuxdatetimeutils.jsx';
 
 
 /**

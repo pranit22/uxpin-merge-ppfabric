@@ -42,7 +42,8 @@ class Tooltip extends React.Component {
                                     display: 'inline-block', //required for tooltip host
                                     width: 10,
                                     height: 10,
-                                    background: 'var(--color-blue-100)',
+                                    borderRadius: 10,
+                                    background: this.props.showMarker ? 'var(--color-blue-100)' : 'transparent',
                     }} />
                     <FTooltip
                         {...this.props}
@@ -99,6 +100,13 @@ Tooltip.propTypes = {
         "rightCenter",
         "rightBottomEdge"
     ]),
+
+    /**
+     * @uxpindescription Whether to show the light blue target marker on the canvas 
+     * @uxpinpropname Show Marker
+     */   
+    showMarker: PropTypes.bool,
+
 };
 
 
@@ -110,6 +118,7 @@ Tooltip.defaultProps = {
     showBeak: true,
     text: "I'm a basic tooltip",
     direction: "bottomAutoEdge",
+    showMarker: true,
 }
 
 

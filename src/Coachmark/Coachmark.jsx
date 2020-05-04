@@ -122,9 +122,8 @@ class Coachmark extends React.Component {
                     style={{
                         width: 10,
                         height: 10,
-                        background: 'var(--color-blue-100)',
+                        background: this.props.showMarker ? 'var(--color-blue-100)' : 'transparent',
                         borderRadius: 10,
-                        cursor: 'pointer'
                     }} />
 
                 {this.state.open && (
@@ -237,6 +236,13 @@ Coachmark.propTypes = {
     ]),
 
     /**
+     * @uxpindescription Whether to show the light blue target marker on the canvas 
+     * @uxpinpropname Show Marker
+     */   
+    showMarker: PropTypes.bool,
+
+
+    /**
      * @uxpindescription Fires when the Close button is clicked
      * @uxpinpropname Close Button Click
      */   
@@ -268,6 +274,7 @@ Coachmark.defaultProps = {
     primaryButtonLabel: 'Next',
     secondaryButtonLabel: 'Close',
     secondaryButtonIcon: "Close",
+    showMarker: true,
 }
 
 

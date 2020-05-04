@@ -78,8 +78,8 @@ class Rating extends React.Component {
         )
     
         //Raise this event to UXPin. We'll send them info about which item was clicked on in case they can catch it.
-        if (this.props.onClick) {
-          this.props.onClick(selectedIndex);
+        if (this.props.onChange) {
+          this.props.onChange(selectedIndex);
         }
     }
 
