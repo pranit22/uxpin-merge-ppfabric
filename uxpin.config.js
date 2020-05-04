@@ -5,21 +5,44 @@ module.exports = {
         name: 'PayPal',
         include: [
           'src/PPHeader/PPHeader.jsx',
+          'src/PPProfileCard/PPProfileCard.jsx',
+          'src/PPMetaDataGroup/PPMetaDataGroup.jsx',
+          'src/PPMetaDataPair/PPMetaDataPair.jsx',
+          'src/PPHorizontalStack/PPHorizontalStack.jsx',
+          'src/PPVerticalStack/PPVerticalStack.jsx',
         ]
       },
       {
         name: 'Basic Input',
         include: [
           'src/ActionButton/ActionButton.jsx',
+          'src/Button/Button.jsx',          
           'src/Checkbox/Checkbox.jsx',
           'src/ChoiceGroup/ChoiceGroup.jsx',
           'src/ComboBox/ComboBox.jsx',
+          'src/CommandButton/CommandButton.jsx',
+          'src/CompoundButton/CompoundButton.jsx',
           'src/Dropdown/Dropdown.jsx',
-          'src/Button/Button.jsx',
+          'src/IconButton/IconButton.jsx', 
+          'src/Link/Link.jsx',
+          'src/Rating/Rating.jsx',
+          'src/SearchBox/SearchBox.jsx',
+          'src/Slider/Slider.jsx',
+          'src/SpinButton/SpinButton.jsx',
+          'src/SplitButton/SplitButton.jsx',
           'src/TextField/TextField.jsx',
           'src/Toggle/Toggle.jsx',
-          'src/Slider/Slider.jsx',
-          'src/SpinButton/SpinButton.jsx'
+        ]
+      },
+      {
+        name: 'Galleries & Pickers',
+        include: [
+          'src/Calendar/Calendar.jsx',
+          'src/CalendarButton/CalendarButton.jsx',
+          'src/ColorPicker/ColorPicker.jsx',
+          'src/DatePicker/DatePicker.jsx',
+          'src/PeoplePicker/PeoplePicker.jsx',
+          'src/TagPicker/TagPicker.jsx',
         ]
       },
       {
@@ -28,13 +51,14 @@ module.exports = {
           'src/ActivityItem/ActivityItem.jsx',
           'src/DetailsList/DetailsList.jsx',
           'src/Persona/Persona.jsx',
+          'src/PersonaCoin/PersonaCoin.jsx',
           'src/Facepile/Facepile.jsx',
+          'src/TagItem/TagItem.jsx',
         ]
       },
       {
         name: 'Commands, Menus & Navs',
         include: [
-          'src/Breadcrumb/Breadcrumb.jsx',
           'src/Nav/Nav.jsx',
           'src/Pivot/Pivot.jsx',
         ]
@@ -43,24 +67,30 @@ module.exports = {
         name: 'Notification & Engagement',
         include: [
           'src/Coachmark/Coachmark.jsx',
+          'src/MessageBar/MessageBar.jsx',
+          'src/TeachingBubble/TeachingBubble.jsx',
         ]
       },
       {
         name: 'Progress',
         include: [
           'src/ProgressIndicator/ProgressIndicator.jsx',
+          'src/Spinner/Spinner.jsx',
+        ]
+      },
+      {
+        name: 'Surfaces',
+        include: [
+          'src/Dialog/Dialog.jsx',
+          'src/Tooltip/Tooltip.jsx',
         ]
       },
       {
         name: 'Utilities',
         include: [
+          'src/Icon/Icon.jsx',
+          'src/Separator/Separator.jsx',
           'src/Text/Text.jsx',
-        ]
-      },
-      {
-        name: 'Experimental',
-        include: [
-          'src/Card/Card.jsx',
         ]
       },
     ]

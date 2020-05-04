@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Card as FCard } from '@uifabric/react-cards';
+import { Card as FCard } from 'office-ui-fabric-react';
 import { Text } from 'office-ui-fabric-react';
 
 
@@ -17,11 +17,16 @@ class Card extends React.Component {
 }
 
 Card.propTypes = {
+    
+    /**
+     * @uxpindescription The main message text
+     * @uxpincontroltype textfield(4)
+     */
     text: PropTypes.string,
 };
 
 Card.defaultProps = {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis sed dolor et dapibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec vehicula eros tortor, sed sagittis dolor congue eu. Nunc suscipit porta sapien. In venenatis diam sed dolor mollis sodales. '
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
 }
 
 export { Card as default };

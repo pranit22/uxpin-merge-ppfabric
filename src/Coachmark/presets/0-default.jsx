@@ -3,5 +3,5 @@ import Coachmark from '../Coachmark';
 
 
 export default (
-    <Coachmark uxpId="Coachmark1" />
+    <Coachmark uxpId="coachmark1" />
 );

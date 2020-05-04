@@ -4,6 +4,21 @@ import { mergeStyles, mergeStyleSets } from '@uifabric/merge-styles';
 import { PrimaryButton as FPrimaryButton, DefaultButton as FDefaultButton, IButtonStyles } from 'office-ui-fabric-react';
 
 
+  /**
+   * UPDATED Mar 16-17, 2020 by Anthony Hand
+   * - Removed 'checked' property. This property is not required currently.
+   * - Added descriptions and prop names for each property with some updates. 
+   * - Removed the 'onClick' prop assignment from the <FButton>attributes in the Return method. They were unnecessary.
+   * 
+   * TODOs
+   * - Allow for user resizing of the width. 
+   * - Ensure all styling is as per PPUI spec.
+   * 
+   * For additional outstanding issues, please see: 
+   *    https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/48
+   *    
+   * */
+
 
 class Button extends React.Component {
   constructor(props) {
@@ -12,57 +27,98 @@ class Button extends React.Component {
     }
   }
 
-
   render() {
     let iconProps = { iconName: this.props.iconName }
+
     let styles = {
       root: {
         borderRadius: this.props.rounded ? 100 : 0
-      },
+      }
     }
+
     if (this.props.iconPosition === "end") styles.flexContainer = {
       flexDirection: 'row-reverse'
     }
+
     return (
-      <>
+
+      <div>
         {this.props.primary ?
           <FPrimaryButton  {...this.props}
-            onClick={this.props.onClick}
             iconProps={iconProps}
             styles={styles} />
           :
           <FDefaultButton {...this.props}
-            onClick={this.props.onClick}
             iconProps={iconProps}
             styles={styles}
           />
         }
-      </>
+      </div>
 
     );
   }
 
 }
 
+
+/** 
+ * Set up the properties to be available in the UXPin property inspector. 
+ */
 Button.propTypes = {
+
+  /**
+   * @uxpindescription The displayed text on the button
+   * @uxpinpropname Text
+   * */
   text: PropTypes.string.isRequired,
+
+  /**
+   * @uxpindescription To display the button in the filled style. Otherwise, displays in the outline style
+   * @uxpinpropname Primary Style
+   * */
   primary: PropTypes.bool,
-  checked: PropTypes.bool,
-  disabled: PropTypes.bool,
+
+  /**
+   * @uxpindescription The exact name from the PayPal icon library (Optional)
+   * @uxpinpropname Icon Name
+   * */  
   iconName: PropTypes.string,
+
+  /**
+   * @uxpindescription To disable the control
+   * @uxpinpropname Disabled
+   * */  
+  disabled: PropTypes.bool,
+
+  /**
+   * @uxpindescription The location to display an icon, if one is set
+   * @uxpinpropname Icon Position
+   * */   
   iconPosition: PropTypes.oneOf(['start', 'end']),
+
+  /**
+   * @uxpindescription Sets whether to display the button in the rounded PayPal UI style.
+   * @uxpinpropname Rounded
+   * */   
   rounded: PropTypes.bool,
-  onClick: PropTypes.func,
+
+  /**
+   * @uxpindescription Fires when the button is clicked on.
+   * @uxpinpropname Click
+   * */   
+  onClick: PropTypes.func
 };
 
+
+/**
+ * Set the default values for this control in the UXPin Editor.
+ */
 Button.defaultProps = {
-  text: 'Button Name',
   primary: true,
-  checked: false,
   disabled: false,
   rounded: true,
-  // iconName: 'Dictionary',
-  // iconPosition: 'end'
+  text: "Basic Button"
 };
+
 
 export { Button as default };
