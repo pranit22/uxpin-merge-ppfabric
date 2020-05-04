@@ -138,7 +138,7 @@ class Pivot extends React.Component {
 Pivot.propTypes = {
 
   /**
-  * @uxpindescription The list of tabs. Separate each option with a comma. Icons and commas within tab text are not currently supported.
+  * @uxpindescription The list of tabs. Put one item on each row. Enclose an item in quotes if including a comma. Supports the icon(IconName) feature.
   * @uxpinpropname Tabs
   * @uxpincontroltype codeeditor
   */

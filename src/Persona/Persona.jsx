@@ -87,7 +87,7 @@ Persona.propTypes = {
     /**
     * @uxpindescription The URL to an image file. Leave empty to display initials instead. 
     * @uxpinpropname Img URL
-    * @uxpincontroltype textfield(3)
+    * @uxpincontroltype textfield(6)
     */
     imageUrl: PropTypes.string,
 
@@ -107,8 +107,8 @@ Persona.propTypes = {
 
     /**
     * Requires a proprietary PayPal prop name, or else things get screwy   
-    * @uxpindescription If no image, the color of the 'coin' showing the user's initials 
-    * @uxpinpropname Initials Color
+    * @uxpindescription If no image, the background color of the 'coin' showing the user's initials 
+    * @uxpinpropname Coin Bg Color
     */ 
     ppInitialsColor: PropTypes.oneOf([
         'green', 'darkGreen', 'teal', 'lightBlue', 'blue', 'darkBlue', 'violet',

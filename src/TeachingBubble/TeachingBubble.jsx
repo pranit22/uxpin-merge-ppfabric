@@ -118,7 +118,7 @@ class TeachingBubble extends React.Component {
                     style={{
                         width: 10,
                         height: 10,
-                        background: 'var(--color-blue-100)',
+                        background: this.props.showMarker ? 'var(--color-blue-100)' : 'transparent',
                         borderRadius: 10
                     }} />
 
@@ -239,6 +239,12 @@ TeachingBubble.propTypes = {
     dismiss: PropTypes.func,
 
     /**
+     * @uxpindescription Whether to show the light blue target marker on the canvas 
+     * @uxpinpropname Show Marker
+     */   
+    showMarker: PropTypes.bool,
+
+    /**
      * @uxpindescription Fires when the Primary Button is clicked on
      * @uxpinpropname Primary Button Click
      */ 
@@ -265,6 +271,7 @@ TeachingBubble.defaultProps = {
     primaryButtonLabel: 'Next',
     secondaryButtonLabel: 'Close',
     secondaryButtonIcon: "Close",
+    showMarker: true,
 }
 
 

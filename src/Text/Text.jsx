@@ -2,7 +2,17 @@ import { Text as FText } from 'office-ui-fabric-react';
 import { mergeStyles } from '@uifabric/merge-styles';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
+import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
 
+
+
+  /**
+   * UPDATED April 24, 2020 by Anthony Hand
+   * - Fixed issue where when one nudged the text up or down a pixel, the control would a) sometimes move 3 pixels, 
+   *      and b) sometimes move the opposite direction instead. 
+   * - Fixed issue where the line height was too short. If the text was larger and multi-line, 
+   *      the line height would appear to be <1, with text overlapping. 
+   * */
 
   /**
    * UPDATED Mar 30, 2020 by Anthony Hand
@@ -19,6 +29,10 @@ import * as React from 'react';
    * */
 
 
+//Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
+const defaultTextColor = "#000000";
+
+
 class Text extends React.Component {
 
   constructor(props) {
@@ -31,31 +45,36 @@ class Text extends React.Component {
 
   render() {
 
-    //Convert the PPUI color palette string into something Microsoft can use. 
-    let c = this.props.color.trim();
-    let color = `var(--color-${c})`;
-    let colorStyle = mergeStyles({
-      color: color
-    });
-
-    //Calculate whether we need to set bold or italic props
-    const spanStyle = {
-      fontWeight: this.props.bold ? 'bold' : 'normal',
-      fontStyle: this.props.italic ? 'italic' : 'normal',
+    //Let's see if the user entered a valid color value. This method returns undefined if not. 
+    var textColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.color);
+    if (!textColor) {
+      textColor = defaultTextColor;
     }
+
+    let fTextStyles = {
+      root: {
+        color: textColor,
+        fontWeight: this.props.bold ? 'bold' : 'normal',
+        fontStyle: this.props.italic ? 'italic' : 'normal',
+        display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
+        lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
+      }
+    }
+    
 
     return (
 
         <FText
             {...this.props}
-            className={ colorStyle }
+            styles = { fTextStyles }
             variant = { this.props.size }
-            nowrap = { !this.props.wrap }>
-            <span style = { spanStyle } >{ this.props.value }</span>
+            nowrap = { this.props.truncate }>
+              { this.props.value }
         </FText>
     );
   }
 }
+
 
 
 /** 
@@ -96,13 +115,13 @@ Text.propTypes = {
   italic: PropTypes.bool,
 
   /**
-   * @uxpindescription To allow text wrapping
-   * @uxpinpropname Wrap Text
+   * @uxpindescription To restrict the Text to a single line, truncating any extra with ellipses. If unchecked, you can manually set the width and height. 
+   * @uxpinpropname Truncate Text
    */
-  wrap: PropTypes.bool,
+  truncate: PropTypes.bool,
 
   /**
-   * @uxpindescription Specify a color using the PayPal UI color values, such as 'grey-700' 
+   * @uxpindescription Specify a text color with a Hex or PayPal UI color token, such as '#ffffff' or 'blue-700'. 
    */
   color: PropTypes.string
 };
@@ -116,7 +135,7 @@ Text.defaultProps = {
   size: 'medium',
   bold: false,
   italic: false,
-  wrap: true,
+  truncate: false,
   color: 'grey-700'
 };
 

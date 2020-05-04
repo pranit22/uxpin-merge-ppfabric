@@ -5,6 +5,11 @@ module.exports = {
         name: 'PayPal',
         include: [
           'src/PPHeader/PPHeader.jsx',
+          'src/PPProfileCard/PPProfileCard.jsx',
+          'src/PPMetaDataGroup/PPMetaDataGroup.jsx',
+          'src/PPMetaDataPair/PPMetaDataPair.jsx',
+          'src/PPHorizontalStack/PPHorizontalStack.jsx',
+          'src/PPVerticalStack/PPVerticalStack.jsx',
         ]
       },
       {
@@ -19,6 +24,7 @@ module.exports = {
           'src/CompoundButton/CompoundButton.jsx',
           'src/Dropdown/Dropdown.jsx',
           'src/IconButton/IconButton.jsx', 
+          'src/Link/Link.jsx',
           'src/Rating/Rating.jsx',
           'src/SearchBox/SearchBox.jsx',
           'src/Slider/Slider.jsx',
@@ -26,7 +32,6 @@ module.exports = {
           'src/SplitButton/SplitButton.jsx',
           'src/TextField/TextField.jsx',
           'src/Toggle/Toggle.jsx',
-
         ]
       },
       {
@@ -34,7 +39,10 @@ module.exports = {
         include: [
           'src/Calendar/Calendar.jsx',
           'src/CalendarButton/CalendarButton.jsx',
+          'src/ColorPicker/ColorPicker.jsx',
           'src/DatePicker/DatePicker.jsx',
+          'src/PeoplePicker/PeoplePicker.jsx',
+          'src/TagPicker/TagPicker.jsx',
         ]
       },
       {
@@ -43,7 +51,9 @@ module.exports = {
           'src/ActivityItem/ActivityItem.jsx',
           'src/DetailsList/DetailsList.jsx',
           'src/Persona/Persona.jsx',
+          'src/PersonaCoin/PersonaCoin.jsx',
           'src/Facepile/Facepile.jsx',
+          'src/TagItem/TagItem.jsx',
         ]
       },
       {
@@ -78,8 +88,9 @@ module.exports = {
       {
         name: 'Utilities',
         include: [
-          'src/Text/Text.jsx',
           'src/Icon/Icon.jsx',
+          'src/Separator/Separator.jsx',
+          'src/Text/Text.jsx',
         ]
       },
     ]
