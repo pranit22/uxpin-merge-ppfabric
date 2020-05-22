@@ -36,25 +36,19 @@ class SplitButton extends React.Component {
     }
 
     componentDidMount() {
-        this.setItems();
+        this.set();
     }
 
-    //Get the user-entered left icon name, if there is one
-    getLeftIcon(str) {
-        const tokens = getTokens(str).tokens
-        const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start')
-        return leftIcon ? leftIcon.target : null
-    }
-
-    //If the user has chosen a tiled options display, let's figure out the icon names.
-    getIconProps(str) {
-        return  {
-            iconName: this.getLeftIcon(str) 
-        }
+    componentDidUpdate(prevProps) {
+      if (
+        prevProps.items !== this.props.items
+      ) {
+        this.set();
+      }
     }
 
     //Parse the choice items
-    setItems() {
+    set() {
 
         if (!this.props.items)
             return;
@@ -72,6 +66,20 @@ class SplitButton extends React.Component {
         this.setState({
             items: items
         });
+    }
+
+    //Get the user-entered left icon name, if there is one
+    getLeftIcon(str) {
+        const tokens = getTokens(str).tokens
+        const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start')
+        return leftIcon ? leftIcon.target : null
+    }
+
+    //If the user has chosen a tiled options display, let's figure out the icon names.
+    getIconProps(str) {
+        return  {
+            iconName: this.getLeftIcon(str) 
+        }
     }
 
     //The main Icon Button always passes 0.

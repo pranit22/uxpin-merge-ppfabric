@@ -3,11 +3,11 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
 
-  /**
-   * UPDATED Mar 22, 2020 by Anthony Hand
-   * - Rather than setting/getting props at runtime to track the checked state, switched to using state.
-   * 
-   */
+/**
+ * UPDATED Mar 22, 2020 by Anthony Hand
+ * - Rather than setting/getting props at runtime to track the checked state, switched to using state.
+ * 
+ */
 
 /**
    * UPDATED Mar 19, 2020 by Anthony Hand
@@ -31,23 +31,33 @@ import * as React from 'react';
 class Toggle extends React.Component {
 
   constructor(props) {
-
     super(props);
-
-    //Track the checked state within the control   
-    this.state = {
-      //Initialize with the props value
-      _isChecked: this.props.isChecked 
-    }
   }
 
+  set() {
+    this.setState({
+      _isChecked: this.props.isChecked
+    })
+  }
+
+  componentDidMount() {
+    this.set();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.isChecked !== this.props.isChecked
+    ) {
+      this.set();
+    }
+  }
 
   _onSelectionChange(newValue) {
     //Assumption: That Microsoft really is only sending true or false, and we don't need to validate the value.
 
     //Get the value. 
-    const checked = newValue; 
-    
+    const checked = newValue;
+
     //Set the state with the updated checked value. This will force the control to update in UXPin at runtime.
     this.setState(
       { _isChecked: checked }
@@ -66,11 +76,11 @@ class Toggle extends React.Component {
     const checked = this.state._isChecked;
 
     return (
-          <FToggle  
-            checked={checked}
-            {...this.props}
-            onChange={(e, v) => { this._onSelectionChange(v); }}   //Only catch the new value
-            />
+      <FToggle
+        checked={checked}
+        {...this.props}
+        onChange={(e, v) => { this._onSelectionChange(v); }}   //Only catch the new value
+      />
     );
   }
 }
@@ -110,7 +120,7 @@ Toggle.propTypes = {
    * @uxpindescription To position on the same line as the control (true), or above the control (false)
    * @uxpinpropname Inline Label
    * */
-  inlineLabel: PropTypes.bool,  
+  inlineLabel: PropTypes.bool,
 
   /**
    * @uxpindescription To disable the control
@@ -121,7 +131,7 @@ Toggle.propTypes = {
   /**
    * @uxpindescription Fires when the toggle state changes.
    * @uxpinpropname Value Change
-   * */  
+   * */
   onChange: PropTypes.func
 };
 

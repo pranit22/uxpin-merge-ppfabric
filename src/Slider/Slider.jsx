@@ -27,12 +27,25 @@ import { mergeStyles } from "@uifabric/merge-styles";
 class Slider extends React.Component {
   constructor(props) {
     super(props);
+  }
 
+  set() {
     //Track the slider value state within the control
-    this.state = {
-      //Initialize with the props value
-      _sliderValue: this.props.value,
-    };
+    this.setState({
+      _sliderValue: this.props.value
+    })
+  }
+
+  componentDidMount() {
+    this.set();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.value !== this.props.value
+    ) {
+      this.set();
+    }
   }
 
   _onValueChange(newValue) {

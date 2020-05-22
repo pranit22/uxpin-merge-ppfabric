@@ -1,20 +1,20 @@
 import * as React from 'react';
-import {Rating as FRating} from 'office-ui-fabric-react';
-import {RatingSize} from 'office-ui-fabric-react';
+import { Rating as FRating } from 'office-ui-fabric-react';
+import { RatingSize } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 
 
-  /**
-   * UPDATED Mar 31, 2020 by Anthony Hand
-   * - Rewrote the JSX and 0-default.jsx files to follow template for adding a control a the UXPin library.
-   * - Converted object to a self managing class.
-   * - Added file to our TPX UX Experimental library on UXPin.
-   * 
-   * TODOs
-   * - Waiting for guidance from UXPin on how to expose a return value on at runtime within UXPin.
-   * - Control needs to be updated with the proper PayPal UI theme. 
-   * 
-   * */
+/**
+ * UPDATED Mar 31, 2020 by Anthony Hand
+ * - Rewrote the JSX and 0-default.jsx files to follow template for adding a control a the UXPin library.
+ * - Converted object to a self managing class.
+ * - Added file to our TPX UX Experimental library on UXPin.
+ * 
+ * TODOs
+ * - Waiting for guidance from UXPin on how to expose a return value on at runtime within UXPin.
+ * - Control needs to be updated with the proper PayPal UI theme. 
+ * 
+ * */
 
 
 //Self-imposed limits on the number of stars.
@@ -33,9 +33,7 @@ class Rating extends React.Component {
         }
     }
 
-
-    componentDidMount() {
-
+    set() {
         //We have to do some error checking, just in case. 
 
         //Make sure that the user entered a number between 1 - max.
@@ -48,7 +46,7 @@ class Rating extends React.Component {
         }
         if (sCount > maxNumberOfStars) {
             sCount = maxNumberOfStars;
-        } 
+        }
 
         //Similarly, make sure that the user entered a number between 1 - max.
         var index = this.props.value;
@@ -62,11 +60,27 @@ class Rating extends React.Component {
         if (index > maxNumberOfStars) {
             index = maxNumberOfStars;
         }
-        
-        this.setState (
-            { selectedIndex: index,
-                maxNumberOfStars: sCount }
+
+        this.setState(
+            {
+                selectedIndex: index,
+                maxNumberOfStars: sCount
+            }
         )
+    }
+
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.value !== this.props.value
+            || prevProps.stars !== this.props.stars
+        ) {
+            this.set();
+        }
     }
 
 
@@ -74,12 +88,12 @@ class Rating extends React.Component {
 
         //The index comes in 1-based so we can save it immediately.     
         this.setState(
-          { selectedIndex: selectedIndex }
+            { selectedIndex: selectedIndex }
         )
-    
+
         //Raise this event to UXPin. We'll send them info about which item was clicked on in case they can catch it.
         if (this.props.onChange) {
-          this.props.onChange(selectedIndex);
+            this.props.onChange(selectedIndex);
         }
     }
 
@@ -91,16 +105,16 @@ class Rating extends React.Component {
         let stars = this.state.maxNumberOfStars;
 
         return (
-            <FRating 
-                {...this.props} 
-                rating = { index }
-                max = { stars }
-                allowZeroStars = { true }  //Hard code to allow zero
-                unselectedIcon = { this.props.unselectedIcon }
-                icon = { this.props.selectedIcon }
-                disabled = { this.props.disabled }
-                size = { RatingSize[this.props.size] }
-                onChange = { (e, v) => { this._onChange(v); } }
+            <FRating
+                {...this.props}
+                rating={index}
+                max={stars}
+                allowZeroStars={true}  //Hard code to allow zero
+                unselectedIcon={this.props.unselectedIcon}
+                icon={this.props.selectedIcon}
+                disabled={this.props.disabled}
+                size={RatingSize[this.props.size]}
+                onChange={(e, v) => { this._onChange(v); }}
             />
         )
     }
@@ -136,8 +150,8 @@ Rating.propTypes = {
      * @uxpindescription The display size
      */
     size: PropTypes.oneOf([
-    'Small',
-    'Large',
+        'Small',
+        'Large',
     ]),
 
     /**

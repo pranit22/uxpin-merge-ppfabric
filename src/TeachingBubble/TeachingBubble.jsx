@@ -1,28 +1,28 @@
 import * as React from 'react';
 import {
-        TeachingBubble as FTeachingBubble,
-        DirectionalHint
-    } from 'office-ui-fabric-react';
-import * as PropTypes from 'prop-types';  
+    TeachingBubble as FTeachingBubble,
+    DirectionalHint
+} from 'office-ui-fabric-react';
+import * as PropTypes from 'prop-types';
 
 
-  /**
-   * UPDATED April 7, 2020 by Anthony Hand
-   * - Added support for showing icons on the Primary and Secondary buttons. 
-   * */
+/**
+ * UPDATED April 7, 2020 by Anthony Hand
+ * - Added support for showing icons on the Primary and Secondary buttons. 
+ * */
 
-  /**
-   * UPDATED April 1, 2020 by Anthony Hand
-   * - Rewrote the JSX and 0-default.jsx files to follow template for adding a control a the UXPin library.
-   * - Converted object to a class.
-   * - Added file to our TPX UX Experimental library on UXPin.
-   * 
-   * TODOs
-   * - Control needs to be updated with the proper PayPal UI theme. 
-   * - Cannot change the icon used directly. The mapping itself within the PayPal TPX icon library must be updated. 
-   *        https://github.paypal.com/Console-R/pp-fabric-theme/issues/27
-   * 
-   * */
+/**
+ * UPDATED April 1, 2020 by Anthony Hand
+ * - Rewrote the JSX and 0-default.jsx files to follow template for adding a control a the UXPin library.
+ * - Converted object to a class.
+ * - Added file to our TPX UX Experimental library on UXPin.
+ * 
+ * TODOs
+ * - Control needs to be updated with the proper PayPal UI theme. 
+ * - Cannot change the icon used directly. The mapping itself within the PayPal TPX icon library must be updated. 
+ *        https://github.paypal.com/Console-R/pp-fabric-theme/issues/27
+ * 
+ * */
 
 
 class TeachingBubble extends React.Component {
@@ -37,7 +37,7 @@ class TeachingBubble extends React.Component {
     }
 
 
-    componentDidMount() {
+    set() {
         var isOpen = false;
 
         if (this.props.open) {
@@ -49,17 +49,29 @@ class TeachingBubble extends React.Component {
         )
     }
 
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.open !== this.props.open
+        ) {
+            this.set();
+        }
+    }
+
 
     dismissControl() {
         //Set the control to not open to dismiss it.
-        this.setState (
+        this.setState(
             { open: false }
         )
     }
 
     _onDismissClicked() {
         //Notify UXPin that the Close icon has been clicked on.
-        if (this.props.dismiss) { 
+        if (this.props.dismiss) {
             this.props.dismiss();
         }
 
@@ -68,7 +80,7 @@ class TeachingBubble extends React.Component {
 
     _onPrimaryButtonClicked() {
         //Notify UXPin of the event.
-        if (this.props.primaryButtonClick) { 
+        if (this.props.primaryButtonClick) {
             this.props.primaryButtonClick();
         }
 
@@ -101,12 +113,12 @@ class TeachingBubble extends React.Component {
 
 
         let pIconProps = { iconName: this.props.primaryButtonIcon };
-        let sIconProps = { iconName: this.props.secondaryButtonIcon, style: { color: 'white' }  };
+        let sIconProps = { iconName: this.props.secondaryButtonIcon, style: { color: 'white' } };
 
         //Make the Primary and Secondary buttons rounded
         let roundedButtonStyle = {
             root: {
-              borderRadius: 100
+                borderRadius: 100
             }
         }
 
@@ -123,30 +135,30 @@ class TeachingBubble extends React.Component {
                     }} />
 
                 {this.state.open && (
-                        <FTeachingBubble
-                            target = { this._targetElm.current }
-                            {...this.props}
-                            calloutProps = {{ directionalHint: DirectionalHint[this.props.direction] }}
-                            headline = { this.props.title }
-                            footerContent = { this.props.footerText }
-                            hasCloseButton = { this.props.hasCloseButton }
-                            primaryButtonProps={{
-                                text: this.props.primaryButtonLabel,
-                                hidden: hidePrimaryButton,
-                                styles: roundedButtonStyle, 
-                                iconProps: pIconProps,
-                                onClick: () => { this._onPrimaryButtonClicked() }
-                            }}
-                            secondaryButtonProps={{
-                                text: this.props.secondaryButtonLabel,
-                                hidden: hideSecondaryButton,  
-                                styles: roundedButtonStyle, 
-                                iconProps: sIconProps,
-                                onClick: () => { this._onSecondaryButtonClicked() }
-                            }}
-                            onDismiss={() => { this._onDismissClicked()}} > 
-                            { this.props.text }
-                        </FTeachingBubble>
+                    <FTeachingBubble
+                        target={this._targetElm.current}
+                        {...this.props}
+                        calloutProps={{ directionalHint: DirectionalHint[this.props.direction] }}
+                        headline={this.props.title}
+                        footerContent={this.props.footerText}
+                        hasCloseButton={this.props.hasCloseButton}
+                        primaryButtonProps={{
+                            text: this.props.primaryButtonLabel,
+                            hidden: hidePrimaryButton,
+                            styles: roundedButtonStyle,
+                            iconProps: pIconProps,
+                            onClick: () => { this._onPrimaryButtonClicked() }
+                        }}
+                        secondaryButtonProps={{
+                            text: this.props.secondaryButtonLabel,
+                            hidden: hideSecondaryButton,
+                            styles: roundedButtonStyle,
+                            iconProps: sIconProps,
+                            onClick: () => { this._onSecondaryButtonClicked() }
+                        }}
+                        onDismiss={() => { this._onDismissClicked() }} >
+                        {this.props.text}
+                    </FTeachingBubble>
                 )}
             </>
         );
@@ -161,7 +173,8 @@ TeachingBubble.propTypes = {
 
     /**
      * @uxpindescription Whether to display the TeachingBubble 
-     */   
+     * @uxpinpropname Show
+    */
     open: PropTypes.bool,
 
     /**
@@ -222,7 +235,7 @@ TeachingBubble.propTypes = {
         "topAutoEdge",
         "bottomLeftEdge",
         "bottomCenter",
-        "bottomRightEdge", 
+        "bottomRightEdge",
         "bottomAutoEdge",
         "leftTopEdge",
         "leftCenter",
@@ -235,25 +248,25 @@ TeachingBubble.propTypes = {
     /**
      * @uxpindescription Fires when the Close button is clicked
      * @uxpinpropname Close Button Click
-     */   
+     */
     dismiss: PropTypes.func,
 
     /**
      * @uxpindescription Whether to show the light blue target marker on the canvas 
      * @uxpinpropname Show Marker
-     */   
+     */
     showMarker: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when the Primary Button is clicked on
      * @uxpinpropname Primary Button Click
-     */ 
+     */
     primaryButtonClick: PropTypes.func,
 
     /**
      * @uxpindescription Fires when the Secondary Button is clicked on
      * @uxpinpropname Secondary Button Click
-     */ 
+     */
     secondaryButtonClick: PropTypes.func,
 };
 
@@ -264,7 +277,7 @@ TeachingBubble.propTypes = {
 TeachingBubble.defaultProps = {
     open: true,
     title: "Basic TeachingBubble",
-    text: "Set my 'open' property to true to view me in a mockup.",
+    text: "Set my 'Show' property to true to view me in a mockup.",
     footerText: "",
     direction: "bottomAutoEdge",
     hasCloseButton: true,

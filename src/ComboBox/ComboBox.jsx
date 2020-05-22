@@ -4,31 +4,31 @@ import * as PropTypes from 'prop-types';
 import { getTokens, csv2arr } from '../_helpers/parser.jsx';
 
 
-  /**
-   * UPDATED April 7, 2020 by Anthony Hand
-   * - Added support for entering items with commas. The user must wrap an item with commas in it in quotes.
-   * */
+/**
+ * UPDATED April 7, 2020 by Anthony Hand
+ * - Added support for entering items with commas. The user must wrap an item with commas in it in quotes.
+ * */
 
 
-  /**
-   * UPDATED Mar 22, 2020 by Anthony Hand
-   * - Converted control to a 'controlled' component where the selectedIndex(es) list is managed by logic within the control.
-   * - Removed the fixed width property so that the user can resize it by clicking & dragging in UXPin.
-   * - Added an 'onChange' event. 
-   * - Added descriptions and prop names for each property with some updates. Changed some prop names.
-   * - Converted the 'autoComplete' prop to a boolean. A checkbox is easier in the UXPin UI. 
-   * - Removed the following events, which weren't very useful currently: onMenuOpen, onFocus, onPendingValueChanged.
-   * - Removed the "allowFreeform" prop. It complicated things...
-   * - Changed the input control for the 'label' prop to give it more space. 
-   * 
-   * TODOs
-   * - Waiting for guidance from UXPin on how to expose the selectedIndex prop at runtime within UXPin. 
-   * - Need to support converting CSV formatted options and trimming whitespace. 
-   * - Add support for the user to pre-select the list of selected items in UXPin.
-   * 
-   * For additional outstanding issues, please see: 
-   *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/108
-   * */
+/**
+ * UPDATED Mar 22, 2020 by Anthony Hand
+ * - Converted control to a 'controlled' component where the selectedIndex(es) list is managed by logic within the control.
+ * - Removed the fixed width property so that the user can resize it by clicking & dragging in UXPin.
+ * - Added an 'onChange' event. 
+ * - Added descriptions and prop names for each property with some updates. Changed some prop names.
+ * - Converted the 'autoComplete' prop to a boolean. A checkbox is easier in the UXPin UI. 
+ * - Removed the following events, which weren't very useful currently: onMenuOpen, onFocus, onPendingValueChanged.
+ * - Removed the "allowFreeform" prop. It complicated things...
+ * - Changed the input control for the 'label' prop to give it more space. 
+ * 
+ * TODOs
+ * - Waiting for guidance from UXPin on how to expose the selectedIndex prop at runtime within UXPin. 
+ * - Need to support converting CSV formatted options and trimming whitespace. 
+ * - Add support for the user to pre-select the list of selected items in UXPin.
+ * 
+ * For additional outstanding issues, please see: 
+ *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/108
+ * */
 
 
 
@@ -42,14 +42,14 @@ Pears`;
 
 class ComboBox extends React.Component {
 
-        constructor(props) {
+    constructor(props) {
         super(props);
 
         //Track the lists of selected key(s) within the control
         //TODO: Populate these values with props when feature is exposed.
         this.state = {
             //default must be undefined
-            _index: null, 
+            _index: null,
 
             //default must be an empty array
             _selectedIndices: [],
@@ -58,13 +58,21 @@ class ComboBox extends React.Component {
 
     }
 
+
     componentDidMount() {
-        this.setItems();
+        this.set();
     }
 
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.items !== this.props.items
+        ) {
+            this.set();
+        }
+    }
 
     //Parse the choice items
-    setItems() {
+    set() {
 
         if (!this.props.items)
             return;
@@ -99,23 +107,23 @@ class ComboBox extends React.Component {
         }
         else {
             this._onChangeSingle(index);
-        }        
+        }
     }
 
     //To process the onChange event for a single select use case. 
     _onChangeSingle(index) {
-    
+
         //We MUST  set the state with the updated index value. This will also force the control to update in UXPin at runtime.
         this.setState(
-            { _index: index}
+            { _index: index }
         )
-    
+
         //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
         //For the end user in UXPin, convert the index to a 1-based number. 
         if (this.props.onChange) {
             this.props.onChange(index + 1);
         }
-        
+
     }
 
 
@@ -124,32 +132,32 @@ class ComboBox extends React.Component {
 
         const selected = option.selected;
         const key = option.key;
-    
+
         //Clone the array.
         var keys = [...this.state._selectedIndices];
         const included = keys.includes(key);
-    
+
         //If selected, let's add it to our tracking array prop.
         if (selected && included == false) {
             keys.push(key);
         }
         else if (selected == false && included) {
-    
+
             //Otherwise let's remove it from our tracking array. 
-            var filtered = keys.filter( 
-                    function (currVal) { 
+            var filtered = keys.filter(
+                function (currVal) {
                     return currVal != key;
                 });
-    
+
             // Now we set the filtered array to the keys array.
             keys = filtered;
         }
-    
+
         //We MUST update the state with the new values. This will also force the control to update in UXPin at runtime.
         this.setState(
             { _selectedIndices: keys }
         )
-    
+
         //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
         if (this.props.onChange) {
             const list = keys.toString(); //comma separated
@@ -157,42 +165,42 @@ class ComboBox extends React.Component {
         }
     }
 
-  
+
     render() {
 
         //Microsoft uses one prop for both single and multi-select use cases, unlike the Dropdown. 
         var keys = null;
 
-        if (this.props.multiSelect && 
+        if (this.props.multiSelect &&
             this.state._selectedIndices) {
 
             keys = this.state._selectedIndices;
         }
         else {
             keys = this.state._index;
-        }        
+        }
 
         //Convert the autocomplete boolean to one of Microsoft's preferred strings. 
-        var autoComplete = "off"; 
+        var autoComplete = "off";
         if (this.props.autoComplete) {
             autoComplete = "on";
-        } 
+        }
 
-    
+
         return (
 
             <FComboBox
                 {...this.props}
-                options = { this.state.items }
-                autoComplete = { autoComplete }
-                selectedKey = { keys }  
-                onChange = { (e, o, i, v) => { this._onChoiceChange(o, i); } } //We only want to catch the option and index
+                options={this.state.items}
+                autoComplete={autoComplete}
+                selectedKey={keys}
+                onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }} //We only want to catch the option and index
             />
 
         );
     }
 }
-  
+
 
 
 /** 
@@ -210,20 +218,20 @@ ComboBox.propTypes = {
     /**
      * @uxpindescription Placeholder text to show until an item(s) is selected
      * @uxpinpropname Placeholder
-     */  
-    placeholder: PropTypes.string,  
+     */
+    placeholder: PropTypes.string,
 
     /**
      * Microsoft uses the values: "on", "off" 
      * @uxpindescription Whether the ComboBox auto completes. As the user is inputing text, it will be suggested potential matches from the list of options. 
      * @uxpinpropname Auto-Complete
      */
-    autoComplete: PropTypes.bool, 
+    autoComplete: PropTypes.bool,
 
     /**
      * @uxpindescription To allow multiple selections
      * @uxpinpropname Multi-select
-     */    
+     */
     multiSelect: PropTypes.bool,
 
     /**
@@ -262,7 +270,7 @@ ComboBox.defaultProps = {
     label: "Basic ComboBox",
     placeholder: " - Select -",
     disabled: false,
-    multiSelect: false, 
+    multiSelect: false,
     autoComplete: "off",
     items: defaultItems
 };

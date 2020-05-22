@@ -1,39 +1,47 @@
 import * as React from 'react';
-import {IconButton as FIconButton} from 'office-ui-fabric-react';
+import { IconButton as FIconButton } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import { getTokens, csv2arr } from '../_helpers/parser.jsx';
 
 
 
-  /**
-   * UPDATED April 6, 2020 by Anthony Hand
-   * - Rewrote the JSX and 0-default.jsx files to follow template for adding a control a the UXPin library.
-   * - Converted object to a class.
-   * - Added file to our TPX UX Experimental library on UXPin.
-   * 
-   * TODOs
-   * - Control needs to be updated with the proper PayPal UI theme. 
-   * 
-   * */
+/**
+ * UPDATED April 6, 2020 by Anthony Hand
+ * - Rewrote the JSX and 0-default.jsx files to follow template for adding a control a the UXPin library.
+ * - Converted object to a class.
+ * - Added file to our TPX UX Experimental library on UXPin.
+ * 
+ * TODOs
+ * - Control needs to be updated with the proper PayPal UI theme. 
+ * 
+ * */
 
 
 //Default items to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is. 
 const defaultItems = `icon(Document) Add Document
 icon(FileCode) Add Code File
-icon(Picture) Add Picture`; 
+icon(Picture) Add Picture`;
 
 
 class IconButton extends React.Component {
     constructor(props) {
-      super(props);
-      this.state = {
-          items: []
-      }
+        super(props);
+        this.state = {
+            items: []
+        }
     }
 
     componentDidMount() {
-        this.setItems();
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.items !== this.props.items
+        ) {
+            this.set();
+        }
     }
 
     //Get the user-entered left icon name, if there is one
@@ -45,15 +53,15 @@ class IconButton extends React.Component {
 
     //If the user has chosen a tiled options display, let's figure out the icon names.
     getIconProps(str) {
-        return  {
-            iconName: this.getLeftIcon(str) 
+        return {
+            iconName: this.getLeftIcon(str)
         }
     }
 
     //Parse the choice items
-    setItems() {
+    set() {
 
-        if (!this.props.items) 
+        if (!this.props.items)
             return;
 
         let items = csv2arr(this.props.items)
@@ -83,32 +91,32 @@ class IconButton extends React.Component {
 
 
     render() {
-      let iconProps = { 
-          iconName: this.props.iconName
-         }
+        let iconProps = {
+            iconName: this.props.iconName
+        }
 
-      var menuProps = undefined; 
-      if (this.props.items) {
-        menuProps = {
-            items: this.state.items,
-            directionalHintFixed: true
-        };
-      }
-  
-      return (
-  
-        <FIconButton 
-            {...this.props}
-            title = { this.props.text }
-            iconProps = { iconProps }
-            menuProps = { menuProps }
-            onClick={() => { this._onClick(0) }} //Always send 0. Only fires if it has no sub-menu
-        />
-  
-      );
+        var menuProps = undefined;
+        if (this.props.items) {
+            menuProps = {
+                items: this.state.items,
+                directionalHintFixed: true
+            };
+        }
+
+        return (
+
+            <FIconButton
+                {...this.props}
+                title={this.props.text}
+                iconProps={iconProps}
+                menuProps={menuProps}
+                onClick={() => { this._onClick(0) }} //Always send 0. Only fires if it has no sub-menu
+            />
+
+        );
     }
-  
-  }
+
+}
 
 
 /** 
@@ -125,13 +133,13 @@ IconButton.propTypes = {
     /**
      * @uxpindescription The exact name from the PayPal icon library (Optional)
      * @uxpinpropname Icon Name
-     * */  
+     * */
     iconName: PropTypes.string,
 
     /**
      * @uxpindescription To disable the control
      * @uxpinpropname Disabled
-     * */  
+     * */
     disabled: PropTypes.bool,
 
     /**
@@ -144,7 +152,7 @@ IconButton.propTypes = {
     /**
      * @uxpindescription Fires when the button is clicked on.
      * @uxpinpropname Click
-     * */   
+     * */
     onClick: PropTypes.func
 };
 
@@ -158,7 +166,7 @@ IconButton.defaultProps = {
     iconName: "Print",
     items: defaultItems,
     disabled: false,
-  };
+};
 
 
 export { IconButton as default };

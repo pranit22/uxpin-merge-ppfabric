@@ -1,25 +1,26 @@
 import * as React from 'react';
-import {Dialog as FDialog,
-        DialogFooter,
-        PrimaryButton,
-        DefaultButton,
-        DialogType
-    } from 'office-ui-fabric-react';
+import {
+    Dialog as FDialog,
+    DialogFooter,
+    PrimaryButton,
+    DefaultButton,
+    DialogType
+} from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 
 
-  /**
-   * UPDATED April 2, 2020 by Anthony Hand
-   * - Rewrote the JSX and 0-default.jsx files to follow template for adding a control a the UXPin library.
-   * - Converted object to a class.
-   * - Added file to our TPX UX Experimental library on UXPin.
-   * 
-   * TODOs
-   * - Control needs to be updated with the proper PayPal UI theme. 
-   * - Cannot change the icon used directly. The mapping itself within the PayPal TPX icon library must be updated. 
-   *        https://github.paypal.com/Console-R/pp-fabric-theme/issues/27
-   * 
-   * */
+/**
+ * UPDATED April 2, 2020 by Anthony Hand
+ * - Rewrote the JSX and 0-default.jsx files to follow template for adding a control a the UXPin library.
+ * - Converted object to a class.
+ * - Added file to our TPX UX Experimental library on UXPin.
+ * 
+ * TODOs
+ * - Control needs to be updated with the proper PayPal UI theme. 
+ * - Cannot change the icon used directly. The mapping itself within the PayPal TPX icon library must be updated. 
+ *        https://github.paypal.com/Console-R/pp-fabric-theme/issues/27
+ * 
+ * */
 
 
 
@@ -46,7 +47,7 @@ class Dialog extends React.Component {
     }
 
 
-    componentDidMount() {
+    set() {
         var isOpen = false;
 
         if (this.props.show) {
@@ -58,17 +59,29 @@ class Dialog extends React.Component {
         )
     }
 
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.show !== this.props.show
+        ) {
+            this.set();
+        }
+    }
+
 
     dismissControl() {
         //Set the control to not open to dismiss it.
-        this.setState (
+        this.setState(
             { open: false }
         )
     }
 
     _onDismissClicked() {
         //Notify UXPin that the Close icon has been clicked on.
-        if (this.props.dismiss) { 
+        if (this.props.dismiss) {
             this.props.dismiss();
         }
 
@@ -77,7 +90,7 @@ class Dialog extends React.Component {
 
     _onPrimaryButtonClicked() {
         //Notify UXPin of the event.
-        if (this.props.primaryButtonClick) { 
+        if (this.props.primaryButtonClick) {
             this.props.primaryButtonClick();
         }
 
@@ -101,25 +114,25 @@ class Dialog extends React.Component {
         var actionButtons = [];
 
         if (this.props.secondaryButtonLabel) {
-            let btn = (<DefaultButton 
-                text = {this.props.secondaryButtonLabel}
-                styles = { roundedButtonStyle }
-                onClick = { () => { this._onSecondaryButtonClicked(); } } />);
+            let btn = (<DefaultButton
+                text={this.props.secondaryButtonLabel}
+                styles={roundedButtonStyle}
+                onClick={() => { this._onSecondaryButtonClicked(); }} />);
             actionButtons.push(btn);
             hasActionButtons = true;
         }
         if (this.props.primaryButtonLabel) {
-            let btn = (<PrimaryButton 
-                text = {this.props.primaryButtonLabel}
-                styles = { roundedButtonStyle }
-                onClick = { () => { this._onPrimaryButtonClicked(); } } />);
+            let btn = (<PrimaryButton
+                text={this.props.primaryButtonLabel}
+                styles={roundedButtonStyle}
+                onClick={() => { this._onPrimaryButtonClicked(); }} />);
             actionButtons.push(btn);
             hasActionButtons = true;
         }
 
         var footer = "";
         if (hasActionButtons) {
-            footer =  (<DialogFooter>{actionButtons}</DialogFooter>)
+            footer = (<DialogFooter>{actionButtons}</DialogFooter>)
         }
 
         return (
@@ -133,24 +146,24 @@ class Dialog extends React.Component {
                         verticalAlign: "middle",
                         background: 'var(--color-blue-800)',
                         borderRadius: 10
-                }}><br /><em><strong>Dialog:</strong></em><br />Move this marker offscreen</div>
+                    }}><br /><em><strong>Dialog:</strong></em><br />Move this marker offscreen</div>
                 <FDialog
                     //{ ...this.props }
-                    hidden = { !this.state.open }
-                    dialogContentProps = {{
+                    hidden={!this.state.open}
+                    dialogContentProps={{
                         type: DialogType.normal,
-                        showCloseButton: true, 
+                        showCloseButton: true,
                         title: this.props.title,
-                        subText: this.props.text 
+                        subText: this.props.text
                     }}
-                    modalProps = {{
+                    modalProps={{
                         isBlocking: this.props.blocking,
-                        isDarkOverlay: this.props.darkOverlay, 
+                        isDarkOverlay: this.props.darkOverlay,
                         dragOptions: this.props.draggable ? _dragOptions : undefined
                     }}
-                    onDismiss={() => { this._onDismissClicked()}}
+                    onDismiss={() => { this._onDismissClicked() }}
                 >
-                        { footer }
+                    {footer}
                 </FDialog>
             </div>
         );
@@ -165,7 +178,7 @@ Dialog.propTypes = {
 
     /**
      * @uxpindescription Whether to display the Dialog 
-     */   
+     */
     show: PropTypes.bool,
 
     /**
@@ -182,18 +195,18 @@ Dialog.propTypes = {
 
     /**
      * @uxpindescription Whether the user may drag around the dialog 
-     */   
+     */
     draggable: PropTypes.bool,
 
     /**
      * @uxpindescription Whether the user may click off the dialog to dismiss it, or must click on a button instead 
-     */   
+     */
     blocking: PropTypes.bool,
 
     /**
      * @uxpindescription Whether the to show a dark overlay while the dialog is displayed 
      * @uxpinpropname Dark Overlay
-     */   
+     */
     darkOverlay: PropTypes.bool,
 
     /**
@@ -211,19 +224,19 @@ Dialog.propTypes = {
     /**
      * @uxpindescription Fires when the dialog is dismissed any way EXCEPT clicking on the Primary or Secondary buttons
      * @uxpinpropname Dismissed
-     */   
+     */
     dismiss: PropTypes.func,
 
     /**
      * @uxpindescription Fires when the Primary Button is clicked on
      * @uxpinpropname Primary Button Click
-     */ 
+     */
     primaryButtonClick: PropTypes.func,
 
     /**
      * @uxpindescription Fires when the Secondary Button is clicked on
      * @uxpinpropname Secondary Button Click
-     */ 
+     */
     secondaryButtonClick: PropTypes.func,
 
 };
@@ -238,7 +251,7 @@ Dialog.defaultProps = {
     text: "Place the dialog marker off screen. Using another control like a Button, set the 'open' property to True to show it a mockup.",
     draggable: true,
     darkOverlay: true,
-    blocking: false, 
+    blocking: false,
     primaryButtonLabel: "OK",
     secondaryButtonLabel: "Close"
 };
