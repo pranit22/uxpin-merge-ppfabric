@@ -1,25 +1,25 @@
 import * as React from 'react';
 import {
-        Stack,
-        StackItem,
-        Text 
-    } from 'office-ui-fabric-react';
+    Stack,
+    StackItem,
+    Text
+} from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
 
 
-  /** 
-   * UPDATED May 11, 2020 by Anthony Hand
-   * - Added background color feature.
-   */
+/** 
+ * UPDATED May 11, 2020 by Anthony Hand
+ * - Added background color feature.
+ */
 
-  /** 
-   * UPDATED April 29, 2020 by Anthony Hand
-   * - Added file to our TPX UX Experimental library on UXPin.
-   */
+/** 
+ * UPDATED April 29, 2020 by Anthony Hand
+ * - Added file to our TPX UX Experimental library on UXPin.
+ */
 
 
-const verticalAlign = 'center';
+const verticalAlign = 'start';
 
 const leftAlign = 'left';
 const centerAlign = 'center';
@@ -49,13 +49,13 @@ class PPVerticalStack extends React.Component {
 
     _getHorizontalAlignmentToken() {
         switch (this.props.align) {
-            case leftAlign :
+            case leftAlign:
                 return 'start';
-            case centerAlign :
+            case centerAlign:
                 return 'center';
-            case rightAlign :
+            case rightAlign:
                 return 'end';
-            default :
+            default:
                 return 'start';
         }
     }
@@ -81,9 +81,9 @@ class PPVerticalStack extends React.Component {
             instructionStack = (
                 <Text
                     {...this.props}
-                    styles = { fTextStyles }
-                    variant = { 'medium' }>
-                    { this.props.value }
+                    styles={fTextStyles}
+                    variant={'medium'}>
+                    {this.props.value}
                 </Text>
             );
         }
@@ -97,7 +97,7 @@ class PPVerticalStack extends React.Component {
 
         //Let's see if the user entered a valid color value. This method returns undefined if not. 
         var color = TpxUxColors.getHexFromHexOrPpuiToken(this.props.bgColor);
-        if (!color) 
+        if (!color)
             color = 'transparent';
 
         //For internal padding within the stack. 
@@ -105,9 +105,11 @@ class PPVerticalStack extends React.Component {
 
         const topStackItemStyles = {
             root: {
-              display: 'flex',
-              overflow: 'hidden',
-              background: color,        //undefined is OK
+                display: 'flex',
+                overflow: 'hidden',
+                background: color,        //undefined is OK
+                height: this.props.stackHeight || 'auto',
+                width: this.props.stackWidth || 'auto'
             },
         };
 
@@ -117,7 +119,7 @@ class PPVerticalStack extends React.Component {
 
         const stackTokens = {
             childrenGap: pad,
-            padding: 0, 
+            padding: 0,
         };
 
         //****************************
@@ -135,11 +137,15 @@ class PPVerticalStack extends React.Component {
 
                 for (var i = 0; i < childList.length; i++) {
                     let child = childList[i];
-                    
+
                     let stack = (
-                        <StackItem 
-                            align = { this.props.stretch ? 'stretch' : '' }   >
-                            { child }
+                        <StackItem
+                            key={i}
+                            align={this.props.stretch ? 'stretch' : ''}
+                            // Does this child span the remaining space?
+                            grow={this.props.spanChild && this.props.childSpannerIndex === i + 1 ? true : false}
+                        >
+                            {child}
                         </StackItem>
                     );
                     stackList.push(stack);
@@ -159,11 +165,11 @@ class PPVerticalStack extends React.Component {
                     }
 
                     //A StackItem that will spring to fill available space. 
-                    let spanner = (<StackItem 
-                        grow={1} 
-                        styles={ spanStyles }>
-                            <span />
-                        </StackItem>);
+                    let spanner = (<StackItem
+                        grow={true}
+                        styles={spanStyles}>
+                        <span />
+                    </StackItem>);
 
                     //Add the spanner at the specified index, deleting 0 other items.
                     stackList.splice(newIndex, 0, spanner);
@@ -174,20 +180,19 @@ class PPVerticalStack extends React.Component {
 
         return (
 
-            <Stack 
+            <Stack
                 {...this.props}
-                tokens = { stackTokens }
-                padding = { internalPadding + 'px' }
-                horizontal = { false }
-                horizontalAlign = { hAlign }
-                verticalAlign = { verticalAlign }
-                wrap = { false }
-                styles = { topStackItemStyles }> 
+                tokens={stackTokens}
+                padding={internalPadding + 'px'}
+                horizontal={false}
+                horizontalAlign={hAlign}
+                verticalAlign={verticalAlign}
+                wrap={false}
+                styles={topStackItemStyles}>
 
-                    { instructionStack }
+                {instructionStack}
 
-                    { stackList }
-
+                {stackList}
             </Stack>
         );
     }
@@ -205,7 +210,7 @@ PPVerticalStack.propTypes = {
      * @uxpinignoreprop 
      * @uxpindescription Contents for the right side. 1. Drag an object onto the canvas. 2. In the Layers Panel, drag the item onto this object. Now it should be indented, and contained as a 'child.'  
      * @uxpinpropname Right Contents
-     */ 
+     */
     children: PropTypes.node,
 
     /**
@@ -220,27 +225,27 @@ PPVerticalStack.propTypes = {
     /**
      * @uxpindescription To show or hide the instructional text  
      * @uxpinpropname Show Instructions
-     */ 
-    showInstructions: PropTypes.bool,  
+     */
+    showInstructions: PropTypes.bool,
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Padding within the stack. Value must be 0 or more. 
      * @uxpinpropname Padding
-     */ 
-    internalPadding: PropTypes.number, 
+     */
+    internalPadding: PropTypes.number,
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Row padding between the items in the group. Value must be 0 or more.  
      * @uxpinpropname Gutter
-     */ 
-    gutterPadding: PropTypes.number,  
-    
+     */
+    gutterPadding: PropTypes.number,
+
     /**
      * @uxpindescription To horizontally align all content within the stack 
      * @uxpinpropname Alignment
-     */    
+     */
     align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign]),
 
     /**
@@ -252,14 +257,26 @@ PPVerticalStack.propTypes = {
     /**
      * @uxpindescription To insert a spanner to fill empty space between two elements. 
      * @uxpinpropname Add Spanner
-     */ 
-    addSpanner: PropTypes.bool,  
+     */
+    addSpanner: PropTypes.bool,
 
     /**
      * @uxpindescription The 1-based index for where to insert a Spanner. The Spanner will be inserted to the left of the item that is at this index value.
      * @uxpinpropname Spanner Index
      */
     spannerIndex: PropTypes.number,
+
+    /**
+     * @uxpindescription To make a child fill remaining space, similar to addSpanner property, but for an existing child element.
+     * @uxpinpropname Span Child
+     */
+    spanChild: PropTypes.bool,
+
+    /**
+     * @uxpindescription The 1-based index for the child to be spanned.
+     * @uxpinpropname Child Spanner Index
+     */
+    childSpannerIndex: PropTypes.number,
 
     /**
      * @uxpindescription The Spanner's height (pixels)
@@ -270,8 +287,24 @@ PPVerticalStack.propTypes = {
     /**
      * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
      * @uxpinpropname Bg Color
-     * */  
+     * */
     bgColor: PropTypes.string,
+
+    /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription The height of the stack
+     * @uxpinpropname Stack Height
+     */
+    stackHeight: PropTypes.string,
+
+    /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription The width of the stack
+     * @uxpinpropname Stack Width
+     */
+    stackWidth: PropTypes.string,
 }
 
 
@@ -279,11 +312,13 @@ PPVerticalStack.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 PPVerticalStack.defaultProps = {
-    value: instructionText,    
+    value: instructionText,
     showInstructions: true,
     internalPadding: 0,
     gutterPadding: 12,
     align: leftAlign,
+    spanChild: false,
+    childSpannerIndex: 1,
     stretch: true,
     addSpanner: false,
     spannerIndex: 1,

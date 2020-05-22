@@ -7,6 +7,7 @@ import {
 import * as PropTypes from 'prop-types';
 import { TpxUxNumberParser } from '../_helpers/tpxuxnumberutils.jsx';
 import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
+import { Styles } from 'react-jss';
 
 
 /** 
@@ -186,8 +187,8 @@ class PPHorizontalStack extends React.Component {
             root: {
                 display: 'flex',
                 overflow: 'hidden',
-                width: '100%',
                 background: color,        //undefined is OK
+                height: this.props.stackHeight || 'auto'
             },
         };
 
@@ -227,18 +228,13 @@ class PPHorizontalStack extends React.Component {
 
                     //Now we put it all together!
                     let stack = (
-                        <Stack
-                            horizontal={false}
-                            horizontalAlign={hAlign}
-                            verticalAlign={vAlign}
-                            wrap={false}
+                        <StackItem
+                            key={i}
+                            align={this.props.stretch ? "stretch" : ''}
                             styles={stackItemStyle}
                         >
-                            <StackItem
-                                align={this.props.stretch ? "stretch" : ''}   >
-                                {child}
-                            </StackItem>
-                        </Stack>
+                            {child}
+                        </StackItem>
                     );
                     stackList.push(stack);
                 } //for loop
@@ -254,7 +250,6 @@ class PPHorizontalStack extends React.Component {
             } //if childList
         } //If props.children
 
-
         return (
 
             <Stack
@@ -264,7 +259,8 @@ class PPHorizontalStack extends React.Component {
                 horizontal={true}
                 horizontalAlign={hAlign}
                 wrap={false}
-                styles={topStackItemStyles}>
+                styles={topStackItemStyles}
+            >
 
                 {instructionStack}
 
@@ -360,6 +356,14 @@ PPHorizontalStack.propTypes = {
      * @uxpinpropname Bg Color
      * */
     bgColor: PropTypes.string,
+
+    /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription The height of the stack
+     * @uxpinpropname Stack Height
+     */
+    stackHeight: PropTypes.string,
 }
 
 
@@ -374,6 +378,7 @@ PPHorizontalStack.defaultProps = {
     gutterPadding: 12,
     align: leftAlign,
     vAlign: topAlign,
+    fillParent: false,
     stretch: true,
     addSpanner: false,
     spannerIndex: 1,

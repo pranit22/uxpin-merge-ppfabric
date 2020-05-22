@@ -46,7 +46,7 @@ icon(BIDashboard) Metrics
 icon(Commitments) Data Services
 icon(Admin) Admin`;
 
-const defaultTopPadding = '24';
+const defaultTopPadding = 24;
 
 const defaultStyledBgColor = "#F5F7FA";         //grey-100
 const defaultStyledBorderColor = '#CBD2D6';     //grey-300
@@ -113,7 +113,7 @@ class Nav extends React.Component {
     setDisabledIndexes(callback) {
         let disabledIndexes = csv2arr(this.props.disabled).flat().map(i => parseInt(i.trim()))
         this.setState(
-            { disabledIndexes }, 
+            { disabledIndexes },
             callback)
     }
 
@@ -136,7 +136,7 @@ class Nav extends React.Component {
 
 
     render() {
-        
+
         //Adjust for user input. Neg values not allowed.
         let index = this.props.selectedIndex > 0 ? this.props.selectedIndex : 1;
 
@@ -144,32 +144,37 @@ class Nav extends React.Component {
         let topPad = this.props.navTopPadding > 0 ? this.props.navTopPadding : 0;
 
         let mHeight = this.props.controlHeight > 1 ? this.props.controlHeight : 1;
+        if (this.props.stretch) {
+            mHeight = '100%'
+        }
+        let width = this.props.controlWidth > 1 ? this.props.controlWidth: 'auto';
 
         let navStyles = {
             root: {
                 minHeight: mHeight,
+                width,
                 paddingTop: topPad + 'px',
-                backgroundColor: isStyled ? defaultStyledBgColor : 'transparent',  
+                backgroundColor: isStyled ? defaultStyledBgColor : 'transparent',
                 borderRight: isStyled ? "1px solid " + defaultStyledBorderColor : 'none',
             }
         };
 
         let groupParams = [
-                { links: this.state.links }
-        ];  
+            { links: this.state.links }
+        ];
 
-        
+
         return (
             //For some reason, the control will only display properly in UXPin with this weird wrapping & logic. 
-            <> 
+            <>
                 {this.state.links.length > 0 ?
                     <FNav
                         {...this.props}
-                        selectedKey = { index } 
-                        styles = { navStyles }
-                        groups = { groupParams }
-                        onLinkClick = { this.onMenuClick.bind(this) } />
-                : <div> </div>}
+                        selectedKey={index}
+                        styles={navStyles}
+                        groups={groupParams}
+                        onLinkClick={this.onMenuClick.bind(this)} />
+                    : <div> </div>}
             </>
         )
     }
@@ -185,14 +190,27 @@ Nav.propTypes = {
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Top padding above the control. Value must be 0 or more. 
      * @uxpinpropname Top Padding
-     */ 
-    navTopPadding: PropTypes.number, 
+     */
+    navTopPadding: PropTypes.number,
 
     /**
     * @uxpindescription The height of the control   
     * @uxpinpropname Height
-    */ 
+    */
     controlHeight: PropTypes.number,
+
+    /**
+    * @uxpindescription To stretch the control vertically to fill the space  
+    * @uxpinpropname Stretch
+    */
+    stretch: PropTypes.bool,
+
+
+    /**
+    * @uxpindescription The width of the control   
+    * @uxpinpropname Width
+    */
+    controlWidth: PropTypes.number,
 
     /**
      * @uxpindescription The 1-based index value of the tab to be shown as selected by default
@@ -210,7 +228,7 @@ Nav.propTypes = {
     /**
      * @uxpindescription Whether to apply styling to the control's background
      * @uxpinpropname Styled Background
-     * */    
+     * */
     styledBackground: PropTypes.bool,
 
     /**
@@ -320,6 +338,7 @@ Nav.defaultProps = {
     items: defaultNavItems,
     styledBackground: false,
     disabled: "5, 8",
+    stretch: true
 };
 
 

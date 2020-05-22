@@ -24,12 +24,12 @@ const defaultTextColorHex = '#2C2E2F';
 const defaultBgColor = 'blue-100';
 
 const defaultBorderColor = 'blue-300';
-const defaultBorderThickness = '1';
+const defaultBorderThickness = 1;
 const borderSolid = 'solid';
 
-const defaultInternalPadding = '24';
-const defaultGutterPadding = '12';
-const defaultTextStackPadding = '6';
+const defaultInternalPadding = 24;
+const defaultGutterPadding = 12;
+const defaultTextStackPadding = 6;
 
 
 

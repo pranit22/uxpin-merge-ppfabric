@@ -29,11 +29,11 @@ const defaultLine3Text = "prod_support@paypal.com | mailto:prod_support@paypal.c
 const defaultBgColor = 'transparent';
 
 const defaultBorderColor = 'blue-700';
-const defaultBorderThickness = '4';
+const defaultBorderThickness = 4;
 const borderSolid = 'solid';
 
-const defaultInternalPadding = '24';
-const defaultTextStackPadding = '6';
+const defaultInternalPadding = 24;
+const defaultTextStackPadding = 6;
 
 const defaultTextStackMinWidth = '300px';
 const defaultCorpInfoMaxWidth = '1000px';

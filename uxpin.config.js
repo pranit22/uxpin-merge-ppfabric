@@ -4,20 +4,25 @@ module.exports = {
       {
         name: 'PayPal',
         include: [
+          'src/PPLayout/PPLayout.jsx',
+          'src/PPPageTemplate/PPPageTemplate.jsx',
+          'src/PPPageContainer/PPPageContainer.jsx',
           'src/PPHeader/PPHeader.jsx',
           'src/PPProfileCard/PPProfileCard.jsx',
           'src/PPMetaDataGroup/PPMetaDataGroup.jsx',
           'src/PPMetaDataPair/PPMetaDataPair.jsx',
           'src/PPHorizontalStack/PPHorizontalStack.jsx',
           'src/PPVerticalStack/PPVerticalStack.jsx',
-          'src/PPPageHeader/PPPageHeader.jsx',
-          'src/PPPageFooter/PPPageFooter.jsx',
           'src/PPShape/PPShape.jsx',
           'src/PPFavoritesButton/PPFavoritesButton.jsx',
           'src/PPCard/PPCard.jsx',
           'src/PPCardFooter/PPCardFooter.jsx',
           'src/PPCardTextHeader/PPCardTextHeader.jsx',
-          'src/PPChart/PPChart.jsx'
+          'src/PPChart/PPChart.jsx',
+          'src/PPPage/PPPage.jsx',
+          'src/PPPageBody/PPPageBody.jsx',
+          'src/PPPageHeader/PPPageHeader.jsx',
+          'src/PPPageFooter/PPPageFooter.jsx',
         ]
       },
       {
@@ -90,7 +95,7 @@ module.exports = {
         name: 'Surfaces',
         include: [
           'src/Dialog/Dialog.jsx',
-          'src/Tooltip/Tooltip.jsx',
+          'src/Tooltip/Tooltip.jsx'
         ]
       },
       {
