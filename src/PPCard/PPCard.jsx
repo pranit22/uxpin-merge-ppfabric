@@ -1,18 +1,17 @@
 import * as React from 'react';
-import { Card as FCard } from '@uifabric/react-cards';
 import {
         Stack,
         StackItem,
         Text 
     } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
+import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
 
 
-
-  /** 
-   * UPDATED May 8, 2020 by Anthony Hand
-   * - Added file to our TPX UX Experimental library on UXPin.
-   */
+/** 
+ * UPDATED May 13, 2020 by Anthony Hand
+ * - Added file to our TPX UX Experimental library on UXPin.
+ */
 
 //****** ALIGNMENT */
 const verticalAlign = 'center';
@@ -23,18 +22,8 @@ const rightAlign = 'right';
     
 //****** STYLES */
 
-const themeDefault = "Default";
-const themeBlue = "PayPal Blue";
-const themeDarkBlue = "PayPal Dark Blue";
-
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
 const defaultTextColor = "#000000";
-const specialtyTextColor = "#ffffff"; //White
-
-//PPUI Card Styles: https://engineering.paypalcorp.com/confluence/pages/viewpage.action?spaceKey=PPUI&title=Cards
-const bgColor = "#ffffff"; //White
-const bgDarkBlue = "#003087"; //Blue 800
-const bgBlue = "#005EA6"; //Blue 700
 
 const borderRadius = '4px';
 
@@ -50,17 +39,22 @@ const instructionText = `Card Instructions:
 3) Uncheck the "Show Instructions" box.`;
 
 
-class Card extends React.Component {
+
+class PPCard extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            hovered: false,
         }
     }
 
+    _setHover(hover) {
+        this.setState({ hovered: hover });
+    }
 
     _getHorizontalAlignmentToken() {
-        switch (this.props.cardAlign) {
+        switch (this.props.align) {
             case leftAlign :
                 return 'start';
             case centerAlign :
@@ -74,10 +68,8 @@ class Card extends React.Component {
 
     render() {
 
-        console.log('CARD: In Render.');
-
         //An empty string will cause the Text control to hide.
-        let instructions = this.props.showInstructions ? this.props.instructions : '' ;
+        let instructions = this.props.showInstructions ? this.props.value : '' ;
 
         let hAlign = this._getHorizontalAlignmentToken();
 
@@ -94,19 +86,18 @@ class Card extends React.Component {
         };
 
         //Let's make sure we have a positive number. 
-        let cardPad = this.props.cardPadding < 0 ? 0 : this.props.cardPadding + 'px';
-        let cardBgColor =   this.props.cardTheme === themeBlue ? bgBlue 
-                            : this.props.cardTheme === themeDarkBlue ? bgDarkBlue
-                            : bgColor;
-        let cardShadow =   this.props.cardTheme === themeBlue ? '' 
-                            : this.props.cardTheme === themeDarkBlue ? ''
-                            : this.state.hovered ? elevationShadow1 : elevationShadow0; //default theme only
+        let cardPad = this.props.cardPadding < 0 ? 0 : this.props.cardPadding;
+
+        //Let's see if the user entered a valid color value. This method returns undefined if not. 
+        let cardBgColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.bgColor);
+
+        let cardShadow =   this.state.hovered ? elevationShadow1 : elevationShadow0; 
 
         const divStyles = {
               backgroundColor: cardBgColor,
               borderRadius: borderRadius,
-              boxShadow: cardShadow,
-              padding: cardPad,
+              boxShadow: this.props.showShadow ? cardShadow : '',
+              padding: cardPad + 'px',
         };
 
         //With one number, the padding applies to both rows and columns.  
@@ -114,20 +105,15 @@ class Card extends React.Component {
         let pad = this.props.gutterPadding < 0 ? 0 : this.props.gutterPadding;
 
         const stackTokens = {
-            childrenMargin: pad,
+            childrenGap: pad,
             padding: 0, 
         };
 
         //****************************
         //For Text control: Instructions
-        let cardTextColor =   this.props.cardTheme === themeBlue ? specialtyTextColor 
-                                : this.props.cardTheme === themeDarkBlue ? specialtyTextColor
-                                : defaultTextColor;
-
-
         let fTextStyles = {
             root: {
-                color: cardTextColor,
+                color: defaultTextColor,
                 fontWeight: 'normal',
                 fontStyle: 'normal',
                 display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
@@ -148,36 +134,49 @@ class Card extends React.Component {
 
             //Now, we configure the StackItems
             if (childList.length) {
-                var i;
-                for (i = 0; i < childList.length; i++) {
-                    let child = childList[i];      
-                    let stack = (
-                        <StackItem 
-                            align = { this.props.stretch ? 'stretch' : '' }   >
-                            { child }
-                        </StackItem>
-                    );
-                    stackList.push(stack);
+                for (var i = 0; i < childList.length; i++) {
+                    if (childList[i]) {
+                        let child = childList[i];   
+                        child.cardTheme = this.props.cardTheme;   
+                        let stack = (
+                            <StackItem 
+                                align = { 'stretch' }   >
+                                { child }
+                            </StackItem>
+                        );
+                        stackList.push(stack);
+                    }
                 }
             }
         } //If props.children
 
-        console.log('CARD: Return section is next.');
-
 
         return (
-            <FCard 
+            <div 
+                    {...this.props} 
+                    style= { divStyles } 
+                    onMouseEnter = {() => this._setHover(true)}
+                    onMouseLeave = {() => this._setHover(false)} >
+
+            <Stack 
                 {...this.props}
                 tokens = { stackTokens }
                 horizontal = { false }
-                styles = { topStackItemStyles }  > 
-                <FCard.Section>
+                horizontalAlign = { hAlign }
+                verticalAlign = { verticalAlign }
+                wrap = { false }
+                styles = { topStackItemStyles }> 
                     <Text
-                        styles = { fTextStyles } >
+                        {...this.props}
+                        styles = { fTextStyles }
+                        variant = { 'medium' }>
                         { instructions }
                     </Text>
-                </FCard.Section>
-            </FCard>
+
+                    { stackList }
+
+            </Stack>
+            </div>
         );
     }
 }
@@ -187,7 +186,7 @@ class Card extends React.Component {
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
  */
-Card.propTypes = {
+PPCard.propTypes = {
 
     /**
      * Don't show this prop in the UXPin Editor. 
@@ -204,18 +203,13 @@ Card.propTypes = {
      * @uxpinpropname Instructions
      * @uxpincontroltype textfield(6)
      */
-    instructions: PropTypes.string,
+    value: PropTypes.string,
 
     /**
      * @uxpindescription To show or hide the instructional text  
      * @uxpinpropname Show Instructions
      */ 
     showInstructions: PropTypes.bool, 
-    
-    /**
-     * @uxpindescription The visual theme of the card. This selection influences background color and shadow effects. 
-     */    
-    cardTheme: PropTypes.oneOf([themeDefault, themeDarkBlue, themeBlue]),
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
@@ -235,28 +229,34 @@ Card.propTypes = {
      * @uxpindescription To horizontally align all content within the stack 
      * @uxpinpropname Alignment
      */    
-    cardAlign: PropTypes.oneOf([leftAlign, centerAlign, rightAlign]),
+    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign]),
 
     /**
-     * @uxpindescription To stretch the right side contents 
-     * @uxpinpropname Stretch Contents
-     */
-    stretch: PropTypes.bool,
+     * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
+     * @uxpinpropname Bg Color
+     * */  
+    bgColor: PropTypes.string,
+
+    /**
+     * @uxpindescription To show or hide the card's background shadow  
+     * @uxpinpropname Show Shadow
+     */ 
+    showShadow: PropTypes.bool, 
 }
 
 
 /**
  * Set the default values for this control in the UXPin Editor.
  */
-Card.defaultProps = {
-    instructions: instructionText,    
+PPCard.defaultProps = {
+    value: instructionText,    
     showInstructions: true,
-    cardTheme: themeDefault,
     cardPadding: 12,
     gutterPadding: 12,
-    cardAlign: leftAlign,
-    stretch: true,
+    align: leftAlign,
+    bgColor: '',
+    showShadow: true,
 }
 
 
-export { Card as default };
+export { PPCard as default };

@@ -65,14 +65,11 @@ class PPMetaDataGroup extends React.Component {
         //For Text control on the left side
 
         //Let's see if the user entered a valid color value. This method returns undefined if not. 
-        var textColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.color);
-        if (!textColor) {
-            textColor = defaultTextColor;
-        }
+        let textColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.color);
 
         let fTextStyles = {
             root: {
-                color: textColor,
+                color: textColor ? textColor : defaultTextColor,
                 fontWeight: this.props.bold ? 'bold' : 'normal',
                 fontStyle: this.props.italic ? 'italic' : 'normal',
                 display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes

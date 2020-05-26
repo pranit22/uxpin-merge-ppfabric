@@ -15,7 +15,7 @@ import * as PropTypes from 'prop-types';
  */
 
 
-const primaryColor = '#0070BA';         //"blue-600";        //Also disclosure
+const primaryColor = '#0070BA';         //"blue-600";   //Also disclosure
 const primaryHoverColor = '#003087';    //"blue-800";   //Also disclosure
 
 const secondaryColor = '#000000';       //"black";
@@ -70,8 +70,6 @@ class Link extends React.Component {
 
         if (this.props.disabled)
             return;
-
-        console.log("onLinkClick");
         
         //Raise this event to UXPin. We'll send them the HREF value in case they can catch it.
         if (this.props.onLinkClick) {
@@ -157,7 +155,7 @@ Link.propTypes = {
 
     /**
      * @uxpindescription The display size, corresponding to a Microsoft Text 'Variant'
-     * @uxpinpropname Header Size
+     * @uxpinpropname Size
      */
     size: PropTypes.oneOf([
         'tiny',
@@ -174,13 +172,13 @@ Link.propTypes = {
 
     /**
      * @uxpindescription To apply bold formatting
-     * @uxpinpropname Header Bold
+     * @uxpinpropname Bold
      */
     bold: PropTypes.bool,
 
     /**
      * @uxpindescription To apply italic formatting
-     * @uxpinpropname Header Italic
+     * @uxpinpropname Italic
      */
     italic: PropTypes.bool,
 

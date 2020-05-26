@@ -1,29 +1,39 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Nav as FNav, ZIndexes } from 'office-ui-fabric-react';
-import { name2key, getTokens, csv2arr } from '../_helpers/parser.jsx';
+import { Nav as FNav } from 'office-ui-fabric-react';
+import { getTokens, csv2arr } from '../_helpers/parser.jsx';
 
 
+/**
+ * UPDATED May 21, 2020 by Anthony Hand
+ * - Updated to reflect UXPin 2.5's new model for handling prop updates in the Editor vs. at Runtime.
+ * - Created constants for the background and border color
+ */
 
-  /**
-   * UPDATED Mar 31, 2020 by Anthony Hand
-   * - Added a prop so the user can choose whether to enable a styled background or leave it clear.   
-   * */
+/** 
+ * UPDATED May 14, 2020 by Anthony Hand
+ * - Added a prop so the user may optionally add top padding. 
+ */
 
-  /**
-   * UPDATED Mar 27, 2020 by Anthony Hand
-   * - Fixed the issue where the user couldn't drag a border to resize the control within UXPin.  
-   * - Set the background color and border line per Eric Rider's design reference.  
-   * - Updated the default nav items to appear more relevant to TPX developers. 
-   * - Added descriptions and prop names for each property with some updates. Changed some prop names.
-   * 
-   * TODOs
-   * - In the UXPin editor, allow the user to click on the control's bottom border to drag the height. 
-   * - Verify PayPal UI styles.
-   * - Come up with a system to allow the user to specify groups. 
-   * - Once UXPin can catch a value on a click event, remove all the extra click events. Only have 1. Return the index of the clicked on nav item. 
-   * 
-   * */
+/**
+ * UPDATED Mar 31, 2020 by Anthony Hand
+ * - Added a prop so the user can choose whether to enable a styled background or leave it clear.   
+ * */
+
+/**
+ * UPDATED Mar 27, 2020 by Anthony Hand
+ * - Fixed the issue where the user couldn't drag a border to resize the control within UXPin.  
+ * - Set the background color and border line per Eric Rider's design reference.  
+ * - Updated the default nav items to appear more relevant to TPX developers. 
+ * - Added descriptions and prop names for each property with some updates. Changed some prop names.
+ * 
+ * TODOs
+ * - In the UXPin editor, allow the user to click on the control's bottom border to drag the height. 
+ * - Verify PayPal UI styles.
+ * - Come up with a system to allow the user to specify groups. 
+ * - Once UXPin can catch a value on a click event, remove all the extra click events. Only have 1. Return the index of the clicked on nav item. 
+ * 
+ * */
 
 
 
@@ -36,39 +46,44 @@ icon(BIDashboard) Metrics
 icon(Commitments) Data Services
 icon(Admin) Admin`;
 
+const defaultTopPadding = '24';
+
+const defaultStyledBgColor = "#F5F7FA";         //grey-100
+const defaultStyledBorderColor = '#CBD2D6';     //grey-300
+
 
 class Nav extends React.Component {
     constructor(props) {
         super(props);
 
-
         this.state = {
             links: [],
-            selectedIndex: props.selectedIndex || 1,
+            selectedIndex: 1,
             disabledIndexes: []
         }
     }
 
 
     componentDidMount() {
-        this.setDisabledIndexes(this.setItems)
+        this.setState(
+            { selectedIndex: this.props.selectedIndex }
+        )
+        this.setDisabledIndexes(this.setItems);
     }
 
-
-    //TODO: Set the PayPal UI styling until the theme is updated. 
-    getStyles() {
-
-        if (this.props.styledBackground) {
-            return {
-                root: {
-                    backgroundColor: "#F5F7FA",
-                    borderRight: "1px solid #CBD2D6",
-                }
-            }
+    componentDidUpdate(prevProps) {
+        if (prevProps.selectedIndex !== this.props.selectedIndex) {
+            this.setState(
+                { selectedIndex: this.props.selectedIndex }
+            )
         }
 
-        return "";
-
+        //The disabled indexes and items are set in one call
+        //Call them both if one or the other has changed
+        if (prevProps.disabled !== this.props.disabled ||
+            prevProps.items !== this.props.items) {
+            this.setDisabledIndexes(this.setItems);
+        }
     }
 
 
@@ -86,7 +101,7 @@ class Nav extends React.Component {
                 .flat()
                 .map((val, i) => ({
                     name: getTokens(val).text,
-                    key: name2key(val),
+                    key: i + 1,  //Setting the key to the 1-based index
                     disabled: this.state.disabledIndexes.includes(i + 1),
                     icon: this.getLeftIcon(val)
                 }))
@@ -121,6 +136,23 @@ class Nav extends React.Component {
 
 
     render() {
+        
+        //Adjust for user input. Neg values not allowed.
+        let index = this.props.selectedIndex > 0 ? this.props.selectedIndex : 1;
+
+        let isStyled = this.props.styledBackground;
+        let topPad = this.props.navTopPadding > 0 ? this.props.navTopPadding : 0;
+
+        let mHeight = this.props.controlHeight > 1 ? this.props.controlHeight : 1;
+
+        let navStyles = {
+            root: {
+                minHeight: mHeight,
+                paddingTop: topPad + 'px',
+                backgroundColor: isStyled ? defaultStyledBgColor : 'transparent',  
+                borderRight: isStyled ? "1px solid " + defaultStyledBorderColor : 'none',
+            }
+        };
 
         let groupParams = [
                 { links: this.state.links }
@@ -133,8 +165,8 @@ class Nav extends React.Component {
                 {this.state.links.length > 0 ?
                     <FNav
                         {...this.props}
-                        selectedKey = { this.state.links[this.state.selectedIndex - 1].key } 
-                        styles = { this.getStyles() }
+                        selectedKey = { index } 
+                        styles = { navStyles }
                         groups = { groupParams }
                         onLinkClick = { this.onMenuClick.bind(this) } />
                 : <div> </div>}
@@ -150,6 +182,19 @@ class Nav extends React.Component {
 Nav.propTypes = {
 
     /**
+     * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
+     * @uxpindescription Top padding above the control. Value must be 0 or more. 
+     * @uxpinpropname Top Padding
+     */ 
+    navTopPadding: PropTypes.number, 
+
+    /**
+    * @uxpindescription The height of the control   
+    * @uxpinpropname Height
+    */ 
+    controlHeight: PropTypes.number,
+
+    /**
      * @uxpindescription The 1-based index value of the tab to be shown as selected by default
      * @uxpinpropname Selected Index
      */
@@ -163,16 +208,16 @@ Nav.propTypes = {
     items: PropTypes.string,
 
     /**
-     * @uxpindescription The list of nav items to show as disabled, separated with commas. (1-based index)
-     * @uxpinpropname Disabled Items
-     * */
-    disabled: PropTypes.string,
-
-    /**
      * @uxpindescription Whether to apply styling to the control's background
      * @uxpinpropname Styled Background
      * */    
     styledBackground: PropTypes.bool,
+
+    /**
+     * @uxpindescription The list of nav items to show as disabled, separated with commas. (1-based index)
+     * @uxpinpropname Disabled Items
+     * */
+    disabled: PropTypes.string,
 
     /**
     * @uxpindescription Fires when Item 1 is clicked
@@ -270,6 +315,7 @@ Nav.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Nav.defaultProps = {
+    navTopPadding: defaultTopPadding,
     selectedIndex: 1,
     items: defaultNavItems,
     styledBackground: false,

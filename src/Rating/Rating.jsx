@@ -90,6 +90,8 @@ class Rating extends React.Component {
         let index = this.state.selectedIndex;
         let stars = this.state.maxNumberOfStars;
 
+        
+
         return (
             <FRating 
                 {...this.props} 

@@ -4,6 +4,12 @@ import * as React from 'react';
 
 
   /**
+   * UPDATED May 20, 2020 by Anthony Hand
+   * - Updated to reflect UXPin 2.5's new model for handling prop updates in the Editor vs. at Runtime.
+   * 
+   */
+
+  /**
    * UPDATED Mar 22, 2020 by Anthony Hand
    * - Rather than setting/getting props at runtime to track the checked state, switched to using state.
    * 
@@ -35,39 +41,51 @@ class Checkbox extends React.Component {
     //Track the checked state within the control
     this.state = {
       //Initialize with the props value
-      _isChecked: this.props.isChecked
+      isChecked: false,
+    }
+  }
+
+  componentDidMount() {
+    //Save the value coming in from props & initializes the state
+    this.setState(
+      { isChecked: this.props.isChecked}
+    )
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    //Handles prop updates in the UXPin Editor
+    if (prevProps.isChecked !== this.props.isChecked) {
+      
+      this.setState(
+        { isChecked: this.props.isChecked}
+      )
     }
   }
 
   _onSelectionChange(isChecked) {
     //Assumption: That Microsoft really is only sending true or false, and we don't need to validate the value.
-
-    //Get the value. No validation currently needed.
-    const checked = isChecked;
     
     //Set the state with the updated checked value. This will force the control to update in UXPin at runtime.
     this.setState(
-      { _isChecked: checked }
+      { isChecked: isChecked}
     )
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
     if (this.props.onChange) {
-      this.props.onChange(checked);
+      this.props.onChange(isChecked);
     }
   }
 
   render() {
 
-    //Get the value from our wrapper control's prop.
-    const checked = this.state._isChecked;
-
+    
     return (
 
       <FCheckbox 
           {...this.props}
-          checked={checked}
-          onChange={(e, v) => { this._onSelectionChange(v); }}  //We only catch the new value
-          >{this.props.children}</FCheckbox>
+          checked = { this.state.isChecked }
+          onChange = { (e, v) => { this._onSelectionChange(v); } }  //We only catch the new value
+          />
     );
   }
 }
@@ -77,11 +95,13 @@ class Checkbox extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 Checkbox.propTypes = {
+
   /**
-   * @uxpindescription To display the box before the start or after end of the text.
-   * @uxpinpropname Box Side
+   * @uxpindescription The displayed text for the checkbox
+   * @uxpinpropname Text
+   * @uxpincontroltype textfield(3)
    * */
-  boxSide: PropTypes.oneOf(['start', 'end']),
+  label: PropTypes.string,
 
   /**
    * @uxpindescription The checked state of the control.
@@ -90,17 +110,16 @@ Checkbox.propTypes = {
   isChecked: PropTypes.bool,
 
   /**
+   * @uxpindescription To display the box before the start or after end of the text.
+   * @uxpinpropname Box Side
+   * */
+  boxSide: PropTypes.oneOf(['start', 'end']),
+
+  /**
    * @uxpindescription To disable the control
    * @uxpinpropname Disabled
    * */
   disabled: PropTypes.bool,
-
-  /**
-   * @uxpindescription The displayed text for the checkbox
-   * @uxpinpropname Text
-   * @uxpincontroltype textfield(3)
-   * */
-  label: PropTypes.string,
 
   /**
    * @uxpindescription Fires when the checked state changes.
@@ -114,10 +133,10 @@ Checkbox.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
  Checkbox.defaultProps = {
+  label: 'Basic Checkbox',
+  isChecked: false,
   boxSide: 'start',
-  isChecked: false, 
   disabled: false,
-  label: 'Basic Checkbox'
 };
 
 
