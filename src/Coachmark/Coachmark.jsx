@@ -3,30 +3,30 @@ import { Coachmark as FCoachmark, TeachingBubbleContent, DirectionalHint } from 
 import * as PropTypes from 'prop-types';
 
 
-  /**
-   * UPDATED April 7, 2020 by Anthony Hand
-   * - Added support for showing icons on the Primary and Secondary buttons. 
-   * */
+/**
+ * UPDATED April 7, 2020 by Anthony Hand
+ * - Added support for showing icons on the Primary and Secondary buttons. 
+ * */
 
-  /**
-   * UPDATED Mar 30, 2020 by Anthony Hand
-   * - Experimented with supporting link() and icon() features for the message copy. Unfortunately, both icons and links are
-   *        hard coded to be blue, so they're effectively invisible against the blue background. 
-   *        Too hard to access those tokens at runtime to change them.
-   * - Added the footer property so we can simulate multi-step coaching.
-   * - Added logic to hide a button if there is no text specified. 
-   * - Fixed a layout bug where the bottom portion below the buttons was too narrow.   
-   * - Made the buttons rounded, as per PayPal UI requirements.   
-   * - Refactored the button click event handling. 
-   * - Added descriptions and prop names for each property with some updates. Changed some prop names.
-   * 
-   * TODOs
-   * - Cannot change the icon used directly. The mapping itself within the PayPal TPX icon library must be updated. 
-   *        https://github.paypal.com/Console-R/pp-fabric-theme/issues/27
-   * - For additional issues, see:
-   *        https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/103
-   * 
-   * */
+/**
+ * UPDATED Mar 30, 2020 by Anthony Hand
+ * - Experimented with supporting link() and icon() features for the message copy. Unfortunately, both icons and links are
+ *        hard coded to be blue, so they're effectively invisible against the blue background. 
+ *        Too hard to access those tokens at runtime to change them.
+ * - Added the footer property so we can simulate multi-step coaching.
+ * - Added logic to hide a button if there is no text specified. 
+ * - Fixed a layout bug where the bottom portion below the buttons was too narrow.   
+ * - Made the buttons rounded, as per PayPal UI requirements.   
+ * - Refactored the button click event handling. 
+ * - Added descriptions and prop names for each property with some updates. Changed some prop names.
+ * 
+ * TODOs
+ * - Cannot change the icon used directly. The mapping itself within the PayPal TPX icon library must be updated. 
+ *        https://github.paypal.com/Console-R/pp-fabric-theme/issues/27
+ * - For additional issues, see:
+ *        https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/103
+ * 
+ * */
 
 
 class Coachmark extends React.Component {
@@ -40,8 +40,7 @@ class Coachmark extends React.Component {
         this._targetElm = React.createRef();
     }
 
-
-    componentDidMount() {
+    set() {
         var isOpen = false;
 
         if (this.props.open) {
@@ -53,17 +52,29 @@ class Coachmark extends React.Component {
         )
     }
 
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.open !== this.props.open
+        ) {
+            this.set();
+        }
+    }
+
 
     dismissControl() {
         //Set the control to not open to dismiss it.
-        this.setState (
+        this.setState(
             { open: false }
         )
     }
 
     _onDismissClicked() {
         //Notify UXPin that the Close icon has been clicked on.
-        if (this.props.dismiss) { 
+        if (this.props.dismiss) {
             this.props.dismiss();
         }
 
@@ -72,7 +83,7 @@ class Coachmark extends React.Component {
 
     _onPrimaryButtonClicked() {
         //Notify UXPin of the event.
-        if (this.props.primaryButtonClick) { 
+        if (this.props.primaryButtonClick) {
             this.props.primaryButtonClick();
         }
 
@@ -106,12 +117,12 @@ class Coachmark extends React.Component {
         //Make the Primary and Secondary buttons rounded
         let roundedButtonStyle = {
             root: {
-              borderRadius: 100
+                borderRadius: 100
             }
         }
 
         let pIconProps = { iconName: this.props.primaryButtonIcon };
-        let sIconProps = { iconName: this.props.secondaryButtonIcon, style: { color: 'white' }  };
+        let sIconProps = { iconName: this.props.secondaryButtonIcon, style: { color: 'white' } };
 
         return (
             <>
@@ -129,32 +140,32 @@ class Coachmark extends React.Component {
                 {this.state.open && (
                     <FCoachmark
                         {...this.props}
-                        target = { this._targetElm.current }
-                        positioningContainerProps = {{
+                        target={this._targetElm.current}
+                        positioningContainerProps={{
                             doNotLayer: false,
                             directionalHint: DirectionalHint[this.props.direction],
-                            directionalHintFixed: false 
+                            directionalHintFixed: false
                         }}>
                         <TeachingBubbleContent
-                            headline = { this.props.title }
-                            footerContent = { this.props.footerText }
-                            hasCloseIcon = { true }
+                            headline={this.props.title}
+                            footerContent={this.props.footerText}
+                            hasCloseIcon={true}
                             primaryButtonProps={{
                                 text: this.props.primaryButtonLabel,
                                 hidden: hidePrimaryButton,
-                                styles: roundedButtonStyle, 
+                                styles: roundedButtonStyle,
                                 iconProps: pIconProps,
                                 onClick: () => { this._onPrimaryButtonClicked() }
                             }}
                             secondaryButtonProps={{
                                 text: this.props.secondaryButtonLabel,
-                                hidden: hideSecondaryButton,  
-                                styles: roundedButtonStyle, 
+                                hidden: hideSecondaryButton,
+                                styles: roundedButtonStyle,
                                 iconProps: sIconProps,
                                 onClick: () => { this._onSecondaryButtonClicked() }
                             }}
-                            onDismiss={() => { this._onDismissClicked()}} > 
-                            { this.props.text }
+                            onDismiss={() => { this._onDismissClicked() }} >
+                            {this.props.text}
                         </TeachingBubbleContent>
                     </FCoachmark>
                 )}
@@ -171,7 +182,8 @@ Coachmark.propTypes = {
 
     /**
      * @uxpindescription Whether to display the Coachmark 
-     */   
+     * @uxpinpropname Show
+     */
     open: PropTypes.bool,
 
     /**
@@ -189,7 +201,7 @@ Coachmark.propTypes = {
     /**    
     * @uxpindescription Footer text to display in the bottom left corner. 
     */
-   footerText: PropTypes.string,
+    footerText: PropTypes.string,
 
     /**
      * @uxpindescription The displayed text on the Primary Button. Remove text to hide button.
@@ -225,7 +237,7 @@ Coachmark.propTypes = {
         "topAutoEdge",
         "bottomLeftEdge",
         "bottomCenter",
-        "bottomRightEdge", 
+        "bottomRightEdge",
         "bottomAutoEdge",
         "leftTopEdge",
         "leftCenter",
@@ -238,26 +250,26 @@ Coachmark.propTypes = {
     /**
      * @uxpindescription Whether to show the light blue target marker on the canvas 
      * @uxpinpropname Show Marker
-     */   
+     */
     showMarker: PropTypes.bool,
 
 
     /**
      * @uxpindescription Fires when the Close button is clicked
      * @uxpinpropname Close Button Click
-     */   
+     */
     dismiss: PropTypes.func,
 
     /**
      * @uxpindescription Fires when the Primary Button is clicked on
      * @uxpinpropname Primary Button Click
-     */ 
+     */
     primaryButtonClick: PropTypes.func,
 
     /**
      * @uxpindescription Fires when the Secondary Button is clicked on
      * @uxpinpropname Secondary Button Click
-     */ 
+     */
     secondaryButtonClick: PropTypes.func,
 };
 

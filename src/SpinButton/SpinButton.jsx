@@ -1,46 +1,58 @@
 import * as React from 'react';
-import {SpinButton as FSpinButton} from 'office-ui-fabric-react';
+import { SpinButton as FSpinButton } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 //import { mergeStyles } from '@uifabric/merge-styles';
 
 
-  /**
-   * UPDATED Mar 22, 2020 by Anthony Hand
-   * - Rather than setting/getting props at runtime to track the checked state, switched to using state.
-   * 
-   */
+/**
+ * UPDATED Mar 22, 2020 by Anthony Hand
+ * - Rather than setting/getting props at runtime to track the checked state, switched to using state.
+ * 
+ */
 
-  /**
-   * UPDATED Mar 19, 2020 by Anthony Hand
-   * - NEW: Added the disabled and tooltip properties, both of which are supported natively in the control. 
-   * - Created a synthetic onChange event. This event isn't formally supported by Microsoft in the control's API. We're piecing it together
-   *   from several other events that would result in a new value. It's a good enough solution for UXPin.
-   * - Converted this into a 'controlled' component where it tracks its own value.
-   * - Added multiple methods to capture user interactions with the control, determine the new value, then save and propagate it.
-   * - Cleaned up the assignment of attributes on the control in the Render function.  
-   * - Added descriptions and prop names for each property with some updates. 
-   * - Changed the prop type for step to number, rather than string.
-   * 
-   * TODOs
-   * - Waiting for guidance from UXPin on how to expose the isChecked prop at runtime within UXPin. 
-   * 
-   * For additional outstanding issues, please see: 
-   *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/94
-   * */
+/**
+ * UPDATED Mar 19, 2020 by Anthony Hand
+ * - NEW: Added the disabled and tooltip properties, both of which are supported natively in the control. 
+ * - Created a synthetic onChange event. This event isn't formally supported by Microsoft in the control's API. We're piecing it together
+ *   from several other events that would result in a new value. It's a good enough solution for UXPin.
+ * - Converted this into a 'controlled' component where it tracks its own value.
+ * - Added multiple methods to capture user interactions with the control, determine the new value, then save and propagate it.
+ * - Cleaned up the assignment of attributes on the control in the Render function.  
+ * - Added descriptions and prop names for each property with some updates. 
+ * - Changed the prop type for step to number, rather than string.
+ * 
+ * TODOs
+ * - Waiting for guidance from UXPin on how to expose the isChecked prop at runtime within UXPin. 
+ * 
+ * For additional outstanding issues, please see: 
+ *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/94
+ * */
 
 
 class SpinButton extends React.Component {
     constructor(props) {
-
-      super(props);
-
-      //Track the current numerical value within the control
-      this.state = {
-          //Initialize with the props value. This state variable holds a string. 
-          _currentValue: this.props.value
-      }
+        super(props);
     }
 
+    set() {
+        //Track the current numerical value within the control
+        this.setState({
+            //Initialize with the props value. This state variable holds a string. 
+            _currentValue: this.props.value
+        });
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.value !== this.props.value
+        ) {
+            this.set();
+        }
+    }
 
     /* 
     *  ************* UTILITY METHOD
@@ -89,13 +101,9 @@ class SpinButton extends React.Component {
         // ************************
         // Save and propagate the new value
 
-        //Update the prop. This might be a Microsoft bug. 
-        //It seems like Microsoft requires we set this prop rather than in the Render method below. Weird. 
-        this.props.value = displayValue;
-
         //Update the value in State to force an update. Convert back to a string.
-        this.setState (
-            {  _currentValue: displayValue }
+        this.setState(
+            { _currentValue: displayValue }
         )
 
         //Raise this event to UXPin. We'll send them the value in case they can catch it.
@@ -127,7 +135,7 @@ class SpinButton extends React.Component {
     *  We have to increment or decrement ourselves.
     *  This method calculates what the new value should be. 
     **/
-   _onIncDec(oldValue, isIncrement) {
+    _onIncDec(oldValue, isIncrement) {
 
         // ************************
         // Validate Value First
@@ -137,12 +145,12 @@ class SpinButton extends React.Component {
         if (isIncrement) {
             //Add the step value
             //newValue = parsedVal + this.props.step;
-            this._valueChanged(parsedVal + this.props.step); 
+            this._valueChanged(parsedVal + this.props.step);
         }
         else {
             //Subtract the step value
             //newValue = parsedVal - this.props.step;
-            this._valueChanged(parsedVal - this.props.step); 
+            this._valueChanged(parsedVal - this.props.step);
         }
     }
 
@@ -152,23 +160,21 @@ class SpinButton extends React.Component {
 
     render() {
 
-        //Get the value from state. 
-        //NOTE: Although we set this here, it appears that MS is hard coded to use the props.value instead.
+        //Get the value from state.
         var newValue = this.state._currentValue;
 
         return (
-
-            <FSpinButton 
-                title={ this.props.title } 
-                {...this.props} 
-                value={ newValue }
-                onValidate={(v) => { this._onValidate(v); }} 
+            <FSpinButton
+                title={this.props.title}
+                {...this.props}
+                value={newValue}
+                onValidate={(v) => { this._onValidate(v); }}
                 onIncrement={(v) => { this._onIncDec(v, true); }}
                 onDecrement={(v) => { this._onIncDec(v, false); }}
-            />       
-        ); 
+            />
+        );
     }
-}    
+}
 
 
 /** 
@@ -176,43 +182,43 @@ class SpinButton extends React.Component {
  */
 SpinButton.propTypes = {
 
-   /**
-    * @uxpindescription The numeric value of the SpinButton (Required)
-    * @uxpinpropname Value
-    * */  
+    /**
+     * @uxpindescription The numeric value of the SpinButton (Required)
+     * @uxpinpropname Value
+     * */
     value: PropTypes.string.isRequired,
 
-   /**
-    * @uxpindescription Description label of the SpinButton
-    * @uxpinpropname Label
-    * @uxpincontroltype textfield(2)
-    * */    
+    /**
+     * @uxpindescription Description label of the SpinButton
+     * @uxpinpropname Label
+     * @uxpincontroltype textfield(2)
+     * */
     label: PropTypes.string,
 
     /**
     * @uxpindescription The minimum value of the SpinButton
     * @uxpinpropname Min
-    * */  
+    * */
     min: PropTypes.number,
 
     /**
     * @uxpindescription The maximum value of the SpinButton
     * @uxpinpropname Max
-    * */  
+    * */
     max: PropTypes.number,
 
     /**
     * @uxpindescription The amount to raise or lower the value when clicking on the up or down buttons
     * @uxpinpropname Step
-    * */      
+    * */
     step: PropTypes.number,
 
-       /**
-    * @uxpindescription A little tooltip that will display on hover
-    * @uxpinpropname Tooltip
-    * @uxpincontroltype textfield(2)
-    * */    
-   title: PropTypes.string,
+    /**
+ * @uxpindescription A little tooltip that will display on hover
+ * @uxpinpropname Tooltip
+ * @uxpincontroltype textfield(2)
+ * */
+    title: PropTypes.string,
 
     /**
      * @uxpindescription To disable the control
@@ -223,7 +229,7 @@ SpinButton.propTypes = {
     /**
     * @uxpindescription Fires when the value has changed
     * @uxpinpropname Value Changed
-    * */  
+    * */
     onChange: PropTypes.func,
 };
 
@@ -234,10 +240,10 @@ SpinButton.propTypes = {
 SpinButton.defaultProps = {
     label: 'Basic SpinButton',
     value: '1',
-    min:    0,
-    max:    10,
-    step:   0.5,
-    title:  '',
+    min: 0,
+    max: 10,
+    step: 0.5,
+    title: '',
     disabled: false
 }
 

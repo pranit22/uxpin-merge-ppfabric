@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {
-        Link as FLink,
-        Text
-    } from 'office-ui-fabric-react';
+    Link as FLink,
+    Text
+} from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 
 
@@ -39,25 +39,25 @@ class Link extends React.Component {
         }
     }
 
-
-    componentDidMount() {
+    set() {
         //Because any prop change in UXPin causes the control to remount, let's figure these out once and store them.
         let role = this.props.linkType;
-        
-        //Primary and Disclosure share the same color
-        let linkColor = role === "secondary"  ? secondaryColor
-                        : primaryColor; //Default
 
         //Primary and Disclosure share the same color
-        let hoverColor = role === "secondary"  ? secondaryHoverColor
-                        : primaryHoverColor; //Default
+        let linkColor = role === "secondary" ? secondaryColor
+            : primaryColor; //Default
+
+        //Primary and Disclosure share the same color
+        let hoverColor = role === "secondary" ? secondaryHoverColor
+            : primaryHoverColor; //Default
 
         //Disclosure only varies on the resting state textDecoration style
-        let decor = role === "disclosure"  ? disclosureTextDecor
-                        : textDecor; //Default
+        let decor = role === "disclosure" ? disclosureTextDecor
+            : textDecor; //Default
 
         this.setState(
-            {   linkColor: linkColor,
+            {
+                linkColor: linkColor,
                 hoverColor: hoverColor,
                 decoration: decor,
                 hoverDecoration: hoverTextDecor
@@ -65,12 +65,25 @@ class Link extends React.Component {
         )
     }
 
+    componentDidMount() {
+        this.set()
+    }
+
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.linkType !== this.props.linkType
+        ) {
+            this.set();
+        }
+    }
+
 
     _onLinkClick() {
 
         if (this.props.disabled)
             return;
-        
+
         //Raise this event to UXPin. We'll send them the HREF value in case they can catch it.
         if (this.props.onLinkClick) {
             this.props.onLinkClick(this.props.linkHref);
@@ -107,21 +120,21 @@ class Link extends React.Component {
 
         return (
 
-                <FLink
+            <FLink
+                {...this.props}
+                styles={this.props.disabled ? '' : linkStyles}
+                disabled={this.props.disabled}
+                href={this.props.linkHref}
+                target={"_UXPin Mockup"} //Force open in a new window
+                onClick={() => { this._onLinkClick() }}
+            >
+                <Text
                     {...this.props}
-                    styles = { this.props.disabled ? '' : linkStyles }
-                    disabled = { this.props.disabled }
-                    href = { this.props.linkHref }
-                    target = { "_UXPin Mockup" } //Force open in a new window
-                    onClick={() => { this._onLinkClick() }}
-                >
-                    <Text
-                        {...this.props}
-                        styles = { linkTextStyles }
-                        variant = { this.props.size }>
-                        { this.props.value }
-                    </Text>
-                </FLink>
+                    styles={linkTextStyles}
+                    variant={this.props.size}>
+                    {this.props.value}
+                </Text>
+            </FLink>
 
         );
 
@@ -186,17 +199,17 @@ Link.propTypes = {
      * @uxpindescription To disable the control
      * */
     disabled: PropTypes.bool,
-    
+
     /**
      * @uxpindescription To horizontally align all content within the stack 
      * @uxpinpropname Type
-     */    
+     */
     linkType: PropTypes.oneOf(['primary', 'secondary', 'disclosure']),
 
     /**
      * @uxpindescription Fires when the control is clicked on
      * @uxpinpropname Click
-     */  
+     */
     onLinkClick: PropTypes.func,
 }
 

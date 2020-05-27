@@ -1,28 +1,28 @@
 import * as React from 'react';
 import {
-        Callout,
-        CommandBar,
-        DirectionalHint,
-        Persona,
-        PersonaPresence,
-        PersonaSize,
-        Stack,
-        StackItem
-    } from 'office-ui-fabric-react';
-import * as PropTypes from 'prop-types';  
+    Callout,
+    CommandBar,
+    DirectionalHint,
+    Persona,
+    PersonaPresence,
+    PersonaSize,
+    Stack,
+    StackItem
+} from 'office-ui-fabric-react';
+import * as PropTypes from 'prop-types';
 import { getTokens, csv2arr } from '../_helpers/parser.jsx';
 
 
 
-  /**
-   * UPDATED April 15, 2020 by Anthony Hand
-   * - Created new control from scratch.
-   * - Added file to our TPX UX Experimental library on UXPin.
-   * 
-   * TODOs
-   * - Control components need to be updated with the proper PayPal UI theme.
-   * - Set the background of the CommandBar to transparent or white.  
-   * */
+/**
+ * UPDATED April 15, 2020 by Anthony Hand
+ * - Created new control from scratch.
+ * - Added file to our TPX UX Experimental library on UXPin.
+ * 
+ * TODOs
+ * - Control components need to be updated with the proper PayPal UI theme.
+ * - Set the background of the CommandBar to transparent or white.  
+ * */
 
 
 //Default action items to populate the control with.
@@ -30,7 +30,7 @@ import { getTokens, csv2arr } from '../_helpers/parser.jsx';
 const defaultItems = `icon(Email) Send email
 icon(BubbleUser) Teams chat
 icon(Chat) Slack
-icon(CircleInfo) `; 
+icon(CircleInfo) `;
 
 //This is the default URL to use for a generic female user
 let personaFemaleUrl = "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-female.png"
@@ -38,14 +38,14 @@ let personaFemaleUrl = "https://static2.sharepointonline.com/files/fabric/office
 //Special styling for the Callout
 const calloutStyles = {
     root: {
-    padding: "12px",
-    background: 'white',
+        padding: "12px",
+        background: 'white',
     }
 };
 
 //Special styling for the CommandBar
 const cbStyles = {
-    root: ['ms-CommandBar', 
+    root: ['ms-CommandBar',
         {
             background: 'white',
             backgroundColor: 'white',
@@ -63,8 +63,8 @@ const personaStyles = {
         color: '#0070BA', //Blue 600
         selectors: {
             ':hover': {
-              color: '#003087', //Blue 800
-              textDecoration: 'underline',
+                color: '#003087', //Blue 800
+                textDecoration: 'underline',
             },
         },
     }],
@@ -96,26 +96,14 @@ class PPProfileCard extends React.Component {
         this._targetElm = React.createRef();
     }
 
-    componentDidMount() {
+    set() {
         this.setState(
             { open: this.props.open }
         )
 
         this.setItems();
     }
-
-    //Get the user-entered left icon name, if there is one
-    getLeftIcon(str) {
-        const tokens = getTokens(str).tokens
-        const leftIcon = tokens && tokens.find(t => t.type === 'icon')
-        return leftIcon ? leftIcon.target : ""
-    }
-
-    //Let's figure out the icon names.
-    getIconProps(str) {
-        return  { iconName: this.getLeftIcon(str) }
-    }
-
+    
     //Parse the CommandBar items
     setItems() {
         //If there are no items, then return and skip this part. 
@@ -134,7 +122,7 @@ class PPProfileCard extends React.Component {
             }));
 
         var showCommandBar = false;
-        
+
         if (items && items.length > 0) {
             showCommandBar = true;
         }
@@ -145,9 +133,34 @@ class PPProfileCard extends React.Component {
         });
     }
 
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.open !== this.props.open
+        ) {
+            this.set();
+        }
+    }
+
+    //Get the user-entered left icon name, if there is one
+    getLeftIcon(str) {
+        const tokens = getTokens(str).tokens
+        const leftIcon = tokens && tokens.find(t => t.type === 'icon')
+        return leftIcon ? leftIcon.target : ""
+    }
+
+    //Let's figure out the icon names.
+    getIconProps(str) {
+        return { iconName: this.getLeftIcon(str) }
+    }
+
+
     //Hides the control
     dismissControl() {
-        this.setState (
+        this.setState(
             { open: false }
         )
     }
@@ -192,45 +205,45 @@ class PPProfileCard extends React.Component {
                 {this.state.open && (
                     <Callout
                         {...this.props}
-                        target = { this._targetElm.current }
-                        styles = { calloutStyles }
-                        calloutWidth = { 0 } //This makes the width automatic
-                        directionalHint = { DirectionalHint[this.props.direction] }
-                        doNotLayer = { false }
-                        gapSpace = { 0 }
-                        isBeakVisible = { false }
-                        hideOverflow = { true }
-                        onDismiss = { (this._onDismiss.bind(this)) }
+                        target={this._targetElm.current}
+                        styles={calloutStyles}
+                        calloutWidth={0} //This makes the width automatic
+                        directionalHint={DirectionalHint[this.props.direction]}
+                        doNotLayer={false}
+                        gapSpace={0}
+                        isBeakVisible={false}
+                        hideOverflow={true}
+                        onDismiss={(this._onDismiss.bind(this))}
                     >
-                    <Stack styles = { stackStyles } tokens = { verticalGapStackTokens } > 
-                        <StackItem align = {'start'}>
-                            <Persona
-                                {...this.props}
-                                size = { PersonaSize['size72'] }    
-                                presence = { PersonaPresence[this.props.ppPresence] } 
-                                initialsColor = { this.props.ppInitialsColor } 
-                                styles = { personaStyles }
+                        <Stack styles={stackStyles} tokens={verticalGapStackTokens} >
+                            <StackItem align={'start'}>
+                                <Persona
+                                    {...this.props}
+                                    size={PersonaSize['size72']}
+                                    presence={PersonaPresence[this.props.ppPresence]}
+                                    initialsColor={this.props.ppInitialsColor}
+                                    styles={personaStyles}
 
-                                //We can set these props as-is
-                                imageUrl = { this.props.imageUrl }
-                                imageInitials = { this.props.initials }
-                                text = { this.props.name }
-                                secondaryText = { this.props.role }
-                                tertiaryText = { this.props.email }
-                                onClick = {() => this._onClick(0) } //Always send 0
-                            />
-                        </StackItem>
-
-                        {this.state.showCommandBar && (
-                            <StackItem align = {'start'}>
-                                <CommandBar 
-                                    items = { this.state.items }
-                                    styles = { cbStyles }
+                                    //We can set these props as-is
+                                    imageUrl={this.props.imageUrl}
+                                    imageInitials={this.props.initials}
+                                    text={this.props.name}
+                                    secondaryText={this.props.role}
+                                    tertiaryText={this.props.email}
+                                    onClick={() => this._onClick(0)} //Always send 0
                                 />
                             </StackItem>
-                        )}
-                    </Stack>
-                </Callout>
+
+                            {this.state.showCommandBar && (
+                                <StackItem align={'start'}>
+                                    <CommandBar
+                                        items={this.state.items}
+                                        styles={cbStyles}
+                                    />
+                                </StackItem>
+                            )}
+                        </Stack>
+                    </Callout>
                 )}
             </>
 
@@ -247,7 +260,8 @@ PPProfileCard.propTypes = {
 
     /**
      * @uxpindescription Whether to display the control 
-     */   
+     * @uxpinpropname Show
+     */
     open: PropTypes.bool,
 
     /**
@@ -261,14 +275,14 @@ PPProfileCard.propTypes = {
      * Requires a proprietary PayPal prop name, or else things get screwy. 
      * @uxpindescription The user's presence status 
      * @uxpinpropname Presence
-     */     
+     */
     ppPresence: PropTypes.oneOf(['none', 'online', 'offline', 'away', 'busy', 'dnd', 'blocked']),
 
     /**
      * Requires a proprietary PayPal prop name, or else things get screwy   
      * @uxpindescription If no image, the color of the 'coin' showing the user's initials 
      * @uxpinpropname Initials Color
-     */ 
+     */
     ppInitialsColor: PropTypes.oneOf([
         'green', 'darkGreen', 'teal', 'lightBlue', 'blue', 'darkBlue', 'violet',
         'purple', 'magenta', 'lightPink', 'pink', 'burgundy', 'lightRed', 'darkRed',
@@ -277,24 +291,24 @@ PPProfileCard.propTypes = {
     /**
      * @uxpindescription If no image, the initials to display on the 'coin' 
      * @uxpinpropname Initials
-     */         
+     */
     initials: PropTypes.string,
 
     /**
      * @uxpindescription The full name for this persona 
      * @uxpinpropname Name
-     */ 
+     */
     name: PropTypes.string,
 
     /**
      * @uxpindescription This persona's role; displayed under their name
      * @uxpinpropname Role
-     */     
+     */
     role: PropTypes.string,
 
     /**
      * @uxpindescription This persona's email address
-     */     
+     */
     email: PropTypes.string,
 
     /**
@@ -314,7 +328,7 @@ PPProfileCard.propTypes = {
         "topAutoEdge",
         "bottomLeftEdge",
         "bottomCenter",
-        "bottomRightEdge", 
+        "bottomRightEdge",
         "bottomAutoEdge",
         "leftTopEdge",
         "leftCenter",
@@ -327,13 +341,13 @@ PPProfileCard.propTypes = {
     /**
      * @uxpindescription Whether to show the light blue target marker on the canvas 
      * @uxpinpropname Show Marker
-     */   
+     */
     showMarker: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when one of the CommandBar buttons is clicked on
      * @uxpinpropname Click
-     * */   
+     * */
     onClick: PropTypes.func,
 }
 

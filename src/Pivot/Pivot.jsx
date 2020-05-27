@@ -1,33 +1,33 @@
-import { Pivot as FPivot, 
-    PivotItem, 
-    PivotLinkSize,
-    StyleConstants
-  } from 'office-ui-fabric-react/lib/Pivot';
+import {
+  Pivot as FPivot,
+  PivotItem,
+  PivotLinkSize
+} from 'office-ui-fabric-react/lib/Pivot';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { getTokens, csv2arr } from '../_helpers/parser';
 
 
 
-  /**
-   * UPDATED April 3, 2020 by Anthony Hand
-   * - Added support for showing tabs with icons.
-   * - Added support for the user to put commas in tab text. Text a comma must be enclosed in quotes.
-   */
+/**
+ * UPDATED April 3, 2020 by Anthony Hand
+ * - Added support for showing tabs with icons.
+ * - Added support for the user to put commas in tab text. Text a comma must be enclosed in quotes.
+ */
 
-  /**
-   * UPDATED Mar 25, 2020 by Anthony Hand
-   * - Added support for specifying whether the pivot text is normal or large. 
-   * - Refactored how props are set in the Render function.
-   * - Added descriptions and prop names for each property with some updates. Changed some prop names.
-   * 
-   * TODOs
-   * - Waiting for guidance from UXPin on how to expose a return value on at runtime within UXPin.
-   * - Must support escaped commas and being able to add icons.
-   * 
-   * For additional outstanding issues, please see: 
-   *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/102
-   * */
+/**
+ * UPDATED Mar 25, 2020 by Anthony Hand
+ * - Added support for specifying whether the pivot text is normal or large. 
+ * - Refactored how props are set in the Render function.
+ * - Added descriptions and prop names for each property with some updates. Changed some prop names.
+ * 
+ * TODOs
+ * - Waiting for guidance from UXPin on how to expose a return value on at runtime within UXPin.
+ * - Must support escaped commas and being able to add icons.
+ * 
+ * For additional outstanding issues, please see: 
+ *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/102
+ * */
 
 
 //Default pivot tab items to populate the control with.
@@ -35,23 +35,45 @@ import { getTokens, csv2arr } from '../_helpers/parser';
 const defaultTabs = `Tab One
 Tab Two
 Tab Three
-Tab Four`; 
-
+Tab Four`;
 
 class Pivot extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       tabs: [],
       selectedIndex: this.props.selectedIndex
     }
   }
 
-
   componentDidMount() {
-    this.setItems();
+    this.set();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.tabs !== this.props.tabs
+      || prevProps.selectedIndex !== this.props.selectedIndex
+    ) {
+      this.set();
+    }
+  }
+
+  //Parse the choice items
+  set() {
+    let items = csv2arr(this.props.tabs)
+      .flat()
+      .map((val, index) => ({
+        text: getTokens(val).text,
+        key: index + 1,
+        icon: this.getLeftIcon(val)
+      }));
+
+    this.setState({
+      tabs: items,
+      selectedIndex: this.props.selectedIndex
+    });
   }
 
   //Get the user-entered left icon name, if there is one
@@ -59,21 +81,6 @@ class Pivot extends React.Component {
     const tokens = getTokens(str).tokens
     const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start')
     return leftIcon ? leftIcon.target : null
-}
-
-  //Parse the choice items
-  setItems() {
-    let items = csv2arr(this.props.tabs)
-        .flat()
-        .map((val, index) => ({
-            text: getTokens(val).text,
-            key: index + 1,
-            icon: this.getLeftIcon(val)
-        }));
-
-    this.setState({
-      tabs: items
-    });
   }
 
 
@@ -105,11 +112,11 @@ class Pivot extends React.Component {
       let t = tabs[i];
       //The key is already 1 based
       let tab = (
-        <PivotItem 
-            headerText={t.text} 
-            itemKey={t.key} 
-            key={t.key} 
-            itemIcon={t.icon}
+        <PivotItem
+          headerText={t.text}
+          itemKey={t.key}
+          key={t.key}
+          itemIcon={t.icon}
         />
       );
       tabList.push(tab);
@@ -120,13 +127,13 @@ class Pivot extends React.Component {
 
     return (
 
-          <FPivot 
-              {...this.props} //List this one first!! THen our overrides. 
-              selectedKey = { key }
-              linkSize = { PivotLinkSize[this.props.linkSize] }
-              onLinkClick={(pi) => { this._onLinkClick(pi); }} >
-                { tabList }
-          </FPivot>
+      <FPivot
+        {...this.props} //List this one first!! THen our overrides. 
+        selectedKey={key}
+        linkSize={PivotLinkSize[this.props.linkSize]}
+        onLinkClick={(pi) => { this._onLinkClick(pi); }} >
+        {tabList}
+      </FPivot>
     )
   }
 }
@@ -153,7 +160,7 @@ Pivot.propTypes = {
   /**
   * @uxpindescription Size option 
   * @uxpinpropname Tab Size
-  */    
+  */
   linkSize: PropTypes.oneOf(['normal', 'large']),
 
   /**
