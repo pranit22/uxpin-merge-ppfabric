@@ -29,10 +29,25 @@ import * as React from 'react';
   
     render() {
       let iconProps = { iconName: this.props.iconName }
-  
+
+      //We want the root's margin to help the control to equal 40px. We need to make up 14px when there is no text.
+      var rootPadding = '0 7px';
+      //The label margin is always present, even when there is no label
+      var labelMargin = '0';
+      if (this.props.text) {
+        rootPadding = '0';
+        labelMargin = '0 8px';
+      }
+
       let styles = {
+        root: {
+          margin: 0,
+          padding: rootPadding,       
+        },
         label: {
-          whiteSpace: 'nowrap'
+          whiteSpace: 'nowrap',
+          margin: labelMargin,
+          padding: 0,   
         }
       }
   
@@ -42,9 +57,10 @@ import * as React from 'react';
   
       return (
 
-        <FActionButton {...this.props} 
-          iconProps={iconProps}
-          styles={styles}        
+        <FActionButton 
+            {...this.props} 
+            iconProps={iconProps}
+            styles={styles}        
         />
   
       );

@@ -17,6 +17,9 @@ import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
    */
 
 
+const defaultTextColor = '#000000';
+const defaultBgColor = '#ffffff';
+
 
 class Separator extends React.Component {
     constructor(props) {
@@ -28,12 +31,6 @@ class Separator extends React.Component {
 
 
     render() {
-
-        //Let's see if the user entered a valid text color value. This method returns undefined if not. 
-        var txColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.textColor);
-        if (!txColor) {
-            txColor = '#000000';
-        }
 
         const iconStyles = {
             root: {
@@ -47,10 +44,19 @@ class Separator extends React.Component {
         //Let's see if the user entered a valid background color value. This method returns undefined if not. 
         var bgColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.bgColor);
         if (!bgColor) {
-            bgColor = '#ffffff';
+            bgColor = defaultBgColor;
+        }
+
+        //Let's see if the user entered a valid text color value. This method returns undefined if not. 
+        var txColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.textColor);
+        if (!txColor) {
+            txColor = defaultTextColor;
         }
 
         const contentStyles = {
+            background: 'red',
+            backgroundColor: 'red',
+            
             content: {
                 background: bgColor,
                 color: txColor,
@@ -143,8 +149,8 @@ Separator.propTypes = {
 Separator.defaultProps = {
     text: "Simple Separator",
     iconName: '',
-    bgColor: '',
-    textColor: '',
+    bgColor: defaultBgColor,
+    textColor: defaultTextColor,
     alignment: "center",
     vertical: false,
 }

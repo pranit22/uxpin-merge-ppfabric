@@ -189,7 +189,7 @@ export const TpxUxColors = {
      */
     getHexFromPPUIColorToken : function(token) {
         //First, normalize our incoming color value
-        let t = token.trim().toLowerCase().replace("-", "").replace(" ", "");
+        let t = token.trim().toLowerCase().replace("-", "").replace(" ", "").replace("gray", "grey");
 
         switch (t) {
             case "blue800" :
@@ -226,6 +226,8 @@ export const TpxUxColors = {
                 return this.grey300;
             case "grey200" :
                 return this.grey200;
+            case "grey100" :
+                return this.grey100;
 
             //Accents
             //Green
@@ -259,6 +261,9 @@ export const TpxUxColors = {
                 return this.purple500;
             case "pink500" :
                 return this.pink500;
+
+            case 'transparent' :
+                return 'transparent';
 
             default:
                 return undefined;

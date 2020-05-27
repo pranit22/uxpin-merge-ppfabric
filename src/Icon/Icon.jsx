@@ -64,7 +64,7 @@ class Icon extends React.Component {
 
             <FontIcon 
                 {...this.props}
-                iconName = { this.props.iconName }
+                iconName = { this.props.iconName.trim() }
                 className = { iconDisplayClass }
             />
 

@@ -3,6 +3,10 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { getTokens, csv2arr } from '../_helpers/parser.jsx';
 
+  /**
+   * UPDATED May 21, 2020 by Anthony Hand
+   * - Updated to reflect UXPin 2.5's new model for handling prop updates in the Editor vs. at Runtime.
+   */
 
   /**
    * UPDATED April 3, 2020 by Anthony Hand
@@ -47,14 +51,34 @@ class ChoiceGroup extends React.Component {
 
     //Track the selected index state within the control
     this.state = {
-      //Initialize with the props value
-      _index: this.props.selectedIndex,
+      _index: 1,
       items: []  
     }
   }
 
   componentDidMount() {
     this.setItems();
+
+    //Store the selected index as 1 based, same as user input
+    this.setState (
+      { _index: this.props.selectedIndex }
+    )
+  }
+
+  componentDidUpdate(prevProps) {
+
+    if (prevProps.selectedIndex !== this.props.selectedIndex) {
+      //Store the selected index as 1 based, same as user input
+      this.setState(
+        { _index: this.props.selectedIndex }
+      )
+    }
+
+    //If the user sets props to true, then we add icons, which automatically converts it to tiled display.
+    //So if either condition is true, we need to reset the items list. 
+    if (prevProps.items !== this.props.items || prevProps.tiled !== this.props.tiled) {
+      this.setItems();
+    }
   }
 
   //Get the user-entered left icon name, if there is one
@@ -98,7 +122,7 @@ class ChoiceGroup extends React.Component {
 
   _onChoiceChange(option) {
 
-    //Get the value. +1 because it's stored as a 1-based index to be more user friendly.
+    //Get the value. Add 1 because it's stored as a 1-based index to be more user friendly.
     const i = option.key + 1;
 
     //Currently, we don't update the props for the selected index and only use it at runtime.
@@ -116,7 +140,7 @@ class ChoiceGroup extends React.Component {
 
   render() {
 
-    //Get the value from state. -1 because it's stored as a 1-based index to be more user friendly.
+    //Get the value from state. Subtract 1 because it's stored as a 1-based index to be more user friendly.
     const selectedKey = this.state._index - 1;
 
     return (
