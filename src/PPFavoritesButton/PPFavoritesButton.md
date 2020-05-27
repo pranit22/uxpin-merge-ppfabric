@@ -1,0 +1,7 @@
+# PPFavoritesButton
+  
+```jsx
+<PPFavoritesButton />
+```
+  
+ 

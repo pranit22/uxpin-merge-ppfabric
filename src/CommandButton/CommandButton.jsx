@@ -98,12 +98,37 @@ class CommandButton extends React.Component {
     render() {
         let iconProps = { iconName: this.props.iconName }
 
+        //We want the root's margin to help the control to equal 40px. We need to make up 14px when there is no text.
+        var rootPadding = '0 7px';
+        //The label margin is always present, even when there is no label
+        var labelMargin = '0';
+        if (this.props.text) {
+            rootPadding = '0';
+            labelMargin = '0 8px';
+        }
+
+        let styles = {
+            root: {
+                margin: 0,
+                padding: rootPadding,
+            },
+            label: {
+                whiteSpace: 'nowrap',
+                margin: labelMargin,
+                padding: 0,
+            }
+        }
+
         var menuProps = undefined;
         if (this.props.items) {
             menuProps = {
                 items: this.state.items,
                 directionalHintFixed: true
             };
+        }
+
+        let menuIconProps = {
+            iconName: 'ElipsisVertical',
         }
 
         return (
@@ -113,6 +138,8 @@ class CommandButton extends React.Component {
                 text={this.props.text}
                 iconProps={iconProps}
                 menuProps={menuProps}
+                menuIconProps={this.props.ellipsis ? menuIconProps : ''}
+                styles={styles}
                 onClick={() => { this._onClick(0) }} //Always send 0. Only fires if it has no sub-menu
             />
 
@@ -151,6 +178,12 @@ CommandButton.propTypes = {
      * @uxpincontroltype codeeditor
      * */
     items: PropTypes.string,
+
+    /**
+     * @uxpindescription To show the sub-menu icon as an ellipsis
+     * @uxpinpropname Ellipsis Icon
+     * */
+    ellipsis: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when the button is clicked on.

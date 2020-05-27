@@ -1,0 +1,7 @@
+# PPCardTextHeader
+  
+```jsx
+<PPCardTextHeader />
+```
+  
+ 
