@@ -3,29 +3,29 @@ import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
 
-  /**
-   * UPDATED Mar 22, 2020 by Anthony Hand
-   * - Rather than setting/getting props at runtime to maintain variable with internal text contents, switched to using state.
-   * 
-   */
+/**
+ * UPDATED Mar 22, 2020 by Anthony Hand
+ * - Rather than setting/getting props at runtime to maintain variable with internal text contents, switched to using state.
+ * 
+ */
 
-  /**
-   * UPDATED Mar 19, 2020 by Anthony Hand
-   * - NEW: Added the placeholder prop and onChange event.  
-   * - Fixed 2 annoying design time bugs. If one set the prefix or suffix and then removed the text value, a gray region would continue to render. 
-   *   Now that gray region will disappear once one removes the text values for them. 
-   * - Fixed an annoying design time bug regarding sizing a control. Previously, one could not drag the control to make it wider or shorter. Now it's OK. 
-   * - Converted control into a 'controlled' component where it tracks its own text value.  
-   * - Removed defaultValue property. This wasn't useful at runtime.
-   * - Added descriptions and prop names for each property with some updates. 
-   * - Cleaned up default props.
-   * 
-   * TODOs
-   * - Waiting for guidance from UXPin on how to expose the isChecked prop at runtime within UXPin. 
-   * 
-   * For additional outstanding issues, please see: 
-   *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/98
-   * */
+/**
+ * UPDATED Mar 19, 2020 by Anthony Hand
+ * - NEW: Added the placeholder prop and onChange event.  
+ * - Fixed 2 annoying design time bugs. If one set the prefix or suffix and then removed the text value, a gray region would continue to render. 
+ *   Now that gray region will disappear once one removes the text values for them. 
+ * - Fixed an annoying design time bug regarding sizing a control. Previously, one could not drag the control to make it wider or shorter. Now it's OK. 
+ * - Converted control into a 'controlled' component where it tracks its own text value.  
+ * - Removed defaultValue property. This wasn't useful at runtime.
+ * - Added descriptions and prop names for each property with some updates. 
+ * - Cleaned up default props.
+ * 
+ * TODOs
+ * - Waiting for guidance from UXPin on how to expose the isChecked prop at runtime within UXPin. 
+ * 
+ * For additional outstanding issues, please see: 
+ *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/98
+ * */
 
 
 
@@ -33,13 +33,25 @@ import * as React from 'react';
 class TextField extends React.Component {
 
   constructor(props) {
-
     super(props);
+  }
 
-    //Track the text contents within the control   
-    this.state = {
-        //Initialize with the props value
-        currentValue: this.props.textValue
+  set() {
+    this.setState({
+      //Initialize with the props value
+      currentValue: this.props.textValue
+    })
+  }
+
+  componentDidMount() {
+    this.set();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.textValue !== this.props.textValue
+    ) {
+      this.set();
     }
   }
 
@@ -49,8 +61,8 @@ class TextField extends React.Component {
     //Assumption: That Microsoft really is only sending strings and it's not undefined. 
 
     //Get the value. 
-    const textVal = newValue.toString(); 
-    
+    const textVal = newValue.toString();
+
     //Set the state with the updated checked value. This will force the control to update in UXPin at runtime.
     this.setState(
       { currentValue: textVal }
@@ -85,19 +97,19 @@ class TextField extends React.Component {
     }
 
     //We're going to keep this off for UXPin
-    let showAutoComplete = false; 
+    let showAutoComplete = false;
 
 
     return (
-        <FTextField 
-            value = {textVal}
-            iconProps = {{ iconName: this.props.icon }}
-            onChange = {(e, v) => { this._onValueChange(v); }}   //Only catch the value
-            {...this.props}
-            prefix = {prefix}
-            suffix = {suffix}
-            autoComplete = {showAutoComplete} 
-        />
+      <FTextField
+        value={textVal}
+        iconProps={{ iconName: this.props.icon }}
+        onChange={(e, v) => { this._onValueChange(v); }}   //Only catch the value
+        {...this.props}
+        prefix={prefix}
+        suffix={suffix}
+        autoComplete={showAutoComplete}
+      />
     );
   }
 }
@@ -108,24 +120,24 @@ class TextField extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 TextField.propTypes = {
- 
-    /**
-   * @uxpindescription The label for the switch
-   * @uxpinpropname Label
-   * @uxpincontroltype textfield(2)
-   * */
+
+  /**
+ * @uxpindescription The label for the switch
+ * @uxpinpropname Label
+ * @uxpincontroltype textfield(2)
+ * */
   label: PropTypes.string,
 
   /**
    * @uxpindescription For multiline text fields, whether or not to auto adjust text field height
    * @uxpinpropname Auto Adjust Height
-   * */  
+   * */
   autoAdjustHeight: PropTypes.bool,
 
   /**
    * @uxpindescription Description displayed below the text field to provide additional details about what text to enter
    * @uxpinpropname Description
-   * */  
+   * */
   description: PropTypes.string,
 
   /**
@@ -139,8 +151,8 @@ TextField.propTypes = {
   /**
    * @uxpindescription Placeholder text to show in the text field when it's empty
    * @uxpinpropname Placeholder
-   * */  
-  placeholder: PropTypes.string,  
+   * */
+  placeholder: PropTypes.string,
 
   /**
    * @uxpindescription To disable the control
@@ -194,7 +206,7 @@ TextField.propTypes = {
    * We give this property a unique name to avoid collisions. We map its value to the control's 'onChange' prop.
    * @uxpindescription Fires when the text value changes.
    * @uxpinpropname Value Change
-   * */  
+   * */
   onValueChange: PropTypes.func
 };
 

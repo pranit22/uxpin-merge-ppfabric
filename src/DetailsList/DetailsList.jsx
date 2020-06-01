@@ -1,40 +1,41 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { 
-  DetailsList as FDetailsList, 
+import {
+  DetailsList as FDetailsList,
   SelectionMode,
   ConstrainMode,
   SearchBox,
   Stack,
-  StackItem } from 'office-ui-fabric-react';
+  StackItem
+} from 'office-ui-fabric-react';
 import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import { getTokens, csv2arr } from '../_helpers/parser.jsx'
 
 
 
-  /**
-   * UPDATED Mar 31, 2020 by Anthony Hand
-   * - Replaced the TextField with a SearchBox control for the filter feature. 
-   * - Added props to let the user specify an icon and a placeholder string for the SearchBox. 
-   * - Implemented a Stack control to control the layouts for the SearchBox and DetailsList.  
-   * */
+/**
+ * UPDATED Mar 31, 2020 by Anthony Hand
+ * - Replaced the TextField with a SearchBox control for the filter feature. 
+ * - Added props to let the user specify an icon and a placeholder string for the SearchBox. 
+ * - Implemented a Stack control to control the layouts for the SearchBox and DetailsList.  
+ * */
 
-  /**
-   * UPDATED Mar 26, 2020 by Anthony Hand
-   * - Updated the filter text field's icon and set its width to more closely match 3 columns. 
-   * - Added support for multi-line text in table cells.
-   * - Fixed the 'jumping table' bug. Setting the search filter box's margin to 0 from 0.2em appears to have fixed it. 
-   * - Set the margin between the filter textbox and the table to 24 px. It had been too close before. 
-   * - Set the background color of the column headers to a lighter grey 100 until the theme can be formally updated.
-   * - Updated the default column and row values to more closely illustrate common use cases. 
-   * - Added descriptions and prop names for each property with some updates. Changed some prop names.
-   * 
-   * TODOs
-   * - There are lots of asks in the Github issue ticket. 
-   * 
-   * For additional outstanding issues, please see: 
-   *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/89
-   * */
+/**
+ * UPDATED Mar 26, 2020 by Anthony Hand
+ * - Updated the filter text field's icon and set its width to more closely match 3 columns. 
+ * - Added support for multi-line text in table cells.
+ * - Fixed the 'jumping table' bug. Setting the search filter box's margin to 0 from 0.2em appears to have fixed it. 
+ * - Set the margin between the filter textbox and the table to 24 px. It had been too close before. 
+ * - Set the background color of the column headers to a lighter grey 100 until the theme can be formally updated.
+ * - Updated the default column and row values to more closely illustrate common use cases. 
+ * - Added descriptions and prop names for each property with some updates. Changed some prop names.
+ * 
+ * TODOs
+ * - There are lots of asks in the Github issue ticket. 
+ * 
+ * For additional outstanding issues, please see: 
+ *  https://github.paypal.com/Console-R/uxpin-merge-ms-fabric/issues/89
+ * */
 
 
 
@@ -46,8 +47,8 @@ const searchFieldMarginBottom = '24px';
 
 //Use this in the default props below.
 const defaultColumnValues = "Column A,  Column B, Column C, Column D, Actions";
-const defaultRowValues = 
-      `link(Component_Name_A), icon(CircleCheckSolid|color-green-600) Ready, C-1, D-1, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)
+const defaultRowValues =
+  `link(Component_Name_A), icon(CircleCheckSolid|color-green-600) Ready, C-1, D-1, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)
       link(Component_Name_B), icon(CircleWarningSolid|color-orange-500) Restarting..., C-2, D-2, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)
       link(Component_Name_C), icon(CircleClearSolid|color-red-500) Unavailable, C-3, D-3, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)`;
 
@@ -64,16 +65,41 @@ class DetailsList extends React.Component {
       columns: [],
       rows: [],
       allItems: [],
-      alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
-      alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : []
-    }
+      alignRight: [],
+      alignCenter: []
+    };
+  }
+
+  set() {
+    this.setState(
+      {
+        alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
+        alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : []
+      },
+      () => this.setColumns(this.setRows)
+    );
+
+
   }
 
   componentDidMount() {
-    this.setColumns(this.setRows)
+    this.set();
   }
 
-  
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.alignRight !== this.props.alignRight ||
+      prevProps.alignCenter !== this.props.alignCenter ||
+      prevProps.columns !== this.props.columns ||
+      prevProps.items !== this.props.items ||
+      prevProps.minWidth !== this.props.minWidth ||
+      prevProps.maxWidth !== this.props.maxWidth
+    ) {
+      this.set();
+    }
+  }
+
+
   getColumnClasses(colIndex) {
     let alignHeaderLabels = {}
     if (this.state.alignCenter.includes(colIndex + 1)) alignHeaderLabels = { margin: '0 auto' }
@@ -196,7 +222,7 @@ class DetailsList extends React.Component {
             :
             getTokens(value).text
 
-          r[column.fieldName] = name 
+          r[column.fieldName] = name
         }
 
       })
@@ -210,7 +236,7 @@ class DetailsList extends React.Component {
 
   onSearchClear(event) {
     //This means that the user has hit the clear button, so we need to clear the text out. 
-    
+
     event.target.value = "";
 
     //Propagate the change to the SearchTable event
@@ -221,51 +247,51 @@ class DetailsList extends React.Component {
   render() {
 
     return (
-          
-          <Stack>
 
-            {this.props.isSearchEnabled && 
-                <StackItem
-                    align = "end"
-                    styles = {{ root: { marginBottom: searchFieldMarginBottom } }} 
-                >
-                    <SearchBox 
-                        iconProps = {{ iconName: this.props.icon }} 
-                        placeholder = { this.props.placeholder }
-                        onChange = { this.searchTable } 
-                        onClear = { this.onSearchClear }
-                        styles = {{ root: { width: searchFieldWidth }}} 
-                    />
-                </StackItem>
-            }
-            <StackItem>
-              
-              <div style={{ display: 'block' }} className={
-                mergeStyles({
-                  selectors: {
-                    '& .ms-DetailsHeader': {
-                      paddingTop: 0,
-                    },
-                  }
-                })
-              }>
-                  <FDetailsList 
-                      {...this.props}
-                      columns = { this.state.columns }
-                      items = { this.state.rows }
-                      selectionMode = { SelectionMode.none } //Hard coding this to off for the time being. 
-                      constrainMode = { ConstrainMode[ConstrainMode.horizontalConstrained]} //Hard coding this. 
-                      onRenderRow = {(props, defaultRender) => (
-                          <>
-                            {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
-                          </>
-                      )}
-                      isHeaderVisible = { this.props.header } 
-                  />
-                </div>
-            </StackItem>
+      <Stack>
 
-          </Stack>
+        {this.props.isSearchEnabled &&
+          <StackItem
+            align="end"
+            styles={{ root: { marginBottom: searchFieldMarginBottom } }}
+          >
+            <SearchBox
+              iconProps={{ iconName: this.props.icon }}
+              placeholder={this.props.placeholder}
+              onChange={this.searchTable}
+              onClear={this.onSearchClear}
+              styles={{ root: { width: searchFieldWidth } }}
+            />
+          </StackItem>
+        }
+        <StackItem>
+
+          <div style={{ display: 'block' }} className={
+            mergeStyles({
+              selectors: {
+                '& .ms-DetailsHeader': {
+                  paddingTop: 0,
+                },
+              }
+            })
+          }>
+            <FDetailsList
+              {...this.props}
+              columns={this.state.columns}
+              items={this.state.rows}
+              selectionMode={SelectionMode.none} //Hard coding this to off for the time being. 
+              constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]} //Hard coding this. 
+              onRenderRow={(props, defaultRender) => (
+                <>
+                  {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
+                </>
+              )}
+              isHeaderVisible={this.props.header}
+            />
+          </div>
+        </StackItem>
+
+      </Stack>
 
     );
   }
@@ -313,25 +339,25 @@ DetailsList.propTypes = {
   /**
   * @uxpindescription Minimum column width width 
   * @uxpinpropname Min Width
-  */ 
+  */
   minWidth: PropTypes.number,
 
   /**
   * @uxpindescription Maximum column width width 
   * @uxpinpropname Max Width
-  */ 
+  */
   maxWidth: PropTypes.number,
 
   /**
   * @uxpindescription Whether to show the filter SearchBox 
   * @uxpinpropname Show Filter
-  */ 
+  */
   isSearchEnabled: PropTypes.bool,
 
   /**
   * @uxpindescription Whether to display the table headers 
   * @uxpinpropname Show Headers
-  */ 
+  */
   header: PropTypes.bool,
 
   /**
@@ -343,8 +369,8 @@ DetailsList.propTypes = {
   /**
    * @uxpindescription Placeholder text to show in the text field when it's empty
    * @uxpinpropname Search Placeholder
-   * */  
-  placeholder: PropTypes.string,  
+   * */
+  placeholder: PropTypes.string,
 
 };
 
@@ -354,7 +380,7 @@ DetailsList.propTypes = {
  */
 DetailsList.defaultProps = {
   columns: defaultColumnValues,
-  items: defaultRowValues ,
+  items: defaultRowValues,
   minWidth: 125,
   maxWidth: 350,
   header: true,

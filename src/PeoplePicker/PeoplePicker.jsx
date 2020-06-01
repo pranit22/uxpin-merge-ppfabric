@@ -1,20 +1,20 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {
-    ListPeoplePicker, 
+    ListPeoplePicker,
     NormalPeoplePicker
 } from 'office-ui-fabric-react';
 import { TpxUxPersonaData } from '../_helpers/tpxuxpersonautils.jsx';
 
 
-  /** 
-   * UPDATED April 22, 2020 by Anthony Hand
-   * - Added file to our TPX UX Experimental library on UXPin.
-   * 
-   * TODOs
-   * - Control needs to be updated with the proper PayPal UI theme. 
-   * 
-   */
+/** 
+ * UPDATED April 22, 2020 by Anthony Hand
+ * - Added file to our TPX UX Experimental library on UXPin.
+ * 
+ * TODOs
+ * - Control needs to be updated with the proper PayPal UI theme. 
+ * 
+ */
 
 
 //Strings to display in the Suggestions UX
@@ -30,7 +30,7 @@ const suggestionProps = {
 //Put a little space between the text field and list of selected users
 const textfieldStyle = {
     text: {
-      marginBottom: '12px',
+        marginBottom: '12px',
     }
 }
 
@@ -57,17 +57,17 @@ class PeoplePicker extends React.Component {
         }
     }
 
-    componentDidMount() {
+    set() {
         //We'll set this list as the default suggestion list. 
         var suggestions = TpxUxPersonaData.getPersonaList(maxNumberOfPersonas);
 
         //We keep this duplicate to track selected persona indexes
         let personas = TpxUxPersonaData.getPersonaList(maxNumberOfPersonas);
-        personas.sort(function(a, b){
+        personas.sort(function (a, b) {
             var x = a.text.toLowerCase();
             var y = b.text.toLowerCase();
-            if (x < y) {return -1;}
-            if (x > y) {return 1;}
+            if (x < y) { return -1; }
+            if (x > y) { return 1; }
             return 0;
         });
 
@@ -98,11 +98,24 @@ class PeoplePicker extends React.Component {
         }
 
         this.setState(
-            {   selectedItems: selectedItems,
+            {
+                selectedItems: selectedItems,
                 suggestionList: suggestions,
                 allPersonas: personas
-             }
+            }
         )
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.selectedIndexes !== this.props.selectedIndexes
+        ) {
+            this.set();
+        }
     }
 
     /**
@@ -146,7 +159,7 @@ class PeoplePicker extends React.Component {
      * @returns {string} Returns the full name of the Persona to display in the UI.
      */
     _getTextFromItem(item) {
-        if (!item || !item.text) 
+        if (!item || !item.text)
             return "";
 
         //Let's send back the full name
@@ -167,11 +180,11 @@ class PeoplePicker extends React.Component {
             //Now, remove duplicates of already selected people
             filteredList = this.removeDuplicates(filteredList, this.state.selectedItems);
 
-            filteredList.sort(function(a, b){
+            filteredList.sort(function (a, b) {
                 var x = a.text.toLowerCase();
                 var y = b.text.toLowerCase();
-                if (x < y) {return -1;}
-                if (x > y) {return 1;}
+                if (x < y) { return -1; }
+                if (x > y) { return 1; }
                 return 0;
             });
 
@@ -205,7 +218,7 @@ class PeoplePicker extends React.Component {
                     includedInEmail = uniquename.includes(fText);
                 }
 
-                return ( includedInName || includedInEmail);
+                return (includedInName || includedInEmail);
             });
 
         return filteredList;
@@ -233,8 +246,8 @@ class PeoplePicker extends React.Component {
         if (!personaList || !personaList.length || personaList.length === 0)
             return false;
 
-        if (!persona || !persona.text || persona.text.trim() === '') 
-            return false; 
+        if (!persona || !persona.text || persona.text.trim() === '')
+            return false;
 
         return personaList.filter(item => item.text === persona.text).length > 0;
     }
@@ -252,7 +265,7 @@ class PeoplePicker extends React.Component {
         var i;
         for (i = 0; i < personas.length; i++) {
             let p = personas[i];
-            if (name == p.text) 
+            if (name == p.text)
                 return i;
         }
 
@@ -281,7 +294,7 @@ class PeoplePicker extends React.Component {
             }
 
             //Sort numerically
-            indexList.sort(function(a, b) {
+            indexList.sort(function (a, b) {
                 return a - b;
             });
 
@@ -289,7 +302,7 @@ class PeoplePicker extends React.Component {
         }
 
         //Let's replace the old list in memory
-        this.setState (
+        this.setState(
             { selectedItems: items }
         )
     }
@@ -299,40 +312,40 @@ class PeoplePicker extends React.Component {
     render() {
 
         return (
-        <div>
-        { this.props.inline 
-            ? //Display normal one? 
-                <NormalPeoplePicker
-                    {...this.props}
-                    key = { 'normal' } //'list' is a nice alternative, but not sure how to set it as controlled
-                    className = { 'ms-PeoplePicker' }
-                    styles = { textfieldStyle }
-                    pickerSuggestionsProps = { suggestionProps }
-                    disabled = { this.props.disabled }
+            <div>
+                {this.props.inline
+                    ? //Display normal one? 
+                    <NormalPeoplePicker
+                        {...this.props}
+                        key={'normal'} //'list' is a nice alternative, but not sure how to set it as controlled
+                        className={'ms-PeoplePicker'}
+                        styles={textfieldStyle}
+                        pickerSuggestionsProps={suggestionProps}
+                        disabled={this.props.disabled}
 
-                    selectedItems = { this.state.selectedItems }
+                        selectedItems={this.state.selectedItems}
 
-                    getTextFromItem = {(i) => this._getTextFromItem(i)}
-                    onResolveSuggestions = {(f, s) => this._onFilterChanged(f, s)}
-                    onChange = {(items) => this._onItemsChanged(items)}
-                />
-            : //Or display the inline option
-                <ListPeoplePicker
-                    {...this.props}
-                    key = { 'list' } //'list' is a nice alternative, but not sure how to set it as controlled
-                    className = { 'ms-PeoplePicker' }
-                    styles = { textfieldStyle }
-                    pickerSuggestionsProps = { suggestionProps }
-                    disabled = { this.props.disabled }
+                        getTextFromItem={(i) => this._getTextFromItem(i)}
+                        onResolveSuggestions={(f, s) => this._onFilterChanged(f, s)}
+                        onChange={(items) => this._onItemsChanged(items)}
+                    />
+                    : //Or display the inline option
+                    <ListPeoplePicker
+                        {...this.props}
+                        key={'list'} //'list' is a nice alternative, but not sure how to set it as controlled
+                        className={'ms-PeoplePicker'}
+                        styles={textfieldStyle}
+                        pickerSuggestionsProps={suggestionProps}
+                        disabled={this.props.disabled}
 
-                    selectedItems = { this.state.selectedItems }
+                        selectedItems={this.state.selectedItems}
 
-                    getTextFromItem = {(i) => this._getTextFromItem(i)}
-                    onResolveSuggestions = {(f, s) => this._onFilterChanged(f, s)}
-                    onChange = {(items) => this._onItemsChanged(items)}
-                /> 
+                        getTextFromItem={(i) => this._getTextFromItem(i)}
+                        onResolveSuggestions={(f, s) => this._onFilterChanged(f, s)}
+                        onChange={(items) => this._onItemsChanged(items)}
+                    />
 
-         } </div>         
+                } </div>
         );
     }
 
@@ -351,25 +364,25 @@ PeoplePicker.propTypes = {
     /**
      * @uxpindescription To display selected persons inline rather than below the input field
      * @uxpinpropname Inline Selections
-     * */  
+     * */
     inline: PropTypes.bool,
 
     /**
      * @uxpindescription Of the 10 total Personas available, enter a list of 1-based index values for default items to be shown as selected (Optional)
      * @uxpinpropname Selected Indexes
-     * */  
+     * */
     selectedIndexes: PropTypes.string,
 
     /**
      * @uxpindescription To disable the control
-     * */  
+     * */
     disabled: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when the user selects or removes a person.
      * @uxpinpropname Change
      * */
-    onSelectionChanged: PropTypes.func 
+    onSelectionChanged: PropTypes.func
 
 }
 

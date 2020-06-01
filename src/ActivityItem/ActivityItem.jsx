@@ -71,8 +71,12 @@ class ActivityItem extends React.Component {
                 //TODO: Add a click event handler here...
                 return el.suggestions[0]();
             }
-            else {
+            else if(el.suggestions[0]) {
+                // if there's a suggestion, call the function
                 return el.suggestions[0]();
+            } else {
+                // there's no suggestion, return the text
+                return (<span key={i}> {el.tokenString} </span>);
             }
         });
 

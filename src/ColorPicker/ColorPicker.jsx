@@ -22,7 +22,7 @@ class ColorPicker extends React.Component {
         }
     }
 
-    componentDidMount() {
+    set() {
         //Let's see if the UXPin designer entered a default color value...
         let color = "";
         if (this.props.selectedColor) 
@@ -42,7 +42,19 @@ class ColorPicker extends React.Component {
                 { selectedColorObj: color }
             )
         }
-    }
+      }
+    
+      componentDidMount() {
+        this.set();
+      }
+    
+      componentDidUpdate(prevProps) {
+        if (
+          prevProps.selectedColor !== this.props.selectedColor
+        ) {
+          this.set();
+        }
+      }
 
 
     _onColorChanged(color) {
