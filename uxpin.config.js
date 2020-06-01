@@ -17,6 +17,7 @@ module.exports = {
           'src/PPCard/PPCard.jsx',
           'src/PPCardFooter/PPCardFooter.jsx',
           'src/PPCardTextHeader/PPCardTextHeader.jsx',
+          'src/PPChart/PPChart.jsx'
         ]
       },
       {
@@ -100,7 +101,7 @@ module.exports = {
           'src/Text/Text.jsx',
           'src/Image/Image.jsx',
         ]
-      },
+      }
     ]
   },
   name: 'MS Fabric UXPin Merge'

@@ -1,0 +1,7 @@
+# PPChart
+  
+```jsx
+<PPChart />
+```
+  
+ 
