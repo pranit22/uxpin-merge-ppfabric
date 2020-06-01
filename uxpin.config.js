@@ -10,6 +10,13 @@ module.exports = {
           'src/PPMetaDataPair/PPMetaDataPair.jsx',
           'src/PPHorizontalStack/PPHorizontalStack.jsx',
           'src/PPVerticalStack/PPVerticalStack.jsx',
+          'src/PPPageHeader/PPPageHeader.jsx',
+          'src/PPPageFooter/PPPageFooter.jsx',
+          'src/PPShape/PPShape.jsx',
+          'src/PPFavoritesButton/PPFavoritesButton.jsx',
+          'src/PPCard/PPCard.jsx',
+          'src/PPCardFooter/PPCardFooter.jsx',
+          'src/PPCardTextHeader/PPCardTextHeader.jsx',
         ]
       },
       {
@@ -91,6 +98,7 @@ module.exports = {
           'src/Icon/Icon.jsx',
           'src/Separator/Separator.jsx',
           'src/Text/Text.jsx',
+          'src/Image/Image.jsx',
         ]
       },
     ]
