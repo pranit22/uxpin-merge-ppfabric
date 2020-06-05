@@ -314,7 +314,7 @@ PPVerticalStack.propTypes = {
 PPVerticalStack.defaultProps = {
     value: instructionText,
     showInstructions: true,
-    internalPadding: 0,
+    internalPadding: 24,
     gutterPadding: 12,
     align: leftAlign,
     spanChild: false,

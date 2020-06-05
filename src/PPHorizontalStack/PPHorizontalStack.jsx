@@ -185,8 +185,6 @@ class PPHorizontalStack extends React.Component {
 
         const topStackItemStyles = {
             root: {
-                display: 'flex',
-                overflow: 'hidden',
                 background: color,        //undefined is OK
                 height: this.props.stackHeight || 'auto'
             },
@@ -220,9 +218,7 @@ class PPHorizontalStack extends React.Component {
                     let stackItemWidth = this._getColumnWidth(i);
                     let stackItemStyle = {
                         root: {
-                            width: stackItemWidth,
-                            display: 'flex',
-                            overflow: 'hidden',
+                            width: stackItemWidth
                         },
                     };
 
@@ -374,7 +370,7 @@ PPHorizontalStack.defaultProps = {
     value: instructionText,
     showInstructions: true,
     widths: defaultWidths,
-    internalPadding: 0,
+    internalPadding: 24,
     gutterPadding: 12,
     align: leftAlign,
     vAlign: topAlign,

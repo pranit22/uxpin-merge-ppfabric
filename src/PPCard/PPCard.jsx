@@ -6,6 +6,7 @@ import {
     } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
+import _ from 'lodash';
 
 
 /** 
@@ -136,7 +137,7 @@ class PPCard extends React.Component {
             if (childList.length) {
                 for (var i = 0; i < childList.length; i++) {
                     if (childList[i]) {
-                        let child = childList[i];   
+                        let child = _.cloneDeep(childList[i]);   
                         child.cardTheme = this.props.cardTheme;   
                         let stack = (
                             <StackItem 
