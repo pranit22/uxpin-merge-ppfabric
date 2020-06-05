@@ -95,7 +95,8 @@ module.exports = {
         name: 'Surfaces',
         include: [
           'src/Dialog/Dialog.jsx',
-          'src/Tooltip/Tooltip.jsx'
+          'src/Tooltip/Tooltip.jsx',
+          'src/Panel/Panel.jsx',
         ]
       },
       {

@@ -61,7 +61,7 @@
     "image-webpack-loader": "^6.0.0",
     "lodash": "^4.17.15",
     "node-sass": "^4.13.1",
-    "office-ui-fabric-react": "7.69.x",
+    "office-ui-fabric-react": "7.117.3",
     "postcss-loader": "^3.0.0",
     "react-docgen": "^4.1.1",
     "react-jss": "10.0.0-alpha.24",
