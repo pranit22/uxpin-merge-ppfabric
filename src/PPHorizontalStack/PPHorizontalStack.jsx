@@ -370,7 +370,7 @@ PPHorizontalStack.defaultProps = {
     value: instructionText,
     showInstructions: true,
     widths: defaultWidths,
-    internalPadding: 24,
+    internalPadding: 0,
     gutterPadding: 12,
     align: leftAlign,
     vAlign: topAlign,

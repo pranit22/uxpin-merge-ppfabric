@@ -105,8 +105,6 @@ class PPVerticalStack extends React.Component {
 
         const topStackItemStyles = {
             root: {
-                display: 'flex',
-                overflow: 'hidden',
                 background: color,        //undefined is OK
                 height: this.props.stackHeight || 'auto',
                 width: this.props.stackWidth || 'auto'
@@ -314,7 +312,7 @@ PPVerticalStack.propTypes = {
 PPVerticalStack.defaultProps = {
     value: instructionText,
     showInstructions: true,
-    internalPadding: 24,
+    internalPadding: 0,
     gutterPadding: 12,
     align: leftAlign,
     spanChild: false,

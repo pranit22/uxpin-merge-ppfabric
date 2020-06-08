@@ -144,13 +144,15 @@ class Nav extends React.Component {
         let topPad = this.props.navTopPadding > 0 ? this.props.navTopPadding : 0;
 
         let mHeight = this.props.controlHeight > 1 ? this.props.controlHeight : 1;
+        let height = 'auto';
         if (this.props.stretch) {
-            mHeight = '100%'
+            height = '100%'
         }
-        let width = this.props.controlWidth > 1 ? this.props.controlWidth: 'auto';
+        let width = this.props.controlWidth > 1 ? this.props.controlWidth : 'auto';
 
         let navStyles = {
             root: {
+                height,
                 minHeight: mHeight,
                 width,
                 paddingTop: topPad + 'px',

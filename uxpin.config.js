@@ -4,7 +4,6 @@ module.exports = {
       {
         name: 'PayPal',
         include: [
-          'src/PPLayout/PPLayout.jsx',
           'src/PPPageTemplate/PPPageTemplate.jsx',
           'src/PPPageContainer/PPPageContainer.jsx',
           'src/PPHeader/PPHeader.jsx',
