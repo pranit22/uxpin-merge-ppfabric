@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {
-  DetailsList as FDetailsList,
+  ShimmeredDetailsList as FDetailsList,
   SelectionMode,
   ConstrainMode,
   SearchBox,
@@ -52,7 +52,7 @@ const defaultRowValues =
       link(Component_Name_B), icon(CircleWarningSolid|color-orange-500) Restarting..., C-2, D-2, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)
       link(Component_Name_C), icon(CircleClearSolid|color-red-500) Unavailable, C-3, D-3, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)`;
 
-
+const defaultShimmerDuration = 1;
 
 class DetailsList extends React.Component {
   constructor(props) {
@@ -62,6 +62,7 @@ class DetailsList extends React.Component {
     this.onSearchClear = this.onSearchClear.bind(this);
 
     this.state = {
+      shimmer: true,
       columns: [],
       rows: [],
       allItems: [],
@@ -71,14 +72,26 @@ class DetailsList extends React.Component {
   }
 
   set() {
+    console.log(this.props.shimmer)
     this.setState(
       {
         alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
-        alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : []
+        alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : [],
+        shimmer: this.props.shimmer
       },
       () => this.setColumns(this.setRows)
     );
 
+    if (this.props.shimmer) {
+      setTimeout(
+        () => {
+        this.setState({
+          shimmer: false
+        })
+      },
+        (this.props.shimmerDuration || defaultShimmerDuration) * 1000
+      )
+    }
 
   }
 
@@ -93,7 +106,9 @@ class DetailsList extends React.Component {
       prevProps.columns !== this.props.columns ||
       prevProps.items !== this.props.items ||
       prevProps.minWidth !== this.props.minWidth ||
-      prevProps.maxWidth !== this.props.maxWidth
+      prevProps.maxWidth !== this.props.maxWidth ||
+      prevProps.shimmer !== this.props.shimmer ||
+      prevProps.shimmerDuration !== this.props.shimmerDuration
     ) {
       this.set();
     }
@@ -276,6 +291,7 @@ class DetailsList extends React.Component {
             })
           }>
             <FDetailsList
+              enableShimmer={this.state.shimmer}
               {...this.props}
               columns={this.state.columns}
               items={this.state.rows}
@@ -361,6 +377,18 @@ DetailsList.propTypes = {
   header: PropTypes.bool,
 
   /**
+  * @uxpindescription Whether to display the shimmer 
+  * @uxpinpropname Shimmer
+  */
+  shimmer: PropTypes.bool,
+
+  /**
+  * @uxpindescription Shimmer duration inseconds
+  * @uxpinpropname Shimmer Duration
+  */
+  shimmerDuration: PropTypes.number,
+
+  /**
    * @uxpindescription The exact name from the PayPal icon library. Displays on the right side. 
    * @uxpinpropname Search Icon
    * */
@@ -388,7 +416,9 @@ DetailsList.defaultProps = {
   alignCenter: "3, 4",
   isSearchEnabled: true,
   icon: searchFieldIconName,
-  placeholder: searchFieldPlaceholder
+  placeholder: searchFieldPlaceholder,
+  shimmer: true,
+  shimmerDuration: defaultShimmerDuration
 };
 
 
