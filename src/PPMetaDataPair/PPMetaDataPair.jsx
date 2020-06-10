@@ -1,35 +1,38 @@
 import * as React from 'react';
 import {
-        Stack,
-        StackItem,
-        Text 
-    } from 'office-ui-fabric-react';
+    Stack,
+    StackItem,
+    Text,
+    Shimmer,
+    ShimmerElementType
+} from 'office-ui-fabric-react';
+import PPVerticalStack from '../PPVerticalStack/PPVerticalStack';
 import * as PropTypes from 'prop-types';
 import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
 import { TpxUxNumberParser } from '../_helpers/tpxuxnumberutils.jsx';
 
 
-  /** 
-   * UPDATED April 30, 2020 by Anthony Hand
-   * - Added the ability for the user to enter either a percent, like '25%', or a number, like '212', for the left side's width.
-   */
+/** 
+ * UPDATED April 30, 2020 by Anthony Hand
+ * - Added the ability for the user to enter either a percent, like '25%', or a number, like '212', for the left side's width.
+ */
 
-    /** 
-   * UPDATED April 27, 2020 by Anthony Hand
-   * - Added file to our TPX UX Experimental library on UXPin.
-   */
+/** 
+* UPDATED April 27, 2020 by Anthony Hand
+* - Added file to our TPX UX Experimental library on UXPin.
+*/
 
 
 
 const innerStackItemStyles = {
     root: {
-      alignItems: 'center',
+        alignItems: 'center',
     },
 };
 
 const innerStackTokens = {
     childrenGap: '12',
-    padding: 0, 
+    padding: 0,
 };
 
 const verticalAlign = 'center';
@@ -51,6 +54,8 @@ const defaultLeftWidth = 212;
 //Default gutter padding. 
 const defaultGutter = 24;
 
+const defaultShimmerDuration = 1;
+
 
 class PPMetaDataPair extends React.Component {
     constructor(props) {
@@ -60,6 +65,34 @@ class PPMetaDataPair extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.shimmer !== this.props.shimmer ||
+            prevProps.shimmerDuration !== this.props.shimmerDuration
+        ) {
+            this.set();
+        }
+    }
+
+    set() {
+        this.setState({
+            shimmer: this.props.shimmer
+        })
+        if (this.props.shimmer) {
+            setTimeout(
+                () => {
+                    this.setState({
+                        shimmer: false
+                    })
+                },
+                (this.props.shimmerDuration || defaultShimmerDuration) * 1000
+            )
+        }
+    }
 
     render() {
 
@@ -70,9 +103,9 @@ class PPMetaDataPair extends React.Component {
 
         //The user can enter either a percent or regular number
         var leftW = TpxUxNumberParser.parsePercentOrInt(this.props.leftWidth);
-        if (!leftW) 
+        if (!leftW)
             leftW = defaultLeftWidth;
-        
+
         const leftStackItemStyles = {
             root: {
                 width: leftW,
@@ -88,7 +121,7 @@ class PPMetaDataPair extends React.Component {
         let gap = '12 ' + pad;
         const stackTokens = {
             childrenGap: gap,
-            padding: 0, 
+            padding: 0,
         };
 
 
@@ -127,13 +160,13 @@ class PPMetaDataPair extends React.Component {
             if (childList.length) {
                 var i;
                 for (i = 0; i < childList.length; i++) {
-                    let child = childList[i];      
+                    let child = childList[i];
                     let stack = (
-                        <StackItem 
-                            styles = { innerStackItemStyles }
-                            grow = { this.props.stretch ? true : '' }
-                            align = { this.props.stretch ? "stretch" : '' }   >
-                            { child }
+                        <StackItem
+                            styles={innerStackItemStyles}
+                            grow={this.props.stretch ? true : ''}
+                            align={this.props.stretch ? "stretch" : ''}   >
+                            {child}
                         </StackItem>
                     );
                     stackList.push(stack);
@@ -142,44 +175,59 @@ class PPMetaDataPair extends React.Component {
         } //If props.children
 
         return (
-
-            <Stack 
-                {...this.props}
-                tokens = { stackTokens }
-                horizontal = { true }
-                horizontalAlign = { horizontalAlign }
-                verticalAlign = { verticalAlign }
-                > 
-
-                <StackItem 
-                    styles = { leftStackItemStyles }
-                    disableShrink = { true }
-                    align = { 'stretch' } > 
-                    <Text
+            <React.Fragment>
+                {this.state.shimmer && (
+                    <PPVerticalStack
+                        showInstructions={false}
+                        gutterPadding={10}
+                    >
+                        <Shimmer shimmerElements={[
+                            { type: ShimmerElementType.line, height: 24, width: leftW },
+                            { type: ShimmerElementType.gap, width: pad, },
+                            { type: ShimmerElementType.line, height: 24 },
+                        ]} />
+                    </PPVerticalStack>
+                )}
+                {!this.state.shimmer && (
+                    <Stack
                         {...this.props}
-                        styles = { fTextStyles }
-                        variant = { this.props.size }>
-                        { this.props.value }
-                    </Text>
-                </StackItem>
+                        tokens={stackTokens}
+                        horizontal={true}
+                        horizontalAlign={horizontalAlign}
+                        verticalAlign={verticalAlign}
+                    >
 
-                <StackItem 
-                    grow = { true }
-                    align = { 'stretch' }>
-                   
-                   <Stack
-                        tokens = { innerStackTokens }
-                        horizontal = { false }
-                        horizontalAlign = { horizontalAlign }
-                        verticalAlign = { innerVerticalAlign }
-                        wrap = { false } >
+                        <StackItem
+                            styles={leftStackItemStyles}
+                            disableShrink={true}
+                            align={'stretch'} >
+                            <Text
+                                {...this.props}
+                                styles={fTextStyles}
+                                variant={this.props.size}>
+                                {this.props.value}
+                            </Text>
+                        </StackItem>
 
-                       { stackList }
+                        <StackItem
+                            grow={true}
+                            align={'stretch'}>
 
-                   </Stack>
+                            <Stack
+                                tokens={innerStackTokens}
+                                horizontal={false}
+                                horizontalAlign={horizontalAlign}
+                                verticalAlign={innerVerticalAlign}
+                                wrap={false} >
 
-                </StackItem>
-            </Stack>
+                                {stackList}
+
+                            </Stack>
+
+                        </StackItem>
+                    </Stack>
+                )}
+            </React.Fragment>
         );
     }
 }
@@ -195,7 +243,7 @@ PPMetaDataPair.propTypes = {
      * @uxpinignoreprop 
      * @uxpindescription Contents for the right side. 1. Drag an object onto the canvas. 2. In the Layers Panel, drag the item onto this object. Now it should be indented, and contained as a 'child.'  
      * @uxpinpropname Right Contents
-     */ 
+     */
     children: PropTypes.node,
 
     /**
@@ -243,21 +291,33 @@ PPMetaDataPair.propTypes = {
     /**
      * @uxpindescription The fixed width for the left side label. Enter a percent like '33%' or a whole number, like '212'.
      * @uxpinpropname Left Width
-     */ 
+     */
     leftWidth: PropTypes.string,
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Padding between the left side label and the right side contents. Value must be 0 or more.  
      * @uxpinpropname Gutter
-     */ 
-    gutterPadding: PropTypes.number, 
-    
+     */
+    gutterPadding: PropTypes.number,
+
     /**
      * @uxpindescription To stretch the right side contents 
      * @uxpinpropname Stretch Contents
      */
     stretch: PropTypes.bool,
+
+    /**
+    * @uxpindescription Whether to display the shimmer 
+    * @uxpinpropname Shimmer
+    */
+    shimmer: PropTypes.bool,
+
+    /**
+    * @uxpindescription Shimmer duration inseconds
+    * @uxpinpropname Shimmer Duration
+    */
+    shimmerDuration: PropTypes.number,
 
 }
 
@@ -274,6 +334,8 @@ PPMetaDataPair.defaultProps = {
     leftWidth: defaultLeftWidth,
     gutterPadding: defaultGutter,
     stretch: true,
+    shimmer: true,
+    shimmerDuration: defaultShimmerDuration
 }
 
 
