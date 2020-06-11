@@ -20,17 +20,29 @@ const defaultUnfavoritedText = 'Click to Favorite';
 
 class PPFavoritesButton extends React.Component {
     constructor(props) {
-      super(props);
+        super(props);
 
-      this.state = {
-          isFavorited: false,
-      }
+        this.state = {
+            isFavorited: false,
+        }
     }
 
-    componentDidMount() {
+    set() {
         this.setState(
             { isFavorited: this.props.isFavorited }
         );
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.isFavorited !== this.props.isFavorited
+        ) {
+            this.set();
+        }
     }
 
     _onClick() {
@@ -57,7 +69,7 @@ class PPFavoritesButton extends React.Component {
         var iName = this.state.isFavorited ? this.props.favoritedIconName : this.props.iconName;
         if (iName)
             iName = iName.trim();
-        
+
         let iconProps = { iconName: iName }
 
         //We want the root's margin to help the control to equal 40px. We need to make up 14px when there is no text.
@@ -72,29 +84,29 @@ class PPFavoritesButton extends React.Component {
         let styles = {
             root: {
                 margin: 0,
-                padding: rootPadding,       
+                padding: rootPadding,
             },
             label: {
                 whiteSpace: 'nowrap',
                 margin: labelMargin,
-                padding: 0,   
+                padding: 0,
             }
         }
 
         return (
 
-            <ActionButton 
+            <ActionButton
                 {...this.props}
-                text = { text }
-                iconProps = { iconProps }
-                styles = { styles }
-                onClick={() => { this._onClick() }} 
+                text={text}
+                iconProps={iconProps}
+                styles={styles}
+                onClick={() => { this._onClick() }}
             />
 
         );
     }
-  
-  }
+
+}
 
 
 /** 
@@ -105,7 +117,7 @@ PPFavoritesButton.propTypes = {
     /**
      * @uxpindescription To toggle the Favorited state
      * @uxpinpropname Is Favorited
-     * */  
+     * */
     isFavorited: PropTypes.bool,
 
     /**
@@ -117,7 +129,7 @@ PPFavoritesButton.propTypes = {
     /**
      * @uxpindescription Unfavorited State: The exact name from the PayPal icon library (Optional)
      * @uxpinpropname Icon Name
-     * */  
+     * */
     iconName: PropTypes.string,
 
     /**
@@ -129,19 +141,19 @@ PPFavoritesButton.propTypes = {
     /**
      * @uxpindescription Favorited State: The exact name from the PayPal icon library (Optional)
      * @uxpinpropname Fave Icon Name
-     * */  
+     * */
     favoritedIconName: PropTypes.string,
 
     /**
      * @uxpindescription To disable the control
      * @uxpinpropname Disabled
-     * */  
+     * */
     disabled: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when the button is clicked on.
      * @uxpinpropname Click
-     * */   
+     * */
     onClick: PropTypes.func
 };
 
