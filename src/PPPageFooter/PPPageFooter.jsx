@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {
-        Image, 
-        ImageFit,
-        Link,
-        Stack,
-        StackItem,
-        Text 
-    } from 'office-ui-fabric-react';
+    Image,
+    ImageFit,
+    Link,
+    Stack,
+    StackItem,
+    Text
+} from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
 
@@ -41,7 +41,7 @@ const defaultCorpInfoMaxWidth = '1000px';
 const linkStyles = {
     root: {
         color: '#0070BA',           //"blue-600"
-        textDecoration: "none", 
+        textDecoration: "none",
         selectors: {
             ':hover': {
                 color: '#003087',   //"blue-800"
@@ -80,19 +80,35 @@ class PPPageFooter extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
+        this.state = {
             links: [],
             textColor: defaultTextColorHex,
         }
     }
 
-    componentDidMount() {
-
+    set() {
         this.setItems();
 
-        this.setState (
-            { textColor: defaultTextColorHex }
-        )
+        this.setState(
+            {
+                textColor:
+                    TpxUxColors.getHexFromHexOrPpuiToken(this.props.textColor)
+                    || TpxUxColors.getHexFromHexOrPpuiToken(defaultTextColor)
+            }
+        );
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.links !== this.props.links
+            || prevProps.textColor !== this.props.textColor
+        ) {
+            this.set();
+        }
     }
 
 
@@ -114,8 +130,8 @@ class PPPageFooter extends React.Component {
             } //if items
         } //if props.links
 
-        this.setState (
-            {links: linkList}
+        this.setState(
+            { links: linkList }
         );
     }
 
@@ -160,12 +176,12 @@ class PPPageFooter extends React.Component {
             fontSize: textSize,
             fontWeight: 'normal',
             fontStyle: 'normal',
-       }
+        }
 
         let textSpan = (
-            <span 
-                style = { fTextStyles }>
-                    { text }
+            <span
+                style={fTextStyles}>
+                {text}
             </span>
         )
 
@@ -182,12 +198,12 @@ class PPPageFooter extends React.Component {
                 fontSize: textSize,
                 fontWeight: 'normal',
                 fontStyle: 'normal',
-           }
+            }
 
             linkDelimiter = (
-                <span 
-                    style = { delimiterStyle }>
-                    { " | " }
+                <span
+                    style={delimiterStyle}>
+                    {" | "}
                 </span>
             );
         }
@@ -195,15 +211,15 @@ class PPPageFooter extends React.Component {
         let linkPart = (
             <>
                 <Link
-                    styles = { linkStyles }
-                    href = { href }
-                    target = { "_UXPin Mockup" } //Force open in a new window
+                    styles={linkStyles}
+                    href={href}
+                    target={"_UXPin Mockup"} //Force open in a new window
                     onClick={() => { this._onLinkClick(href) }}
                 >
-                    { textSpan }
+                    {textSpan}
                 </Link>
 
-                { linkDelimiter }
+                {linkDelimiter}
             </>
         );
 
@@ -216,17 +232,17 @@ class PPPageFooter extends React.Component {
         var bColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.borderColor);
 
         //If the line thickness is 0 or the user has removed the line color, then we're done.
-        if (this.props.borderThickness < 1 || !bColor) 
+        if (this.props.borderThickness < 1 || !bColor)
             return 'none';
 
         let thickness = this.props.borderThickness > 0 ? this.props.borderThickness : defaultBorderThickness;
-        
+
         return thickness + 'px ' + borderSolid + ' ' + bColor;
     }
 
 
     _onLinkClick(href) {
-        
+
         //Raise this event to UXPin. We'll send them a value in case they can catch it.
         if (this.props.onLinkClick) {
             this.props.onLinkClick(href);
@@ -252,7 +268,7 @@ class PPPageFooter extends React.Component {
         //With one number, the padding applies to both rows and columns.  
         const outerStackTokens = {
             childrenGap: 24,        //24 between each column in the outer stack
-            padding: 0, 
+            padding: 0,
         };
 
         const outerStackStyles = {
@@ -271,7 +287,7 @@ class PPPageFooter extends React.Component {
         //With one number, the padding applies to both rows and columns.  
         const textStackTokens = {
             childrenGap: defaultTextStackPadding,
-            padding: 0, 
+            padding: 0,
         };
 
 
@@ -289,12 +305,12 @@ class PPPageFooter extends React.Component {
                     lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
                 }
             }
-            
+
             line1 = (
                 <Text
-                    styles = { l1Styles }
-                    variant = { defaultLine1TextSize }>
-                    { this.props.line1Value }
+                    styles={l1Styles}
+                    variant={defaultLine1TextSize}>
+                    {this.props.line1Value}
                 </Text>
             );
 
@@ -309,7 +325,7 @@ class PPPageFooter extends React.Component {
             line2 = this._configTextOrLink(l2Info, defaultTextSize, false);
             showDivider = true;
         }
-        
+
 
         //****************************
         //LINE 3 TEXT
@@ -370,19 +386,19 @@ class PPPageFooter extends React.Component {
         //With one number, the padding applies to both rows and columns.
         const companyInfoStackTokens = {
             childrenGap: defaultTextStackPadding,
-            padding: 0, 
+            padding: 0,
         };
-        
+
         //Set up the StackItems
         //The right side is a vertical stack, as well. 
         var linkList = [];
         if (this.state.links && this.state.links.length) {
 
             for (var i = 0; i < this.state.links.length; i++) {
-                let link = this.state.links[i];  
+                let link = this.state.links[i];
 
                 //Now we put it all together!
-                var addLinkDelimiter = false; 
+                var addLinkDelimiter = false;
                 if (i + 1 < this.state.links.length)
                     addLinkDelimiter = true;
 
@@ -401,73 +417,73 @@ class PPPageFooter extends React.Component {
 
         let confidentialityInfo = this._parseTextAndLink(confidentiality);
         let confidentialityElem = this._configTextOrLink(confidentialityInfo, corpInfoTextSize, false);
-        
+
 
         return (
 
             <Stack                                          //Outer wrapper stack
                 {...this.props}
-                tokens = { outerStackTokens }
-                horizontal = { true }
-                horizontalAlign = { 'start' }
-                verticalAlign = { 'center' }
-                wrap = { false }
-                styles = {outerStackStyles }
-                padding = { internalPadding + 'px' }>
-
-                    <StackItem>
-                        <Stack                              //Left side vertical text stack              
-                            tokens = { textStackTokens }
-                            horizontal = { false }
-                            horizontalAlign = { 'start' }
-                            verticalAlign = { 'center' }
-                            wrap = { false }
-                            styles = { textStackStyles }>
-                                <StackItem>
-                                    { line1 }
-                                </StackItem>
-                                <StackItem>
-                                    { line2 }
-                                </StackItem>
-                                <StackItem>
-                                    { line3 }
-                                </StackItem>
-                        </Stack>
-                    </StackItem>
-
-                { spanner }
-
-                { divider }
+                tokens={outerStackTokens}
+                horizontal={true}
+                horizontalAlign={'start'}
+                verticalAlign={'center'}
+                wrap={false}
+                styles={outerStackStyles}
+                padding={internalPadding + 'px'}>
 
                 <StackItem>
-                    <Image 
+                    <Stack                              //Left side vertical text stack              
+                        tokens={textStackTokens}
+                        horizontal={false}
+                        horizontalAlign={'start'}
+                        verticalAlign={'center'}
+                        wrap={false}
+                        styles={textStackStyles}>
+                        <StackItem>
+                            {line1}
+                        </StackItem>
+                        <StackItem>
+                            {line2}
+                        </StackItem>
+                        <StackItem>
+                            {line3}
+                        </StackItem>
+                    </Stack>
+                </StackItem>
+
+                {spanner}
+
+                {divider}
+
+                <StackItem>
+                    <Image
                         {...logoProps}
                     />
                 </StackItem>
 
                 <StackItem>
                     <Stack                                  //Right side Company Info Stack
-                        tokens = { companyInfoStackTokens }
-                        horizontal = { false }
-                        horizontalAlign = { 'start' }
-                        verticalAlign = { 'center' }
-                        wrap = { false }
-                        styles = { corpInfoStackStyles }>
-                           
-                            <StackItem>
-                                <div>{ linkList }</div>
-                            </StackItem>
+                        tokens={companyInfoStackTokens}
+                        horizontal={false}
+                        horizontalAlign={'start'}
+                        verticalAlign={'center'}
+                        wrap={false}
+                        styles={corpInfoStackStyles}>
 
-                            <StackItem>
-                                { copyrightElem }
-                            </StackItem>
-                        
-                            <StackItem>
-                                { confidentialityElem }
-                            </StackItem>                        
+                        <StackItem>
+                            <div>{linkList}</div>
+                        </StackItem>
+
+                        <StackItem>
+                            {copyrightElem}
+                        </StackItem>
+
+                        <StackItem>
+                            {confidentialityElem}
+                        </StackItem>
                     </Stack>
                 </StackItem>
-                
+
             </Stack>
 
 
@@ -544,7 +560,7 @@ PPPageFooter.propTypes = {
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Padding within the control. Value must be 0 or more. 
      * @uxpinpropname Padding
-     */ 
+     */
     internalPadding: PropTypes.number,
 
     /**
