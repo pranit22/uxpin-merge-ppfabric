@@ -6,14 +6,14 @@ import {
 import { getTokens, csv2arr } from '../_helpers/parser';
 
 
-  /** 
-   * UPDATED April 23, 2020 by Anthony Hand
-   * - Added file to our TPX UX Experimental library on UXPin.
-   * 
-   * TODOs
-   * - Control needs to be updated with the proper PayPal UI theme. 
-   * 
-   */
+/** 
+ * UPDATED April 23, 2020 by Anthony Hand
+ * - Added file to our TPX UX Experimental library on UXPin.
+ * 
+ * TODOs
+ * - Control needs to be updated with the proper PayPal UI theme. 
+ * 
+ */
 
 
 //Strings to display in the Suggestions UX
@@ -46,7 +46,7 @@ Rose
 Taupe
 Violet
 White
-Yellow`; 
+Yellow`;
 
 
 class TagPicker extends React.Component {
@@ -69,18 +69,17 @@ class TagPicker extends React.Component {
         }
     }
 
-    componentDidMount() {
-
+    set() {
         //We'll set this list as the default suggestion list. 
-        var suggestions =   csv2arr(this.props.items)
-                                .flat()
-                                .map((val, index) => ({
-                                    name: getTokens(val).text,
-                                    key: index + 1,
-                            }));
+        var suggestions = csv2arr(this.props.items)
+            .flat()
+            .map((val, index) => ({
+                name: getTokens(val).text,
+                key: index + 1,
+            }));
 
         //We keep this duplicate to track selected tag indexes
-        let items = [ ...suggestions ];
+        let items = [...suggestions];
 
         //Finally, let's figure out whether to pre-populate any suggested items. 
         var prepopulatedList = [];
@@ -101,11 +100,25 @@ class TagPicker extends React.Component {
         }
 
         this.setState(
-            {   selectedItems: selectedItems,
+            {
+                selectedItems: selectedItems,
                 suggestionList: suggestions,
                 allTags: items
-             }
+            }
         )
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.items !== this.props.items ||
+            prevProps.selectedIndexes !== this.props.selectedIndexes
+        ) {
+            this.set();
+        }
     }
 
     /**
@@ -150,7 +163,7 @@ class TagPicker extends React.Component {
      * @returns {string} Returns the text to display in the UI.
      */
     _getTextFromItem(item) {
-        if (!item || !item.name) 
+        if (!item || !item.name)
             return "";
 
         //Let's send back the text
@@ -187,10 +200,10 @@ class TagPicker extends React.Component {
     filterItemsByText(filterText) {
         let fText = filterText.toLowerCase();
         let filteredList = this.state.suggestionList.filter(
-                                function (item) {
-                                    let name = item.name.toLowerCase();
-                                    return name.includes(fText);
-                                });
+            function (item) {
+                let name = item.name.toLowerCase();
+                return name.includes(fText);
+            });
 
         return filteredList;
     }
@@ -217,8 +230,8 @@ class TagPicker extends React.Component {
         if (!itemList || !itemList.length || itemList.length === 0)
             return false;
 
-        if (!tag || !tag.name || tag.name.trim() === '') 
-            return false; 
+        if (!tag || !tag.name || tag.name.trim() === '')
+            return false;
 
         return itemList.filter(item => item.name === tag.name).length > 0;
     }
@@ -236,7 +249,7 @@ class TagPicker extends React.Component {
         var i;
         for (i = 0; i < tags.length; i++) {
             let t = tags[i];
-            if (tagText == t.name) 
+            if (tagText == t.name)
                 return i;
         }
 
@@ -265,7 +278,7 @@ class TagPicker extends React.Component {
             }
 
             //Sort numerically
-            indexList.sort(function(a, b) {
+            indexList.sort(function (a, b) {
                 return a - b;
             });
 
@@ -273,7 +286,7 @@ class TagPicker extends React.Component {
         }
 
         //Let's replace the old list in memory
-        this.setState (
+        this.setState(
             { selectedItems: items }
         )
     }
@@ -285,18 +298,18 @@ class TagPicker extends React.Component {
 
             <FTagPicker
                 {...this.props}
-                pickerSuggestionsProps = { suggestionProps }
-                disabled = { this.props.disabled }
+                pickerSuggestionsProps={suggestionProps}
+                disabled={this.props.disabled}
 
-                selectedItems = { this.state.selectedItems }
+                selectedItems={this.state.selectedItems}
 
-                getTextFromItem = {(i) => this._getTextFromItem(i)}
-                onResolveSuggestions = {(f, s) => this._onFilterChanged(f, s)}
-                onChange = {(items) => this._onItemsChanged(items)}
-            />    
+                getTextFromItem={(i) => this._getTextFromItem(i)}
+                onResolveSuggestions={(f, s) => this._onFilterChanged(f, s)}
+                onChange={(items) => this._onItemsChanged(items)}
+            />
         );
     }
-}    
+}
 
 
 
@@ -314,19 +327,19 @@ TagPicker.propTypes = {
     /**
      * @uxpindescription Of the 10 total Personas available, enter a list of 1-based index values for default items to be shown as selected (Optional)
      * @uxpinpropname Selected Indexes
-     * */  
+     * */
     selectedIndexes: PropTypes.string,
 
     /**
      * @uxpindescription To disable the control
-     * */  
+     * */
     disabled: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when the user selects or removes a person.
      * @uxpinpropname Change
      * */
-    onSelectionChanged: PropTypes.func 
+    onSelectionChanged: PropTypes.func
 
 }
 

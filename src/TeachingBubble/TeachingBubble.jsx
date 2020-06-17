@@ -29,10 +29,6 @@ class TeachingBubble extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            open: false
-        }
-
         this._targetElm = React.createRef();
     }
 

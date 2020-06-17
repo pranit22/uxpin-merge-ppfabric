@@ -43,15 +43,23 @@ export const getTokens = inputStr => {
   let reg = new RegExp(/(\s|)(icon|link)\((.*?)\)(\s|)/gi)
   let ts = str.match(reg)
 
-  if (!ts) return { text: str } // if no tokens detected, return just string
+  if (!ts) return {
+     text: str,
+     tokens: [],
+     mixed: [str],
+     incoming: inputStr
+    }
 
   const getType = t => t.slice(0, t.indexOf('('))
+
   const getTarget = t => t.match(/(?<=\().*?(?=(\)|\|))/g)[0]
+  
   const getMutators = t => {
     let mutators = t.match(/(?<=\|).*?(?=\))/g)
     if (mutators && mutators.length > 0) mutators = mutators[0].split(',').map(v => v.trim())
     return mutators
   }
+
   const getPosition = t => {
     let position = {}
     const [start, end] = [str.indexOf(t), str.indexOf(t) + t.length]
@@ -86,6 +94,7 @@ export const getTokens = inputStr => {
       iconProps={{ iconName: token.target }} />)
     return suggestions
   }
+
   const makeToken = t => {
     let token = {
       tokenString: t,
@@ -97,6 +106,7 @@ export const getTokens = inputStr => {
     token.suggestions = getSuggestions(token)
     return token
   }
+
   let tokens = ts.map(t => makeToken(t))
   let mixed = str.split(/\s(?![^\(]*\))/g).map(el => {
     let token = el.match(reg)

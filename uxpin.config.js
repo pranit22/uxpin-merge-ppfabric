@@ -2,18 +2,30 @@ module.exports = {
   components: {
     categories: [
       {
-        name: 'PayPal',
+        name: 'Page',
         include: [
+          'src/PPPageTemplate/PPPageTemplate.jsx',
+          'src/PPPageContainer/PPPageContainer.jsx',
           'src/PPHeader/PPHeader.jsx',
-          'src/PPProfileCard/PPProfileCard.jsx',
-          'src/PPMetaDataGroup/PPMetaDataGroup.jsx',
-          'src/PPMetaDataPair/PPMetaDataPair.jsx',
-          'src/PPHorizontalStack/PPHorizontalStack.jsx',
-          'src/PPVerticalStack/PPVerticalStack.jsx',
+          'src/PPPage/PPPage.jsx',
+          'src/PPPageBody/PPPageBody.jsx',
           'src/PPPageHeader/PPPageHeader.jsx',
           'src/PPPageFooter/PPPageFooter.jsx',
+        ]
+      },
+      {
+        name: 'Containers',
+        include: [
+          'src/PPHorizontalStack/PPHorizontalStack.jsx',
+          'src/PPVerticalStack/PPVerticalStack.jsx',
           'src/PPShape/PPShape.jsx',
-          'src/PPFavoritesButton/PPFavoritesButton.jsx',
+          'src/PPMetaDataGroup/PPMetaDataGroup.jsx',
+          'src/PPMetaDataPair/PPMetaDataPair.jsx',
+        ]
+      },
+      {
+        name: 'Card',
+        include: [
           'src/PPCard/PPCard.jsx',
           'src/PPCardFooter/PPCardFooter.jsx',
           'src/PPCardTextHeader/PPCardTextHeader.jsx',
@@ -22,23 +34,29 @@ module.exports = {
       {
         name: 'Basic Input',
         include: [
-          'src/ActionButton/ActionButton.jsx',
-          'src/Button/Button.jsx',          
           'src/Checkbox/Checkbox.jsx',
           'src/ChoiceGroup/ChoiceGroup.jsx',
           'src/ComboBox/ComboBox.jsx',
-          'src/CommandButton/CommandButton.jsx',
-          'src/CompoundButton/CompoundButton.jsx',
           'src/Dropdown/Dropdown.jsx',
-          'src/IconButton/IconButton.jsx', 
           'src/Link/Link.jsx',
           'src/Rating/Rating.jsx',
           'src/SearchBox/SearchBox.jsx',
           'src/Slider/Slider.jsx',
-          'src/SpinButton/SpinButton.jsx',
-          'src/SplitButton/SplitButton.jsx',
           'src/TextField/TextField.jsx',
           'src/Toggle/Toggle.jsx',
+        ]
+      },
+      {
+        name: 'Buttons',
+        include: [
+          'src/ActionButton/ActionButton.jsx',
+          'src/Button/Button.jsx',
+          'src/CommandButton/CommandButton.jsx',
+          'src/CompoundButton/CompoundButton.jsx',
+          'src/IconButton/IconButton.jsx',
+          'src/PPFavoritesButton/PPFavoritesButton.jsx',
+          'src/SpinButton/SpinButton.jsx',
+          'src/SplitButton/SplitButton.jsx',
         ]
       },
       {
@@ -90,17 +108,20 @@ module.exports = {
         include: [
           'src/Dialog/Dialog.jsx',
           'src/Tooltip/Tooltip.jsx',
+          'src/Panel/Panel.jsx',
+          'src/PPProfileCard/PPProfileCard.jsx',
         ]
       },
       {
         name: 'Utilities',
         include: [
+          'src/PPChart/PPChart.jsx',
           'src/Icon/Icon.jsx',
           'src/Separator/Separator.jsx',
           'src/Text/Text.jsx',
           'src/Image/Image.jsx',
         ]
-      },
+      }
     ]
   },
   name: 'MS Fabric UXPin Merge'
