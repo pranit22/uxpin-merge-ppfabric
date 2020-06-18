@@ -17,7 +17,11 @@ import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
  * 
  * */
 
-
+const alignToJustifyContentMap = {
+    left: 'flex-start',
+    center: 'center',
+    right: 'flex-end'
+};
 
 class TagItem extends React.Component {
     constructor(props) {
@@ -80,7 +84,7 @@ class TagItem extends React.Component {
     componentDidUpdate(prevProps) {
         if (
             prevProps.role !== this.props.role
-            || prevProps.disabled !== this.props.disabled 
+            || prevProps.disabled !== this.props.disabled
         ) {
             this.set();
         }
@@ -105,6 +109,7 @@ class TagItem extends React.Component {
 
         let styles = {
             root: {
+                justifyContent: alignToJustifyContentMap[this.props.align],
                 alignSelf: "center",
                 borderRadius: 25,
                 color: textColor,
@@ -174,6 +179,11 @@ TagItem.propTypes = {
     text: PropTypes.string,
 
     /**
+     * @uxpindescription Text alignment
+     */
+    align: PropTypes.oneOf(['left', 'center', 'right']),
+
+    /**
      * @uxpindescription Reflect the control's role in the UI with its visual style
      */
     role: PropTypes.oneOf(['Default', 'Info', 'Success', 'Warning', 'Error']),
@@ -208,6 +218,7 @@ TagItem.propTypes = {
  */
 TagItem.defaultProps = {
     text: "Tag Item",
+    align: 'left',
     role: 'Default',
     showClose: true,
     hoverEffect: true,
