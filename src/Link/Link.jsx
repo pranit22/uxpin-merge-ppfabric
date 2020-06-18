@@ -113,7 +113,8 @@ class Link extends React.Component {
                 fontWeight: this.props.bold ? 'bold' : 'normal',
                 fontStyle: this.props.italic ? 'italic' : 'normal',
                 display: 'block',         //Required - prevents a bug
-                lineHeight: 'normal',     //Required - prevents a bug
+                lineHeight: 'normal',     //Required - prevents a bug,
+                textAlign: this.props.align
             }
         }
 
@@ -196,6 +197,11 @@ Link.propTypes = {
     italic: PropTypes.bool,
 
     /**
+     * @uxpindescription Text alignment
+     */
+    align: PropTypes.oneOf(['left', 'center', 'right']),
+
+    /**
      * @uxpindescription To disable the control
      * */
     disabled: PropTypes.bool,
@@ -222,9 +228,10 @@ Link.defaultProps = {
     linkHref: 'https://www.paypal.com',
     linkType: 'primary',
     disabled: false,
-    size: 'large',
+    size: 'medium',
     bold: false,
     italic: false,
+    align: 'left'
 }
 
 

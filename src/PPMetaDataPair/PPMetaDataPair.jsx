@@ -140,7 +140,8 @@ class PPMetaDataPair extends React.Component {
                 fontWeight: this.props.bold ? 'bold' : 'normal',
                 fontStyle: this.props.italic ? 'italic' : 'normal',
                 display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
-                lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
+                lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes,
+                textAlign: this.props.align
             }
         }
 
@@ -283,6 +284,12 @@ PPMetaDataPair.propTypes = {
     italic: PropTypes.bool,
 
     /**
+     * @uxpindescription Text alignment
+     * @uxpinpropname Left Align
+     */
+    align: PropTypes.oneOf(['left', 'center', 'right']),
+
+    /**
      * @uxpindescription Specify a text color with a Hex or PayPal UI color token, such as '#ffffff' or 'blue-700'
      * @uxpinpropname Left Color
      */
@@ -330,6 +337,7 @@ PPMetaDataPair.defaultProps = {
     size: 'medium',
     bold: false,
     italic: false,
+    align: 'left',
     color: 'grey-700',
     leftWidth: defaultLeftWidth,
     gutterPadding: defaultGutter,
