@@ -49,7 +49,7 @@ class ComboBox extends React.Component {
         //TODO: Populate these values with props when feature is exposed.
         this.state = {
             //default must be undefined
-            _index: null,
+            _selectedIndex: null,
 
             //default must be an empty array
             _selectedIndices: [],
@@ -66,6 +66,7 @@ class ComboBox extends React.Component {
     componentDidUpdate(prevProps) {
         if (
             prevProps.items !== this.props.items
+            || prevProps.selected !== this.props.selected
         ) {
             this.set();
         }
@@ -73,7 +74,6 @@ class ComboBox extends React.Component {
 
     //Parse the choice items
     set() {
-
         if (!this.props.items)
             return;
 
@@ -85,8 +85,16 @@ class ComboBox extends React.Component {
                 disabled: false,
             }));
 
+        const selected = csv2arr(this.props.selected)
+            .flat()
+            .map(
+                i => parseInt(i.trim()) - 1
+            );
+        
         this.setState({
-            items: items
+            items: items,
+            _selectedIndex: selected[0],
+            _selectedIndices: selected
         });
     }
 
@@ -115,7 +123,7 @@ class ComboBox extends React.Component {
 
         //We MUST  set the state with the updated index value. This will also force the control to update in UXPin at runtime.
         this.setState(
-            { _index: index }
+            { _selectedIndex: index }
         )
 
         //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
@@ -177,7 +185,7 @@ class ComboBox extends React.Component {
             keys = this.state._selectedIndices;
         }
         else {
-            keys = this.state._index;
+            keys = this.state._selectedIndex;
         }
 
         //Convert the autocomplete boolean to one of Microsoft's preferred strings. 
@@ -222,11 +230,10 @@ ComboBox.propTypes = {
     placeholder: PropTypes.string,
 
     /**
-     * Microsoft uses the values: "on", "off" 
-     * @uxpindescription Whether the ComboBox auto completes. As the user is inputing text, it will be suggested potential matches from the list of options. 
-     * @uxpinpropname Auto-Complete
+     * @uxpindescription The list of available options. Put each item on a separate line. Put quotes around an item to use a comma in it. 
+     * @uxpincontroltype codeeditor
      */
-    autoComplete: PropTypes.bool,
+    items: PropTypes.string,
 
     /**
      * @uxpindescription To allow multiple selections
@@ -235,10 +242,17 @@ ComboBox.propTypes = {
     multiSelect: PropTypes.bool,
 
     /**
-     * @uxpindescription To disable the control
-     * @uxpinpropname Disabled
+     * @uxpindescription The selected indexes, separated with commas (1-based index). In case of Single Select mode, the first number will be used if multiple values are provided.
+     * @uxpinpropname Selected Indexes
      * */
-    disabled: PropTypes.bool,
+    selected: PropTypes.string,
+
+    /**
+     * Microsoft uses the values: "on", "off" 
+     * @uxpindescription Whether the ComboBox auto completes. As the user is inputing text, it will be suggested potential matches from the list of options. 
+     * @uxpinpropname Auto-Complete
+     */
+    autoComplete: PropTypes.bool,
 
     /**
      * @uxpindescription An error message to display below the control. Setting this value also displays the control in an error state.
@@ -247,10 +261,10 @@ ComboBox.propTypes = {
     errorMessage: PropTypes.string,
 
     /**
-     * @uxpindescription The list of available options. Put each item on a separate line. Put quotes around an item to use a comma in it. 
-     * @uxpincontroltype codeeditor
-     */
-    items: PropTypes.string,
+     * @uxpindescription To disable the control
+     * @uxpinpropname Disabled
+     * */
+    disabled: PropTypes.bool,
 
     /** Coma separated values to preselect */
     //defaultSelectedKey: PropTypes.string,
@@ -272,7 +286,8 @@ ComboBox.defaultProps = {
     disabled: false,
     multiSelect: false,
     autoComplete: "off",
-    items: defaultItems
+    items: defaultItems,
+    selected: ""
 };
 
 
