@@ -71,7 +71,7 @@ class ActivityItem extends React.Component {
                 //TODO: Add a click event handler here...
                 return el.suggestions[0]();
             }
-            else if(el.suggestions[0]) {
+            else if (el.suggestions[0]) {
                 // if there's a suggestion, call the function
                 return el.suggestions[0]();
             } else {
@@ -108,6 +108,11 @@ class ActivityItem extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 ActivityItem.propTypes = {
+    /**
+     * @uxpindescription The exact name from the PayPal icon library. Displays on the right side. (Optional)
+     * @uxpinpropname Icon Name
+     */
+    icon: PropTypes.string,
 
     /**
      * @uxpindescription The top line of text summarizing what the activity was. Supports the link(Click Me) feature. 
@@ -130,12 +135,6 @@ ActivityItem.propTypes = {
      * @uxpinpropname Timestamp
      */
     timeStamp: PropTypes.string,
-
-    /**
-     * @uxpindescription The exact name from the PayPal icon library. Displays on the right side. (Optional)
-     * @uxpinpropname Icon Name
-     */
-    icon: PropTypes.string,
 
     /** 
     * @uxpindescription Whether to display the control in Compact mode. 
