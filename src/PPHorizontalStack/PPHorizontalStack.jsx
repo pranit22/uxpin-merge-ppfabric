@@ -7,7 +7,6 @@ import {
 import * as PropTypes from 'prop-types';
 import { TpxUxNumberParser } from '../_helpers/tpxuxnumberutils.jsx';
 import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
-import { Styles } from 'react-jss';
 
 
 /** 
@@ -254,7 +253,6 @@ class PPHorizontalStack extends React.Component {
                 padding={internalPadding + 'px'}
                 horizontal={true}
                 horizontalAlign={hAlign}
-                wrap={false}
                 styles={topStackItemStyles}
             >
 
@@ -348,6 +346,12 @@ PPHorizontalStack.propTypes = {
     spannerIndex: PropTypes.number,
 
     /**
+     * @uxpindescription To wrap the contents that overflow the stack 
+     * @uxpinpropname Wrap
+     */
+    wrap: PropTypes.bool,
+
+    /**
      * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
      * @uxpinpropname Bg Color
      * */
@@ -379,6 +383,7 @@ PPHorizontalStack.defaultProps = {
     addSpanner: false,
     spannerIndex: 1,
     bgColor: '',
+    wrap: false
 }
 
 
