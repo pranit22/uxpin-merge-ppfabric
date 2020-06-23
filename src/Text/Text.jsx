@@ -57,7 +57,8 @@ class Text extends React.Component {
         fontWeight: this.props.bold ? 'bold' : 'normal',
         fontStyle: this.props.italic ? 'italic' : 'normal',
         display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
-        lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
+        lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes,
+        textAlign: this.props.align
       }
     }
     
@@ -115,6 +116,11 @@ Text.propTypes = {
   italic: PropTypes.bool,
 
   /**
+   * @uxpindescription Text alignment
+   */
+  align: PropTypes.oneOf(['left', 'center', 'right']),
+
+  /**
    * @uxpindescription To restrict the Text to a single line, truncating any extra with ellipses. If unchecked, you can manually set the width and height. 
    * @uxpinpropname Truncate Text
    */
@@ -135,8 +141,10 @@ Text.defaultProps = {
   size: 'medium',
   bold: false,
   italic: false,
+  align: 'left',
   truncate: false,
-  color: 'grey-700'
+  color: 'grey-700',
+
 };
 
 

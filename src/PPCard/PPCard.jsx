@@ -134,6 +134,7 @@ class PPCard extends React.Component {
             borderRadius: borderRadius,
             boxShadow: this.props.showShadow ? cardShadow : '',
             padding: cardPad + 'px',
+            margin: this.props.margin
         };
 
         //With one number, the padding applies to both rows and columns.  
@@ -266,6 +267,12 @@ PPCard.propTypes = {
     showInstructions: PropTypes.bool,
 
     /**
+     * @uxpindescription The margin around the card. Value must be 0 or more.  
+     * @uxpinpropname Margin
+     */
+    margin: PropTypes.number,
+
+    /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Inner padding for all card contents. Value must be 0 or more.  
      * @uxpinpropname Card Padding
@@ -317,6 +324,7 @@ PPCard.propTypes = {
 PPCard.defaultProps = {
     value: instructionText,
     showInstructions: true,
+    margin: 6,
     cardPadding: 12,
     gutterPadding: 12,
     align: leftAlign,

@@ -187,6 +187,7 @@ TeachingBubble.propTypes = {
 
     /**    
     * @uxpindescription Footer text to display in the bottom left corner. 
+    * @uxpinpropname Footer Text
     */
     footerText: PropTypes.string,
 
@@ -222,7 +223,7 @@ TeachingBubble.propTypes = {
 
     /**
      * @uxpindescription The control's display direction
-     * @uxpinpropname Hint Direction
+     * @uxpinpropname Direction
      */
     direction: PropTypes.oneOf([
         "topLeftEdge",
@@ -242,12 +243,6 @@ TeachingBubble.propTypes = {
     ]),
 
     /**
-     * @uxpindescription Fires when the Close button is clicked
-     * @uxpinpropname Close Button Click
-     */
-    dismiss: PropTypes.func,
-
-    /**
      * @uxpindescription Whether to show the light blue target marker on the canvas 
      * @uxpinpropname Show Marker
      */
@@ -264,6 +259,12 @@ TeachingBubble.propTypes = {
      * @uxpinpropname Secondary Button Click
      */
     secondaryButtonClick: PropTypes.func,
+
+    /**
+     * @uxpindescription Fires when the Close button is clicked
+     * @uxpinpropname Close Button Click
+     */
+    dismiss: PropTypes.func,
 };
 
 
