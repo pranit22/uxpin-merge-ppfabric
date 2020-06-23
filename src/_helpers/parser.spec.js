@@ -63,16 +63,16 @@ it('getTokens - ex1: mixed values are correct', () => {
 const string2 = 'abc def this text has no tokens '
 const ex2 = getTokens(string2)
 it('getTokens - ex2: should only have trimmed text', () => {
-  expect(ex2.tokens).toBeUndefined()
-  expect(ex2.mixed).toBeUndefined()
+  expect(ex2.tokens).toEqual([])
+  expect(ex2.mixed).toEqual([string2.trim()])
   expect(ex2.text).toEqual(string2.trim())
 })
 
 const string3 = 'One,Two,Three'
 const ex3 = getTokens(string3)
 it('getTokens - ex3: should only have trimmed text', () => {
-  expect(ex3.tokens).toBeUndefined()
-  expect(ex3.mixed).toBeUndefined()
+  expect(ex3.tokens).toEqual([])
+  expect(ex3.mixed).toEqual([string3.trim()])
   expect(ex3.text).toEqual(string3.trim())
 })
 
