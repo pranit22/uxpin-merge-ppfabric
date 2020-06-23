@@ -32,8 +32,7 @@ const bottomAlign = 'bottom';
 const instructionText = `Horizontal Stack Instructions: 
 1) Determine number of columns. 
 2) Drag in any Merge controls onto the canvas, incl PP Stacks and Groups. 
-3) In the Layers Panel, drag and drop them onto this control. 
-4) Uncheck the "Show Instructions" box.`;
+3) In the Layers Panel, drag and drop them onto this control.`;
 
 //This is displayed in the codeeditor. It must retain the line break.
 const defaultWidths = `50%
@@ -141,30 +140,25 @@ class PPHorizontalStack extends React.Component {
     render() {
 
         //****************************
-        //For Text control: Instructions
-        //Let's see if we need to show instructions
-        var instructionStack = '';
-        if (this.props.showInstructions) {
-
-            let fTextStyles = {
-                root: {
-                    color: defaultTextColor,
-                    fontWeight: 'normal',
-                    fontStyle: 'normal',
-                    display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
-                    lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
-                }
+        // Instructions
+        let fTextStyles = {
+            root: {
+                color: defaultTextColor,
+                fontWeight: 'normal',
+                fontStyle: 'normal',
+                display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
+                lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
             }
-
-            instructionStack = (
-                <Text
-                    {...this.props}
-                    styles={fTextStyles}
-                    variant={'medium'}>
-                    {this.props.value}
-                </Text>
-            );
         }
+
+        let instructions = (
+            <Text
+                {...this.props}
+                styles={fTextStyles}
+                variant={'medium'}>
+                {this.props.value}
+            </Text>
+        );
 
         //****************************
         //For Outer Stack
@@ -256,8 +250,7 @@ class PPHorizontalStack extends React.Component {
                 styles={topStackItemStyles}
             >
 
-                {instructionStack}
-
+                {_.isEmpty(this.props.children) && instructions}
                 {stackList}
 
             </Stack>
@@ -287,12 +280,6 @@ PPHorizontalStack.propTypes = {
      * @uxpincontroltype textfield(6)
      */
     value: PropTypes.string,
-
-    /**
-     * @uxpindescription To show or hide the instructional text  
-     * @uxpinpropname Show Instructions
-     */
-    showInstructions: PropTypes.bool,
 
     /**
      * @uxpindescription The list of widths. Put one width amount on each row. Enter a percent like '33%' or a whole number, like '212'. Be sure that the full width is accounted for! (In percent or pixels)
@@ -372,7 +359,6 @@ PPHorizontalStack.propTypes = {
  */
 PPHorizontalStack.defaultProps = {
     value: instructionText,
-    showInstructions: true,
     widths: defaultWidths,
     internalPadding: 0,
     gutterPadding: 12,

@@ -41,8 +41,7 @@ const defaultShimmerDuration = 1;
 
 const instructionText = `Card Instructions: 
 1) Drag any Merge controls in for the Header, Body and Footer sections, as needed. 
-2) In the Layers Panel, drag and drop each control onto this Card. 
-3) Uncheck the "Show Instructions" box.`;
+2) In the Layers Panel, drag and drop each control onto this Card.`;
 
 
 
@@ -104,8 +103,26 @@ class PPCard extends React.Component {
 
     render() {
 
-        //An empty string will cause the Text control to hide.
-        let instructions = this.props.showInstructions ? this.props.value : '';
+        //****************************
+        // Instructions
+        let fTextStyles = {
+            root: {
+                color: defaultTextColor,
+                fontWeight: 'normal',
+                fontStyle: 'normal',
+                display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
+                lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
+            }
+        }
+
+        let instructions = (
+            <Text
+                {...this.props}
+                styles={fTextStyles}
+                variant={'medium'}>
+                {this.props.value}
+            </Text>
+        );
 
         let hAlign = this._getHorizontalAlignmentToken();
 
@@ -145,19 +162,6 @@ class PPCard extends React.Component {
             childrenGap: pad,
             padding: 0,
         };
-
-        //****************************
-        //For Text control: Instructions
-        let fTextStyles = {
-            root: {
-                color: defaultTextColor,
-                fontWeight: 'normal',
-                fontStyle: 'normal',
-                display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
-                lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
-            }
-        }
-
 
         //****************************
         //For Inner Stack
@@ -219,16 +223,8 @@ class PPCard extends React.Component {
                         verticalAlign={verticalAlign}
                         wrap={false}
                         styles={topStackItemStyles}>
-                        <React.Fragment>
-                            <Text
-                                {...this.props}
-                                styles={fTextStyles}
-                                variant={'medium'}>
-                                {instructions}
-                            </Text>
-
-                            {stackList}
-                        </React.Fragment>
+                        {_.isEmpty(this.props.children) && instructions}
+                        {stackList}
                     </Stack>
                 )}
             </div>
@@ -259,12 +255,6 @@ PPCard.propTypes = {
      * @uxpincontroltype textfield(6)
      */
     value: PropTypes.string,
-
-    /**
-     * @uxpindescription To show or hide the instructional text  
-     * @uxpinpropname Show Instructions
-     */
-    showInstructions: PropTypes.bool,
 
     /**
      * @uxpindescription The margin around the card. Value must be 0 or more.  
@@ -323,7 +313,6 @@ PPCard.propTypes = {
  */
 PPCard.defaultProps = {
     value: instructionText,
-    showInstructions: true,
     margin: 6,
     cardPadding: 12,
     gutterPadding: 12,
