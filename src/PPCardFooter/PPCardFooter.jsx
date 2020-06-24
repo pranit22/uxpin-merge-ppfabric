@@ -182,7 +182,6 @@ class PPCardFooter extends React.Component {
         return (
 
             <Stack
-                {...this.props}
                 tokens={stackTokens}
                 horizontal={true}
                 horizontalAlign={'start'}

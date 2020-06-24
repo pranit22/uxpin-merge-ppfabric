@@ -181,7 +181,9 @@ class PPCard extends React.Component {
                         child.cardTheme = this.props.cardTheme;
                         let stack = (
                             <StackItem
-                                align={'stretch'}   >
+                                align={'stretch'}
+                                key={i}
+                            >
                                 {child}
                             </StackItem>
                         );
@@ -194,7 +196,6 @@ class PPCard extends React.Component {
 
         return (
             <div
-                {...this.props}
                 style={divStyles}
                 onMouseEnter={() => this._setHover(true)}
                 onMouseLeave={() => this._setHover(false)} >
@@ -216,13 +217,13 @@ class PPCard extends React.Component {
                 )}
                 {!this.state.shimmer && (
                     <Stack
-                        {...this.props}
                         tokens={stackTokens}
                         horizontal={false}
                         horizontalAlign={hAlign}
                         verticalAlign={verticalAlign}
                         wrap={false}
-                        styles={topStackItemStyles}>
+                        styles={topStackItemStyles}
+                    >
                         {_.isEmpty(this.props.children) && instructions}
                         {stackList}
                     </Stack>
@@ -246,15 +247,6 @@ PPCard.propTypes = {
      * @uxpinpropname Right Contents
      */
     children: PropTypes.node,
-
-    /**
-     * Don't show this prop in the UXPin Editor. 
-     * @uxpinignoreprop 
-     * @uxpindescription Click 'Hide Instructions' to hide this text.
-     * @uxpinpropname Instructions
-     * @uxpincontroltype textfield(6)
-     */
-    value: PropTypes.string,
 
     /**
      * @uxpindescription The margin around the card. Value must be 0 or more.  
