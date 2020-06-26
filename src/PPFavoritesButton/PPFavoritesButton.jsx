@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ActionButton } from 'office-ui-fabric-react';
+import { ActionButton, TooltipHost } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 
 
@@ -93,16 +93,22 @@ class PPFavoritesButton extends React.Component {
             }
         }
 
+        const tooltipId = _.uniqueId('tooltip_');
+
         return (
-
-            <ActionButton
-                {...this.props}
-                text={text}
-                iconProps={iconProps}
-                styles={styles}
-                onClick={() => { this._onClick() }}
-            />
-
+            <TooltipHost
+                content={this.state.isFavorited ? this.props.favoritedTooltip : this.props.unfavoritedTooltip}
+                id={tooltipId}
+            >
+                <ActionButton
+                    {...this.props}
+                    text={text}
+                    iconProps={iconProps}
+                    styles={styles}
+                    onClick={() => { this._onClick() }}
+                    aria-describedby={tooltipId}
+                />
+            </TooltipHost >
         );
     }
 
@@ -133,6 +139,12 @@ PPFavoritesButton.propTypes = {
     iconName: PropTypes.string,
 
     /**
+     * @uxpindescription Tooltip for the control
+     * @uxpinpropname Tooltip
+     * */
+    unfavoritedTooltip: PropTypes.string,
+
+    /**
      * @uxpindescription Favorited State: The text to display on the button
      * @uxpinpropname Fave Text
      * */
@@ -143,6 +155,12 @@ PPFavoritesButton.propTypes = {
      * @uxpinpropname Fave Icon Name
      * */
     favoritedIconName: PropTypes.string,
+
+    /**
+     * @uxpindescription Tooltip for the control
+     * @uxpinpropname Fav Tooltip
+     * */
+    favoritedTooltip: PropTypes.string,
 
     /**
      * @uxpindescription To disable the control
@@ -169,6 +187,8 @@ PPFavoritesButton.defaultProps = {
     favoritedText: defaultFavoritedText,
     favoritedIconName: defaultFavoritedIcon,
     disabled: false,
+    favoritedTooltip: '',
+    unfavoritedTooltip: ''
 };
 
 export { PPFavoritesButton as default };

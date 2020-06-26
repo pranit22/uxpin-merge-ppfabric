@@ -12,6 +12,7 @@ export default (
             uxpId='nav1'
             styledBackground={true}
             controlWidth={232}
+            controlHeight={700}
         />
         <PPPage uxpId="pppage1">
             <PPPageHeader uxpId='pppageheader1' />

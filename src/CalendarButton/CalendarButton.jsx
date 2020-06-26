@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Callout, 
+import {
+    Callout,
     FocusTrapZone,
     Calendar,
     CommandButton,
@@ -8,7 +9,8 @@ import {Callout,
     DirectionalHint,
     DateRangeType,
     DayOfWeek,
-    } from 'office-ui-fabric-react';
+    TooltipHost
+} from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import { TpxUxDateTimeUtils } from '../_helpers/tpxuxdatetimeutils.jsx';
 
@@ -25,7 +27,7 @@ import { TpxUxDateTimeUtils } from '../_helpers/tpxuxdatetimeutils.jsx';
 
 
 
-const dayPickerStrings =  {
+const dayPickerStrings = {
     months: TpxUxDateTimeUtils.months,
     shortMonths: TpxUxDateTimeUtils.monthsShort,
     days: TpxUxDateTimeUtils.days,
@@ -45,15 +47,15 @@ const workWeekDays = [
 
 class CalendarButton extends React.Component {
     constructor(props) {
-      super(props);
+        super(props);
 
-      this.state = {
-        selectedDate: null, //null or a Date
-        showCalendar: false,
-        userSelected: false //Whether the end user has explicitly chosen a date
-      }
+        this.state = {
+            selectedDate: null, //null or a Date
+            showCalendar: false,
+            userSelected: false //Whether the end user has explicitly chosen a date
+        }
 
-      this._calendarButtonElement = React.createRef();
+        this._calendarButtonElement = React.createRef();
     }
 
     componentDidMount() {
@@ -68,14 +70,14 @@ class CalendarButton extends React.Component {
             //If it's undefined, then let's just return right now.
             dt = new Date();
         }
-        
-        this.setState (
+
+        this.setState(
             { selectedDate: dt }
         )
     }
 
     _onButtonClick() {
-        this.setState (
+        this.setState(
             { showCalendar: true }
         )
 
@@ -85,8 +87,9 @@ class CalendarButton extends React.Component {
     }
 
     _onSelectDate(date) {
-        this.setState (  
-            {   selectedDate: date,
+        this.setState(
+            {
+                selectedDate: date,
                 showCalendar: false,
                 userSelected: true
             }
@@ -100,8 +103,8 @@ class CalendarButton extends React.Component {
     }
 
     _onDismissCallout() {
-        this.setState (  
-            {   showCalendar: false }
+        this.setState(
+            { showCalendar: false }
         )
     }
 
@@ -116,7 +119,7 @@ class CalendarButton extends React.Component {
 
         let buttonStyles = {
             root: {
-              borderRadius: this.props.rounded ? 100 : 0
+                borderRadius: this.props.rounded ? 100 : 0
             }
         }
 
@@ -125,32 +128,44 @@ class CalendarButton extends React.Component {
             selectedDate = new Date();
         }
 
+        const tooltipId = _.uniqueId('tooltip_');
+
         return (
-            <>
-                <div ref = { this._calendarButtonElement }>
-                    { this.props.buttonType == 'Command' ?
-                            <CommandButton
+            <TooltipHost
+                content={this.props.tooltip}
+                id={tooltipId}
+            >
+
+                <div ref={this._calendarButtonElement}>
+                    {this.props.buttonType == 'Command' ?
+                        <CommandButton
+                            {...this.props}
+                            iconProps={buttonIconProps}
+                            text={buttonText}
+                            disabled={this.props.buttonDisabled}
+                            onClick={() => { this._onButtonClick() }}
+                            aria-describedby={tooltipId}
+                        />
+                        : this.props.buttonType == 'Primary' ?
+                            <PrimaryButton
                                 {...this.props}
-                                iconProps = { buttonIconProps }
-                                text = { buttonText }
-                                disabled = { this.props.buttonDisabled }
-                                onClick = {() => { this._onButtonClick() }} />
-                        : this.props.buttonType == 'Primary' ? 
-                            <PrimaryButton  
+                                iconProps={buttonIconProps}
+                                text={buttonText}
+                                disabled={this.props.buttonDisabled}
+                                styles={buttonStyles}
+                                onClick={() => { this._onButtonClick() }}
+                                aria-describedby={tooltipId}
+                            />
+                            : //else secondary
+                            <DefaultButton
                                 {...this.props}
-                                iconProps = { buttonIconProps }
-                                text = { buttonText }
-                                disabled = { this.props.buttonDisabled }
-                                styles = { buttonStyles } 
-                                onClick = {() => { this._onButtonClick() }} />
-                        : //else secondary
-                            <DefaultButton 
-                                {...this.props}
-                                iconProps = { buttonIconProps }
-                                text = { buttonText }
-                                disabled = { this.props.buttonDisabled }
-                                styles = { buttonStyles } 
-                                onClick = {() => { this._onButtonClick() }} />
+                                iconProps={buttonIconProps}
+                                text={buttonText}
+                                disabled={this.props.buttonDisabled}
+                                styles={buttonStyles}
+                                onClick={() => { this._onButtonClick() }}
+                                aria-describedby={tooltipId}
+                            />
                     }
                 </div>
                 {this.state.showCalendar && (
@@ -158,37 +173,37 @@ class CalendarButton extends React.Component {
                         isBeakVisible={false}
                         gapSpace={0}
                         doNotLayer={false}
-                        target={ this._calendarButtonElement }
+                        target={this._calendarButtonElement}
                         directionalHint={DirectionalHint.bottomLeftEdge}
                         onDismiss={() => { this._onDismissCallout() }}
                         setInitialFocus={true}
                     >
-                        <FocusTrapZone isClickableOutsideFocusTrap = { true }>
+                        <FocusTrapZone isClickableOutsideFocusTrap={true}>
                             <Calendar
                                 //Standard behaviors for this control
-                                isMonthPickerVisible = {true}        
-                                dateRangeType = {DateRangeType.Day}  //Typically, we're looking for a day rather than a month or week
-                                autoNavigateOnSelection = {true}     
-                                showGoToToday = {true}              
-                                showNavigateButtons = {true}        
-                                highlightCurrentMonth = {true}      
-                                highlightSelectedMonth = {true}     
-                                isDayPickerVisible = {true}       
-                                showMonthPickerAsOverlay = {true}
-                                showSixWeeksByDefault =  {true}
-                                firstDayOfWeek = {DayOfWeek.Sunday}
-                                workWeekDays = {workWeekDays}
-                                strings = {dayPickerStrings}
+                                isMonthPickerVisible={true}
+                                dateRangeType={DateRangeType.Day}  //Typically, we're looking for a day rather than a month or week
+                                autoNavigateOnSelection={true}
+                                showGoToToday={true}
+                                showNavigateButtons={true}
+                                highlightCurrentMonth={true}
+                                highlightSelectedMonth={true}
+                                isDayPickerVisible={true}
+                                showMonthPickerAsOverlay={true}
+                                showSixWeeksByDefault={true}
+                                firstDayOfWeek={DayOfWeek.Sunday}
+                                workWeekDays={workWeekDays}
+                                strings={dayPickerStrings}
 
                                 //From UXPin Props & State
-                                value = { selectedDate }
-                                showWeekNumbers = { this.props.showWeekNumbers }
-                                onSelectDate = {(d, sdr) => this._onSelectDate(d) }
+                                value={selectedDate}
+                                showWeekNumbers={this.props.showWeekNumbers}
+                                onSelectDate={(d, sdr) => this._onSelectDate(d)}
                             />
                         </FocusTrapZone>
                     </Callout>
                 )}
-            </>
+            </TooltipHost>
 
         );
     }
@@ -204,12 +219,12 @@ CalendarButton.propTypes = {
      * @uxpindescription Reflect the control's role in the UI with its visual style
      * @uxpinpropname Button Type
      * */
-    buttonType: PropTypes.oneOf(['Command','Primary','Secondary']),
+    buttonType: PropTypes.oneOf(['Command', 'Primary', 'Secondary']),
 
     /**
      * @uxpindescription Sets whether to display a Primary or Secondary  button in the rounded PayPal UI style.
      * @uxpinpropname Rounded
-     * */   
+     * */
     rounded: PropTypes.bool,
 
     /**
@@ -221,14 +236,14 @@ CalendarButton.propTypes = {
     /**
      * @uxpindescription The exact name from the PayPal icon library (Optional)
      * @uxpinpropname Button Icon Name
-     * */ 
+     * */
     buttonIcon: PropTypes.string,
 
     /**
      * A unique name for this property. Got some weird behavior with the same name as the control's prop. 
      * @uxpindescription Set the date in the control using one of these formats: Feb 8, 2020 -OR- 2/6/2020
      * @uxpinpropname Date
-     */  
+     */
     calDate: PropTypes.string,
 
     /**
@@ -240,7 +255,7 @@ CalendarButton.propTypes = {
     /**
      * @uxpindescription To display week numbers on the left side of the Calendar
      * @uxpinpropname Show Week Numbers
-     */  
+     */
     showWeekNumbers: PropTypes.bool,
 
     /**
@@ -250,9 +265,15 @@ CalendarButton.propTypes = {
     buttonDisabled: PropTypes.bool,
 
     /**
+     * @uxpindescription Tooltip for the control
+     * @uxpinpropname Tooltip
+     * */
+    tooltip: PropTypes.string,
+
+    /**
      * @uxpindescription Fires when a date is selected
      * @uxpinpropname Date Selected
-     */  
+     */
     onSelectDate: PropTypes.func,
 
 };
@@ -270,6 +291,7 @@ CalendarButton.defaultProps = {
     calDate: "Jan 15, 2020",
     showSelectedDate: true,
     showWeekNumbers: false,
+    tooltip: ''
 };
 
 

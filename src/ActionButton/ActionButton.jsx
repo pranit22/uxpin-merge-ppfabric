@@ -1,7 +1,7 @@
-import { ActionButton as FActionButton } from 'office-ui-fabric-react';
+import { ActionButton as FActionButton, TooltipHost } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-
+import _ from 'lodash';
 
   /**
    * UPDATED Mar 17, 2020 by Anthony Hand
@@ -54,14 +54,21 @@ import * as React from 'react';
       if (this.props.iconPosition === "end") styles.flexContainer = {
         flexDirection: 'row-reverse'
       }
+
+      const tooltipId = _.uniqueId('tooltip_');
   
       return (
-
-        <FActionButton 
-            {...this.props} 
-            iconProps={iconProps}
-            styles={styles}        
-        />
+        <TooltipHost
+        content={this.props.tooltip}
+        id={tooltipId}
+        >
+          <FActionButton 
+              {...this.props} 
+              iconProps={iconProps}
+              styles={styles}  
+              aria-describedby={tooltipId}      
+          />
+        </TooltipHost>
   
       );
     }
@@ -99,6 +106,12 @@ ActionButton.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * @uxpindescription Tooltip for the control
+   * @uxpinpropname Tooltip
+   * */
+  tooltip: PropTypes.string,
+
+  /**
    * @uxpindescription Fires when the button is clicked on
    * @uxpinpropname Click
    * */    
@@ -112,7 +125,8 @@ ActionButton.propTypes = {
 ActionButton.defaultProps = {
   disabled: false,
   text: 'Basic Action Button',
-  iconName: 'Launch'
+  iconName: 'Launch',
+  tooltip: ''
 };
 
 export { ActionButton as default };

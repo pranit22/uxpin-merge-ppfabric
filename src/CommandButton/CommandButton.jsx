@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CommandButton as FCommandButton } from 'office-ui-fabric-react';
+import { CommandButton as FCommandButton, TooltipHost } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import { getTokens, csv2arr } from '../_helpers/parser.jsx';
 
@@ -131,18 +131,24 @@ class CommandButton extends React.Component {
             iconName: 'ElipsisVertical',
         }
 
+        const tooltipId = _.uniqueId('tooltip_');
+
         return (
 
-            <FCommandButton
-                {...this.props}
-                text={this.props.text}
-                iconProps={iconProps}
-                menuProps={menuProps}
-                menuIconProps={this.props.ellipsis ? menuIconProps : ''}
-                styles={styles}
-                onClick={() => { this._onClick(0) }} //Always send 0. Only fires if it has no sub-menu
-            />
-
+            <TooltipHost
+                content={this.props.tooltip}
+                id={tooltipId}
+            >
+                <FCommandButton
+                    {...this.props}
+                    text={this.props.text}
+                    iconProps={iconProps}
+                    menuProps={menuProps}
+                    menuIconProps={this.props.ellipsis ? menuIconProps : ''}
+                    styles={styles}
+                    onClick={() => { this._onClick(0) }} //Always send 0. Only fires if it has no sub-menu
+                />
+            </TooltipHost>
         );
     }
 
@@ -186,6 +192,12 @@ CommandButton.propTypes = {
     ellipsis: PropTypes.bool,
 
     /**
+     * @uxpindescription Tooltip for the control
+     * @uxpinpropname Tooltip
+     * */
+    tooltip: PropTypes.string,
+
+    /**
      * @uxpindescription Fires when the button is clicked on.
      * @uxpinpropname Click
      * */
@@ -202,6 +214,7 @@ CommandButton.defaultProps = {
     iconName: "Add",
     items: defaultItems,
     disabled: false,
+    tooltip: ''
 };
 
 export { CommandButton as default };

@@ -19,7 +19,8 @@ class PPPage extends React.Component {
                 spanChild={true}
                 childSpannerIndex={2}
                 stretch={true}
-                >
+                stackWidth={`${this.props.controlWidth}px` || 'auto'}
+            >
                 {this.props.children}
             </PPVerticalStack>
         );
@@ -39,7 +40,14 @@ PPPage.propTypes = {
      * @uxpindescription Contents for the right side. 1. Drag an object onto the canvas. 2. In the Layers Panel, drag the item onto this object. Now it should be indented, and contained as a 'child.'  
      * @uxpinpropname Right Contents
      */
-    children: PropTypes.node
+    children: PropTypes.node,
+
+
+    /**
+    * @uxpindescription The width of the control   
+    * @uxpinpropname Width
+    */
+    controlWidth: PropTypes.number,
 
 
 }
@@ -49,7 +57,7 @@ PPPage.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 PPPage.defaultProps = {
-
+    controlWidth: 1208
 }
 
 

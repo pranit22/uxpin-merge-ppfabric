@@ -27,8 +27,7 @@ const rightAlign = 'right';
 
 const instructionText = `Vertical Stack Instructions: 
 1) Drag any Merge controls onto the canvas. 
-2) In the Layers Panel, drag and drop it onto this control. 
-3) Uncheck the "Show Instructions" box.`;
+2) In the Layers Panel, drag and drop it onto this control.`;
 
 
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
@@ -63,30 +62,25 @@ class PPVerticalStack extends React.Component {
     render() {
 
         //****************************
-        //For Text control: Instructions
-        //Let's see if we need to show instructions
-        var instructionStack = '';
-        if (this.props.showInstructions) {
-
-            let fTextStyles = {
-                root: {
-                    color: defaultTextColor,
-                    fontWeight: 'normal',
-                    fontStyle: 'normal',
-                    display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
-                    lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
-                }
+        // Instructions
+        let fTextStyles = {
+            root: {
+                color: defaultTextColor,
+                fontWeight: 'normal',
+                fontStyle: 'normal',
+                display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
+                lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
             }
-
-            instructionStack = (
-                <Text
-                    {...this.props}
-                    styles={fTextStyles}
-                    variant={'medium'}>
-                    {this.props.value}
-                </Text>
-            );
         }
+
+        let instructions = (
+            <Text
+                {...this.props}
+                styles={fTextStyles}
+                variant={'medium'}>
+                {this.props.value}
+            </Text>
+        );
 
         //****************************
         //For Outer Stack
@@ -188,9 +182,9 @@ class PPVerticalStack extends React.Component {
                 wrap={false}
                 styles={topStackItemStyles}>
 
-                {instructionStack}
-
+                {_.isEmpty(this.props.children) && instructions}
                 {stackList}
+                
             </Stack>
         );
     }
@@ -210,21 +204,6 @@ PPVerticalStack.propTypes = {
      * @uxpinpropname Right Contents
      */
     children: PropTypes.node,
-
-    /**
-     * Don't show this prop in the UXPin Editor. 
-     * @uxpinignoreprop 
-     * @uxpindescription Click 'Hide Instructions' to hide this text.
-     * @uxpinpropname Instructions
-     * @uxpincontroltype textfield(6)
-     */
-    value: PropTypes.string,
-
-    /**
-     * @uxpindescription To show or hide the instructional text  
-     * @uxpinpropname Show Instructions
-     */
-    showInstructions: PropTypes.bool,
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
@@ -311,7 +290,6 @@ PPVerticalStack.propTypes = {
  */
 PPVerticalStack.defaultProps = {
     value: instructionText,
-    showInstructions: true,
     internalPadding: 0,
     gutterPadding: 12,
     align: leftAlign,

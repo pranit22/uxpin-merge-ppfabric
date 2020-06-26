@@ -27,7 +27,7 @@ import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
 const defaultTextColor = "#000000";
 
-const defaultIconSize = '24';
+const defaultIconSize = 24;
 const defaultIconName = 'Card';
 
 //****** OTHER */
@@ -200,7 +200,6 @@ class PPCardTextHeader extends React.Component {
         return (
 
             <Stack 
-                {...this.props}
                 tokens = { stackTokens }
                 horizontal = { true }
                 horizontalAlign = { 'start' }
@@ -214,7 +213,6 @@ class PPCardTextHeader extends React.Component {
 
                     <StackItem>
                         <Text
-                            {...this.props}
                             styles = { fTextStyles }
                             variant = { this.props.size }>
                             { this.props.value }

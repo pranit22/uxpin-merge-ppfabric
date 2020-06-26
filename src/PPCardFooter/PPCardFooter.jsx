@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {
-        Stack,
-        StackItem,
-        Text
-    } from 'office-ui-fabric-react';
+    Stack,
+    StackItem,
+    Text
+} from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
 
-  /** 
-   * UPDATED May 11, 2020 by Anthony Hand
-   * - Added file to our TPX UX Experimental library on UXPin.
-   */
+/** 
+ * UPDATED May 11, 2020 by Anthony Hand
+ * - Added file to our TPX UX Experimental library on UXPin.
+ */
 
 
 
@@ -21,10 +21,9 @@ const bottomAlign = 'bottom';
 
 const instructionText = `Card Footer Instructions: 
 1) Drag in any Merge controls onto the canvas, such as ActionButtons. 
-2) In the Layers Panel, drag and drop them onto this control. 
-3) Uncheck the "Show Instructions" box.`;
+2) In the Layers Panel, drag and drop them onto this control.`;
 
-  
+
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
 const defaultTextColor = "#000000";
 
@@ -50,13 +49,13 @@ class PPCardFooter extends React.Component {
 
     _getVerticalAlignmentToken() {
         switch (this.props.vAlign) {
-            case topAlign :
+            case topAlign:
                 return 'start';
-            case middleAlign :
+            case middleAlign:
                 return 'center';
-            case bottomAlign :
+            case bottomAlign:
                 return 'end';
-            default :
+            default:
                 return 'start';
         }
     }
@@ -64,8 +63,27 @@ class PPCardFooter extends React.Component {
 
     render() {
 
-        //An empty string will cause the Text control to hide.
-        let instructions = this.props.showInstructions ? this.props.value : '' ;
+        //****************************
+        // Instructions
+        let fTextStyles = {
+            root: {
+                color: defaultTextColor,
+                width: '200 px',
+                fontWeight: 'normal',
+                fontStyle: 'normal',
+                display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
+                lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
+            }
+        }
+
+        let instructions = (
+            <Text
+                {...this.props}
+                styles={fTextStyles}
+                variant={'medium'}>
+                {this.props.value}
+            </Text>
+        );
 
         let vAlign = this._getVerticalAlignmentToken();
 
@@ -74,18 +92,18 @@ class PPCardFooter extends React.Component {
         var bStyle = '';
 
         if (this.props.borderStyle !== borderNone) {
-            let line =  this.props.borderStyle === borderSolid ? borderSolid 
-                        : this.props.borderStyle === borderDashed ? borderDashed
-                        : borderDotted;
+            let line = this.props.borderStyle === borderSolid ? borderSolid
+                : this.props.borderStyle === borderDashed ? borderDashed
+                    : borderDotted;
 
             //The function returns undefined if it's unparseable
             var bColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.borderColor);
             if (!bColor)
                 bColor = defaultBorderColor;
-            
+
             bStyle = '1px ' + line + ' ' + bColor;
         }
-        
+
         const topStackItemStyles = {
             root: {
                 display: 'flex',
@@ -103,24 +121,9 @@ class PPCardFooter extends React.Component {
         let pad = this.props.gutterPadding > 0 ? this.props.gutterPadding : 0;
         const stackTokens = {
             childrenGap: pad,
-            padding: 0, 
+            padding: 0,
         };
 
-        //****************************
-        //For Text control: Instructions
-
-        let fTextStyles = {
-            root: {
-                color: defaultTextColor,
-                width: '200 px',
-                fontWeight: 'normal',
-                fontStyle: 'normal',
-                display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
-                lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
-            }
-        }
-
-        
         //****************************
         //For Inner Stack
 
@@ -135,7 +138,7 @@ class PPCardFooter extends React.Component {
             if (childList && childList.length) {
 
                 for (var i = 0; i < childList.length; i++) {
-                    let child = childList[i];  
+                    let child = childList[i];
 
                     let stackItemStyle = {
                         root: {
@@ -150,15 +153,15 @@ class PPCardFooter extends React.Component {
                     //Now we put it all together!
                     let stack = (
                         <Stack
-                            horizontal = { false }
-                            horizontalAlign = { 'start' }
-                            verticalAlign = { vAlign }
-                            wrap = { false }
-                            styles = { stackItemStyle }
+                            horizontal={false}
+                            horizontalAlign={'start'}
+                            verticalAlign={vAlign}
+                            wrap={false}
+                            styles={stackItemStyle}
                         >
-                            <StackItem 
-                                align = { this.props.stretch ? "stretch" : '' }   >
-                                { child }
+                            <StackItem
+                                align={this.props.stretch ? "stretch" : ''}   >
+                                {child}
                             </StackItem>
                         </Stack>
                     );
@@ -178,21 +181,15 @@ class PPCardFooter extends React.Component {
 
         return (
 
-            <Stack 
-                {...this.props}
-                tokens = { stackTokens }
-                horizontal = { true }
-                horizontalAlign = { 'start' }
-                wrap = { false }
-                styles = { topStackItemStyles }> 
-                    <Text
-                        {...this.props}
-                        styles = { fTextStyles }
-                        variant = { 'medium' }>
-                        { instructions }
-                    </Text>
+            <Stack
+                tokens={stackTokens}
+                horizontal={true}
+                horizontalAlign={'start'}
+                wrap={false}
+                styles={topStackItemStyles}>
 
-                    { stackList }
+                {_.isEmpty(this.props.children) && instructions}
+                {stackList}
 
             </Stack>
         );
@@ -211,7 +208,7 @@ PPCardFooter.propTypes = {
      * @uxpinignoreprop 
      * @uxpindescription Contents for the right side. 1. Drag an object onto the canvas. 2. In the Layers Panel, drag the item onto this object. Now it should be indented, and contained as a 'child.'  
      * @uxpinpropname Right Contents
-     */ 
+     */
     children: PropTypes.node,
 
     /**
@@ -224,41 +221,35 @@ PPCardFooter.propTypes = {
     value: PropTypes.string,
 
     /**
-     * @uxpindescription To show or hide the instructional text  
-     * @uxpinpropname Show Instructions
-     */ 
-    showInstructions: PropTypes.bool,  
-
-    /**
      * @uxpindescription To show or hide the top border  
      * @uxpinpropname Border Style
-     */ 
-    borderStyle: PropTypes.oneOf([borderDotted, borderSolid, borderDashed, borderNone]),  
+     */
+    borderStyle: PropTypes.oneOf([borderDotted, borderSolid, borderDashed, borderNone]),
 
     /**
      * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
      * @uxpinpropname Border Color
-     * */  
+     * */
     borderColor: PropTypes.string,
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Row padding between the items in the group. Value must be 0 or more. 
      * @uxpinpropname Gutter
-     */ 
-    gutterPadding: PropTypes.number,  
+     */
+    gutterPadding: PropTypes.number,
 
     /**
      * @uxpindescription To vertically align all content within the stack 
      * @uxpinpropname Vert Alignment
-     */    
+     */
     vAlign: PropTypes.oneOf([topAlign, middleAlign, bottomAlign]),
 
     /**
      * @uxpindescription To insert a spanner to fill empty space between two elements. 
      * @uxpinpropname Add Spanner
-     */ 
-    addSpanner: PropTypes.bool,  
+     */
+    addSpanner: PropTypes.bool,
 
     /**
      * @uxpindescription The 1-based index for where to insert a Spanner. The Spanner will be inserted to the left of the item that is at this index value.
@@ -274,7 +265,6 @@ PPCardFooter.propTypes = {
  */
 PPCardFooter.defaultProps = {
     value: instructionText,
-    showInstructions: true,
     borderStyle: borderDotted,
     borderColor: defaultBorderColor,
     gutterPadding: 12,

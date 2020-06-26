@@ -1,20 +1,21 @@
 import * as React from 'react';
-import {    PersonaCoin as FPersonaCoin,
-            Icon,
-            PersonaSize,
-            PersonaInitialsColor
+import {
+    PersonaCoin as FPersonaCoin,
+    PersonaSize,
+    PersonaInitialsColor,
+    TooltipHost
 } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 
 
-  /**
-   * UPDATED April 23, 2020 by Anthony Hand
-   * - Added file to our TPX UX Experimental library on UXPin.
-   * 
-   * TODOs
-   * - Control needs to be updated with the proper PayPal UI theme. 
-   * 
-   */
+/**
+ * UPDATED April 23, 2020 by Anthony Hand
+ * - Added file to our TPX UX Experimental library on UXPin.
+ * 
+ * TODOs
+ * - Control needs to be updated with the proper PayPal UI theme. 
+ * 
+ */
 
 
 const personaFemaleUrl = "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-female.png";
@@ -45,17 +46,24 @@ class PersonaCoin extends React.Component {
 
     render() {
 
+        const tooltipId = _.uniqueId('tooltip_');
 
         return (
-            <FPersonaCoin 
-                {...this.props}
-                size = { PersonaSize[this.props.ppSize] } 
-                initialsColor = { PersonaInitialsColor[this.props.bgColor] } 
-                imageInitials = { this.props.initials }
-                imageUrl = { this.props.imageUrl }
-                //Bind our new OnClick handler
-                onClick = { (this._onClick.bind(this)) }
-            />
+            <TooltipHost
+                content={this.props.tooltip}
+                id={tooltipId}
+            >
+                <FPersonaCoin
+                    {...this.props}
+                    size={PersonaSize[this.props.ppSize]}
+                    initialsColor={PersonaInitialsColor[this.props.bgColor]}
+                    imageInitials={this.props.initials}
+                    imageUrl={this.props.imageUrl}
+                    //Bind our new OnClick handler
+                    onClick={(this._onClick.bind(this))}
+                    aria-describedby={tooltipId}
+                />
+            </TooltipHost>
         );
     }
 }
@@ -71,19 +79,19 @@ PersonaCoin.propTypes = {
     * @uxpinpropname Img URL
     * @uxpincontroltype textfield(6)
     */
-   imageUrl: PropTypes.string,
+    imageUrl: PropTypes.string,
 
     /**
     * @uxpindescription If no image or icon, the initials to display on the 'coin' 
     * @uxpinpropname Initials
-    */         
+    */
     initials: PropTypes.string,
 
     /**
     * Requires a proprietary PayPal prop name, or else things get screwy   
     * @uxpindescription If no image, the background color of the 'coin' showing the user's initials 
     * @uxpinpropname Coin Bg Color
-    */ 
+    */
     bgColor: PropTypes.oneOf([
         'green', 'darkGreen', 'teal', 'lightBlue', 'blue', 'darkBlue', 'violet',
         'purple', 'magenta', 'lightPink', 'pink', 'burgundy', 'lightRed', 'darkRed',
@@ -93,14 +101,20 @@ PersonaCoin.propTypes = {
      * Requires a proprietary PayPal prop name, or else things get screwy. 
      * @uxpindescription The control's size 
      * @uxpinpropname Size
-     */    
+     */
     ppSize: PropTypes.oneOf(['size8', 'size24', 'size32', 'size40', 'size56', 'size72', 'size100']),
+
+    /**
+     * @uxpindescription Tooltip for the control
+     * @uxpinpropname Tooltip
+     * */
+    tooltip: PropTypes.string,
 
     /**
      * @uxpindescription Fires when the control is clicked on
      * @uxpinpropname Click
      * */
-    onClick: PropTypes.func  
+    onClick: PropTypes.func
 
 };
 
@@ -112,19 +126,9 @@ PersonaCoin.defaultProps = {
     imageUrl: personaFemaleUrl,
     initials: 'AL',
     bgColor: 'blue',
-    ppSize: "size100",  
+    ppSize: "size100",
+    tooltip: ''
 };
 
 
 export { PersonaCoin as default };
-
-
-// function PersonaCoin(props) {
-//     return (
-//        <FPersonaCoin {...props}>{props.children}</FPersonaCoin>
-//    );
-//  }
- 
-//  PersonaCoin.propTypes = {
-//      children: PropTypes.node,
-//  };
