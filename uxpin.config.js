@@ -38,7 +38,6 @@ module.exports = {
           'src/ChoiceGroup/ChoiceGroup.jsx',
           'src/ComboBox/ComboBox.jsx',
           'src/Dropdown/Dropdown.jsx',
-          'src/Link/Link.jsx',
           'src/Rating/Rating.jsx',
           'src/SearchBox/SearchBox.jsx',
           'src/Slider/Slider.jsx',
@@ -108,7 +107,7 @@ module.exports = {
         include: [
           'src/Dialog/Dialog.jsx',
           'src/Tooltip/Tooltip.jsx',
-          'src/Panel/Panel.jsx',
+          'src/PPPanel/PPPanel.jsx',
           'src/PPProfileCard/PPProfileCard.jsx',
         ]
       },
@@ -119,6 +118,7 @@ module.exports = {
           'src/Icon/Icon.jsx',
           'src/Separator/Separator.jsx',
           'src/Text/Text.jsx',
+          'src/Link/Link.jsx',
           'src/Image/Image.jsx',
         ]
       }
