@@ -96,19 +96,21 @@ class PPFavoritesButton extends React.Component {
         const tooltipId = _.uniqueId('tooltip_');
 
         return (
-            <TooltipHost
-                content={this.state.isFavorited ? this.props.favoritedTooltip : this.props.unfavoritedTooltip}
-                id={tooltipId}
-            >
-                <ActionButton
-                    {...this.props}
-                    text={text}
-                    iconProps={iconProps}
-                    styles={styles}
-                    onClick={() => { this._onClick() }}
-                    aria-describedby={tooltipId}
-                />
-            </TooltipHost >
+            <div>
+                <TooltipHost
+                    content={this.state.isFavorited ? this.props.favoritedTooltip : this.props.unfavoritedTooltip}
+                    id={tooltipId}
+                >
+                    <ActionButton
+                        {...this.props}
+                        text={text}
+                        iconProps={iconProps}
+                        styles={styles}
+                        onClick={() => { this._onClick() }}
+                        aria-describedby={tooltipId}
+                    />
+                </TooltipHost >
+            </div>
         );
     }
 
