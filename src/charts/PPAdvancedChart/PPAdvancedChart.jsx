@@ -43,6 +43,9 @@ const defaultConfig = JSON.stringify({
     }]
 }, null, 2);
 
+const defaultHeight = 300;
+const defaultWidth = 400;
+
 class PPAdvancedChart extends React.Component {
     constructor(props) {
         super(props);
@@ -56,7 +59,7 @@ class PPAdvancedChart extends React.Component {
         config.chart = {
             ...config.chart,
             width: this.props.width || null,
-            height: this.props.height || 200,
+            height: this.props.height || defaultHeight
         }
         // remove credits that come by default with highcharts
         config.credits = {
@@ -90,7 +93,10 @@ class PPAdvancedChart extends React.Component {
 
     render() {
         return (
-            <>
+            <div style={{
+                width: this.props.width || 'auto',
+                height: this.props.height || defaultHeight
+            }}>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={this.state.config}
@@ -98,7 +104,7 @@ class PPAdvancedChart extends React.Component {
                     ref={this.chartComponent}
                 />
                 <ReactResizeDetector handleWidth handleHeight refreshMode="debounce" refreshRate={100} onResize={() => this.onResize()} />
-            </>
+            </div>
         )
     }
 }
@@ -125,8 +131,8 @@ PPAdvancedChart.propTypes = {
 
 PPAdvancedChart.defaultProps = {
     config: defaultConfig,
-    width: 400,
-    height: 300
+    width: defaultWidth,
+    height: defaultHeight
 }
 
 export default PPAdvancedChart;

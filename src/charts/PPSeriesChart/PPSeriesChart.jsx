@@ -7,6 +7,9 @@ import { csv2arr } from '../../_helpers/parser';
 
 import '../highcharts.pp-theme';
 
+const defaultHeight = 300;
+const defaultWidth = 400;
+
 class PPSeriesChart extends React.Component {
     constructor(props) {
         super(props);
@@ -38,7 +41,7 @@ class PPSeriesChart extends React.Component {
                     chart: {
                         type: this.props.type,
                         width: this.props.width || null,
-                        height: this.props.height || 200
+                        height: this.props.height || defaultHeight
                     },
                     title: {
                         text: this.props.title || ''
@@ -103,7 +106,10 @@ class PPSeriesChart extends React.Component {
 
     render() {
         return (
-            <>
+            <div style={{
+                width: this.props.width || 'auto',
+                height: this.props.height || defaultHeight
+            }}>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={this.state.config}
@@ -111,7 +117,7 @@ class PPSeriesChart extends React.Component {
                     ref={this.chartComponent}
                 />
                 <ReactResizeDetector handleWidth handleHeight refreshMode="debounce" refreshRate={100} onResize={() => this.onResize()} />
-            </>
+            </div>
         )
     }
 }
@@ -237,8 +243,8 @@ PPSeriesChart.defaultProps = {
     series1Data: '34, 52, 44, 65, 33, 41, 38',
     series2Name: 'Web',
     series2Data: '13, 21, 24, 42, 18, 19, 16',
-    width: 400,
-    height: 300
+    width: defaultWidth,
+    height: defaultHeight
 }
 
 export default PPSeriesChart;
