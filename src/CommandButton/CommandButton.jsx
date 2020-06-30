@@ -134,21 +134,22 @@ class CommandButton extends React.Component {
         const tooltipId = _.uniqueId('tooltip_');
 
         return (
-
-            <TooltipHost
-                content={this.props.tooltip}
-                id={tooltipId}
-            >
-                <FCommandButton
-                    {...this.props}
-                    text={this.props.text}
-                    iconProps={iconProps}
-                    menuProps={menuProps}
-                    menuIconProps={this.props.ellipsis ? menuIconProps : ''}
-                    styles={styles}
-                    onClick={() => { this._onClick(0) }} //Always send 0. Only fires if it has no sub-menu
-                />
-            </TooltipHost>
+            <div>
+                <TooltipHost
+                    content={this.props.tooltip}
+                    id={tooltipId}
+                >
+                    <FCommandButton
+                        {...this.props}
+                        text={this.props.text}
+                        iconProps={iconProps}
+                        menuProps={menuProps}
+                        menuIconProps={this.props.ellipsis ? menuIconProps : ''}
+                        styles={styles}
+                        onClick={() => { this._onClick(0) }} //Always send 0. Only fires if it has no sub-menu
+                    />
+                </TooltipHost>
+            </div>
         );
     }
 

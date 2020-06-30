@@ -107,22 +107,23 @@ class SplitButton extends React.Component {
     const tooltipId = _.uniqueId('tooltip_');
 
     return (
-
-      <TooltipHost
-        content={this.props.tooltip}
-        id={tooltipId}
-      >
-        <DefaultButton
-          {...this.props}
-          split={true}
-          primary={this.props.primary}
-          text={this.props.text}
-          iconProps={iconProps}
-          menuProps={menuProps}
-          onClick={() => { this._onClick(0) }} //Always send 0 for the main button part
-          aria-describedby={tooltipId}
-        />
-      </TooltipHost>
+      <div>
+        <TooltipHost
+          content={this.props.tooltip}
+          id={tooltipId}
+        >
+          <DefaultButton
+            {...this.props}
+            split={true}
+            primary={this.props.primary}
+            text={this.props.text}
+            iconProps={iconProps}
+            menuProps={menuProps}
+            onClick={() => { this._onClick(0) }} //Always send 0 for the main button part
+            aria-describedby={tooltipId}
+          />
+        </TooltipHost>
+      </div>
     );
   }
 

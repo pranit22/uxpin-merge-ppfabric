@@ -42,28 +42,28 @@ class Button extends React.Component {
     const tooltipId = _.uniqueId('tooltip_');
 
     return (
-
-      <TooltipHost
-        content={this.props.tooltip}
-        id={tooltipId}
-      >
-        {this.props.primary ?
-          <FPrimaryButton
-            {...this.props}
-            iconProps={iconProps}
-            styles={styles}
-            aria-describedby={tooltipId}
-          />
-          :
-          <FDefaultButton
-            {...this.props}
-            iconProps={iconProps}
-            styles={styles}
-            aria-describedby={tooltipId}
-          />
-        }
-      </TooltipHost>
-
+      <div>
+        <TooltipHost
+          content={this.props.tooltip}
+          id={tooltipId}
+        >
+          {this.props.primary ?
+            <FPrimaryButton
+              {...this.props}
+              iconProps={iconProps}
+              styles={styles}
+              aria-describedby={tooltipId}
+            />
+            :
+            <FDefaultButton
+              {...this.props}
+              iconProps={iconProps}
+              styles={styles}
+              aria-describedby={tooltipId}
+            />
+          }
+        </TooltipHost>
+      </div>
     );
   }
 
