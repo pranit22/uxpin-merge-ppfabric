@@ -114,12 +114,19 @@ module.exports = {
       {
         name: 'Utilities',
         include: [
-          'src/PPChart/PPChart.jsx',
           'src/Icon/Icon.jsx',
           'src/Separator/Separator.jsx',
           'src/Text/Text.jsx',
           'src/Link/Link.jsx',
           'src/Image/Image.jsx',
+        ]
+      },
+      {
+        name: 'Charts',
+        include: [
+          'src/charts/PPSeriesChart/PPSeriesChart.jsx',
+          'src/charts/PPPieChart/PPPieChart.jsx',
+          'src/charts/PPAdvancedChart/PPAdvancedChart.jsx',
         ]
       }
     ]
