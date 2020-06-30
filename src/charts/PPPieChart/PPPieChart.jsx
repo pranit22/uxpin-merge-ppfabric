@@ -7,6 +7,9 @@ import { csv2arr } from '../../_helpers/parser';
 
 import '../highcharts.pp-theme';
 
+const defaultHeight = 300;
+const defaultWidth = 400;
+
 class PPPieChart extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +31,7 @@ class PPPieChart extends React.Component {
                     chart: {
                         type: 'pie',
                         width: this.props.width || null,
-                        height: this.props.height || 200
+                        height: this.props.height || defaultHeight
                     },
                     title: {
                         text: this.props.title || ''
@@ -84,7 +87,10 @@ class PPPieChart extends React.Component {
 
     render() {
         return (
-            <>
+            <div style={{
+                width: this.props.width || 'auto',
+                height: this.props.height || defaultHeight
+            }}>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={this.state.config}
@@ -92,7 +98,7 @@ class PPPieChart extends React.Component {
                     ref={this.chartComponent}
                 />
                 <ReactResizeDetector handleWidth handleHeight refreshMode="debounce" refreshRate={100} onResize={() => this.onResize()} />
-            </>
+            </div>
         )
     }
 }
@@ -149,8 +155,8 @@ PPPieChart.defaultProps = {
     name: 'Logins',
     legend: true,
     labels: false,
-    width: 400,
-    height: 300
+    width: defaultWidth,
+    height: defaultHeight
 }
 
 export default PPPieChart;
