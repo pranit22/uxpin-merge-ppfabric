@@ -55,7 +55,6 @@ class PPPanel extends React.Component {
     }
 
     set() {
-        console.log("setting")
         this.setState({
             isOpen: this.props.show
         })
@@ -65,24 +64,14 @@ class PPPanel extends React.Component {
         this.set();
     }
 
-    componentDidUpdate(prevProps) {
-        if (
-            prevProps.show !== this.props.show
-        ) {
-            this.set();
-        }
-    }
-
     dismissPanel() {
-        this.setState({
-            isOpen: false
-        })
+        this.props.onDismiss(false);
     }
 
     render() {
         return (
             <>
-                {this.state.isOpen && <div
+                {this.props.show && <div
                     style={{
                         width: this.props.width,
                         height: this.props.height || defaultHeight,
@@ -158,6 +147,13 @@ class PPPanel extends React.Component {
                     </div>
 
                 </div>}
+
+                {!this.props.show && <div
+                    style={{
+                        width: 0,
+                        height: 0
+                    }}
+                ></div>}
             </>
         );
     }
@@ -171,8 +167,14 @@ PPPanel.propTypes = {
 
     /**
      * @uxpindescription To show or hide the panel 
+     * @uxpinbind onDismiss
      */
     show: PropTypes.bool,
+
+    /**
+     * @uxpindescription Action to take on dismiss
+     */
+    onDismiss: PropTypes.func,
 
     /**
      * @uxpindescription The size of the panel, choose from available options 

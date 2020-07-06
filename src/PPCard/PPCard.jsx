@@ -177,8 +177,9 @@ class PPCard extends React.Component {
             if (childList.length) {
                 for (var i = 0; i < childList.length; i++) {
                     if (childList[i]) {
-                        let child = _.cloneDeep(childList[i]);
-                        child.cardTheme = this.props.cardTheme;
+                        let child = React.cloneElement(childList[i], {
+                            cardTheme: this.props.cardTheme,
+                        });
                         let stack = (
                             <StackItem
                                 align={'stretch'}
