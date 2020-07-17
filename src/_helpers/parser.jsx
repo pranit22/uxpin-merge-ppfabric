@@ -3,6 +3,10 @@ import { Link, ActionButton, mergeStyles } from 'office-ui-fabric-react';
 
 
 export const csv2arr = text => {
+  if (text.trim() === '') {
+    return [];
+  }
+
   let p = '', row = [''], ret = [row], i = 0, r = 0, s = !0, l;
   for (l of text) {
     if ('"' === l) {
@@ -44,16 +48,16 @@ export const getTokens = inputStr => {
   let ts = str.match(reg)
 
   if (!ts) return {
-     text: str,
-     tokens: [],
-     mixed: [str],
-     incoming: inputStr
-    }
+    text: str,
+    tokens: [],
+    mixed: [str],
+    incoming: inputStr
+  }
 
   const getType = t => t.slice(0, t.indexOf('('))
 
   const getTarget = t => t.match(/(?<=\().*?(?=(\)|\|))/g)[0]
-  
+
   const getMutators = t => {
     let mutators = t.match(/(?<=\|).*?(?=\))/g)
     if (mutators && mutators.length > 0) mutators = mutators[0].split(',').map(v => v.trim())

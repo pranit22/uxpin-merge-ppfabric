@@ -121,7 +121,6 @@ class ChoiceGroup extends React.Component {
   }
 
   _onChoiceChange(option) {
-
     //Get the value. Add 1 because it's stored as a 1-based index to be more user friendly.
     const i = option.key + 1;
 
@@ -191,13 +190,14 @@ ChoiceGroup.propTypes = {
 
   /**
   * @uxpindescription The 1-based index value of the default item to be shown as selected (Optional)
-  * @uxpinpropname Selected Index
+  * @uxpinbind onChange
+  * @uxpinpropname Index
    * */  
   selectedIndex: PropTypes.number,
 
   /**
    * @uxpindescription Fires when the checked state changes.
-   * @uxpinpropname Value Change
+   * @uxpinpropname Index Change
    * */
   onChange: PropTypes.func
 };

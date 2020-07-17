@@ -56,7 +56,7 @@ class TextField extends React.Component {
   }
 
 
-  _onValueChange(newValue) {
+  _onChange(newValue) {
     //We only want to know what the new value should be.
     //Assumption: That Microsoft really is only sending strings and it's not undefined. 
 
@@ -69,8 +69,8 @@ class TextField extends React.Component {
     )
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
-    if (this.props.onValueChange) {
-      this.props.onValueChange(textVal);
+    if (this.props.onChange) {
+      this.props.onChange(textVal);
     }
   }
 
@@ -102,10 +102,10 @@ class TextField extends React.Component {
 
     return (
       <FTextField
+        {...this.props}
         value={textVal}
         iconProps={{ iconName: this.props.icon }}
-        onChange={(e, v) => { this._onValueChange(v); }}   //Only catch the value
-        {...this.props}
+        onChange={(e, v) => { this._onChange(v); }}   //Only catch the value
         prefix={prefix}
         suffix={suffix}
         autoComplete={showAutoComplete}
@@ -144,6 +144,7 @@ TextField.propTypes = {
    * We give this property a unique name to avoid collisions. We map its value to the control's 'value' prop.
    * @uxpindescription Current value of the text field
    * @uxpinpropname Value
+   * @uxpinbind onChange
    * @uxpincontroltype textfield(3)
    * */
   textValue: PropTypes.string,
@@ -207,7 +208,7 @@ TextField.propTypes = {
    * @uxpindescription Fires when the text value changes.
    * @uxpinpropname Value Change
    * */
-  onValueChange: PropTypes.func
+  onChange: PropTypes.func
 };
 
 

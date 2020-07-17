@@ -90,7 +90,7 @@ class ComboBox extends React.Component {
             .map(
                 i => parseInt(i.trim()) - 1
             );
-        
+
         this.setState({
             items: items,
             _selectedIndex: selected[0],
@@ -102,7 +102,6 @@ class ComboBox extends React.Component {
     // Note that 'changed' means its changed from checked to unchecked, or vice versa. 
     // And in the case of multi-select, each individual item comes in separately. 
     _onChoiceChange(option, index) {
-
         //Case Single Select
         // Option info is undefined. The Index is the index of the newly selected item. 
 
@@ -120,7 +119,6 @@ class ComboBox extends React.Component {
 
     //To process the onChange event for a single select use case. 
     _onChangeSingle(index) {
-
         //We MUST  set the state with the updated index value. This will also force the control to update in UXPin at runtime.
         this.setState(
             { _selectedIndex: index }
@@ -129,7 +127,7 @@ class ComboBox extends React.Component {
         //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
         //For the end user in UXPin, convert the index to a 1-based number. 
         if (this.props.onChange) {
-            this.props.onChange(index + 1);
+            this.props.onChange((index + 1).toString());
         }
 
     }
@@ -137,7 +135,6 @@ class ComboBox extends React.Component {
 
     //To process the onChange event for a multi-select use case. 
     _onChangeMulti(option) {
-
         const selected = option.selected;
         const key = option.key;
 
@@ -168,7 +165,7 @@ class ComboBox extends React.Component {
 
         //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
         if (this.props.onChange) {
-            const list = keys.toString(); //comma separated
+            const list = keys.map(key => key + 1).toString(); //comma separated
             this.props.onChange(list);
         }
     }
@@ -243,7 +240,8 @@ ComboBox.propTypes = {
 
     /**
      * @uxpindescription The selected indexes, separated with commas (1-based index). In case of Single Select mode, the first number will be used if multiple values are provided.
-     * @uxpinpropname Selected Indexes
+     * @uxpinbind onChange
+     * @uxpinpropname Indexes
      * */
     selected: PropTypes.string,
 
@@ -271,7 +269,7 @@ ComboBox.propTypes = {
 
     /**
      * @uxpindescription Fires when the selected item(s) changes.
-     * @uxpinpropname Value Change
+     * @uxpinpropname Index Change
      * */
     onChange: PropTypes.func
 

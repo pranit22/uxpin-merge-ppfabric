@@ -123,6 +123,7 @@ Slider.propTypes = {
 
   /**
    * @uxpindescription The value of the Slider
+   * @uxpinbind onChange
    * @uxpinpropname Value
    * */
   value: PropTypes.number,

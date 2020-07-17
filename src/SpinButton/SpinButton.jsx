@@ -184,6 +184,7 @@ SpinButton.propTypes = {
 
     /**
      * @uxpindescription The numeric value of the SpinButton (Required)
+     * @uxpinbind onChange
      * @uxpinpropname Value
      * */
     value: PropTypes.string.isRequired,
@@ -228,7 +229,7 @@ SpinButton.propTypes = {
 
     /**
     * @uxpindescription Fires when the value has changed
-    * @uxpinpropname Value Changed
+    * @uxpinpropname Value Change
     * */
     onChange: PropTypes.func,
 };

@@ -113,6 +113,7 @@ Toggle.propTypes = {
   /**
    * @uxpindescription The checked state of the control
    * @uxpinpropname Checked
+   * @uxpinbind onChange
    * */
   isChecked: PropTypes.bool,
 
@@ -130,7 +131,7 @@ Toggle.propTypes = {
 
   /**
    * @uxpindescription Fires when the toggle state changes.
-   * @uxpinpropname Value Change
+   * @uxpinpropname Checked Change
    * */
   onChange: PropTypes.func
 };

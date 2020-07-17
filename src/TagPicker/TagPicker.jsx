@@ -266,7 +266,7 @@ class TagPicker extends React.Component {
 
         //If the user has set a listener, let's send the list of selected indexes
         //This is a 1-based list of indexes.
-        if (this.props.onSelectionChanged) {
+        if (this.props.onChange) {
             //Let's create a list of selected indexes
             var indexList = [];
             var i;
@@ -282,7 +282,7 @@ class TagPicker extends React.Component {
                 return a - b;
             });
 
-            this.props.onSelectionChanged(indexList.toString());
+            this.props.onChange(indexList.toString());
         }
 
         //Let's replace the old list in memory
@@ -326,7 +326,8 @@ TagPicker.propTypes = {
 
     /**
      * @uxpindescription Of the 10 total Personas available, enter a list of 1-based index values for default items to be shown as selected (Optional)
-     * @uxpinpropname Selected Indexes
+     * @uxpinpropname Indexes
+     * @uxpinbind onChange
      * */
     selectedIndexes: PropTypes.string,
 
@@ -337,9 +338,9 @@ TagPicker.propTypes = {
 
     /**
      * @uxpindescription Fires when the user selects or removes a person.
-     * @uxpinpropname Change
+     * @uxpinpropname Indexes Change
      * */
-    onSelectionChanged: PropTypes.func
+    onChange: PropTypes.func
 
 }
 
