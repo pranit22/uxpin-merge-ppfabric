@@ -129,7 +129,8 @@ class Rating extends React.Component {
 Rating.propTypes = {
 
     /**
-     * @uxpindescription The rating value
+     * @uxpindescription The rating value. This prop's live value is available for scripting.
+     * @uxpinpropname * Value
      * @uxpinbind onChange
      */
     value: PropTypes.number,  //maps to rating
@@ -163,8 +164,8 @@ Rating.propTypes = {
     disabled: PropTypes.bool, //maps to readOnly
 
     /**
-     * @uxpindescription Fires when the rating value changes.
-     * @uxpinpropname Value Change
+     * @uxpindescription Fires when the control's Value property changes.
+     * @uxpinpropname * Value Changed
      * */
     onChange: PropTypes.func
 

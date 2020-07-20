@@ -45,19 +45,16 @@ class PPFavoritesButton extends React.Component {
         }
     }
 
-    _onClick() {
+    _onChange() {
         //Toggle the state.
         let newIsFaveStatus = !this.state.isFavorited;
-
-        console.log("New fave status: " + newIsFaveStatus);
-
         this.setState(
             { isFavorited: newIsFaveStatus, }
         );
 
         //Raise this event to UXPin. We'll send them the new fave status in case they can catch it.
-        if (this.props.onClick) {
-            this.props.onClick(newIsFaveStatus);
+        if (this.props.onChange) {
+            this.props.onChange(newIsFaveStatus);
         }
     }
 
@@ -106,7 +103,7 @@ class PPFavoritesButton extends React.Component {
                         text={text}
                         iconProps={iconProps}
                         styles={styles}
-                        onClick={() => { this._onClick() }}
+                        onClick={() => { this._onChange() }}
                         aria-describedby={tooltipId}
                     />
                 </TooltipHost >
@@ -123,8 +120,9 @@ class PPFavoritesButton extends React.Component {
 PPFavoritesButton.propTypes = {
 
     /**
-     * @uxpindescription To toggle the Favorited state
-     * @uxpinpropname Is Favorited
+     * @uxpindescription To toggle the Favorited state. This prop's live value is available for scripting.
+     * @uxpinpropname * Is Favorited
+     * @uxpinbind onChange
      * */
     isFavorited: PropTypes.bool,
 
@@ -171,10 +169,10 @@ PPFavoritesButton.propTypes = {
     disabled: PropTypes.bool,
 
     /**
-     * @uxpindescription Fires when the button is clicked on.
-     * @uxpinpropname Click
+     * @uxpindescription Fires when the controls Is Favorited value changes.
+     * @uxpinpropname * Is Favorited Changed
      * */
-    onClick: PropTypes.func
+    onChange: PropTypes.func
 };
 
 

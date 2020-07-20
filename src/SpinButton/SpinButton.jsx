@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { SpinButton as FSpinButton } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
-//import { mergeStyles } from '@uifabric/merge-styles';
-
 
 /**
  * UPDATED Mar 22, 2020 by Anthony Hand
@@ -183,9 +181,9 @@ class SpinButton extends React.Component {
 SpinButton.propTypes = {
 
     /**
-     * @uxpindescription The numeric value of the SpinButton (Required)
+     * @uxpindescription The numeric value of the SpinButton (Required). This prop's live value is available for scripting.
      * @uxpinbind onChange
-     * @uxpinpropname Value
+     * @uxpinpropname * Value
      * */
     value: PropTypes.string.isRequired,
 
@@ -228,8 +226,8 @@ SpinButton.propTypes = {
     disabled: PropTypes.bool,
 
     /**
-    * @uxpindescription Fires when the value has changed
-    * @uxpinpropname Value Change
+    * @uxpindescription Fires when the control's Value property changes.
+    * @uxpinpropname * Value Changed
     * */
     onChange: PropTypes.func,
 };

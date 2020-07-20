@@ -241,8 +241,8 @@ CalendarButton.propTypes = {
 
     /**
      * A unique name for this property. Got some weird behavior with the same name as the control's prop. 
-     * @uxpindescription Set the date in the control using one of these formats: Feb 8, 2020 -OR- 2/6/2020
-     * @uxpinpropname Date
+     * @uxpindescription Set the date in the control using one of these formats: Feb 8, 2020 -OR- 2/6/2020. This prop's live value is available for scripting.
+     * @uxpinpropname * Date
      * @uxpinbind onChange
      */
     calDate: PropTypes.string,
@@ -272,8 +272,8 @@ CalendarButton.propTypes = {
     tooltip: PropTypes.string,
 
     /**
-     * @uxpindescription Fires when a date is selected/changed
-     * @uxpinpropname Date Change
+     * @uxpindescription Fires when the selected date value changes.
+     * @uxpinpropname * Date Changed
      */
     onChange: PropTypes.func,
 

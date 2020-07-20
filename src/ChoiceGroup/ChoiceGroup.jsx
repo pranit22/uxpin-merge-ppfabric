@@ -189,15 +189,15 @@ ChoiceGroup.propTypes = {
   tiled: PropTypes.bool,
 
   /**
-  * @uxpindescription The 1-based index value of the default item to be shown as selected (Optional)
+  * @uxpindescription The 1-based index value of the default item to be shown as selected (Optional). This prop's live value is available for scripting.
   * @uxpinbind onChange
-  * @uxpinpropname Index
+  * @uxpinpropname * Index
    * */  
   selectedIndex: PropTypes.number,
 
   /**
-   * @uxpindescription Fires when the checked state changes.
-   * @uxpinpropname Index Change
+   * @uxpindescription Fires when the selected index value changes.
+   * @uxpinpropname * Index Changed
    * */
   onChange: PropTypes.func
 };

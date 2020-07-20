@@ -96,8 +96,8 @@ class ColorPicker extends React.Component {
 ColorPicker.propTypes = {
 
     /**
-     * @uxpindescription A PayPal UI or Hex color value to provide as the default color, such as: 'blue-600' or '#0070BA' (Optional)
-     * @uxpinpropname Color
+     * @uxpindescription A PayPal UI or Hex color value to provide as the default color, such as: 'blue-600' or '#0070BA' (Optional). This prop's live value is available for scripting.
+     * @uxpinpropname * Color
      * @uxpinbind onChange
      */ 
     selectedColor: PropTypes.string,
@@ -109,8 +109,8 @@ ColorPicker.propTypes = {
     showAlpha: PropTypes.bool,
 
     /**
-     * @uxpindescription Fires when a color is selected
-     * @uxpinpropname Color Change
+     * @uxpindescription Fires when the control's Color value changes.
+     * @uxpinpropname * Color Changed
      */  
     onChange: PropTypes.func,
 };

@@ -111,8 +111,8 @@ Toggle.propTypes = {
   offText: PropTypes.string,
 
   /**
-   * @uxpindescription The checked state of the control
-   * @uxpinpropname Checked
+   * @uxpindescription The checked state of the control. This prop's live value is available for scripting.
+   * @uxpinpropname * Checked
    * @uxpinbind onChange
    * */
   isChecked: PropTypes.bool,
@@ -130,8 +130,8 @@ Toggle.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * @uxpindescription Fires when the toggle state changes.
-   * @uxpinpropname Checked Change
+   * @uxpindescription Fires when the control's Checked value changes
+   * @uxpinpropname * Checked Changed
    * */
   onChange: PropTypes.func
 };

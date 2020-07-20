@@ -131,7 +131,7 @@ class Dropdown extends React.Component {
 
     //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
     if (this.props.onChange) {
-      const list = keys.map(key => key + 1).toString(); //comma separated
+      const list = keys.sort().map(key => key + 1).toString(); //comma separated
       this.props.onChange(list);
     }
   }
@@ -208,9 +208,9 @@ Dropdown.propTypes = {
   multiSelect: PropTypes.bool,
 
   /**
-   * @uxpindescription The selected indexes, separated with commas (1-based index). In case of Single Select mode, the first number will be used if multiple values are provided.
+   * @uxpindescription The selected indexes, separated with commas (1-based index). In case of Single Select mode, the first number will be used if multiple values are provided. This prop's live value is available for scripting.
    * @uxpinbind onChange
-   * @uxpinpropname Indexes
+   * @uxpinpropname * Indexes
    * */
   selected: PropTypes.string,
 
@@ -227,8 +227,8 @@ Dropdown.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * @uxpindescription Fires when the selected item(s) changes.
-   * @uxpinpropname Indexes Change
+   * @uxpindescription Fires when the selected index(es) changes.
+   * @uxpinpropname * Indexes Changed
    * */
   onChange: PropTypes.func
 };
