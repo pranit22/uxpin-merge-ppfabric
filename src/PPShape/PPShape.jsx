@@ -43,7 +43,8 @@ const defaultBorderRadius = '4';
 const instructionText = `Shape Instructions: 
 1) Set sizing and other desired properties.
 2) Optionally, drag any Merge controls onto the canvas. 
-2) In the Layers Panel, drag and drop Merge controls onto this control.`;
+3) In the Layers Panel, drag and drop Merge controls onto this control. 
+4) Uncheck the "Show Instructions" box.`;
 
 
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
@@ -133,25 +134,30 @@ class PPShape extends React.Component {
     render() {
 
         //****************************
-        // Instructions
-        let fTextStyles = {
-            root: {
-                color: defaultTextColor,
-                fontWeight: 'normal',
-                fontStyle: 'normal',
-                display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
-                lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
-            }
-        }
+        //For Text control: Instructions
+        //Let's see if we need to show instructions
+        var instructionStack = '';
+        if (this.props.showInstructions) {
 
-        let instructions = (
-            <Text
-                {...this.props}
-                styles={fTextStyles}
-                variant={'medium'}>
-                {this.props.value}
-            </Text>
-        );
+            let fTextStyles = {
+                root: {
+                    color: defaultTextColor,
+                    fontWeight: 'normal',
+                    fontStyle: 'normal',
+                    display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
+                    lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
+                }
+            }
+
+            instructionStack = (
+                <Text
+                    {...this.props}
+                    styles={fTextStyles}
+                    variant={'medium'}>
+                    {this.props.value}
+                </Text>
+            );
+        }
 
         //Styles with dynamic values
 
@@ -247,7 +253,8 @@ class PPShape extends React.Component {
                 styles={topStackItemStyles}
                 onClick={() => { this._onClick() }}>
 
-                {_.isEmpty(this.props.children) && instructions}
+                {instructionStack}
+
                 {stackList}
 
             </Stack>
@@ -279,6 +286,12 @@ PPShape.propTypes = {
      * @uxpincontroltype textfield(6)
      */
     value: PropTypes.string,
+
+    /**
+     * @uxpindescription To show or hide the instructional text  
+     * @uxpinpropname Show Instructions
+     */
+    showInstructions: PropTypes.bool,
 
     /**
      * @uxpindescription To set the shape to a circle rather than a rectangle  
@@ -379,6 +392,7 @@ PPShape.propTypes = {
  */
 PPShape.defaultProps = {
     value: instructionText,
+    showInstructions: true,
     isCircle: false,
     boxWidth: 50,
     boxHeight: 50,
