@@ -122,8 +122,9 @@ Slider.propTypes = {
   vertical: PropTypes.bool,
 
   /**
-   * @uxpindescription The value of the Slider
-   * @uxpinpropname Value
+   * @uxpindescription The value of the Slider. This prop's live value is available for scripting.
+   * @uxpinbind onChange
+   * @uxpinpropname * Value
    * */
   value: PropTypes.number,
 
@@ -134,8 +135,8 @@ Slider.propTypes = {
   showValue: PropTypes.bool,
 
   /**
-   * @uxpindescription Fires when the Slider value changes.
-   * @uxpinpropname Value Change
+   * @uxpindescription Fires when the control's Value property changes.
+   * @uxpinpropname * Value Changed
    * */
   onChange: PropTypes.func,
 };

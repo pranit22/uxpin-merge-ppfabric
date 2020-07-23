@@ -86,16 +86,16 @@ class DatePicker extends React.Component {
      * We'll immediately use the date. In the future, we may use the date range, too. 
      * @param {*} date - The selected date
      */
-    _onSelectDate(date) {
+    _onChange(date) {
 
         this.setState(
             { selectedDate: date }
         )
 
-        if (this.props.onSelectDate) {
+        if (this.props.onChange) {
             //Format this before surfacing with style: 'Feb 8, 2020' 
             let dt = TpxUxDateTimeUtils.getFormattedDate(date);
-            this.props.onSelectDate(dt);
+            this.props.onChange(dt);
         }
     }
 
@@ -156,7 +156,7 @@ class DatePicker extends React.Component {
                 disabled={this.props.disabled}
                 isRequired={this.props.required}
 
-                onSelectDate={(d, sdr) => this._onSelectDate(d)}
+                onSelectDate={(d, sdr) => this._onChange(d)}
                 onFormatDate={(d) => this._onFormatDate(d)}
                 parseDateFromString={(d) => this._onParseDate(d)}
             />
@@ -177,8 +177,9 @@ DatePicker.propTypes = {
 
     /**
      * A unique name for this property. Got some weird behavior with the same name as the control's prop. 
-     * @uxpindescription Set the date in the control using one of these formats: Feb 8, 2020 -OR- 2/6/2020
-     * @uxpinpropname Date
+     * @uxpindescription Set the date in the control using one of these formats: Feb 8, 2020 -OR- 2/6/2020. This prop's live value is available for scripting.
+     * @uxpinpropname * Date
+     * @uxpinbind onChange
      */
     calDate: PropTypes.string,
 
@@ -206,10 +207,10 @@ DatePicker.propTypes = {
     showWeekNumbers: PropTypes.bool,
 
     /**
-     * @uxpindescription Fires when a date is selected
-     * @uxpinpropname Date Selected
+     * @uxpindescription Fires when the selected date value changes.
+     * @uxpinpropname * Date Changed
      */
-    onSelectDate: PropTypes.func,
+    onChange: PropTypes.func,
 };
 
 

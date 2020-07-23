@@ -54,8 +54,8 @@ class SearchBox extends React.Component {
     )
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
-    if (this.props.onValueChange) {
-      this.props.onValueChange(textVal);
+    if (this.props.onChange) {
+      this.props.onChange(textVal);
     }
   }
 
@@ -115,8 +115,9 @@ SearchBox.propTypes = {
 
   /**
    * We give this property a unique name to avoid collisions. We map its value to the control's 'value' prop.
-   * @uxpindescription Current value of the text field
-   * @uxpinpropname Value
+   * @uxpindescription Current value of the text field. This prop's live value is available for scripting.
+   * @uxpinpropname * Value
+   * @uxpinbind onChange
    * @uxpincontroltype textfield(3)
    * */
   textValue: PropTypes.string,
@@ -141,10 +142,10 @@ SearchBox.propTypes = {
 
   /**
    * We give this property a unique name to avoid collisions. We map its value to the control's 'onChange' prop.
-   * @uxpindescription Fires when the text value changes.
-   * @uxpinpropname Value Change
+   * @uxpindescription Fires when the control's Value property changes.
+   * @uxpinpropname * Value Changed
    * */
-  onValueChange: PropTypes.func,
+  onChange: PropTypes.func,
 
   /**
    * We give this property a unique name to avoid collisions. We map its value to the control's 'onChange' prop.

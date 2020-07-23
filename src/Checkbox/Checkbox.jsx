@@ -104,8 +104,9 @@ Checkbox.propTypes = {
   label: PropTypes.string,
 
   /**
-   * @uxpindescription The checked state of the control.
-   * @uxpinpropname Checked
+   * @uxpindescription The checked state of the control. This prop's live value is available for scripting.
+   * @uxpinbind onChange
+   * @uxpinpropname * Checked
    * */
   isChecked: PropTypes.bool,
 
@@ -122,8 +123,8 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * @uxpindescription Fires when the checked state changes.
-   * @uxpinpropname Value Change
+   * @uxpindescription Fires when the control's Checked value changes.
+   * @uxpinpropname * Checked Changed
    * */
   onChange: PropTypes.func
 };

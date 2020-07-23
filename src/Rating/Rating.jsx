@@ -88,7 +88,7 @@ class Rating extends React.Component {
 
         //The index comes in 1-based so we can save it immediately.     
         this.setState(
-            { selectedIndex: selectedIndex }
+            { selectedIndex }
         )
 
         //Raise this event to UXPin. We'll send them info about which item was clicked on in case they can catch it.
@@ -129,7 +129,9 @@ class Rating extends React.Component {
 Rating.propTypes = {
 
     /**
-     * @uxpindescription The rating value
+     * @uxpindescription The rating value. This prop's live value is available for scripting.
+     * @uxpinpropname * Value
+     * @uxpinbind onChange
      */
     value: PropTypes.number,  //maps to rating
 
@@ -162,8 +164,8 @@ Rating.propTypes = {
     disabled: PropTypes.bool, //maps to readOnly
 
     /**
-     * @uxpindescription Fires when the rating value changes.
-     * @uxpinpropname Value Change
+     * @uxpindescription Fires when the control's Value property changes.
+     * @uxpinpropname * Value Changed
      * */
     onChange: PropTypes.func
 

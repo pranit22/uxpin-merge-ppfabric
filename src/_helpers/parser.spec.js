@@ -97,3 +97,10 @@ it('csv2arr - ex1: conversion of the CVS string to array of arrays', () => {
     ]
   ])
 })
+
+const csv2arr_string2 = '   '; // string with just spaces
+const ex5 = csv2arr(csv2arr_string2)
+
+it('csv2arr - ex2: conversion of empty string (on trimming) returns empty array', () => {
+  expect(ex5).toEqual([])
+})

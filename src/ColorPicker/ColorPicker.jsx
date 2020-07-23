@@ -57,7 +57,7 @@ class ColorPicker extends React.Component {
       }
 
 
-    _onColorChanged(color) {
+    _onChanged(color) {
 
         this.setState (
             {   selectedColorObj: color}
@@ -67,8 +67,8 @@ class ColorPicker extends React.Component {
         let hex = "#" + color.hex;
 
         //Return the index of the color so UXPin can catch it
-        if (this.props.onColorChange) {
-            this.props.onColorChange(hex);
+        if (this.props.onChange) {
+            this.props.onChange(hex);
         }
     }
 
@@ -82,7 +82,7 @@ class ColorPicker extends React.Component {
                 showPreview = { true } //hard code this
                 color = { this.state.selectedColorObj }
                 alphaSliderHidden = { !this.props.showAlpha }
-                onChange = {(evt, c) => this._onColorChanged(c) } //Only catch the color
+                onChange = {(evt, c) => this._onChanged(c) } //Only catch the color
             />
 
         );
@@ -96,8 +96,9 @@ class ColorPicker extends React.Component {
 ColorPicker.propTypes = {
 
     /**
-     * @uxpindescription A PayPal UI or Hex color value to provide as the default color, such as: 'blue-600' or '#0070BA' (Optional)
-     * @uxpinpropname Selected Color
+     * @uxpindescription A PayPal UI or Hex color value to provide as the default color, such as: 'blue-600' or '#0070BA' (Optional). This prop's live value is available for scripting.
+     * @uxpinpropname * Color
+     * @uxpinbind onChange
      */ 
     selectedColor: PropTypes.string,
 
@@ -108,10 +109,10 @@ ColorPicker.propTypes = {
     showAlpha: PropTypes.bool,
 
     /**
-     * @uxpindescription Fires when a color is selected
-     * @uxpinpropname Change
+     * @uxpindescription Fires when the control's Color value changes.
+     * @uxpinpropname * Color Changed
      */  
-    onColorChange: PropTypes.func,
+    onChange: PropTypes.func,
 };
 
 
