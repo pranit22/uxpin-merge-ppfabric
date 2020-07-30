@@ -53,6 +53,7 @@ const defaultRowValues =
       link(Component_Name_C), icon(CircleClearSolid|color-red-500) Unavailable, C-3, D-3, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)`;
 
 const defaultShimmerDuration = 1;
+const defaultShimmerLines = 3;
 
 class DetailsList extends React.Component {
   constructor(props) {
@@ -72,7 +73,6 @@ class DetailsList extends React.Component {
   }
 
   set() {
-    console.log(this.props.shimmer)
     this.setState(
       {
         alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
@@ -85,10 +85,10 @@ class DetailsList extends React.Component {
     if (this.props.shimmer) {
       setTimeout(
         () => {
-        this.setState({
-          shimmer: false
-        })
-      },
+          this.setState({
+            shimmer: false
+          })
+        },
         (this.props.shimmerDuration || defaultShimmerDuration) * 1000
       )
     }
@@ -108,7 +108,8 @@ class DetailsList extends React.Component {
       prevProps.minWidth !== this.props.minWidth ||
       prevProps.maxWidth !== this.props.maxWidth ||
       prevProps.shimmer !== this.props.shimmer ||
-      prevProps.shimmerDuration !== this.props.shimmerDuration
+      prevProps.shimmerDuration !== this.props.shimmerDuration ||
+      prevProps.shimmerLines !== this.props.shimmerLines
     ) {
       this.set();
     }
@@ -128,17 +129,61 @@ class DetailsList extends React.Component {
     })
   }
 
+  /**
+   * This function sorts the visible/filtered rows based on the text visible to the user and ignores the tags and attributes (colors and icon names) passed as children.
+   * @param rows current visible rows
+   * @param columnKey the column key to sort rows with
+   * @param isSortedDescending the order of the sort
+   * @returns the sorted rows based on the text content of the column values
+   */
   sortColumns(rows, columnKey, isSortedDescending) {
-    const key = columnKey;
-    return rows.slice(0).sort((a, b) => ((isSortedDescending ? a[key] < b[key] : a[key] > b[key]) ? 1 : -1));
+    return rows.slice(0).sort((a, b) => {
+      const aVal = this.getTextContent(a[columnKey]).toLowerCase();
+      const bVal = this.getTextContent(b[columnKey]).toLowerCase();
+      return isSortedDescending ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+    });
   }
 
-  includesText(i, text) {
-    return Object.values(i).some(txt => txt.toString().toLowerCase().indexOf(text.toLowerCase()) > -1);
+  /**
+   * Goes through all children contained in a row object in state and uses element.props.children to get all text visible to the user (ignores the props and attributes like color and icons passed as user input) and returns the string by joining all parts after trimming.
+   * @param elem the react element or a component that renders a cell
+   * @returns the text content of the elements/components (similar to DOM textContent property which returns the text content of the specified node, and its immediate descendants)
+   * 
+   */
+  getTextContent(elem) {
+    return elem.reduce((_text, part) => {
+      const children = part.props.children;
+      if (children) {
+        if (Array.isArray(children)) {
+          _text.push(children.join('').trim())
+        } else {
+          _text.push(children.trim())
+        }
+      }
+      return _text;
+    }, []).join(' ')
+  }
+
+  /**
+   * 
+   * This function checks whether row contains any cell that has the text visible to the user which contains the search term. The tags and attributes (colors and icon names) passed as children as ignored from the search.
+   * @param i the row object that holds data for a row
+   * @param search the search term
+   * @returns true, if the search term is a substring of the text content of any cell, false, otherwise
+   * 
+   */
+  includesText(i, search) {
+    return Object.values(i).some(elem => {
+      if (Array.isArray(elem)) {
+        const text = this.getTextContent(elem);
+        return text.toLowerCase().includes(search.toLowerCase())
+      }
+      return false;
+    });
   }
 
   searchText(text) {
-    return this.state.allItems.filter(i => this.includesText(i, text)) || this.state.allItems;
+    return this.state.allItems.filter(i => this.includesText(i, text));
   }
 
   searchTable(event) {
@@ -180,12 +225,10 @@ class DetailsList extends React.Component {
         .map((columnName, colIndex) => {
           columnName = columnName.trim()
 
-          let name = getTokens(columnName).mixed ? getTokens(columnName).mixed
+          let name = getTokens(columnName).mixed
             .map((el, i) => typeof el === 'string' ?
               <span key={i}> {el} </span> :
               el.suggestions[0]())
-            :
-            getTokens(columnName).text
 
           const columnParams = {
             key: columnName,
@@ -319,10 +362,35 @@ class DetailsList extends React.Component {
  */
 DetailsList.propTypes = {
 
+  /**
+  * @uxpindescription Whether to show the filter SearchBox 
+  * @uxpinpropname Show Filter
+  */
+  isSearchEnabled: PropTypes.bool,
+
+  /**
+   * @uxpindescription The exact name from the PayPal icon library. Displays on the right side. 
+   * @uxpinpropname Search Icon
+   * */
+  icon: PropTypes.string,
+
+  /**
+   * @uxpindescription Placeholder text to show in the text field when it's empty
+   * @uxpinpropname Search Placeholder
+   * */
+  placeholder: PropTypes.string,
+
+  /**
+  * @uxpindescription Whether to display the table headers 
+  * @uxpinpropname Show Headers
+  */
+  header: PropTypes.bool,
+
   /** 
    *  Separate each item with new line or | symbol.
    *  Put at the end of the line [color:blue-600] token to set color for whole column.
    * @uxpindescription Enter one column per row. Supports these features: link(Link Text) and icon(Name|color-blue-600). Also supports CSV formatting.
+   * @uxpinpropname Headers
    * @uxpincontroltype codeeditor
    * */
   columns: PropTypes.string,
@@ -341,7 +409,7 @@ DetailsList.propTypes = {
   /**
   * Example: 2, 3
   * @uxpindescription Enter a comma-separated list of column numbers for right aligning their contents (Optional)
-  * @uxpinpropname Alight Right
+  * @uxpinpropname Align Right
   */
   alignRight: PropTypes.string,
 
@@ -365,40 +433,22 @@ DetailsList.propTypes = {
   maxWidth: PropTypes.number,
 
   /**
-  * @uxpindescription Whether to show the filter SearchBox 
-  * @uxpinpropname Show Filter
-  */
-  isSearchEnabled: PropTypes.bool,
-
-  /**
-  * @uxpindescription Whether to display the table headers 
-  * @uxpinpropname Show Headers
-  */
-  header: PropTypes.bool,
-
-  /**
   * @uxpindescription Whether to display the shimmer 
   * @uxpinpropname Shimmer
   */
   shimmer: PropTypes.bool,
 
   /**
-  * @uxpindescription Shimmer duration inseconds
+  * @uxpindescription Shimmer duration, in seconds
   * @uxpinpropname Shimmer Duration
   */
   shimmerDuration: PropTypes.number,
 
   /**
-   * @uxpindescription The exact name from the PayPal icon library. Displays on the right side. 
-   * @uxpinpropname Search Icon
-   * */
-  icon: PropTypes.string,
-
-  /**
-   * @uxpindescription Placeholder text to show in the text field when it's empty
-   * @uxpinpropname Search Placeholder
-   * */
-  placeholder: PropTypes.string,
+  * @uxpindescription Number of Shimmer lines
+  * @uxpinpropname Shimmer Lines
+  */
+  shimmerLines: PropTypes.number,
 
 };
 
@@ -418,7 +468,8 @@ DetailsList.defaultProps = {
   icon: searchFieldIconName,
   placeholder: searchFieldPlaceholder,
   shimmer: true,
-  shimmerDuration: defaultShimmerDuration
+  shimmerDuration: defaultShimmerDuration,
+  shimmerLines: defaultShimmerLines
 };
 
 
