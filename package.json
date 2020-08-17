@@ -8,9 +8,8 @@
     "jest": "jest --coverage",
     "server": "uxpin-merge server --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js",
     "start": "uxpin-merge --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --disable-tunneling",
-    "push:master": "NODE_TLS_REJECT_UNAUTHORIZED=0 uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 258e3f84adad7ff4420400d965b6bb14f683acdc",
-    "push:experimental": "NODE_TLS_REJECT_UNAUTHORIZED=0 uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token f06631f716d0ab697fd84ed258fabac10ad2c3fc",
-    "push:pranit": "NODE_TLS_REJECT_UNAUTHORIZED=0 uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 4542303d10c69fbe2a42d19fd36cbf247ba54d06",
+    "push:prod": "NODE_TLS_REJECT_UNAUTHORIZED=0 uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 258e3f84adad7ff4420400d965b6bb14f683acdc",
+    "push:preprod": "NODE_TLS_REJECT_UNAUTHORIZED=0 uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 0e31a8221465db6579c1cee38308fe94b2fdd33c",
     "debug": "uxpin-merge dump --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js > metadata.json",
     "kitchensink": "webpack-cli serve --config app/kitchensink/webpack.config.js"
   },
