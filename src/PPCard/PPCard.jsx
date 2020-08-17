@@ -250,12 +250,16 @@ PPCard.propTypes = {
     children: PropTypes.node,
 
     /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
      * @uxpindescription The margin around the card. Value must be 0 or more.  
      * @uxpinpropname Margin
      */
     margin: PropTypes.number,
 
     /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Inner padding for all card contents. Value must be 0 or more.  
      * @uxpinpropname Card Padding
@@ -308,7 +312,7 @@ PPCard.defaultProps = {
     value: instructionText,
     margin: 6,
     cardPadding: 12,
-    gutterPadding: 12,
+    gutterPadding: 24,
     align: leftAlign,
     bgColor: '',
     showShadow: true,
