@@ -78,7 +78,7 @@ class PPVerticalStack extends React.Component {
                 {...this.props}
                 styles={fTextStyles}
                 variant={'medium'}>
-                {this.props.value}
+                {instructionText}
             </Text>
         );
 
@@ -289,7 +289,6 @@ PPVerticalStack.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 PPVerticalStack.defaultProps = {
-    value: instructionText,
     internalPadding: 0,
     gutterPadding: 12,
     align: leftAlign,

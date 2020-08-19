@@ -77,7 +77,7 @@ class Card extends React.Component {
         console.log('CARD: In Render.');
 
         //An empty string will cause the Text control to hide.
-        let instructions = this.props.showInstructions ? this.props.instructions : '' ;
+        let instructions = this.props.showInstructions ? instructionText : '' ;
 
         let hAlign = this._getHorizontalAlignmentToken();
 
@@ -198,15 +198,6 @@ Card.propTypes = {
     children: PropTypes.node,
 
     /**
-     * Don't show this prop in the UXPin Editor. 
-     * @uxpinignoreprop 
-     * @uxpindescription Click 'Hide Instructions' to hide this text.
-     * @uxpinpropname Instructions
-     * @uxpincontroltype textfield(6)
-     */
-    instructions: PropTypes.string,
-
-    /**
      * @uxpindescription To show or hide the instructional text  
      * @uxpinpropname Show Instructions
      */ 
@@ -249,7 +240,6 @@ Card.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Card.defaultProps = {
-    instructions: instructionText,    
     showInstructions: true,
     cardTheme: themeDefault,
     cardPadding: 12,

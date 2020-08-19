@@ -120,7 +120,7 @@ class PPCard extends React.Component {
                 {...this.props}
                 styles={fTextStyles}
                 variant={'medium'}>
-                {this.props.value}
+                {instructionText}
             </Text>
         );
 
@@ -305,7 +305,6 @@ PPCard.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 PPCard.defaultProps = {
-    value: instructionText,
     margin: 6,
     cardPadding: 12,
     gutterPadding: 12,
