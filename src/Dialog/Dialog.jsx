@@ -4,7 +4,8 @@ import {
     DialogFooter,
     PrimaryButton,
     DefaultButton,
-    DialogType
+    DialogType,
+    Stack
 } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 
@@ -23,7 +24,17 @@ import * as PropTypes from 'prop-types';
  * */
 
 
+const small = 'small';
+const medium = 'medium';
+const large = 'large';
 
+const getWidthFromSize = width => {
+    switch (width) {
+        case small: return 340;
+        case medium: return 680;
+        case large: return 1020;
+    }
+}
 
 const _dragOptions = {
     moveMenuItemText: 'Move',
@@ -148,7 +159,7 @@ class Dialog extends React.Component {
                         borderRadius: 10
                     }}><br /><em><strong>Dialog:</strong></em><br />Move this marker offscreen</div>
                 <FDialog
-                    //{ ...this.props }
+                    maxWidth={getWidthFromSize(this.props.maxWidth)}
                     hidden={!this.state.open}
                     dialogContentProps={{
                         type: DialogType.normal,
@@ -163,6 +174,16 @@ class Dialog extends React.Component {
                     }}
                     onDismiss={() => { this._onDismissClicked() }}
                 >
+                    {this.props.children &&
+                        <Stack
+                            tokens={{
+                                childrenGap: 12,
+                                padding: '12px 0px'
+                            }}
+                        >
+                            {this.props.children}
+                        </Stack>
+                    }
                     {footer}
                 </FDialog>
             </div>
@@ -177,9 +198,22 @@ class Dialog extends React.Component {
 Dialog.propTypes = {
 
     /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription Contents for the right side. 1. Drag an object onto the canvas. 2. In the Layers Panel, drag the item onto this object. Now it should be indented, and contained as a 'child.'  
+     * @uxpinpropname Right Contents
+     */
+    children: PropTypes.node,
+
+    /**
      * @uxpindescription Whether to display the Dialog 
      */
     show: PropTypes.bool,
+
+    /**
+     * @uxpindescription Max width for the control
+     */
+    maxWidth: PropTypes.oneOf([small, medium, large]),
 
     /**
      * @uxpindescription The control's title text
@@ -247,6 +281,7 @@ Dialog.propTypes = {
  */
 Dialog.defaultProps = {
     show: true,
+    maxWidth: small,
     title: "Basic Dialog",
     text: "Place the dialog marker off screen. Using another control like a Button, set the 'open' property to True to show it a mockup.",
     draggable: true,
