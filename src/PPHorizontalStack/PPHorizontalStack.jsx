@@ -164,7 +164,7 @@ class PPHorizontalStack extends React.Component {
                 {...this.props}
                 styles={fTextStyles}
                 variant={'medium'}>
-                {this.props.value}
+                {instructionText}
             </Text>
         );
 
@@ -282,15 +282,6 @@ PPHorizontalStack.propTypes = {
     children: PropTypes.node,
 
     /**
-     * Don't show this prop in the UXPin Editor. 
-     * @uxpinignoreprop 
-     * @uxpindescription Click 'Hide Instructions' to hide this text.
-     * @uxpinpropname Instructions
-     * @uxpincontroltype textfield(6)
-     */
-    value: PropTypes.string,
-
-    /**
      * @uxpindescription The list of widths. Put one width amount on each row. Enter a percent like '33%' or a whole number, like '212'. Be sure that the full width is accounted for! (In percent or pixels)
      * @uxpinpropname Col Widths
      * @uxpincontroltype codeeditor
@@ -362,7 +353,6 @@ PPHorizontalStack.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 PPHorizontalStack.defaultProps = {
-    value: instructionText,
     widths: defaultWidths,
     internalPadding: 0,
     gutterPadding: 12,
