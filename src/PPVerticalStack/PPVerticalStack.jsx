@@ -24,6 +24,7 @@ const verticalAlign = 'start';
 const leftAlign = 'left';
 const centerAlign = 'center';
 const rightAlign = 'right';
+const stretchAlign = 'stretch';
 
 const instructionText = `Vertical Stack Instructions: 
 1) Drag any Merge controls onto the canvas. 
@@ -55,7 +56,7 @@ class PPVerticalStack extends React.Component {
             case rightAlign:
                 return 'end';
             default:
-                return 'start';
+                return this.props.align;
         }
     }
 
@@ -133,7 +134,6 @@ class PPVerticalStack extends React.Component {
                     let stack = (
                         <StackItem
                             key={i}
-                            align={this.props.stretch ? 'stretch' : ''}
                             // Does this child span the remaining space?
                             grow={this.props.spanChild && this.props.childSpannerIndex === i + 1 ? true : false}
                         >
@@ -223,13 +223,7 @@ PPVerticalStack.propTypes = {
      * @uxpindescription To horizontally align all content within the stack 
      * @uxpinpropname Alignment
      */
-    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign]),
-
-    /**
-     * @uxpindescription To stretch the contents within each section
-     * @uxpinpropname Stretch Contents
-     */
-    stretch: PropTypes.bool,
+    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign, stretchAlign]),
 
     /**
      * @uxpindescription To insert a spanner to fill empty space between two elements. 
@@ -295,7 +289,6 @@ PPVerticalStack.defaultProps = {
     align: leftAlign,
     spanChild: false,
     childSpannerIndex: 1,
-    stretch: true,
     addSpanner: false,
     spannerIndex: 1,
     spannerHeight: 48,
