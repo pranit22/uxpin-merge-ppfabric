@@ -165,7 +165,15 @@ class Dialog extends React.Component {
                         type: DialogType.normal,
                         showCloseButton: true,
                         title: this.props.title,
-                        subText: this.props.text
+                        subText: this.props.text,
+                        styles: {
+                            subText: {
+                                marginBottom: 0
+                            },
+                            innerContent: {
+                                marginBottom: 24
+                            }
+                        }
                     }}
                     modalProps={{
                         isBlocking: this.props.blocking,
@@ -177,8 +185,12 @@ class Dialog extends React.Component {
                     {this.props.children &&
                         <Stack
                             tokens={{
-                                childrenGap: 12,
-                                padding: '12px 0px'
+                                childrenGap: 12
+                            }}
+                            styles={{
+                                root: {
+                                    marginTop: 12
+                                }
                             }}
                         >
                             {this.props.children}
