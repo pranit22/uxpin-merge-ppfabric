@@ -46,24 +46,6 @@ const instructions = (
 );
 
 class PPPanel extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isOpen: props.show
-        }
-    }
-
-    set() {
-        this.setState({
-            isOpen: this.props.show
-        })
-    }
-
-    componentDidMount() {
-        this.set();
-    }
-
     dismissPanel() {
         this.props.onDismiss(false);
     }
