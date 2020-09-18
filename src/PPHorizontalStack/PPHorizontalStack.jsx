@@ -30,10 +30,7 @@ const bottomAlign = 'bottom';
 
 const startAlign = 'start';
 const endAlign = 'end';
-const spaceEvenly = 'space-evenly';
-const spaceBetween = 'space-between';
-const spaceAround = 'space-around';
-const baseline = 'baseline';
+
 const stretchAlign = 'stretch';
 
 
@@ -131,6 +128,19 @@ class PPHorizontalStack extends React.Component {
         }
     }
 
+    _getHorizontalAlignmentCSSValue() {
+        switch (this.props.align) {
+            case leftAlign:
+                return `flex-${startAlign}`;
+            case centerAlign:
+                return centerAlign;
+            case rightAlign:
+                return `flex-${endAlign}`;
+            default:
+                return this.props.align;
+        }
+    }
+
     _getVerticalAlignmentToken() {
         switch (this.props.vAlign) {
             case topAlign:
@@ -144,6 +154,18 @@ class PPHorizontalStack extends React.Component {
         }
     }
 
+    _getVerticalAlignmentCSSValue() {
+        switch (this.props.vAlign) {
+            case topAlign:
+                return `flex-${startAlign}`;
+            case middleAlign:
+                return centerAlign;
+            case bottomAlign:
+                return `flex-${endAlign}`;
+            default:
+                return this.props.align;
+        }
+    }
 
     render() {
 
@@ -219,8 +241,10 @@ class PPHorizontalStack extends React.Component {
                     let stackItemWidth = this._getColumnWidth(i);
                     let stackItemStyle = {
                         root: {
+                            display: 'flex',
                             width: stackItemWidth,
-                            alignItems: this.props.vAlign
+                            alignItems: this._getVerticalAlignmentCSSValue(),
+                            justifyContent: this._getHorizontalAlignmentCSSValue()
                         },
                     };
 
@@ -228,6 +252,7 @@ class PPHorizontalStack extends React.Component {
                     let stack = (
                         <StackItem
                             key={i}
+                            align={this.props.stretch ? stretchAlign : ''}
                             styles={stackItemStyle}
                         >
                             {child}
@@ -306,14 +331,19 @@ PPHorizontalStack.propTypes = {
      * @uxpindescription To horizontally align all content within the stack 
      * @uxpinpropname Horiz Alignment
      */
-    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign, stretchAlign, spaceAround, spaceBetween, spaceEvenly, baseline]),
+    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign]),
 
     /**
      * @uxpindescription To vertically align all content within the stack 
      * @uxpinpropname Vert Alignment
      */
-    vAlign: PropTypes.oneOf([topAlign, middleAlign, bottomAlign, stretchAlign]),
+    vAlign: PropTypes.oneOf([topAlign, middleAlign, bottomAlign]),
 
+    /**	
+     * @uxpindescription To stretch the children vertically
+     * @uxpinpropname Stretch Contents	
+     */
+    stretch: PropTypes.bool,
 
     /**
      * @uxpindescription To insert a spanner to fill empty space between two elements. 
@@ -358,6 +388,7 @@ PPHorizontalStack.defaultProps = {
     gutterPadding: 12,
     align: leftAlign,
     vAlign: topAlign,
+    stretch: true,
     fillParent: false,
     addSpanner: false,
     spannerIndex: 1,

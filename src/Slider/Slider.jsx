@@ -63,7 +63,7 @@ class Slider extends React.Component {
   //TODO: Figure out how to handle sizing, especially vertical.
   getSliderClasses() {
     return mergeStyles({
-      height: this.props.vertical ? 300 : 50,
+      height: this.props.vertical ? this.props.verticalHeight : 'auto',
       marginBottom: 4,
     });
   }
@@ -122,6 +122,12 @@ Slider.propTypes = {
   vertical: PropTypes.bool,
 
   /**
+   * @uxpindescription Height for the vertical slider, including the label
+   * @uxpinpropname Vertical Height
+   * */
+  verticalHeight: PropTypes.number,
+
+  /**
    * @uxpindescription The value of the Slider. This prop's live value is available for scripting.
    * @uxpinbind onChange
    * @uxpinpropname * Value
@@ -152,6 +158,7 @@ Slider.defaultProps = {
   value: 2,
   showValue: true,
   vertical: false,
+  verticalHeight: 300
 };
 
 export { Slider as default };

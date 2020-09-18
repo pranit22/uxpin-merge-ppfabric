@@ -24,6 +24,10 @@ const verticalAlign = 'start';
 const leftAlign = 'left';
 const centerAlign = 'center';
 const rightAlign = 'right';
+
+const startAlign = 'start';
+const endAlign = 'end';
+
 const stretchAlign = 'stretch';
 
 const instructionText = `Vertical Stack Instructions: 
@@ -134,6 +138,7 @@ class PPVerticalStack extends React.Component {
                     let stack = (
                         <StackItem
                             key={i}
+                            align={this.props.stretch ? stretchAlign : ''}
                             // Does this child span the remaining space?
                             grow={this.props.spanChild && this.props.childSpannerIndex === i + 1 ? true : false}
                         >
@@ -184,7 +189,7 @@ class PPVerticalStack extends React.Component {
 
                 {_.isEmpty(this.props.children) && instructions}
                 {stackList}
-                
+
             </Stack>
         );
     }
@@ -223,7 +228,13 @@ PPVerticalStack.propTypes = {
      * @uxpindescription To horizontally align all content within the stack 
      * @uxpinpropname Alignment
      */
-    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign, stretchAlign]),
+    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign]),
+
+    /**	
+     * @uxpindescription To stretch the contents within each section	
+     * @uxpinpropname Stretch Contents	
+     */
+    stretch: PropTypes.bool,
 
     /**
      * @uxpindescription To insert a spanner to fill empty space between two elements. 
@@ -286,6 +297,7 @@ PPVerticalStack.defaultProps = {
     internalPadding: 0,
     gutterPadding: 12,
     align: leftAlign,
+    stretch: true,
     spanChild: false,
     childSpannerIndex: 1,
     addSpanner: false,
