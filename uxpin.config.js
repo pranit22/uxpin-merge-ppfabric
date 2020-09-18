@@ -24,6 +24,16 @@ module.exports = {
         ]
       },
       {
+        name: 'Utilities',
+        include: [
+          'src/Icon/Icon.jsx',
+          'src/Separator/Separator.jsx',
+          'src/Text/Text.jsx',
+          'src/Link/Link.jsx',
+          'src/Image/Image.jsx',
+        ]
+      },
+      {
         name: 'Card',
         include: [
           'src/PPCard/PPCard.jsx',
@@ -109,16 +119,6 @@ module.exports = {
           'src/Tooltip/Tooltip.jsx',
           'src/PPPanel/PPPanel.jsx',
           'src/PPProfileCard/PPProfileCard.jsx',
-        ]
-      },
-      {
-        name: 'Utilities',
-        include: [
-          'src/Icon/Icon.jsx',
-          'src/Separator/Separator.jsx',
-          'src/Text/Text.jsx',
-          'src/Link/Link.jsx',
-          'src/Image/Image.jsx',
         ]
       },
       {

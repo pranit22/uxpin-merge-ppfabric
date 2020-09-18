@@ -140,14 +140,7 @@ ActivityItem.propTypes = {
     * @uxpindescription Whether to display the control in Compact mode. 
     * @uxpinpropname Compact Mode
     */
-    isCompact: PropTypes.bool,
-
-
-    /**
-     * @uxpindescription Fires when the control is clicked on.
-     * @uxpinpropname Click
-     * */
-    onClick: PropTypes.func
+    isCompact: PropTypes.bool
 };
 
 
