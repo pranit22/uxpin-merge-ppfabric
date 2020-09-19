@@ -237,27 +237,22 @@ class PPHorizontalStack extends React.Component {
 
                 for (var i = 0; i < childList.length; i++) {
                     let child = childList[i];
-
                     let stackItemWidth = this._getColumnWidth(i);
-                    let stackItemStyle = {
-                        root: {
-                            display: 'flex',
-                            width: stackItemWidth,
-                            alignItems: this._getVerticalAlignmentCSSValue(),
-                            justifyContent: this._getHorizontalAlignmentCSSValue()
-                        },
-                    };
 
                     //Now we put it all together!
                     let stack = (
-                        <StackItem
+                        <Stack
                             key={i}
-                            align={this.props.stretch ? stretchAlign : ''}
-                            styles={stackItemStyle}
+                            styles={{
+                                root: {
+                                    width: stackItemWidth,
+                                }
+                            }}
+                            horizontalAlign={this.props.stretch ? stretchAlign : hAlign}
                         >
                             {child}
-                        </StackItem>
-                    );
+                        </Stack>
+                    )
                     stackList.push(stack);
                 } //for loop
 
@@ -340,7 +335,7 @@ PPHorizontalStack.propTypes = {
     vAlign: PropTypes.oneOf([topAlign, middleAlign, bottomAlign]),
 
     /**	
-     * @uxpindescription To stretch the children vertically
+     * @uxpindescription To stretch the children horizontally
      * @uxpinpropname Stretch Contents	
      */
     stretch: PropTypes.bool,
