@@ -18,6 +18,7 @@ class PPPageContainer extends React.Component {
                 widths={`auto\nauto`}
                 showInstructions={false}
                 stackHeight='100%'
+                vAlign="stretch"
             >
                 {this.props.children}
             </PPHorizontalStack>
