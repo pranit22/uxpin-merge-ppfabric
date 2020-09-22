@@ -150,7 +150,7 @@ class PPHorizontalStack extends React.Component {
             case bottomAlign:
                 return endAlign;
             default:
-                return this.props.align;
+                return this.props.vAlign;
         }
     }
 
@@ -163,7 +163,7 @@ class PPHorizontalStack extends React.Component {
             case bottomAlign:
                 return `flex-${endAlign}`;
             default:
-                return this.props.align;
+                return this.props.vAlign;
         }
     }
 
