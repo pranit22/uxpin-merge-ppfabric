@@ -6,7 +6,6 @@ import {
 } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
 import { getTokens } from '../_helpers/parser.jsx'
-import { mergeStyles, FontSizes, FontWeights } from '@uifabric/merge-styles';
 
 
 
@@ -18,7 +17,6 @@ import { mergeStyles, FontSizes, FontWeights } from '@uifabric/merge-styles';
  * 
  * TODOs
  * - Control needs to be updated with the proper PayPal UI theme. 
- * - The 'X' close icon is too small. 
  * 
  * */
 
@@ -131,7 +129,9 @@ class MessageBar extends React.Component {
                         <div>{actionButtons}</div>
                         : undefined
                 }
-                onDismiss={(this.props.onDismissClicked) ? this._onDismiss.bind(this) : undefined} //The Close icon only displays when the event is handled
+                dismissIconProps={{iconName: "Clear", style: {fontSize:16} }}
+                //The Close icon only displays when the event is handled
+                onDismiss={this.props.showDismissButton && this.props.onDismissClicked ? this._onDismiss.bind(this) : undefined}
             >
                 {this.state.message}
             </FMessageBar>
@@ -171,6 +171,12 @@ MessageBar.propTypes = {
     * @uxpinpropname Multiline
     */
     multiline: PropTypes.bool,
+
+    /** 
+    * @uxpindescription Whether to show the dismiss button 
+    * @uxpinpropname Dismiss Button
+    */
+    showDismissButton: PropTypes.bool,
 
     /**
      * @uxpindescription The text to display on the Primary Button (Optional)
@@ -212,7 +218,8 @@ MessageBar.defaultProps = {
     messageBarType: "info",
     multiline: true,
     button1Text: "Yes",
-    button2Text: "No"
+    button2Text: "No",
+    showDismissButton: true
 };
 
 
