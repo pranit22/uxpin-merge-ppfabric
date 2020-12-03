@@ -95,6 +95,7 @@ module.exports = {
         include: [
           'src/Nav/Nav.jsx',
           'src/Pivot/Pivot.jsx',
+          'src/Breadcrumb/Breadcrumb.jsx'
         ]
       },
       {
