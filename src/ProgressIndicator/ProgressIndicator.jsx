@@ -78,6 +78,13 @@ class ProgressIndicator extends React.Component {
               : this.props.status === 'Error' ? errorRed
                 : defaultBlue,
           borderRadius: 100
+        },
+        '& .ms-Button': {
+          verticalAlign: 'middle',
+          paddingRight: 8,
+        },
+        'span': {
+            verticalAlign: 'middle'
         }
       }
     })
