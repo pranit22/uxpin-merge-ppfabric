@@ -1,0 +1,7 @@
+# CardFooterß
+  
+```jsx
+<CardFooter />
+```
+  
+ 

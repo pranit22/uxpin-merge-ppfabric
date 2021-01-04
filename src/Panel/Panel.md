@@ -1,7 +1,0 @@
-# Panel
-  
-```jsx
-<Panel />
-```
-  
- 

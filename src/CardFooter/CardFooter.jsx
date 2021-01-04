@@ -38,7 +38,7 @@ const borderDotted = 'dotted';
 const spanner = (<StackItem grow={1}><span /></StackItem>);
 
 
-class PPCardFooter extends React.Component {
+class CardFooter extends React.Component {
     constructor(props) {
         super(props);
 
@@ -201,7 +201,7 @@ class PPCardFooter extends React.Component {
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
  */
-PPCardFooter.propTypes = {
+CardFooter.propTypes = {
 
     /**
      * Don't show this prop in the UXPin Editor. 
@@ -254,7 +254,7 @@ PPCardFooter.propTypes = {
 /**
  * Set the default values for this control in the UXPin Editor.
  */
-PPCardFooter.defaultProps = {
+CardFooter.defaultProps = {
     borderStyle: borderDotted,
     borderColor: defaultBorderColor,
     gutterPadding: 12,
@@ -264,4 +264,4 @@ PPCardFooter.defaultProps = {
 }
 
 
-export { PPCardFooter as default };
+export { CardFooter as default };

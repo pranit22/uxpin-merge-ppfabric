@@ -36,8 +36,8 @@ module.exports = {
       {
         name: 'Card',
         include: [
-          'src/PPCard/PPCard.jsx',
-          'src/PPCardFooter/PPCardFooter.jsx',
+          'src/Card/Card.jsx',
+          'src/CardFooter/CardFooter.jsx',
           'src/CardTextHeader/CardTextHeader.jsx',
         ]
       },

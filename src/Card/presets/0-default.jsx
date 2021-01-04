@@ -3,5 +3,5 @@ import Card from '../Card';
 
 
 export default (
-    <Card uxpId="card1" />
+    <Card uxpId="ppcard1" />
 );

@@ -1,7 +1,0 @@
-# PPCardFooterß
-  
-```jsx
-<PPCardFooter />
-```
-  
- 

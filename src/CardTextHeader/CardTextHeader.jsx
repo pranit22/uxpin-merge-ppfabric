@@ -13,7 +13,7 @@ import { TpxUxColors } from '../_helpers/tpxuxcolorutils.jsx';
 
 /** 
  * UPDATED May 13, 2020 by Anthony Hand
- * - Added an Icon to the front of the PPCardHeader.
+ * - Added an Icon to the front of the CardHeader.
  */
 
 /** 

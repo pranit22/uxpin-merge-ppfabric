@@ -1,7 +1,0 @@
-# PPCard
-  
-```jsx
-<PPCard />
-```
-  
- 
