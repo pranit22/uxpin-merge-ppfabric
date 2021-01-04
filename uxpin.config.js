@@ -38,7 +38,7 @@ module.exports = {
         include: [
           'src/PPCard/PPCard.jsx',
           'src/PPCardFooter/PPCardFooter.jsx',
-          'src/PPCardTextHeader/PPCardTextHeader.jsx',
+          'src/CardTextHeader/CardTextHeader.jsx',
         ]
       },
       {

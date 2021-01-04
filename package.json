@@ -10,6 +10,7 @@
     "start": "uxpin-merge --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --disable-tunneling",
     "push:prod": "NODE_TLS_REJECT_UNAUTHORIZED=0 uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 258e3f84adad7ff4420400d965b6bb14f683acdc",
     "push:preprod": "NODE_TLS_REJECT_UNAUTHORIZED=0 uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token 0e31a8221465db6579c1cee38308fe94b2fdd33c",
+    "push:pranit": "NODE_TLS_REJECT_UNAUTHORIZED=0 uxpin-merge push --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js --token e513c68a4924591b22ea5c095776524de01bb2a6",
     "debug": "uxpin-merge dump --webpack-config ./webpack.config.js --wrapper ./src/UXPinWrapper/UXPinWrapper.js > metadata.json",
     "kitchensink": "webpack-cli serve --config app/kitchensink/webpack.config.js"
   },
@@ -48,7 +49,7 @@
     "@types/react-router-dom": "^4.3.5",
     "@uifabric/icons": "latest",
     "@uifabric/react-cards": "^0.109.60",
-    "@uxpin/merge-cli": "^2.5.3",
+    "@uxpin/merge-cli": "^2.7.2",
     "@webpack-cli/serve": "^0.1.8",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.1.0",

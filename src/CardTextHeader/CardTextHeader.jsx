@@ -42,7 +42,7 @@ icon(FileCode) Code File
 icon(Picture) Picture`; 
 
 
-class PPCardTextHeader extends React.Component {
+class CardTextHeader extends React.Component {
     constructor(props) {
         super(props);
 
@@ -234,7 +234,7 @@ class PPCardTextHeader extends React.Component {
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
  */
-PPCardTextHeader.propTypes = {
+CardTextHeader.propTypes = {
 
     /**
      * @uxpindescription Text to display in the header
@@ -311,7 +311,7 @@ PPCardTextHeader.propTypes = {
 /**
  * Set the default values for this control in the UXPin Editor.
  */
-PPCardTextHeader.defaultProps = {
+CardTextHeader.defaultProps = {
     value: defaultHeaderText,
     textColor: defaultTextColor,
     size: 'large',
@@ -324,4 +324,4 @@ PPCardTextHeader.defaultProps = {
 }
 
 
-export { PPCardTextHeader as default };
+export { CardTextHeader as default };
